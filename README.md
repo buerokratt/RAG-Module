@@ -1,1 +1,1 @@
-# Retrieval-Service
+# RAG-Module
