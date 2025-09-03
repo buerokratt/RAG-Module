@@ -1,4 +1,4 @@
-name: Ruff Format
+name: Ruff Format Check
 
 on:
   pull_request:

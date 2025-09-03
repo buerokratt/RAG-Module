@@ -1,4 +1,4 @@
-name: ruff lint check
+name: Ruff Lint Check
 
 on:
   pull_request:

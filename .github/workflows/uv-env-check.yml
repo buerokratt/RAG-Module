@@ -1,4 +1,4 @@
-name: uv environment check
+name: UV Environment Check
 
 on:
   pull_request:
