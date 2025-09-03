@@ -1,4 +1,4 @@
-name: Ruff Format
+name: Pytest Testcases Check
 
 on:
   pull_request:
@@ -7,8 +7,8 @@ on:
     branches: [main, dev, testing, wip]   # optional; expand to ["*"] if you want all pushes
 
 jobs:
-  ruff-format:
-    name: Ruff Format Check
+  pytest-testcases:
+    name: Pytest Testcases Check
     runs-on: ubuntu-latest
 
     steps:
