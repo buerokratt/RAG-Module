@@ -1,0 +1,31 @@
+name: uv environment check
+
+on:
+  pull_request:
+    branches: [wip, dev, testing, main]
+  push:
+    branches: [wip, dev, testing, main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv (with cache)
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.15"
+
+      # If you commit .python-version, this ensures the exact interpreter is available
+      - name: Pin Python
+        run: |
+          uv python install 3.12.10
+          uv python pin 3.12.10
+          uv run python -c "import sys; print(sys.version)"
+
+      # The authoritative guard: MUST match uv.lock and Python markers
+      - name: Sync (frozen)
+        run: uv sync --frozen
