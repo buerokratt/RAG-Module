@@ -1,4 +1,4 @@
-name: Environment Check (uv sync)
+name: uv environment check
 
 on:
   pull_request:
@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup uv (with cache)
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
+          version: "0.8.15"
 
       # If you commit .python-version, this ensures the exact interpreter is available
       - name: Pin Python
