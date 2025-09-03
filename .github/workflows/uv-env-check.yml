@@ -2,9 +2,9 @@ name: uv environment check
 
 on:
   pull_request:
-    branches: [wip, dev, testing, main]
+    branches: ["*"]
   push:
-    branches: [wip, dev, testing, main]
+    branches: ["*"]
 
 jobs:
   checks:
