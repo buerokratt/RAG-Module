@@ -1,0 +1,30 @@
+name: GitLeaks Check
+
+on:
+  pull_request:
+    branches: ["*"]        # run on all PRs
+  push:
+    branches: ["*"]   # optional; expand to ["*"] if you want it on all pushes
+
+jobs:
+  gitleaks:
+    name: Run GitLeaks Secret Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # important: ensures full history for gitleaks scanning
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --no-git --report-format json --report-path gitleaks-report.json
+
+      - name: Upload gitleaks report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json

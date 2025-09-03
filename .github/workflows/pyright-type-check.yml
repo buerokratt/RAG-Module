@@ -1,4 +1,4 @@
-name: Pyright Type Check
+name: pyright type check
 
 on:
   pull_request:
@@ -18,10 +18,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12.10'
+          python-version-file: '.python-version'
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies (locked)
         run: uv sync --frozen
