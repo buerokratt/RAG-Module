@@ -13,7 +13,7 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     networks:
-      - bykstackrag
+      - bykstack
 
   # Logging Stack - Loki and Grafana
   loki:
@@ -26,7 +26,7 @@ services:
       - ./grafana-configs/loki-config.yaml:/etc/loki/local-config.yaml
       - loki-data:/loki
     networks:
-      - bykstackrag
+      - bykstack
     restart: unless-stopped
 
   grafana:
@@ -42,7 +42,7 @@ services:
       - ./grafana-configs/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
       - ./grafana-configs/grafana-dashboard-deployment.json:/etc/grafana/dashboards/deployment.json
     networks:
-      - bykstackrag
+      - bykstack
     depends_on:
       - loki
     restart: unless-stopped
@@ -111,7 +111,7 @@ services:
       EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
       SMTP_CONNECTION_URL: ${SMTP_CONNECTION_URL}
     networks:
-      - bykstackrag
+      - bykstack
 
   langfuse-web:
     image: docker.io/langfuse/langfuse:3
@@ -136,7 +136,7 @@ services:
       LANGFUSE_INIT_USER_NAME: ${LANGFUSE_INIT_USER_NAME:-}
       LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_INIT_USER_PASSWORD:-}
     networks:
-      - bykstackrag
+      - bykstack
 
   clickhouse:
     image: docker.io/clickhouse/clickhouse-server
@@ -161,7 +161,7 @@ services:
       retries: 10
       start_period: 1s
     networks:
-      - bykstackrag
+      - bykstack
 
   minio:
     image: minio/minio:latest
@@ -193,7 +193,7 @@ services:
       retries: 5
       start_period: 1s
     networks:
-      - bykstackrag
+      - bykstack
 
   redis:
     image: docker.io/redis:7
@@ -210,7 +210,7 @@ services:
       timeout: 10s
       retries: 10
     networks:
-      - bykstackrag
+      - bykstack
 
   rag_search_db:
     container_name: rag_search_db
@@ -232,7 +232,7 @@ services:
     volumes:
       - rag-search-db:/var/lib/postgresql/data
     networks:
-      - bykstackrag
+      - bykstack
 
 volumes:
   loki-data:
@@ -251,6 +251,6 @@ volumes:
     name: minio_data
 
 networks:
-  bykstackrag:
-    name: bykstackrag
+  bykstack:
+    name: bykstack
     driver: bridge
