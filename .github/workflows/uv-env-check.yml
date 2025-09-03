@@ -1,4 +1,4 @@
-name: Environment Check (uv frozen)
+name: Environment Check (uv sync)
 
 on:
   pull_request:
@@ -22,8 +22,8 @@ jobs:
       # If you commit .python-version, this ensures the exact interpreter is available
       - name: Pin Python
         run: |
-          uv python install 3.12.11
-          uv python pin 3.12.11
+          uv python install 3.12.10
+          uv python pin 3.12.10
           uv run -c "import sys; print(sys.version)"
 
       # The authoritative guard: MUST match uv.lock and Python markers
