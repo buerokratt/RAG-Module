@@ -24,7 +24,7 @@ jobs:
         run: |
           uv python install 3.12.10
           uv python pin 3.12.10
-          uv run -c "import sys; print(sys.version)"
+          uv run python -c "import sys; print(sys.version)"
 
       # The authoritative guard: MUST match uv.lock and Python markers
       - name: Sync (frozen)
