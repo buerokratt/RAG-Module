@@ -1,0 +1,28 @@
+name: Pytest Testcases Check
+
+on:
+  pull_request:
+    branches: ["*"]        # run on PRs to any branch
+  push:
+    branches: [main, dev, testing, wip]   # optional; expand to ["*"] if you want all pushes
+
+jobs:
+  pytest-testcases:
+    name: Pytest Testcases Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      # Format check only — fails if files are not formatted
+      - name: Run test cases using Pytest
+        run: uv run pytest tests
