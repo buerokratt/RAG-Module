@@ -4,4 +4,46 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = "==3.12.10"
-dependencies = []
+dependencies = [
+    "pyright>=1.1.404",
+    "pytest>=8.4.1",
+]
+
+[tool.pyright]
+# --- Environment & discovery ---
+pythonVersion = "3.12.10"          # Target Python semantics (pattern matching, typing features, stdlib types).
+venvPath = "."                   # Where virtual envs live relative to repo root.
+venv = ".venv"                   # The specific env name uv manages (uv sync creates .venv).
+
+# --- What to analyze ---
+include = ["src", "tests"]       # Top-level packages & tests to check.
+exclude = [
+  "**/.venv", "**/__pycache__", "build", "dist", ".git",
+  ".ruff_cache", ".mypy_cache"
+]
+
+# --- Global strictness ---
+typeCheckingMode = "strict"      # Enforce full strict mode repo-wide (see notes below).
+useLibraryCodeForTypes = true    # If a lib lacks stubs, inspect its code to infer types where possible.
+
+# Make the most common "loose" mistakes fail fast in strict mode.
+# You can tune these individually if you need a temporary carve-out.
+reportMissingTypeStubs = "error"           # Untyped third-party libs must have type info (stubs or inline).
+reportUnknownVariableType = "error"        # Vars with unknown/implicit Any are not allowed.
+reportUnknownMemberType = "error"          # Members on unknowns are not allowed.
+reportUnknownArgumentType = "error"        # Call arguments can't be unknown.
+reportUnknownLambdaType = "error"          # Lambda params must be typed in strict contexts.
+reportImplicitOptional = "error"           # T | None must be explicit; no silent Optional.
+reportMissingTypeArgument = "error"        # Generic types must specify their parameters.
+reportIncompatibleVariableOverride = "error"   # Subclass fields must type-refine correctly.
+reportInvalidTypeVarUse = "error"          # Catch misuse of TypeVar/variance.
+reportUntypedFunctionDecorator = "error"   # Decorators must be typed (prevents Any leakage).
+reportUnusedVariable = "error"           # Ditto; promote to "error" if you want hard hygiene.
+reportUnusedImport = "warning"             # Hygiene: warn, but don’t fail builds.
+
+
+# Tests often deserialize lots of data and patch frameworks; keep them strict,
+# but relax "missing stubs" so untyped test-only libs don’t block you.
+[[tool.pyright.overrides]]
+module = "tests/**"
+reportMissingTypeStubs = "warning"

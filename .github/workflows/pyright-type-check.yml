@@ -1,4 +1,4 @@
-name: UV Environment Check
+name: Pyright Type Check
 
 on:
   pull_request:
@@ -7,23 +7,24 @@ on:
     branches: ["*"]
 
 jobs:
-  checks:
+  pyright:
+    name: Pyright Type Check
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup uv (with cache)
-        uses: astral-sh/setup-uv@v6
-        with:
-          version: "0.8.15"
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: '.python-version'
 
-      # The authoritative guard: MUST match uv.lock and Python markers
-      - name: Sync (frozen)
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies (locked)
         run: uv sync --frozen
+
+      - name: Run Pyright
+        run: uv run pyright

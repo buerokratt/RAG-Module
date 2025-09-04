@@ -74,7 +74,7 @@ For more help, check the [uv documentation](https://docs.astral.sh/uv/)
 
 - Located in `.github/workflows/uv-env-check.yml`
 
-- This GitHub actions check runs to check whether there are any conflicts between the lockfile and pyproject.toml. If it fails 
+- This GitHub actions check runs to check whether there are any conflicts between the lockfile and pyproject.toml. If it fails, then there has been some dependency update to the pyproject.toml without updating the lockfile
 
 ### Type check for Python 
 
