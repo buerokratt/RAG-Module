@@ -184,6 +184,9 @@ CI will validate that the lockfile and environment are consistent. If you forgot
 
 - **Never edit `uv.lock` manually.** It is controlled by `uv`.
 - **Never use `uv pip install` for permanent deps** — it only changes your local venv. Use `uv add` instead.
+- **Never add or depend on `requirement.txt` files** for installing packages locally or through docker containers. Use `uv run sync --frozen` instead.
+
+
 - If you remove a dependency, run:
 
 ```bash
