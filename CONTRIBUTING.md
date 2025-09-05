@@ -51,7 +51,7 @@ python -V  # Should output: Python 3.12.10
 
 ### Step 6: Run the Application
 
-When running the FastAPI APIs locally always run with
+When running any Python programs (APIs or scripts) in a docker container or locally, always run with
 
 ```bash
 uv run python app.py
@@ -63,20 +63,75 @@ instead of
 python3 app.py
 ```
 
-This will make sure that regardless of whether you have activated the .venv environment or not uv will use the right versions when setting up the
+This will make sure that regardless of whether you have activated the .venv environment or not uv will use virtual environment created instead of system level versions.
+
+
+### Step 7: Setup pre-commit hooks
+
+Install pre-commit hooks to ensure code quality checks run automatically before commits.
+
+```bash
+uv run pre-commit install
+```
+
+
+This installs git hooks that will run configured checks (linting, formatting, etc.) on staged files before each commit.
+
+#### Validate Pre-commit Setup
+Test that the hooks are working correctly:
+
+```bash
+uv run pre-commit run --all-files
+```
+
+This runs all pre-commit hooks on the entire codebase. Fix any issues that are reported.
+
+
+**Note:** If pre-commit hooks fail during a commit, the commit will be blocked until you fix the issues and re-stage your changes.
 
 
 For more help, check the [uv documentation](https://docs.astral.sh/uv/)
 
 ## CI Checks
 
-### Environment Check
+### Environment check
 
 - Located in `.github/workflows/uv-env-check.yml`
 
-- This GitHub actions check runs to check whether there are any conflicts between the lockfile and pyproject.toml. If it fails, then there has been some dependency update to the pyproject.toml without updating the lockfile
+- This GitHub actions check runs to check whether there are any conflicts between the lockfile and pyproject.toml. If it fails, then there has been some dependency update to the pyproject.toml without updating the lockfile.
 
 ### Type check for Python 
+
+- Located in `.github/workflows/pyright-type-check.yml`
+
+- This GitHub actions checks runs the Pyright type checker across the entire code-base to check for undeclared Python variables and objects. You can check the Pyright configuration in the `pyproject.toml` file. We use a `strict` configuration, so even objects being returned through frameworks and libraries should be either type-casted or should be validated using libraries such as `Pydantic`.
+
+
+### Pytest Test-cases check
+
+- Located in `.github/workflows/pytest-testcases-check.yml`
+
+- This GitHub actions checks runs all Pytest test-cases unders the `tests/` folder.
+
+
+### Ruff Python code format check
+
+- Located in `.github/workflows/ruff-format-check.yml`
+
+- This GitHub actions check runs the   `ruff format --check` on the entire codebase to detect any code incompliant with the project's code formatting standards which are configured in `pyproject.toml`
+
+#### Ruff Lint check
+
+- Located in `.github/workflows/ruff-lint-check.yml`
+
+- This GitHub actions check runs the `ruff check` command on the entire code base to detect any code incompliant with the project's linting standards which are configured in `pyproject.toml`
+
+### Gitleaks check
+
+- Located in `.github/workflows/git-leaks-check.yml`
+
+- This GitHub actions check uses the GitLeaks open source tool to check for potential secret/key leakages in the code. There is also a pre-commit hook configured with gitleaks to detect any possible secret leaks before even committing. 
+
 
 ## Installing New Dependencies to the Project (Python)
 
@@ -137,7 +192,3 @@ uv sync --reinstall
 git add pyproject.toml uv.lock
 git commit -m "removed package-name"
 ```
-
-## Coding Standards
-
-## PR evaluation criteria
