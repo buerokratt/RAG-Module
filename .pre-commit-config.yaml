@@ -3,6 +3,11 @@ repos:
     rev: v8.24.2
     hooks:
       - id: gitleaks
+        name: gitleaks (full scan on push)
+        stages: [pre-push]
+        args: ["detect", "--source", ".", "--no-banner", "--redact"]
+        pass_filenames: false
+        always_run: true
 
   - repo: https://github.com/astral-sh/uv-pre-commit
     # uv version.
