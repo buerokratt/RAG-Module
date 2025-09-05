@@ -5,7 +5,7 @@ repos:
       - id: gitleaks
         name: gitleaks (full scan on push)
         stages: [pre-push]
-        args: ["detect", "--source", ".", "--no-banner", "--redact"]
+        args: ["detect", "--source", ".", "--no-banner"]
         pass_filenames: false
         always_run: true
 

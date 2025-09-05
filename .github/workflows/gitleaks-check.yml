@@ -17,6 +17,6 @@ jobs:
 
       - name: Run Gitleaks
         run: |
-            docker run --rm -v ${{ github.workspace }}:/code zricethezav/gitleaks:latest detect --source=/code
+            docker run --rm -v ${{ github.workspace }}:/code zricethezav/gitleaks:latest detect --source=/code --redact --no-banner
 
 
