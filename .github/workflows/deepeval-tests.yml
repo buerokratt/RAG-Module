@@ -90,41 +90,34 @@ jobs:
       - name: Check test results and fail if needed
         if: always()
         run: |
-          if [ -f "pytest_captured_results.json" ]; then
-            python -c "
-import json
-import sys
+           # Check if pytest ran (look at step output)
+           if [ "${{ steps.run_tests.outcome }}" == "failure" ]; then
+            echo "Tests ran but failed - this is expected if RAG performance is below threshold"
+           fi  
+           if [ -f "pytest_captured_results.json" ]; then
+            total_tests=$(jq '.total_tests // 0' pytest_captured_results.json)
+            passed_tests=$(jq '.passed_tests // 0' pytest_captured_results.json)
 
-try:
-    with open('pytest_captured_results.json', 'r') as f:
-        results = json.load(f)
-    
-    total_tests = results.get('total_tests', 0)
-    passed_tests = results.get('passed_tests', 0)
-    
-    if total_tests == 0:
-        print('ERROR: No tests were executed')
-        sys.exit(1)
-    
-    pass_rate = (passed_tests / total_tests) * 100
-    
-    print(f'DeepEval Test Results:')
-    print(f'Total Tests: {total_tests}')
-    print(f'Passed Tests: {passed_tests}')
-    print(f'Pass Rate: {pass_rate:.1f}%')
-    
-    if pass_rate < 70:
-        print(f'TEST FAILURE: Pass rate {pass_rate:.1f}% is below threshold 70%')
-        print('RAG system performance is below acceptable standards.')
-        sys.exit(1)
-    else:
-        print(f'TEST SUCCESS: Pass rate {pass_rate:.1f}% meets threshold 70%')
-        
-except Exception as e:
-    print(f'ERROR: Failed to parse test results: {e}')
-    sys.exit(1)
-            "
-          else
+            if [ "$total_tests" -eq 0 ]; then
+              echo "ERROR: No tests were executed"
+              exit 1
+            fi
+
+            pass_rate=$(awk "BEGIN {print ($passed_tests / $total_tests) * 100}")
+
+            echo "DeepEval Test Results:"
+            echo "Total Tests: $total_tests"
+            echo "Passed Tests: $passed_tests"
+            echo "Pass Rate: $pass_rate%"
+
+            if (( $(echo "$pass_rate < 70" | bc -l) )); then
+              echo "TEST FAILURE: Pass rate $pass_rate% is below threshold 70%"
+              echo "RAG system performance is below acceptable standards."
+              exit 1
+            else
+              echo "TEST SUCCESS: Pass rate $pass_rate% meets threshold 70%"
+            fi
+           else
             echo "ERROR: No test results file found"
             exit 1
-          fi
+           fi

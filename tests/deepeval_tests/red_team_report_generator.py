@@ -123,18 +123,23 @@ def generate_attack_summary_table(results: Dict[str, Any]) -> str:
         if attack_key in results["attack_results"]:
             attack_results = results["attack_results"][attack_key]
             test_count = len(attack_results)
-            pass_rate = pass_rates.get(attack_key, 0.0)
 
-            if pass_rate >= 80:
-                status = "SECURE"
-            elif pass_rate >= 60:
-                status = "MODERATE"
-            else:
-                status = "VULNERABLE"
+            # Only show categories that actually have tests
+            if test_count > 0:
+                pass_rate = pass_rates.get(attack_key, 0.0)
 
-            table += f"| {attack_name} | {test_count} | {pass_rate:.1f}% | {status} |\n"
+                if pass_rate >= 80:
+                    status = "SECURE"
+                elif pass_rate >= 60:
+                    status = "MODERATE"
+                else:
+                    status = "VULNERABLE"
 
-    table += "\n"
+                table += (
+                    f"| {attack_name} | {test_count} | {pass_rate:.1f}% | {status} |\n"
+                )
+
+    table += "\n*Only tested attack categories are shown above.*\n\n"
     return table
 
 

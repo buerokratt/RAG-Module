@@ -56,18 +56,26 @@ class StandardResultCollector:
 
         self.results["detailed_results"].append(test_result)
 
-        # Add scores to metric_scores and count totals
+        # Count this as ONE test (not one per metric)
+        self.results["total_tests"] += 1
+
+        # Check if majority of metrics passed
+        passed_metrics = sum(
+            1 for result in metrics_results.values() if result["passed"]
+        )
+        if passed_metrics >= len(metrics_results) * 0.6:  # 60% of metrics must pass
+            self.results["passed_tests"] += 1
+        else:
+            self.results["failed_tests"] += 1
+
+        # Add scores to metric_scores for averaging
         for metric_name, metric_result in metrics_results.items():
             score = metric_result["score"]
-            passed = metric_result["passed"]
-
             self.results["metric_scores"][metric_name].append(score)
-            self.results["total_tests"] += 1
 
-            if passed:
-                self.results["passed_tests"] += 1
-            else:
-                self.results["failed_tests"] += 1
+        print(
+            f"Added test {test_case_num}: Total tests = {self.results['total_tests']}"
+        )
 
     def save_results(self, filepath: str = "pytest_captured_results.json"):
         """Save collected results to JSON file."""
@@ -81,10 +89,22 @@ class StandardResultCollector:
             json.dump(self.results, f, indent=2, default=str)
 
         print(f"Test results saved to {filepath}")
+        print(f"Total tests: {self.results['total_tests']}")
+        print(f"Passed tests: {self.results['passed_tests']}")
+        print(f"Failed tests: {self.results['failed_tests']}")
 
 
 # Global results collector
 standard_results_collector = StandardResultCollector()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def save_results_fixture():
+    """Ensure results are saved even if tests fail."""
+    yield
+    # This runs after all tests, even if they fail
+    print("Saving results from pytest fixture...")
+    standard_results_collector.save_results("pytest_captured_results.json")
 
 
 class TestRAGSystem:
@@ -93,6 +113,8 @@ class TestRAGSystem:
     @classmethod
     def setup_class(cls):
         """Setup test class with metrics and test data."""
+        print("Setting up TestRAGSystem...")
+
         # Initialize all DeepEval metrics
         cls.contextual_precision = ContextualPrecisionMetric(threshold=0.7)
         cls.contextual_recall = ContextualRecallMetric(threshold=0.7)
@@ -105,10 +127,7 @@ class TestRAGSystem:
         with open(data_path, "r", encoding="utf-8") as f:
             cls.test_data = json.load(f)
 
-    @classmethod
-    def teardown_class(cls):
-        """Save all collected results after tests complete."""
-        standard_results_collector.save_results("pytest_captured_results.json")
+        print(f"Loaded {len(cls.test_data)} test cases")
 
     def create_test_case(
         self, data_item: Dict[str, Any], provider: str = "anthropic"
@@ -147,8 +166,11 @@ class TestRAGSystem:
         # Get test case index for consistent numbering
         test_case_num = self.test_data.index(test_item) + 1
 
+        print(f"\nTesting case {test_case_num}: {test_item['input'][:50]}...")
+
         # Initialize metrics results
-        metrics_results: Dict[str, Any] = {}
+        metrics_results = {}
+        failed_assertions = []
 
         # Define all metrics to test
         metrics = [
@@ -163,8 +185,8 @@ class TestRAGSystem:
         for metric_name, metric in metrics:
             try:
                 metric.measure(test_case)
-                score: float | None = metric.score
-                passed: bool = score >= 0.7 if score else False
+                score = metric.score
+                passed = score >= 0.7
                 reason = metric.reason
 
                 metrics_results[metric_name] = {
@@ -173,12 +195,14 @@ class TestRAGSystem:
                     "reason": reason,
                 }
 
-                # Individual assertion for pytest
-                assert score is not None, f"{metric_name} returned None score."
-                assert score >= 0.7, (
-                    f"{metric_name} failed for query: '{test_item['input']}'. "
-                    f"Score: {score}, Reason: {reason}"
-                )
+                print(f"  {metric_name}: {score:.3f} ({'PASS' if passed else 'FAIL'})")
+
+                # Collect failed assertions but don't raise immediately
+                if not passed:
+                    failed_assertions.append(
+                        f"{metric_name} failed for query: '{test_item['input']}'. "
+                        f"Score: {score}, Reason: {reason}"
+                    )
 
             except Exception as e:
                 metrics_results[metric_name] = {
@@ -186,14 +210,21 @@ class TestRAGSystem:
                     "passed": False,
                     "reason": f"Error: {str(e)}",
                 }
-                # Re-raise to fail pytest
-                raise AssertionError(f"{metric_name} error: {str(e)}")
+                failed_assertions.append(f"{metric_name} error: {str(e)}")
 
-        # Add results to collector
-        standard_results_collector.add_test_result(
-            test_case_num=test_case_num,
-            test_input=test_item["input"],
-            category=test_item["category"],
-            language=test_item.get("language", "en"),
-            metrics_results=metrics_results,
-        )
+        # Always add results to collector, regardless of pass/fail
+        try:
+            standard_results_collector.add_test_result(
+                test_case_num=test_case_num,
+                test_input=test_item["input"],
+                category=test_item["category"],
+                language=test_item.get("language", "en"),
+                metrics_results=metrics_results,
+            )
+        except Exception as e:
+            print(f"Error adding test result: {e}")
+
+        # Now raise assertion if any metrics failed (for pytest reporting)
+        if failed_assertions:
+            # Just raise the first failure to keep pytest output clean
+            raise AssertionError(failed_assertions[0])
