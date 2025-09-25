@@ -1,5 +1,5 @@
 import pytest
-import dspy  # type: ignore
+import dspy
 from typing import Any, Dict
 from pathlib import Path
 from src.llm_config_module.llm_manager import LLMManager
@@ -43,8 +43,8 @@ def test_azure_llm_inference(vault_env_vars: Dict[str, str]) -> None:
     class QA(dspy.Signature):
         """Short factual answer"""
 
-        question = dspy.InputField()  # type: ignore
-        answer = dspy.OutputField()  # type: ignore
+        question = dspy.InputField()
+        answer = dspy.OutputField()
 
     qa = dspy.Predict(QA)
     out = qa(
@@ -54,7 +54,7 @@ def test_azure_llm_inference(vault_env_vars: Dict[str, str]) -> None:
     print(
         "Question: If this pass through the Azure OpenAI provider, say 'Azure DSPY Configuration Successful'"
     )
-    print(f"Answer: {out.answer}")  # type: ignore
+    print(f"Answer: {out.answer}")
 
     # Type-safe assertions
     answer: Any = getattr(out, "answer", None)

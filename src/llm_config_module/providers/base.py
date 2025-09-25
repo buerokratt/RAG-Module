@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
-import dspy  # type: ignore[import-untyped]
+import dspy
 
 from llm_config_module.exceptions import InvalidConfigurationError
 
@@ -38,23 +38,6 @@ class BaseLLMProvider(ABC):
         pass
 
     @abstractmethod
-    def generate(self, prompt: str, **kwargs: Any) -> str:
-        """Generate response from the LLM.
-
-        Args:
-            prompt: The input prompt for the LLM.
-            **kwargs: Additional generation parameters.
-
-        Returns:
-            Generated response text.
-
-        Raises:
-            RuntimeError: If the provider is not initialized.
-            Exception: If generation fails.
-        """
-        pass
-
-    @abstractmethod
     def get_dspy_client(self) -> dspy.LM:
         """Return DSPY-compatible client.
 
@@ -75,15 +58,6 @@ class BaseLLMProvider(ABC):
             Human-readable provider name.
         """
         pass
-
-    @property
-    def is_initialized(self) -> bool:
-        """Check if the provider is initialized.
-
-        Returns:
-            True if the provider is initialized, False otherwise.
-        """
-        return self._initialized
 
     def validate_config(self) -> None:
         """Validate provider configuration.

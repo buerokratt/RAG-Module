@@ -42,7 +42,7 @@ class VaultClient:
             mount_point: KV mount point (default: secret)
         """
         self.vault_url = vault_url.rstrip("/")
-        self.token = token or os.getenv("VAULT_TOKEN", "myroot")
+        self.token = token or os.getenv("VAULT_TOKEN")
         self.mount_point = mount_point
         self.session = self._create_session()
         self.headers = {"X-Vault-Token": self.token, "Content-Type": "application/json"}

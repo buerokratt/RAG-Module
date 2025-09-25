@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: changelog/rag-search-script-v1-llm-connections.sql

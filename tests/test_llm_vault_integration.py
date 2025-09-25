@@ -10,7 +10,7 @@ from typing import Dict
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from loguru import logger
-from llm_config_module.llm_manager import LLMManager
+from src.llm_config_module.llm_manager import LLMManager
 
 
 # Configure loguru

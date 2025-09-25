@@ -3,7 +3,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import yaml
 from dotenv import load_dotenv
@@ -22,6 +22,11 @@ from llm_config_module.exceptions import ConfigurationError, InvalidConfiguratio
 
 # Constants
 DEFAULT_CONFIG_FILENAME = "llm_config.yaml"
+
+# Type alias for configuration values that can be processed
+ConfigValue = Union[
+    str, Dict[str, "ConfigValue"], List["ConfigValue"], int, float, bool, None
+]
 
 
 class ConfigurationLoader:
@@ -368,7 +373,7 @@ class ConfigurationLoader:
             Configuration with environment variables substituted.
         """
 
-        def substitute_env_vars(obj: Any) -> Any:
+        def substitute_env_vars(obj: ConfigValue) -> ConfigValue:
             if isinstance(obj, str):
                 # Pattern to match ${VAR_NAME} or ${VAR_NAME:default_value}
                 pattern = r"\$\{([^}:]+)(?::([^}]*))?\}"
@@ -380,19 +385,28 @@ class ConfigurationLoader:
 
                 return re.sub(pattern, replace_env_var, obj)
             elif isinstance(obj, dict):
-                result: Dict[str, Any] = {}
-                for key, value in obj.items():  # type: ignore[misc]
-                    result[str(key)] = substitute_env_vars(value)  # type: ignore[arg-type]
+                result: Dict[str, ConfigValue] = {}
+                for key, value in obj.items():
+                    result[str(key)] = substitute_env_vars(value)
                 return result
             elif isinstance(obj, list):
-                result_list: List[Any] = []
-                for item in obj:  # type: ignore[misc]
+                result_list: List[ConfigValue] = []
+                for item in obj:
                     result_list.append(substitute_env_vars(item))
                 return result_list
             else:
                 return obj
 
-        return substitute_env_vars(config)
+        result = substitute_env_vars(config)
+        # Since we know config is a Dict[str, Any] and substitute_env_vars preserves structure,
+        # the result should also be a Dict[str, Any]
+        if isinstance(result, dict):
+            return cast(Dict[str, Any], result)
+        else:
+            # This should never happen given our input type, but provide a fallback
+            raise ConfigurationError(
+                "Environment variable substitution resulted in non-dictionary type"
+            )
 
     def _parse_configuration(self, config: Dict[str, Any]) -> LLMConfiguration:
         """Parse the processed configuration into structured objects.

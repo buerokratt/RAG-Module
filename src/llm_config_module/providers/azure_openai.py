@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List
 
-import dspy  # type: ignore[import-untyped]
+import dspy
 
 from llm_config_module.providers.base import BaseLLMProvider
 from llm_config_module.exceptions import ProviderInitializationError
@@ -62,40 +62,6 @@ class AzureOpenAIProvider(BaseLLMProvider):
             raise ProviderInitializationError(
                 f"Failed to initialize {self.provider_name} provider: {e}"
             ) from e
-
-    def generate(self, prompt: str, **kwargs: Any) -> str:
-        """Generate response from Azure OpenAI.
-
-        Args:
-            prompt: The input prompt for the LLM.
-            **kwargs: Additional generation parameters.
-
-        Returns:
-            Generated response text.
-
-        Raises:
-            RuntimeError: If the provider is not initialized.
-            Exception: If generation fails.
-        """
-        self._ensure_initialized()
-
-        if self._client is None:
-            raise RuntimeError("Client is not initialized")
-
-        try:
-            # Use DSPY's generate method
-            response = self._client.generate(prompt, **kwargs)  # type: ignore[attr-defined]
-
-            # Simple response handling - convert to string regardless of format
-            if isinstance(response, str):
-                return response
-            elif isinstance(response, list) and len(response) > 0:  # type: ignore[arg-type]
-                return str(response[0])  # type: ignore[return-value]
-            else:
-                return str(response)  # type: ignore[arg-type]
-
-        except Exception as e:
-            raise RuntimeError(f"Failed to generate response: {e}") from e
 
     def get_dspy_client(self) -> dspy.LM:
         """Return DSPY-compatible client.

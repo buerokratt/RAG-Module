@@ -37,7 +37,7 @@ class VaultConnectionCLI:
         """Initialize Vault client and connection manager."""
         try:
             vault_url = os.getenv("VAULT_ADDR", "http://localhost:8200")
-            vault_token = os.getenv("VAULT_TOKEN", "myroot")
+            vault_token = os.getenv("VAULT_TOKEN")
 
             self.vault_client = VaultClient(vault_url=vault_url, token=vault_token)
             self.connection_manager = ConnectionManager(self.vault_client)

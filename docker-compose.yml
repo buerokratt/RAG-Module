@@ -1,4 +1,161 @@
 services:
+  ruuter-public:
+    container_name: ruuter-public
+    image: ruuter
+    environment:
+      - application.cors.allowedOrigins=http://localhost:8086,http://localhost:3001,http://localhost:3003,http://localhost:3004,http://localhost:8080,http://localhost:8000,http://localhost:8090
+      - application.httpCodesAllowList=200,201,202,204,400,401,403,500
+      - application.internalRequests.allowedIPs=127.0.0.1
+      - application.logging.displayRequestContent=true
+      - application.logging.displayResponseContent=true
+      - application.logging.printStackTrace=true
+      - application.internalRequests.disabled=true
+      - server.port=8086
+    volumes:
+      - ./DSL/Ruuter.public:/DSL
+      - ./constants.ini:/app/constants.ini
+    ports:
+      - 8086:8086
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "512M"
+  
+  ruuter-private:
+    container_name: ruuter-private
+    image: ruuter
+    environment:
+      - application.cors.allowedOrigins=http://localhost:3001,http://localhost:3003,http://localhost:8088,http://localhost:3002,http://localhost:3004,http://localhost:8000
+      - application.httpCodesAllowList=200,201,202,400,401,403,500
+      - application.internalRequests.allowedIPs=127.0.0.1
+      - application.logging.displayRequestContent=true
+      - application.logging.displayResponseContent=true
+      - application.logging.printStackTrace=true
+      - application.internalRequests.disabled=true
+      - server.port=8088
+    volumes:
+      - ./DSL/Ruuter.private:/DSL
+      - ./constants.ini:/app/constants.ini
+    ports:
+      - 8088:8088
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "512M"
+
+  data-mapper:
+    container_name: data-mapper
+    image: data-mapper
+    environment:
+      - PORT=3000
+      - CONTENT_FOLDER=/data
+    volumes:
+      - ./DSL:/data
+      - ./DSL/DMapper/rag-search/hbs:/workspace/app/views/rag-search
+      - ./DSL/DMapper/rag-search/lib:/workspace/app/lib
+    ports:
+      - 3000:3000
+    networks:
+      - bykstack
+
+  tim:
+    container_name: tim
+    image: tim
+    depends_on:
+      tim-postgresql:
+        condition: service_started
+    environment:
+      - SECURITY_ALLOWLIST_JWT=ruuter-private,ruuter-public,data-mapper,resql,tim,tim-postgresql,chat-widget,authentication-layer,127.0.0.1,::1
+      - KEY_PASS=ppjjpp
+    ports:
+      - 8085:8085
+    networks:
+      - bykstack
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cpus: "0.5"
+    mem_limit: "512M"
+
+  tim-postgresql:
+    container_name: tim-postgresql
+    image: postgres:14.1
+    environment:
+      - POSTGRES_USER=tim
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=tim
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./tim-db:/var/lib/postgresql/data
+    ports:
+      - 9876:5432
+    networks:
+      - bykstack
+
+  authentication-layer:
+    container_name: authentication-layer
+    image: authentication-layer
+    ports:
+      - 3004:3004
+    networks:
+      - bykstack
+
+  resql:
+    container_name: resql
+    image: resql
+    depends_on:
+      rag_search_db:
+        condition: service_started
+    environment:
+      - sqlms.datasources.[0].name=byk
+      - sqlms.datasources.[0].jdbcUrl=jdbc:postgresql://rag_search_db:5432/rag-search #For LocalDb Use
+      # sqlms.datasources.[0].jdbcUrl=jdbc:postgresql://171.22.247.13:5435/byk?sslmode=require
+      - sqlms.datasources.[0].username=postgres
+      - sqlms.datasources.[0].password=dbadmin
+      - logging.level.org.springframework.boot=INFO
+    ports:
+      - 8082:8082
+    volumes:
+      - ./DSL/Resql:/DSL
+      - ./shared:/shared
+      - ./DSL/DatasetGenerator/output_datasets:/app/output_datasets
+    networks:
+      - bykstack
+
+  gui:
+    container_name: gui
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_RUUTER_API_URL=http://localhost/ruuter-public
+      - REACT_APP_RUUTER_PRIVATE_API_URL=http://localhost/ruuter-private
+      - REACT_APP_EXTERNAL_API_URL=http://localhost/dataset-gen-service
+      - REACT_APP_CUSTOMER_SERVICE_LOGIN=http://localhost/authentication-layer/et/dev-auth
+      - REACT_APP_NOTIFICATION_NODE_URL=http://localhost/notifications-node
+      - REACT_APP_CSP=upgrade-insecure-requests; default-src 'self'; font-src 'self' data:; img-src 'self' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src 'self' http://localhost ws://localhost;
+      - DEBUG_ENABLED=true
+      - CHOKIDAR_USEPOLLING=true
+      - PORT=3001
+      - REACT_APP_SERVICE_ID=conversations,settings,monitoring
+      - REACT_APP_ENABLE_HIDDEN_FEATURES=TRUE
+      - VITE_HOST=0.0.0.0
+      - VITE_PORT=3001
+      - HOST=0.0.0.0
+      - VITE_ALLOWED_HOSTS=localhost,127.0.0.1
+      - HMR=false
+      - FAST_REFRESH=false
+    build:
+      context: ./GUI
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3003:3001"
+    volumes:
+      - /app/node_modules
+      - ./GUI:/app
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "1G"
+    restart: unless-stopped
+
   qdrant:
     image: qdrant/qdrant:v1.15.1
     restart: always
@@ -244,7 +401,7 @@ services:
       - "8200:8200"         # UI & API
     environment:
       - VAULT_ADDR=http://0.0.0.0:8200
-      - VAULT_API_ADDR=http://localhost:8200
+      - VAULT_API_ADDR=http://vault:8200
       - VAULT_DEV_ROOT_TOKEN_ID=myroot
       - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
     volumes:
@@ -258,11 +415,43 @@ services:
       timeout: 5s
       retries: 5
 
+  # LLM Orchestration Service
+  llm-orchestration-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.llm_orchestration_service
+    container_name: llm-orchestration-service
+    restart: always
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=production
+      - VAULT_ADDR=http://vault:8200
+    volumes:
+      # Mount configuration files
+      - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
+      # Mount logs directory for persistence
+      - llm_orchestration_logs:/app/logs
+    networks:
+      - bykstack
+    depends_on:
+      - vault
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://llm-orchestration-service:8100/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
+
 volumes:
   loki-data:
     name: loki-data
   grafana-data:
     name: grafana-data
+  llm_orchestration_logs:
+    name: llm_orchestration_logs
   qdrant_data:
     name: qdrant_data
   rag-search-db:

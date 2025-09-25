@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List, Optional
 
-import dspy  # type: ignore[import-untyped]
+import dspy
 
 from llm_config_module.llm_factory import LLMFactory
 from llm_config_module.config.loader import ConfigurationLoader
@@ -163,7 +163,7 @@ class LLMManager:
             provider: Optional specific provider to configure DSPY with.
         """
         dspy_client = self.get_dspy_client(provider)
-        dspy.configure(lm=dspy_client)  # type: ignore[attr-defined]
+        dspy.configure(lm=dspy_client)
 
     def get_available_providers(self) -> Dict[LLMProvider, str]:
         """Get information about available providers.

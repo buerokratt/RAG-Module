@@ -1,0 +1,106 @@
+# Docker ignore file for LLM Orchestration Service
+# Exclude unnecessary files from Docker build context
+
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+coverage.xml
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Config files (will be mounted)
+.env.local
+.env.development
+.env.test
+
+# Cache directories
+.ruff_cache/
+.mypy_cache/
+.pyright_cache/
+
+# Test files
+test_*.py
+*_test.py
+tests/
+
+# Development scripts
+run_*.py
+test_*.py
+
+# Temporary files
+*.tmp
+*.temp
+.temporary
+
+# Node modules (if any)
+node_modules/
+
+# Docker files (except the specific one being built)
+Dockerfile*
+!Dockerfile.llm_orchestration_service
+docker-compose*.yml
+
+# Grafana configs (not needed for this service)
+grafana-configs/

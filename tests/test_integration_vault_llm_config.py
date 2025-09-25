@@ -4,8 +4,8 @@ import os
 import pytest
 from pathlib import Path
 from typing import Dict
-from llm_config_module.llm_manager import LLMManager
-from llm_config_module.exceptions import ConfigurationError
+from src.llm_config_module.llm_manager import LLMManager
+from src.llm_config_module.exceptions import ConfigurationError
 
 
 class TestVaultIntegration:
@@ -44,7 +44,9 @@ class TestVaultIntegration:
         self, vault_env_vars: Dict[str, str]
     ) -> None:
         """Test that development environment requires connection_id."""
-        with pytest.raises(ConfigurationError, match="connection_id is required"):
+        with pytest.raises(
+            ConfigurationError, match=r".*connection_id is required.*development"
+        ):
             LLMManager(
                 config_path=str(self.cfg_path),
                 environment="development",
@@ -81,7 +83,10 @@ class TestVaultIntegration:
 
     def test_invalid_connection_id_fails(self, vault_env_vars: Dict[str, str]) -> None:
         """Test that invalid connection_id causes failure."""
-        with pytest.raises(ConfigurationError):
+        with pytest.raises(
+            ConfigurationError,
+            match=r".*(Connection not found|Failed to discover providers)",
+        ):
             LLMManager(
                 config_path=str(self.cfg_path),
                 environment="development",
@@ -180,9 +185,6 @@ def test_vault_unavailable_fallback() -> None:
             original_values[var] = os.environ.get(var)
             del os.environ[var]
 
-    # Reset any singletons that might be carrying state from other tests
-    from llm_config_module.llm_manager import LLMManager
-
     LLMManager.reset_instance()
 
     try:
@@ -193,7 +195,7 @@ def test_vault_unavailable_fallback() -> None:
         # This should fail since vault is unreachable and token is empty
         with pytest.raises(
             ConfigurationError,
-            match="Vault URL and token must be provided|Failed to load LLM configuration|No production connections found|Connection refused|Failed to connect",
+            match=r".*(Vault URL and token must be provided|Failed to load LLM configuration|No production connections found|Connection refused|Failed to connect|must be provided.*configuration.*environment)",
         ):
             LLMManager(config_path=str(cfg_path), environment="production")
 
