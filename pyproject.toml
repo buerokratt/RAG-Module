@@ -23,6 +23,7 @@ dependencies = [
     "hvac>=2.3.0",
     "fastapi>=0.116.1",
     "uvicorn>=0.35.0",
+    "langfuse>=3.5.1",
 ]
 
 [tool.pyright]

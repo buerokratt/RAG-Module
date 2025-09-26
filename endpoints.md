@@ -1,6 +1,7 @@
 # LLM Connections API Endpoints
 
 ## Base URL
+
 ```
 /ruuter-private/llm/connections
 ```
@@ -10,11 +11,13 @@
 ## 1. Create LLM Connection
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/llm/connections/create
 ```
 
 ### Request Body
+
 ```json
 {
   "llmPlatform": "OpenAI",
@@ -29,6 +32,7 @@ POST /ruuter-private/llm/connections/create
 ```
 
 ### Response (201 Created)
+
 ```json
 {
   "id": 1,
@@ -49,11 +53,13 @@ POST /ruuter-private/llm/connections/create
 ## 2. Update LLM Connection
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/llm/connections/update
 ```
 
 ### Request Body
+
 ```json
 {
   "llmPlatform": "Azure AI",
@@ -65,6 +71,7 @@ POST /ruuter-private/llm/connections/update
 ```
 
 ### Response (200 OK)
+
 ```json
 {
   "id": 1,
@@ -83,11 +90,13 @@ POST /ruuter-private/llm/connections/update
 ## 3. Delete LLM Connection
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/llm/connections/delete
 ```
 
 ### Response (200 OK)
+
 ```json
 {
   "operationSuccessful": true,
@@ -101,23 +110,27 @@ POST /ruuter-private/llm/connections/delete
 ## 4. List All LLM Connections
 
 ### Endpoint
+
 ```http
 GET /ruuter-private/llm/connections/list
 ```
 
 ### Query Parameters (Optional for filtering)
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `llmPlatform` | `string` | Filter by LLM platform |
-| `llmModel` | `string` | Filter by LLM model |
+
+| Parameter                 | Type       | Description                                  |
+| ------------------------- | ---------- | -------------------------------------------- |
+| `llmPlatform`           | `string` | Filter by LLM platform                       |
+| `llmModel`              | `string` | Filter by LLM model                          |
 | `deploymentEnvironment` | `string` | Filter by environment (Testing / Production) |
 
 ### Example Request
+
 ```http
 GET /ruuter-private/llm/connections/list?llmPlatform=OpenAI&deploymentEnvironment=Testing&model=GPT4
 ```
 
 ### Response (200 OK)
+
 ```json
 [
   {
@@ -140,11 +153,13 @@ GET /ruuter-private/llm/connections/list?llmPlatform=OpenAI&deploymentEnvironmen
 ## 5. Get Single LLM Connection
 
 ### Endpoint
+
 ```http
 GET /ruuter-private/llm/connections/overview
 ```
 
 ### Response (200 OK)
+
 ```json
 {
   "id": 1,
@@ -161,9 +176,11 @@ GET /ruuter-private/llm/connections/overview
 ```
 
 ---
+
 # Inference Results API Endpoints
 
 ## Base URL
+
 ```
 /ruuter-private/inference/results
 ```
@@ -173,11 +190,13 @@ GET /ruuter-private/llm/connections/overview
 ## 1. Store Inference Result
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/inference/results/store
 ```
 
 ### Request Body
+
 ```json
 {
   "llmConnectionId": 1,
@@ -203,6 +222,7 @@ POST /ruuter-private/inference/results/store
 ```
 
 ### Response (201 Created)
+
 ```json
 {
   "id": 10,
@@ -232,11 +252,13 @@ POST /ruuter-private/inference/results/store
 ## 2. View/get Inference Result
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/inference/results/view
 ```
 
 ### Request Body
+
 ```json
 
 {
@@ -246,6 +268,7 @@ POST /ruuter-private/inference/results/view
 ```
 
 ### Response (200 OK)
+
 ```json
 {
   "chatId": 10,
@@ -261,11 +284,13 @@ POST /ruuter-private/inference/results/view
 ## 3. Inquiry from chatbot to llm ochestration service
 
 ### Endpoint
+
 ```http
 POST /ruuter-private/rag/inquiry
 ```
 
 ### Request Body
+
 ```json
 
 {
@@ -289,6 +314,7 @@ POST /ruuter-private/rag/inquiry
 ```
 
 ### Response (200 OK)
+
 ```json
 {
     "chatId": "chat-12345",

@@ -31,7 +31,7 @@ class VaultClient:
     def __init__(
         self,
         vault_url: str = "http://localhost:8200",
-        token: Optional[str] = None,
+        token: Optional[str] = "myroot",
         mount_point: str = "secret",
     ):
         """Initialize Vault client.
@@ -42,7 +42,7 @@ class VaultClient:
             mount_point: KV mount point (default: secret)
         """
         self.vault_url = vault_url.rstrip("/")
-        self.token = token or os.getenv("VAULT_TOKEN")
+        self.token ="myroot"
         self.mount_point = mount_point
         self.session = self._create_session()
         self.headers = {"X-Vault-Token": self.token, "Content-Type": "application/json"}
@@ -131,6 +131,10 @@ class VaultClient:
             # For KV v2 in dev mode, use the data endpoint with nested data structure
             url = f"{self.vault_url}/v1/{self.mount_point}/data/{path}"
             payload = {"data": data}
+            print(f"DEBUG: URL = {url}")
+            print(f"DEBUG: Headers = {self.headers}")
+            print(f"DEBUG: Token = {self.token}")
+            print(f"DEBUG: Payload = {payload}")
 
             # Use custom JSON encoder to handle datetime objects
             json_payload = json.dumps(payload, cls=DateTimeEncoder)
@@ -138,6 +142,9 @@ class VaultClient:
             response = self.session.post(
                 url, data=json_payload, headers=self.headers, timeout=10
             )
+            print(f"DEBUG: Response status = {response.status_code}")
+            print(f"DEBUG: Response text = {response.text}")
+        
 
             if response.status_code in [200, 204]:
                 logger.info(f"Successfully stored secret at path: {path}")

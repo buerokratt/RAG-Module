@@ -360,7 +360,7 @@ services:
     command: >
       --requirepass ${REDIS_AUTH:-myredissecret}
     ports:
-      - 127.0.0.1:6379:6379
+      - 127.0.0.1:6378:6379
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 3s
@@ -394,7 +394,17 @@ services:
   vault:
     image: hashicorp/vault:latest
     container_name: vault
-    command: ["vault", "server", "-dev", "-dev-listen-address=0.0.0.0:8200", "-dev-root-token-id=myroot"]
+    command:  |
+      sh -c "
+      vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=myroot &
+      sleep 5 &&
+      export VAULT_ADDR='http://0.0.0.0:8200' &&
+      export VAULT_TOKEN='myroot' &&
+      vault secrets disable secret &&
+      vault secrets enable -path=secret kv-v2 &&
+      wait  
+      "  
+    #["vault", "server", "-dev", "-dev-listen-address=0.0.0.0:8200", "-dev-root-token-id=myroot"]
     cap_add:
       - IPC_LOCK            # allow mlock to prevent swapping
     ports:
@@ -429,6 +439,7 @@ services:
     environment:
       - ENVIRONMENT=production
       - VAULT_ADDR=http://vault:8200
+      - LANGFUSE_HOST=http://langfuse-web:3000  
     volumes:
       # Mount configuration files
       - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
@@ -438,6 +449,7 @@ services:
       - bykstack
     depends_on:
       - vault
+      - langfuse-web
     healthcheck:
       test: ["CMD", "curl", "-f", "http://llm-orchestration-service:8100/health"]
       interval: 30s
