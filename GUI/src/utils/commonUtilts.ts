@@ -88,3 +88,27 @@ export const formatClassHierarchyArray = (array: string | string[]) => {
 
 export const areArraysEqual = (a: string[] = [], b: string[] = []) =>
   a.length === b.length && a.every((v, i) => v === b[i]);
+
+/**
+ * Format number with comma separators (e.g., 1234567 -> "1,234,567")
+ */
+export const formatNumberWithCommas = (value: string | number): string => {
+  // Remove any existing commas and non-numeric characters except decimal point
+  const cleanValue = String(value).replace(/[^\d.]/g, '');
+  
+  // Split by decimal point to handle decimal numbers
+  const parts = cleanValue.split('.');
+  
+  // Add commas to the integer part
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+  // Join back with decimal point if it exists
+  return parts.join('.');
+};
+
+/**
+ * Remove commas from formatted number string (e.g., "1,234,567" -> "1234567")
+ */
+export const removeCommasFromNumber = (value: string): string => {
+  return value.replace(/,/g, '');
+};

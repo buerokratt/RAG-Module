@@ -12,8 +12,8 @@ import NoDataView from 'components/molecules/NoDataView';
 import './LLMConnections.scss';
 import { platforms, trainingStatuses } from 'config/dataModelsConfig';
 import LLMConnectionCard from 'components/molecules/LLMConnectionCard';
-import { mockLLMConnections } from 'mockData/llmConnectionData';
-import ViewLLMConnection from './ViewLLMConnection';
+import { fetchLLMConnectionsPaginated, LLMConnectionFilters, LLMConnection } from 'services/llmConnections';
+import { llmConnectionsQueryKeys } from 'utils/queryKeys';
 
 const LLMConnections: FC = () => {
   const { t } = useTranslation();
@@ -21,36 +21,104 @@ const LLMConnections: FC = () => {
   const [searchParams] = useSearchParams();
 
   const [pageIndex, setPageIndex] = useState<number>(1);
-
-  const [view, setView] = useState<'list' | 'individual'>('list');
-  const isModelDataLoading = false;
-  const [filters, setFilters] = useState({
-    modelName: 'all',
-    modelStatus: 'all',
-    trainingStatus: 'all',
-    deploymentEnvironment: 'all',
-    sort: 'createdAt desc',
+  const [filters, setFilters] = useState<LLMConnectionFilters>({
+    pageNumber: 1,
+    pageSize: 10,
+    sortBy: 'created_at',
+    sortOrder: 'desc',
   });
 
-  // Check if we have an ID parameter to show the detail view
-  const connectionId = searchParams.get('id');
+  // Fetch LLM connections using TanStack Query with new paginated endpoint
+  const { data: connectionsResponse, isLoading: isModelDataLoading, error } = useQuery({
+    queryKey: llmConnectionsQueryKeys.paginatedList(filters),
+    queryFn: () => fetchLLMConnectionsPaginated(filters),
+  });
 
-  // If there's an ID parameter, show the ViewLLMConnection component
-  if (connectionId) {
-    return <ViewLLMConnection />;
-  }
+  const llmConnections = connectionsResponse;
+  const totalPages = connectionsResponse?.[0]?.totalPages || 1;
 
-
+  // Update filters when pageIndex changes
+  useEffect(() => {
+    setFilters(prev => ({ ...prev, pageNumber: pageIndex }));
+  }, [pageIndex]);
 
   const handleFilterChange = (
     name: string,
     value: string | number | undefined | { name: string; id: string }
   ) => {
+    let filterUpdate: Partial<LLMConnectionFilters> = {};
+    
+    if (name === 'sorting') {
+      // Handle sorting format - no conversion needed, use snake_case directly
+      const sortingValue = value as string;
+      const [sortBy, sortOrder] = sortingValue.split(' ');
+      
+      filterUpdate = {
+        sortBy: sortBy,
+        sortOrder: sortOrder as 'asc' | 'desc'
+      };
+    } else {
+      filterUpdate = { [name]: value };
+    }
+
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: value,
+      ...filterUpdate,
     }));
+    
+    // Reset to first page when filters change
+    if (name !== 'pageNumber') {
+      setPageIndex(1);
+    }
   };
+
+  // Platform filter options
+  const platformOptions = [
+    { label: 'All Platforms', value: 'all' },
+    { label: 'OpenAI', value: 'openai' },
+    { label: 'Anthropic', value: 'anthropic' },
+    { label: 'Azure OpenAI', value: 'azure' },
+    { label: 'Google AI', value: 'google' },
+    { label: 'AWS Bedrock', value: 'bedrock' },
+    { label: 'Hugging Face', value: 'huggingface' },
+  ];
+
+  // LLM Model filter options - these would ideally come from an API
+  const llmModelOptions = [
+    { label: 'All Models', value: 'all' },
+    { label: 'GPT-4', value: 'gpt-4' },
+    { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
+    { label: 'GPT-3.5 Turbo', value: 'gpt-3.5-turbo' },
+    { label: 'Claude-3 Sonnet', value: 'claude-3-sonnet' },
+    { label: 'Claude-3 Haiku', value: 'claude-3-haiku' },
+    { label: 'Gemini Pro', value: 'gemini-pro' },
+  ];
+
+  // Environment filter options
+  const environmentOptions = [
+    { label: 'All Environments', value: 'all' },
+    { label: 'Testing', value: 'testing' },
+    { label: 'Production', value: 'production' },
+    { label: 'Development', value: 'development' },
+  ];
+
+  // Sort options - using snake_case format for backend
+  const sortOptions = [
+    { label: 'Created Date (Newest)', value: 'created_at desc' },
+    { label: 'Created Date (Oldest)', value: 'created_at asc' },
+    { label: 'Platform A-Z', value: 'llm_platform asc' },
+    { label: 'Platform Z-A', value: 'llm_platform desc' },
+    { label: 'Model A-Z', value: 'llm_model asc' },
+    { label: 'Model Z-A', value: 'llm_model desc' },
+    { label: 'Budget (High to Low)', value: 'monthly_budget desc' },
+    { label: 'Budget (Low to High)', value: 'monthly_budget asc' },
+  ];
+
+  const currentSorting = `${filters.sortBy || 'created_at'} ${filters.sortOrder || 'desc'}`;
+
+  // Find featured connection (first active one)
+  const featuredConnection = llmConnections?.[0];
+  const otherConnections = llmConnections || [];
 
   return (
     <div>
@@ -72,102 +140,121 @@ const LLMConnections: FC = () => {
                 <div className="models-filter-div">
                   <FormSelect
                     label=""
-                    name=""
+                    name="llmPlatform"
                     placeholder={'Platform'}
-                    options={[]}
+                    options={platformOptions}
                     onSelectionChange={(selection) =>
-                      handleFilterChange('modelStatus', selection?.value ?? '')
+                      handleFilterChange('llmPlatform', selection?.value === 'all' ? '' : selection?.value)
                     }
-                    defaultValue={filters?.modelStatus}
+                    defaultValue={filters?.llmPlatform || 'all'}
                   />
                   <FormSelect
                     label=""
-                    name=""
+                    name="llmModel"
                     placeholder={'Model'}
-                    options={[]}
+                    options={llmModelOptions}
                     onSelectionChange={(selection) =>
-                      handleFilterChange('deploymentEnvironment', selection?.value)
+                      handleFilterChange('llmModel', selection?.value === 'all' ? '' : selection?.value)
                     }
-                    defaultValue={filters?.deploymentEnvironment}
+                    defaultValue={filters?.llmModel || 'all'}
+                  />
+                  <FormSelect
+                    label=""
+                    name="environment"
+                    placeholder={'Environment'}
+                    options={environmentOptions}
+                    onSelectionChange={(selection) =>
+                      handleFilterChange('environment', selection?.value === 'all' ? '' : selection?.value)
+                    }
+                    defaultValue={filters?.environment || 'all'}
                   />
 
                   <FormSelect
                     label=""
-                    name=""
-                    placeholder={'Deployment Environment'}
-                    options={[]}
+                    name="sorting"
+                    placeholder={'Sort By'}
+                    options={sortOptions}
                     onSelectionChange={(selection) =>
-                      handleFilterChange('sort', selection?.value)
+                      handleFilterChange('sorting', selection?.value)
                     }
-                    defaultValue={filters?.sort}
+                    defaultValue={currentSorting}
                   />
 
                   <div className="filter-reset-button">
                     <Button
-                      onClick={() =>
+                      onClick={() => {
                         setFilters({
-                          modelName: 'all',
-                          modelStatus: 'all',
-                          trainingStatus: 'all',
-                          deploymentEnvironment: 'all',
-                          sort: 'createdAt desc',
-                        })
-                      }
+                          pageNumber: 1,
+                          pageSize: 10,
+                          sortBy: 'created_at',
+                          sortOrder: 'desc',
+                          llmPlatform: '',
+                          llmModel: '',
+                          environment: '',
+                        });
+                        setPageIndex(1);
+                      }}
                       appearance={ButtonAppearanceTypes.SECONDARY}
                     >
-                      {t('global.reset') ?? ''}
+                      {t('global.reset') ?? 'Reset'}
                     </Button>
                   </div>
                 </div>
               </div>
-              { <div className="m-30-0">
-                <p>Deployed LLM Connection</p>
-                <div className="grid-container m-30-0">
-                  <LLMConnectionCard
-                            key={mockLLMConnections[0]?.llmConnectionId}
-                            llmConnectionId={mockLLMConnections[0]?.llmConnectionId}
-                            llmConnectionName={mockLLMConnections[0]?.llmConnectionName}
-                            isActive={mockLLMConnections[0]?.isActive}
-                            deploymentEnv={mockLLMConnections[0]?.deploymentEnv}
-                            budgetStatus={mockLLMConnections[0]?.budgetStatus}
-                            platform={mockLLMConnections[0]?.platform}
-                            model={mockLLMConnections[0]?.model}
-                          />
-                  </div>
-              </div>}
 
-              {mockLLMConnections?.length > 0 ? (
-                <div><p>Other Data Models</p>
+              {featuredConnection && (
+                <div className="m-30-0">
+                  <p>Production LLM Connection</p>
                   <div className="grid-container m-30-0">
-
-                    {mockLLMConnections?.map(
-                      (llmConnection, index: number) => {
-                        return (
-                          <LLMConnectionCard
-                            key={llmConnection?.llmConnectionId}
-                            llmConnectionId={llmConnection?.llmConnectionId}
-                            llmConnectionName={llmConnection?.llmConnectionName}
-                            isActive={llmConnection?.isActive}
-                            deploymentEnv={llmConnection?.deploymentEnv}
-                            budgetStatus={llmConnection?.budgetStatus}
-                            platform={llmConnection?.platform}
-                            model={llmConnection?.model}
-                          />
-                        );
-                      }
-                    )}
+                    <LLMConnectionCard
+                      key={featuredConnection.id}
+                      llmConnectionId={featuredConnection.id}
+                      llmConnectionName={`${featuredConnection.llmPlatform} - ${featuredConnection.llmModel}`}
+                      isActive={featuredConnection.status === 'active'}
+                      deploymentEnv={featuredConnection.environment}
+                      budgetStatus={featuredConnection.budgetStatus}
+                      platform={featuredConnection.llmPlatform}
+                      model={featuredConnection.llmModel}
+                    />
                   </div>
                 </div>
+              )}
 
-              ) : (
-                <NoDataView text={t('dataModels.noModels') ?? ''} />
+              {otherConnections?.length > 0 ? (
+                <div>
+                  <p>Other LLM Connections</p>
+                  <div className="grid-container m-30-0">
+                    {otherConnections?.map((llmConnection: LLMConnection) => {
+                      return (
+                        <LLMConnectionCard
+                          key={llmConnection.id}
+                          llmConnectionId={llmConnection.id}
+                          llmConnectionName={`${llmConnection.llmPlatform} - ${llmConnection.llmModel}`}
+                          isActive={llmConnection.status === 'active'}
+                          deploymentEnv={llmConnection.environment}
+                          budgetStatus={llmConnection.budgetStatus}
+                          platform={llmConnection.llmPlatform}
+                          model={llmConnection.llmModel}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : !featuredConnection ? (
+                <NoDataView text={t('dataModels.noModels') ?? 'No LLM connections found'} />
+              ) : null}
+
+              {(error as any) && (
+                <div className="error-message" style={{ color: 'red', padding: '20px' }}>
+                  <p>Error loading LLM connections. Please try again.</p>
+                </div>
               )}
             </div>
             <Pagination
-              pageCount={1}
+              pageCount={totalPages}
               pageIndex={pageIndex}
               canPreviousPage={pageIndex > 1}
-              canNextPage={pageIndex < 10}
+              canNextPage={pageIndex < totalPages}
               onPageChange={setPageIndex}
             />
           </div>

@@ -1,0 +1,98 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Update an existing LLM connection"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+      - field: llm_platform
+        type: string
+        description: "LLM platform (e.g., Azure AI, OpenAI)"
+      - field: llm_model
+        type: string
+        description: "LLM model (e.g., GPT-4o)"
+      - field: embedding_platform
+        type: string
+        description: "Embedding platform (e.g., Azure AI, OpenAI)"
+      - field: embedding_model
+        type: string
+        description: "Embedding model (e.g., Ada-200-1)"
+      - field: monthly_budget
+        type: number
+        description: "Monthly budget amount"
+      - field: deployment_environment
+        type: string
+        description: "Deployment environment (Testing or Production)"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+    llm_platform: ${incoming.body.llm_platform}
+    llm_model: ${incoming.body.llm_model}
+    embedding_platform: ${incoming.body.embedding_platform}
+    embedding_model: ${incoming.body.embedding_model}
+    monthly_budget: ${Number(incoming.body.monthly_budget)}
+    environment: ${incoming.body.deployment_environment}
+    updated_at: ${new Date().toISOString()}
+  next: validate_environment
+
+validate_environment:
+  switch:
+    - condition: ${environment == "testing" || environment == "production"}
+      next: check_connection_exists
+  next: return_invalid_environment
+
+check_connection_exists:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: existing_connection
+  next: validate_connection_exists
+
+validate_connection_exists:
+  switch:
+    - condition: "${existing_connection.response.body.length > 0}"
+      next: update_llm_connection
+  next: return_not_found
+
+update_llm_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection"
+    body:
+      connection_id: ${connection_id}
+      llm_platform: ${llm_platform}
+      llm_model: ${llm_model}
+      embedding_platform: ${embedding_platform}
+      embedding_model: ${embedding_model}
+      monthly_budget: ${monthly_budget}
+      environment: ${environment}
+  result: connection_result
+  next: return_success
+
+return_success:
+  return: ${connection_result.response.body[0]}
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_invalid_environment:
+  status: 400
+  return: "error: environment must be 'Testing' or 'Production'"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end

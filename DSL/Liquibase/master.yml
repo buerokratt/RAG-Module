@@ -1,3 +1,9 @@
 databaseChangeLog:
   - include:
       file: changelog/rag-search-script-v1-llm-connections.sql
+  - include:
+      file: changelog/rag-search-script-v2-user-management.sql
+  - include:
+      file: changelog/rag-search-script-v3-configuration.sql
+  - include:
+      file: changelog/rag-search-script-v4-authority-data.xml

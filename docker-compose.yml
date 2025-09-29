@@ -360,7 +360,7 @@ services:
     command: >
       --requirepass ${REDIS_AUTH:-myredissecret}
     ports:
-      - 127.0.0.1:6378:6379
+      - 127.0.0.1:6379:6379
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 3s
@@ -392,38 +392,46 @@ services:
       - bykstack
 
   vault:
-    image: hashicorp/vault:latest
+    image: hashicorp/vault:1.20.3
     container_name: vault
-    command:  |
-      sh -c "
-      vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=myroot &
-      sleep 5 &&
-      export VAULT_ADDR='http://0.0.0.0:8200' &&
-      export VAULT_TOKEN='myroot' &&
-      vault secrets disable secret &&
-      vault secrets enable -path=secret kv-v2 &&
-      wait  
-      "  
-    #["vault", "server", "-dev", "-dev-listen-address=0.0.0.0:8200", "-dev-root-token-id=myroot"]
+    user: "0"
     cap_add:
-      - IPC_LOCK            # allow mlock to prevent swapping
-    ports:
-      - "8200:8200"         # UI & API
+      - IPC_LOCK
+    command: ["vault", "server", "-config=/vault/config/vault.hcl"]
     environment:
-      - VAULT_ADDR=http://0.0.0.0:8200
-      - VAULT_API_ADDR=http://vault:8200
-      - VAULT_DEV_ROOT_TOKEN_ID=myroot
-      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+      VAULT_ADDR: http://0.0.0.0:8200
+      VAULT_SKIP_VERIFY_CONFIG_PERMISSIONS: "true"
     volumes:
-      - vault-data:/vault/data  # persisted Raft storage
+      - vault-data:/vault/file
+      - ./vault/config:/vault/config          # contains vault.hcl
+      - ./vault/logs:/vault/logs
+    expose:
+      - "8200"
     networks:
       - bykstack
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "vault", "status"]
+      test: ["CMD", "vault", "status", "-format=json"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+
+  vault-agent-llm:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-llm
+    user: "0"
+    command: ["vault", "agent", "-config=/agent/in/agent.hcl", "-log-level=info"]
+    depends_on:
+      - vault
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/llm:/agent/in:ro       # agent.hcl, role_id, secret_id
+      - ./vault/agent-out:/agent/out            # token output
+    networks:
+      - bykstack
+    restart: unless-stopped
+
 
   # LLM Orchestration Service
   llm-orchestration-service:
@@ -439,17 +447,18 @@ services:
     environment:
       - ENVIRONMENT=production
       - VAULT_ADDR=http://vault:8200
-      - LANGFUSE_HOST=http://langfuse-web:3000  
+      - VAULT_TOKEN=/agent/out/token
     volumes:
       # Mount configuration files
       - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
       # Mount logs directory for persistence
       - llm_orchestration_logs:/app/logs
+      - ./vault/agent-out:/agent/out:ro
     networks:
       - bykstack
     depends_on:
       - vault
-      - langfuse-web
+      - vault-agent-llm
     healthcheck:
       test: ["CMD", "curl", "-f", "http://llm-orchestration-service:8100/health"]
       interval: 30s
@@ -476,6 +485,8 @@ volumes:
     name: minio_data
   vault-data:
     name: vault-data
+  vault-agent-out:
+    name: vault-agent-out
 
 networks:
   bykstack:

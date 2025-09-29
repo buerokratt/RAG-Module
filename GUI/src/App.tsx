@@ -10,35 +10,36 @@ import LoadingScreen from 'pages/LoadingScreen/LoadingScreen';
 import LLMConnections from 'pages/LLMConnections';
 import CreateLLMConnection from 'pages/LLMConnections/CreateLLMConnection';
 import ViewLLMConnection from 'pages/LLMConnections/ViewLLMConnection';
+import UserManagement from 'pages/UserManagement';
+import TestLLM from 'pages/TestModel';
 
 const App: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [hasRedirected, setHasRedirected] = useState(false);
-  // const { isLoading, data } = useQuery({
-  //   queryKey: authQueryKeys.USER_DETAILS(),
+  const { isLoading, data } = useQuery({
+    queryKey: authQueryKeys.USER_DETAILS(),
 
-  //   onSuccess: (res: { response: UserInfo }) => {
-  //     localStorage.setItem('exp', res.response.JWTExpirationTimestamp);
-  //     useStore.getState().setUserInfo(res.response);
-  //   },
-  // });
+    onSuccess: (res: { response: UserInfo }) => {
+      localStorage.setItem('exp', res.response.JWTExpirationTimestamp);
+      useStore.getState().setUserInfo(res.response);
+    },
+  });
 
-  // useEffect(() => {
-  //   if (!isLoading && data && !hasRedirected && location.pathname === '/') {
-  //     const isAdmin = (data as { response: UserInfo }).response.authorities.some(
-  //       (item) => item === ROLES.ROLE_ADMINISTRATOR
-  //     );
-  //     if (isAdmin) {
-  //       navigate('/user-management');
-  //     } else {
-  //       navigate('/dataset-groups');
-  //     }
-  //     setHasRedirected(true);
-  //   }
-  // }, [isLoading, data, navigate, hasRedirected, location.pathname]);
+  useEffect(() => {
+    if (!isLoading && data && !hasRedirected && location.pathname === '/') {
+      const isAdmin = (data as { response: UserInfo }).response.authorities.some(
+        (item) => item === ROLES.ROLE_ADMINISTRATOR
+      );
+      if (isAdmin) {
+        navigate('/user-management');
+      } else {
+        navigate('/dataset-groups');
+      }
+      setHasRedirected(true);
+    }
+  }, [isLoading, data, navigate, hasRedirected, location.pathname]);
 
-  const isLoading = false;
   return (
     <>
       {isLoading ? (
@@ -46,20 +47,21 @@ const App: FC = () => {
       ) : (
         <Routes>
           <Route element={<Layout />}>
-            {/* {(data as { response: UserInfo })?.response.authorities.some(
+            {(data as { response: UserInfo })?.response.authorities.some(
               (item) => item === ROLES.ROLE_ADMINISTRATOR
             ) ? (
               <>
-                // admin routes
+            <Route path="/user-management" element={<UserManagement />} />
               </>
             ) : (
               <>
                 // unauthorized route
               </>
-            )} */}
+            )}
             <Route path="/llm-connections" element={<LLMConnections />} />
             <Route path="/create-llm-connection" element={<CreateLLMConnection />} />
             <Route path="/view-llm-connection" element={<ViewLLMConnection />} />
+            <Route path="/test-llm" element={<TestLLM />} />
 
             </Route>
         </Routes>

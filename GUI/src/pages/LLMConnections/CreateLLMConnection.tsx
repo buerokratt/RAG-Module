@@ -1,34 +1,65 @@
 import BackArrowButton from "assets/BackArrowButton";
 import LLMConnectionForm, { LLMConnectionFormData } from "components/molecules/LLMConnectionForm";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useDialog } from 'hooks/useDialog';
+import { createLLMConnection } from 'services/llmConnections';
+import { llmConnectionsQueryKeys } from 'utils/queryKeys';
+import { ButtonAppearanceTypes } from 'enums/commonEnums';
+import { Button } from 'components';
 
 const CreateLLMConnection = () => {
     const navigate = useNavigate();
-      const [isLoading, setIsLoading] = useState(false);
+    const { open: openDialog, close: closeDialog } = useDialog();
+    const queryClient = useQueryClient();
     
-      const handleSubmit = async (data: LLMConnectionFormData) => {
-        setIsLoading(true);
-        try {
-          // Here you would typically call your API to create the LLM connection
-          console.log('Creating LLM Connection:', data);
-          
-          // Simulate API call
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          // Navigate back to connections list or show success message
-          navigate('/llm-connections');
-        } catch (error) {
-          console.error('Error creating LLM connection:', error);
-          // Handle error (show toast, etc.)
-        } finally {
-          setIsLoading(false);
-        }
-      };
+    const createConnectionMutation = useMutation({
+      mutationFn: createLLMConnection,
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: llmConnectionsQueryKeys.all()
+        });
+        
+        openDialog({
+          title: 'Connection Succeeded',
+          content: <p>The provide LLM configuration is successfully configured</p>,
+          footer: (
+            <Button
+              appearance={ButtonAppearanceTypes.PRIMARY}
+              onClick={() => {
+                closeDialog();
+                navigate('/llm-connections');
+              }}
+            >
+              View LLM Connections
+            </Button>
+          ),
+        });
+      },
+      onError: (error: any) => {
+        console.error('Error creating LLM connection:', error);
+        openDialog({
+          title: 'Connection Failed',
+          content: <p>{'The connection couldn’t be established either due to invalid API credentials or misconfiguration in the deployment platform'}</p>,
+          footer: (
+            <Button
+              appearance={ButtonAppearanceTypes.PRIMARY}
+              onClick={closeDialog}
+            >
+              Go Back
+            </Button>
+          ),
+        });
+      },
+    });
     
-      const handleCancel = () => {
-        navigate('/llm-connections');
-      };
+    const handleSubmit = async (data: LLMConnectionFormData) => {
+      createConnectionMutation.mutate(data);
+    };
+    
+    const handleCancel = () => {
+      navigate('/llm-connections');
+    };
 
     return(
         <div className="container">
@@ -44,6 +75,7 @@ const CreateLLMConnection = () => {
         onSubmit={handleSubmit}
         onCancel={handleCancel}
         isEditing={false}
+        onDelete={() => {}}
       />
         </div>
 

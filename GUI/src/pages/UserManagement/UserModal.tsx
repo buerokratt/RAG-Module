@@ -47,12 +47,13 @@ const UserModal: FC<UserModalProps> = ({ onClose, user, isModalOpen }) => {
       authorities: user?.authorities,
       csaTitle: user?.csaTitle,
       csaEmail: user?.csaEmail,
-      fullName: user?.firstName && user?.lastName ?`${user?.firstName} ${user?.lastName}`:"",
+      fullName: user?.firstName && user?.lastName ? `${user?.firstName} ${user?.lastName}` : "",
     },
   });
 
   const watchedValues = useWatch({
-    control  });    
+    control,
+  });
 
   const roles = useMemo(
     () => [
@@ -195,9 +196,8 @@ const UserModal: FC<UserModalProps> = ({ onClose, user, isModalOpen }) => {
     >
       <Track direction="vertical" gap={16} align="right">
         <FormInput
-          defaultValue={`${user?.firstName ?? ''} ${
-            user?.lastName ?? ''
-          }`.trim()}
+          defaultValue={`${user?.firstName ?? ''} ${user?.lastName ?? ''
+            }`.trim()}
           {...register('fullName', {
             required: t('userManagement.addUser.nameRequired') ?? '',
           })}

@@ -21,7 +21,7 @@ export default defineConfig({
       },
     },
   ],
-  base: 'rag-search',
+  base: '/rag-search',
   build: {
     outDir: './build',
     target: 'es2015',

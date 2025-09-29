@@ -13,7 +13,7 @@ type LLMConnectionCardProps = {
   llmConnectionId: number | string;
   llmConnectionName?: string;
   platform?: string;
-  model?: boolean;
+  model?: string;
   isActive?: boolean;
   deploymentEnv?: string;
   budgetStatus?: string;
@@ -43,19 +43,19 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
   };
 
   const renderBudgetStatus = (status: string | undefined) => {
-    if (status === "within") {
+    if (status === "within_budget") {
       return (
         <Label type="success">
           {'Within Budget'}
         </Label>
       );
-    } else if (status === "over") {
+    } else if (status === "over_budget") {
       return (
         <Label type="error">
           {'Over Budget'}
         </Label>
       );
-    } else if (status === "close") {
+    } else if (status === "close_to_exceed") {
       return (
         <Label type="warning">
           {'Close to Exceed Budget'}

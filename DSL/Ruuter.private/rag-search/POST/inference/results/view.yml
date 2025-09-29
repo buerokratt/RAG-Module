@@ -1,0 +1,47 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "View/get inference result"
+  method: post
+  accepts: json
+  returns: json
+  namespace: inference-results
+  allowlist:
+    body:
+      - field: llmConnectionId
+        type: number
+        description: "LLM connection ID"
+      - field: message
+        type: string
+        description: "User message/question"
+
+extract_request_data:
+  assign:
+    llmConnectionId: ${incoming.body.llmConnectionId}
+    message: ${incoming.body.message}
+  next: validate_request
+
+validate_request:
+  switch:
+    - condition: ${llmConnectionId != null && message != null}
+      next: generate_mock_response
+  next: return_bad_request
+
+generate_mock_response:
+  assign:
+    data: {
+      chatId: 10,
+      llmServiceActive: true,
+      questionOutOfLlmScope: true,
+      content: "Random answer with citations\n  - https://gov.ee/sample1,\n  - https://gov.ee/sample1"
+    }
+  next: return_success
+
+return_success:
+  return: ${data}
+  next: end
+
+return_bad_request:
+  status: 400
+  return: "llmConnectionId and message are required"
+  next: end
