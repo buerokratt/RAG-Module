@@ -1,0 +1,183 @@
+[
+    {
+        "input": "How flexible will pensions become in 2021?",
+        "expected_output": "In 2021, pensions will become more flexible allowing people to choose the most suitable time for retirement, partially withdraw their pension, or stop pension payments if they wish, effectively creating their own personal pension plan.",
+        "retrieval_context": [
+            "In 2021, the pension will become more flexible. People will be able to choose the most suitable time for their retirement, partially withdraw their pension or stop payment of their pension if they wish, in effect creating their own personal pension plan."
+        ],
+        "category": "pension_information",
+        "language": "en"
+    },
+    {
+        "input": "Когда изменятся расчеты пенсионного возраста?",
+        "expected_output": "Начиная с 2027 года расчеты пенсионного возраста будут основываться на ожидаемой продолжительности жизни 65-летних людей. Пенсионная система таким образом будет соответствовать демографическим изменениям.",
+        "retrieval_context": [
+            "Starting in 2027, retirement age calculations will be based on the life expectancy of 65-year-olds. The pension system will thus be in line with demographic developments."
+        ],
+        "category": "pension_information",
+        "language": "ru"
+    },
+    {
+        "input": "Kui palju raha maksti peredele 2021. aastal?",
+        "expected_output": "2021. aastal maksti peredele kokku umbes 653 miljonit eurot toetusi, sealhulgas umbes 310 miljonit eurot peretoetuste eest ja 280 miljonit eurot lapsetoetuste eest.",
+        "retrieval_context": [
+            "In 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; Approximately 280 million euros for parental benefit."
+        ],
+        "category": "family_benefits",
+        "language": "et"
+    },
+    {
+        "input": "Сколько семей получает поддержку для многодетных семей?",
+        "expected_output": "23,687 семей и 78,296 детей получают поддержку для многодетных семей, включая 117 семей с семью или более детьми.",
+        "retrieval_context": [
+            "23,687 families and 78,296 children receive support for families with many children, including 117 families with seven or more children."
+        ],
+        "category": "family_benefits",
+        "language": "ru"
+    },
+    {
+        "input": "How many single parents receive support?",
+        "expected_output": "8,804 parents and 10,222 children receive single parent support.",
+        "retrieval_context": [
+            "8,804 parents and 1,0222 children receive single parent support."
+        ],
+        "category": "single_parent_support",
+        "language": "en"
+    },
+    {
+        "input": "Какие уровни бедности среди семей с одним родителем?",
+        "expected_output": "Семьи с одним родителем (в основном матери) находятся в группе наивысшего риска бедности: 5,3% живут в абсолютной бедности и 27,3% в относительной бедности.",
+        "retrieval_context": [
+            "Single-parent (mostly mother) families are at the highest risk of poverty, of whom 5.3% live in absolute poverty and 27.3% in relative poverty."
+        ],
+        "category": "single_parent_support",
+        "language": "ru"
+    },
+    {
+        "input": "Millal saab piletit tagastada?",
+        "expected_output": "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit.",
+        "retrieval_context": [
+            "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
+        ],
+        "category": "train_services",
+        "language": "et"
+    },
+    {
+        "input": "За сколько минут до отправления можно вернуть билет на поезд?",
+        "expected_output": "Возврат билета возможен только в том случае, если до отправления поездки остается не менее 60 минут.",
+        "retrieval_context": [
+            "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
+        ],
+        "category": "train_services",
+        "language": "ru"
+    },
+    {
+        "input": "Where is ticket refunded without charge?",
+        "expected_output": "The ticket cost is refunded to the Elron travel card without service charge only if the refund request is submitted through the Elron homepage refund form.",
+        "retrieval_context": [
+            "Pileti maksumus tagastatakse Elroni sõidukaardile teenustasuta ainult juhul, kui tagastussoov esitatakse Elroni kodulehe tagastusvormi kaudu."
+        ],
+        "category": "train_services",
+        "language": "en"
+    },
+    {
+        "input": "Что сказала министр Кармен Йоллер о дезинформации в области здравоохранения?",
+        "expected_output": "Министр социальных дел Эстонии Кармен Йоллер заявила, что Европа должна действовать более совместно и скоординированно, чтобы остановить распространение дезинформации, связанной со здоровьем.",
+        "retrieval_context": [
+            "Europe must act more jointly and in a more coordinated way to stop the spread of health-related misinformation, said Estonia's Minister of Social Affairs, Karmen Joller."
+        ],
+        "category": "health_cooperation",
+        "language": "ru"
+    },
+    {
+        "input": "What agreement did Estonia sign with Ukraine?",
+        "expected_output": "Estonian Minister of Social Affairs Karmen Joller and Ukrainian Minister of Health Viktor Liashko signed the next stage of a health cooperation agreement to reinforce health collaboration and support Ukraine's healthcare system recovery.",
+        "retrieval_context": [
+            "Estonian Minister of Social Affairs Karmen Joller and Ukrainian Minister of Health Viktor Liashko today signed the next stage of a health cooperation agreement.",
+            "The aim of the agreement is to reinforce health collaboration, support Ukraine's healthcare system recovery."
+        ],
+        "category": "health_cooperation",
+        "language": "en"
+    },
+    {
+        "input": "Какая цель соглашения о сотрудничестве с Украиной?",
+        "expected_output": "Цель соглашения - укрепить сотрудничество в области здравоохранения и поддержать восстановление системы здравоохранения Украины.",
+        "retrieval_context": [
+            "The aim of the agreement is to reinforce health collaboration, support Ukraine's healthcare system recovery."
+        ],
+        "category": "health_cooperation",
+        "language": "ru"
+    },
+    {
+        "input": "Kuidas tellida sõiduplaani muudatuste teateid?",
+        "expected_output": "Saad tellida sõiduplaanimuudatuste ja hilinemiste teated e-postile.",
+        "retrieval_context": [
+            "Telli sõiduplaanimuudatuste ja hilinemiste teated e-postile."
+        ],
+        "category": "train_services",
+        "language": "et"
+    },
+    {
+        "input": "Как подписаться на уведомления об изменениях в расписании поездов?",
+        "expected_output": "Вы можете подписаться на уведомления об изменениях расписания и опозданиях по электронной почте.",
+        "retrieval_context": [
+            "Telli sõiduplaanimuudatuste ja hilinemiste teated e-postile."
+        ],
+        "category": "train_services",
+        "language": "ru"
+    },
+    {
+        "input": "What are the contact details of the Ministry of Social Affairs?",
+        "expected_output": "Ministry of Social Affairs is located at Suur-Ameerika 1, 10122 Tallinn, phone +372 626 9301, email [email protected]. Open Monday-Thursday 8.30-17.15 and Friday 8.30-16.00.",
+        "retrieval_context": [
+            "Ministry of Social Affairs Suur-Ameerika 1, 10122 Tallinn +372 626 9301 [email protected] Open Mon -Thu 8.30-17.15 and Fri 8.30-16.00"
+        ],
+        "category": "contact_information",
+        "language": "en"
+    },
+    {
+        "input": "Каковы контактные данные Министерства социальных дел?",
+        "expected_output": "Министерство социальных дел находится по адресу Суур-Амеэрика 1, 10122 Таллинн, телефон +372 626 9301, электронная почта [email protected]. Открыто понедельник-четверг 8.30-17.15 и пятница 8.30-16.00.",
+        "retrieval_context": [
+            "Ministry of Social Affairs Suur-Ameerika 1, 10122 Tallinn +372 626 9301 [email protected] Open Mon -Thu 8.30-17.15 and Fri 8.30-16.00"
+        ],
+        "category": "contact_information",
+        "language": "ru"
+    },
+    {
+        "input": "Сколько родителей-одиночек получают поддержку в Эстонии?",
+        "expected_output": "8,804 родителя и 10,222 ребенка получают поддержку для родителей-одиночек.",
+        "retrieval_context": [
+            "8,804 parents and 1,0222 children receive single parent support."
+        ],
+        "category": "single_parent_support",
+        "language": "ru"
+    },
+    {
+        "input": "Когда Министерство социальных дел начало искать решения для поддержки семей с одним родителем?",
+        "expected_output": "С января 2022 года Министерство социальных дел ищет решения для поддержки семей с одним родителем.",
+        "retrieval_context": [
+            "Since January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families."
+        ],
+        "category": "single_parent_support",
+        "language": "ru"
+    },
+    {
+        "input": "Какова была численность населения Эстонии согласно прогнозам?",
+        "expected_output": "Согласно прогнозам, население Эстонии сократится с 1,31 миллиона до 1,11 миллиона к 2060 году. Количество людей в возрасте 18-63 лет уменьшится на 256,000 человек, или на 32%.",
+        "retrieval_context": [
+            "According to forecasts, the population of Estonia will decrease from 1.31 million to 1.11 million by 2060. The number of people aged 18-63 will decrease by 256,000, or 32%."
+        ],
+        "category": "pension_information",
+        "language": "ru"
+    },
+    {
+        "input": "Какая была новая инновационная программа стоимостью 12 миллионов евро?",
+        "expected_output": "На Фестивале социальных технологий была представлена новая инновационная программа стоимостью 12 миллионов евро, направленная на поддержку самостоятельной жизни пожилых людей и людей с ограниченными возможностями с помощью технологических решений.",
+        "retrieval_context": [
+            "New €12 million innovation programme unveiled at Welfare Technology Festival aimed at supporting independent living for older adults and people with disabilities through technology-driven solutions."
+        ],
+        "category": "health_cooperation",
+        "language": "ru"
+    }
+]
