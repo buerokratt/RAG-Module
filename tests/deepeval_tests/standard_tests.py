@@ -21,7 +21,7 @@ class StandardResultCollector:
     """Collects test results during execution for report generation."""
 
     def __init__(self):
-        self.results: Dict[str, Any] = {
+        self.results = {
             "total_tests": 0,
             "passed_tests": 0,
             "failed_tests": 0,
@@ -169,8 +169,8 @@ class TestRAGSystem:
         print(f"\nTesting case {test_case_num}: {test_item['input'][:50]}...")
 
         # Initialize metrics results
-        metrics_results: Dict[str, Any] = {}
-        failed_assertions: list[str] = []
+        metrics_results = {}
+        failed_assertions = []
 
         # Define all metrics to test
         metrics = [
@@ -185,8 +185,8 @@ class TestRAGSystem:
         for metric_name, metric in metrics:
             try:
                 metric.measure(test_case)
-                score: float | None = metric.score
-                passed: bool = score >= 0.7 if score is not None else False
+                score = metric.score
+                passed = score >= 0.7
                 reason = metric.reason
 
                 metrics_results[metric_name] = {

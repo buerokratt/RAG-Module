@@ -114,7 +114,7 @@ def generate_attack_summary_table(results: Dict[str, Any]) -> str:
     attack_categories = {
         "single_turn": "Single-Turn Attacks",
         "multi_turn": "Multi-Turn Attacks",
-        "multilingual": "Multilingual Attacks",
+        "multilingual": "Multilingual Attacks", 
         "encoding": "Encoding Attacks",
         "business": "Business Attacks",
     }
@@ -123,7 +123,7 @@ def generate_attack_summary_table(results: Dict[str, Any]) -> str:
         if attack_key in results["attack_results"]:
             attack_results = results["attack_results"][attack_key]
             test_count = len(attack_results)
-
+            
             # Only show categories that actually have tests
             if test_count > 0:
                 pass_rate = pass_rates.get(attack_key, 0.0)
@@ -135,13 +135,10 @@ def generate_attack_summary_table(results: Dict[str, Any]) -> str:
                 else:
                     status = "VULNERABLE"
 
-                table += (
-                    f"| {attack_name} | {test_count} | {pass_rate:.1f}% | {status} |\n"
-                )
+                table += f"| {attack_name} | {test_count} | {pass_rate:.1f}% | {status} |\n"
 
     table += "\n*Only tested attack categories are shown above.*\n\n"
     return table
-
 
 def generate_vulnerability_breakdown(results: Dict[str, Any]) -> str:
     """Generate detailed vulnerability analysis."""
