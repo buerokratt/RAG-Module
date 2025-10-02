@@ -1,0 +1,123 @@
+name: DeepEval RAG System Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/deepeval-tests.yml'
+
+jobs:
+  deepeval-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+          
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        
+      - name: Install dependencies (locked)
+        run: uv sync --frozen
+        
+      - name: Run DeepEval tests
+        id: run_tests
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: uv run python -m pytest tests/deepeval_tests/standard_tests.py -v --tb=short
+          
+      - name: Generate evaluation report
+        if: always()
+        run: python tests/deepeval_tests/report_generator.py
+          
+      - name: Comment PR with test results
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const reportContent = fs.readFileSync('test_report.md', 'utf8');
+              
+              const comments = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number
+              });
+              
+              const existingComment = comments.data.find(
+                comment => comment.user.login === 'github-actions[bot]' &&
+                comment.body.includes('RAG System Evaluation Report')
+              );
+              
+              if (existingComment) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existingComment.id,
+                  body: reportContent
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: reportContent
+                });
+              }
+              
+            } catch (error) {
+              console.error('Failed to post test results:', error);
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## RAG System Evaluation Report\n\n**Error generating test report**\n\nFailed to read or post test results. Check workflow logs for details.\n\nError: ${error.message}`
+              });
+            }
+            
+      - name: Check test results and fail if needed
+        if: always()
+        run: |
+           # Check if pytest ran (look at step output)
+           if [ "${{ steps.run_tests.outcome }}" == "failure" ]; then
+            echo "Tests ran but failed - this is expected if RAG performance is below threshold"
+           fi  
+           if [ -f "pytest_captured_results.json" ]; then
+            total_tests=$(jq '.total_tests // 0' pytest_captured_results.json)
+            passed_tests=$(jq '.passed_tests // 0' pytest_captured_results.json)
+
+            if [ "$total_tests" -eq 0 ]; then
+              echo "ERROR: No tests were executed"
+              exit 1
+            fi
+
+            pass_rate=$(awk "BEGIN {print ($passed_tests / $total_tests) * 100}")
+
+            echo "DeepEval Test Results:"
+            echo "Total Tests: $total_tests"
+            echo "Passed Tests: $passed_tests"
+            echo "Pass Rate: $pass_rate%"
+
+            if (( $(echo "$pass_rate < 70" | bc -l) )); then
+              echo "TEST FAILURE: Pass rate $pass_rate% is below threshold 70%"
+              echo "RAG system performance is below acceptable standards."
+              exit 1
+            else
+              echo "TEST SUCCESS: Pass rate $pass_rate% meets threshold 70%"
+            fi
+           else
+            echo "ERROR: No test results file found"
+            exit 1
+           fi
