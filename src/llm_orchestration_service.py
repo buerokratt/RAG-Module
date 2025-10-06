@@ -21,6 +21,38 @@ from src.llm_orchestrator_config.llm_cochestrator_constants import (
 )
 from src.utils.cost_utils import calculate_total_costs
 
+from langfuse import Langfuse, observe
+
+
+class LangfuseConfig:
+    """Configuration for Langfuse integration."""
+
+    def __init__(self):
+        self.langfuse_client: Optional[Langfuse] = None
+        self._initialize_langfuse()
+
+    def _initialize_langfuse(self):
+        """Initialize Langfuse client with Vault secrets."""
+        try:
+            from llm_orchestrator_config.vault.vault_client import VaultAgentClient
+
+            vault = VaultAgentClient()
+            if vault.is_vault_available():
+                langfuse_secrets = vault.get_secret("langfuse/config")
+                if langfuse_secrets:
+                    self.langfuse_client = Langfuse(
+                        public_key=langfuse_secrets.get("public_key"),
+                        secret_key=langfuse_secrets.get("secret_key"),
+                        host=langfuse_secrets.get("host", "http://langfuse-web:3000"),
+                    )
+                    logger.info("Langfuse client initialized successfully")
+                else:
+                    logger.warning("Langfuse secrets not found in Vault")
+            else:
+                logger.warning("Vault not available, Langfuse tracing disabled")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Langfuse: {e}")
+
 
 class LLMOrchestrationService:
     """
@@ -35,8 +67,10 @@ class LLMOrchestrationService:
         Note: The service does not persist state between requests, but tracks per-request
         information (e.g., costs) internally during request processing.
         """
-        pass
-
+        self.langfuse_config = LangfuseConfig()
+        
+    
+    @observe(name="orchestration_request", as_type="agent")
     def process_orchestration_request(
         self, request: OrchestrationRequest
     ) -> OrchestrationResponse:
@@ -54,7 +88,13 @@ class LLMOrchestrationService:
         """
         # Initialize cost tracking dictionary
         costs_dict: Dict[str, Dict[str, Any]] = {}
-
+        # add user tracking 
+        if self.langfuse_config.langfuse_client:
+            langfuse= self.langfuse_config.langfuse_client
+            langfuse.update_current_trace(
+                user_id=request.authorId,
+                session_id=request.chatId,
+            )
         try:
             logger.info(
                 f"Processing orchestration request for chatId: {request.chatId}, "
@@ -142,6 +182,33 @@ class LLMOrchestrationService:
                 logger.info(
                     f"Successfully generated RAG response for chatId: {request.chatId}"
                 )
+                if self.langfuse_config.langfuse_client:
+                    langfuse = self.langfuse_config.langfuse_client
+                    total_costs = calculate_total_costs(costs_dict)
+            
+                    total_input_tokens = sum(c.get("total_prompt_tokens", 0) for c in costs_dict.values())
+                    total_output_tokens = sum(c.get("total_completion_tokens", 0) for c in costs_dict.values())
+            
+                    langfuse.update_current_generation(
+                        
+                        model = llm_manager.get_provider_info().get("model", "unknown"),
+                        usage_details={
+                            "input": total_input_tokens,
+                            "output": total_output_tokens,
+                            "total": total_costs.get("total_tokens", 0),
+                        },
+                        cost_details={
+                            "total": total_costs.get("total_cost", 0.0),
+                        },
+                     metadata={
+                            "total_calls": total_costs.get("total_calls", 0),
+                            "cost_breakdown": costs_dict,
+                            "chat_id": request.chatId,
+                            "author_id": request.authorId,
+                            "environment": request.environment,
+                        }
+                    )
+                
                 return response
 
             except Exception as response_error:
@@ -164,6 +231,7 @@ class LLMOrchestrationService:
             )
             # Log costs even on error
             self._log_costs(costs_dict)
+            
 
             return OrchestrationResponse(
                 chatId=request.chatId,
@@ -201,7 +269,8 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.warning(f"Failed to log costs: {str(e)}")
-
+            
+    @observe(name="initialize_llm_manager", as_type="span")
     def _initialize_llm_manager(
         self, environment: str, connection_id: Optional[str]
     ) -> LLMManager:
@@ -230,7 +299,9 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize LLM Manager: {str(e)}")
             raise
-
+        
+        
+    @observe(name="prompt_refinement", as_type="chain")
     def _refine_user_prompt(
         self,
         llm_manager: LLMManager,
@@ -281,6 +352,22 @@ class LLMOrchestrationService:
                     "num_calls": 0,
                 },
             )
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    model = llm_manager.get_provider_info().get("model", "unknown"),
+                    usage_details={
+                        "input": usage_info.get("total_prompt_tokens", 0),
+                        "output": usage_info.get("total_completion_tokens", 0),
+                        "total": usage_info.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": usage_info.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "num_calls": usage_info.get("num_calls", 0),
+                    }
+                )
 
             # Validate the output schema using Pydantic
             try:
@@ -312,6 +399,7 @@ class LLMOrchestrationService:
             logger.error(f"Failed to refine message: {original_message}")
             raise RuntimeError(f"Prompt refinement process failed: {str(e)}") from e
 
+    @observe(name="initialize_hybrid_retriever", as_type="span")
     def _initialize_hybrid_retriever(self) -> HybridRetriever:
         """
         Initialize hybrid retriever for document retrieval.
@@ -332,7 +420,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize hybrid retriever: {str(e)}")
             raise
-
+    @observe(name="initialize_response_generator", as_type="span")
     def _initialize_response_generator(
         self, llm_manager: LLMManager
     ) -> ResponseGeneratorAgent:
@@ -358,7 +446,8 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize response generator: {str(e)}")
             raise
-
+        
+    @observe(name="chunk_retrieval", as_type="retriever")
     def _retrieve_relevant_chunks(
         self, hybrid_retriever: HybridRetriever, refined_output: PromptRefinerOutput
     ) -> List[Dict[str, Union[str, float, Dict[str, Any]]]]:
@@ -388,6 +477,18 @@ class LLMOrchestrationService:
                 fused_cap=120,
                 final_topn=12,
             )
+            # Update Langfuse with retrieval metadata
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "num_chunks_retrieved": len(relevant_chunks),
+                        "topk_dense": 40,
+                        "topk_bm25": 40,
+                        "fused_cap": 120,
+                        "final_topn": 12,
+                    }
+                )
 
             logger.info(f"Retrieved {len(relevant_chunks)} relevant chunks")
 
@@ -415,6 +516,7 @@ class LLMOrchestrationService:
             )
             raise RuntimeError(f"Chunk retrieval process failed: {str(e)}") from e
 
+    @observe(name="response_generation", as_type="generation")
     def _generate_rag_response(
         self,
         llm_manager: LLMManager,
@@ -471,7 +573,25 @@ class LLMOrchestrationService:
                 },
             )
             costs_dict["response_generator"] = generator_usage
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    model = llm_manager.get_provider_info().get("model", "unknown"),
+                    usage_details={
+                        "input": generator_usage.get("total_prompt_tokens", 0),
+                        "output": generator_usage.get("total_completion_tokens", 0),
+                        "total": generator_usage.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": generator_usage.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "num_calls": generator_usage.get("num_calls", 0),
+                        "question_out_of_scope": question_out_of_scope,
+                        "num_chunks_used": len(relevant_chunks) if relevant_chunks else 0,
+                    },
+                    output=answer
+                )
             if question_out_of_scope:
                 logger.info("Question determined out-of-scope – sending fixed message.")
                 return OrchestrationResponse(

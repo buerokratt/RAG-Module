@@ -25,6 +25,7 @@ dependencies = [
     "uvicorn>=0.35.0",
     "qdrant-client>=1.15.1",
     "rank-bm25>=0.2.2",
+    "langfuse>=3.6.1",
 ]
 
 [tool.pyright]
