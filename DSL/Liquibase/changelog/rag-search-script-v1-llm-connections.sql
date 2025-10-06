@@ -35,13 +35,15 @@ CREATE TABLE llm_connections (
 
 CREATE TABLE inference_results (
     id SERIAL PRIMARY KEY,
-    llm_connection_id INT NOT NULL REFERENCES llm_connections(id) ON DELETE CASCADE,
+    llm_connection_id INT REFERENCES llm_connections(id) ON DELETE CASCADE,
+    chat_id TEXT,                                 -- optional chat session ID
     user_question TEXT NOT NULL,                  -- raw user input
     refined_questions JSONB,                      -- list of refined questions (LLM-generated)
     conversation_history JSONB,                   -- prior messages (array of {role, content})
     ranked_chunks JSONB,                          -- retrieved chunks (ranked, with metadata)
     embedding_scores JSONB,                       -- distance scores for each chunk
     final_answer TEXT,                            -- LLM’s final generated answer
+    environment TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
 

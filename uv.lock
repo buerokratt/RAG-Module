@@ -1001,15 +1001,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mpmath"
-version = "1.3.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e0/47/dd32fa426cc72114383ac549964eecb20ecfd886d1e5ccf5340b55b02f57/mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f", size = 508106, upload-time = "2023-03-07T16:47:11.061Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c", size = 536198, upload-time = "2023-03-07T16:47:09.197Z" },
-]
-
-[[package]]
 name = "msal"
 version = "1.33.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1813,7 +1804,6 @@ dependencies = [
     { name = "qdrant-client" },
     { name = "rank-bm25" },
     { name = "requests" },
-    { name = "rerankers", extra = ["transformers"] },
     { name = "ruff" },
     { name = "testcontainers" },
     { name = "uvicorn" },
@@ -1842,7 +1832,6 @@ requires-dist = [
     { name = "qdrant-client", specifier = ">=1.15.1" },
     { name = "rank-bm25", specifier = ">=0.2.2" },
     { name = "requests", specifier = ">=2.32.5" },
-    { name = "rerankers", extras = ["transformers"], specifier = ">=0.10.0" },
     { name = "ruff", specifier = ">=0.12.12" },
     { name = "testcontainers", specifier = ">=4.13.0" },
     { name = "uvicorn", specifier = ">=0.35.0" },
@@ -1909,23 +1898,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3f5c837e9c3dfcfe2018ea6ecef224c710c85ef728f4/requests-2.32.5.tar.gz", hash = "sha256:dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf", size = 134517, upload-time = "2025-08-18T20:46:02.573Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/db/4254e3eabe8020b458f1a747140d32277ec7a271daf1d235b70dc0b4e6e3/requests-2.32.5-py3-none-any.whl", hash = "sha256:2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6", size = 64738, upload-time = "2025-08-18T20:46:00.542Z" },
-]
-
-[[package]]
-name = "rerankers"
-version = "0.10.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a2/1e/3ed2026be7c135939905eac4f50d1bf8339180821c6757b2e91b83de2fa5/rerankers-0.10.0.tar.gz", hash = "sha256:b8e8b363abc4e9757151956949c27b197993c0a774437287a932f855afc17a73", size = 49679, upload-time = "2025-05-22T08:22:53.396Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/ed/f3b81ca8743d69b95d679b95e6e1d22cb7cc678ae77c6a57827303a7e48c/rerankers-0.10.0-py3-none-any.whl", hash = "sha256:634a6befa130a245ed46022ade217ee482869448f01aae2051ed54d7d5bd2791", size = 53084, upload-time = "2025-05-22T08:22:52.022Z" },
-]
-
-[package.optional-dependencies]
-transformers = [
-    { name = "protobuf" },
-    { name = "sentencepiece" },
-    { name = "torch" },
-    { name = "transformers" },
 ]
 
 [[package]]
@@ -2222,41 +2194,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/14/84/8aa9b4adfc4fbd09381e20a5bc6aa27040c9c09caa89988c01544e008d18/tokenizers-0.22.0-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:da589a61cbfea18ae267723d6b029b84598dc8ca78db9951d8f5beff72d8507c", size = 9692735, upload-time = "2025-08-29T10:25:32.089Z" },
     { url = "https://files.pythonhosted.org/packages/bf/24/83ee2b1dc76bfe05c3142e7d0ccdfe69f0ad2f1ebf6c726cea7f0874c0d0/tokenizers-0.22.0-cp39-abi3-win32.whl", hash = "sha256:dbf9d6851bddae3e046fedfb166f47743c1c7bd11c640f0691dd35ef0bcad3be", size = 2471915, upload-time = "2025-08-29T10:25:36.411Z" },
     { url = "https://files.pythonhosted.org/packages/d1/9b/0e0bf82214ee20231845b127aa4a8015936ad5a46779f30865d10e404167/tokenizers-0.22.0-cp39-abi3-win_amd64.whl", hash = "sha256:c78174859eeaee96021f248a56c801e36bfb6bd5b067f2e95aa82445ca324f00", size = 2680494, upload-time = "2025-08-29T10:25:35.14Z" },
-]
-
-[[package]]
-name = "torch"
-version = "2.8.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "filelock" },
-    { name = "fsspec" },
-    { name = "jinja2" },
-    { name = "networkx" },
-    { name = "nvidia-cublas-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cuda-cupti-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cuda-nvrtc-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cuda-runtime-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cudnn-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cufft-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cufile-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-curand-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cusolver-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cusparse-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-cusparselt-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-nccl-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-nvjitlink-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "nvidia-nvtx-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "setuptools" },
-    { name = "sympy" },
-    { name = "triton", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "typing-extensions" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/0c/2fd4df0d83a495bb5e54dca4474c4ec5f9c62db185421563deeb5dabf609/torch-2.8.0-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:e2fab4153768d433f8ed9279c8133a114a034a61e77a3a104dcdf54388838705", size = 101906089, upload-time = "2025-08-06T14:53:52.631Z" },
-    { url = "https://files.pythonhosted.org/packages/99/a8/6acf48d48838fb8fe480597d98a0668c2beb02ee4755cc136de92a0a956f/torch-2.8.0-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:b2aca0939fb7e4d842561febbd4ffda67a8e958ff725c1c27e244e85e982173c", size = 887913624, upload-time = "2025-08-06T14:56:44.33Z" },
-    { url = "https://files.pythonhosted.org/packages/af/8a/5c87f08e3abd825c7dfecef5a0f1d9aa5df5dd0e3fd1fa2f490a8e512402/torch-2.8.0-cp312-cp312-win_amd64.whl", hash = "sha256:2f4ac52f0130275d7517b03a33d2493bab3693c83dcfadf4f81688ea82147d2e", size = 241326087, upload-time = "2025-08-06T14:53:46.503Z" },
-    { url = "https://files.pythonhosted.org/packages/be/66/5c9a321b325aaecb92d4d1855421e3a055abd77903b7dab6575ca07796db/torch-2.8.0-cp312-none-macosx_11_0_arm64.whl", hash = "sha256:619c2869db3ada2c0105487ba21b5008defcc472d23f8b80ed91ac4a380283b0", size = 73630478, upload-time = "2025-08-06T14:53:57.144Z" },
 ]
 
 [[package]]

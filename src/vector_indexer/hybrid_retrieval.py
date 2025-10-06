@@ -4,7 +4,6 @@ import logging
 from qdrant_client import QdrantClient
 from qdrant_client.models import SearchParams
 from rank_bm25 import BM25Okapi
-from rerankers import Reranker
 
 from vector_indexer.chunk_config import ChunkConfig
 from vector_indexer.chunker import ChunkRetriever
@@ -121,16 +120,19 @@ class HybridRetriever:
             self.qdrant, self.cfg.qdrant_collection
         )
 
-        # Initialize reranker
-        try:
-            self.reranker = Reranker(
-                "BAAI/bge-reranker-v2-m3", model_type="cross-encoder"
-            )
-        except Exception as e:
-            logger.warning(
-                f"Failed to initialize reranker: {e}. Using identity reranker."
-            )
-            self.reranker = None
+        # Initialize reranker (COMMENTED OUT - DISABLED UNTIL OPTIMIZING PERFORMANCE)
+        # try:
+        #     self.reranker = Reranker(
+        #         "BAAI/bge-reranker-v2-m3", model_type="cross-encoder"
+        #     )
+        # except Exception as e:
+        #     logger.warning(
+        #         f"Failed to initialize reranker: {e}. Using identity reranker."
+        #     )
+        #     self.reranker = None
+
+        self.reranker = None
+        logger.info("Reranker disabled - using only dense search and BM25")
 
     def _search_query(
         self, query: str, topk_dense: int, topk_bm25: int
@@ -244,11 +246,16 @@ class HybridRetriever:
             logger.warning("No fused results obtained")
             return []
 
-        if self.reranker is not None:
-            try:
-                return self._rerank_results(fused, original_question, final_topn)
-            except Exception as e:
-                logger.error(f"Reranking failed: {e}. Using fusion scores only.")
-                return self._format_results(fused, final_topn)
-        else:
-            return self._format_results(fused, final_topn)
+        # Reranking disabled - always use fusion scores only
+        # if self.reranker is not None:
+        #     try:
+        #         return self._rerank_results(fused, original_question, final_topn)
+        #     except Exception as e:
+        #         logger.error(f"Reranking failed: {e}. Using fusion scores only.")
+        #         return self._format_results(fused, final_topn)
+        # else:
+        #     return self._format_results(fused, final_topn)
+
+        # Always use fusion scores without reranking
+        logger.info("Using RRF fusion scores without reranking")
+        return self._format_results(fused, final_topn)

@@ -5,6 +5,7 @@ import dspy
 import logging
 
 from src.llm_orchestrator_config.llm_cochestrator_constants import OUT_OF_SCOPE_MESSAGE
+from src.utils.cost_utils import get_lm_usage_since
 
 # Configure logging
 logging.basicConfig(
@@ -82,7 +83,7 @@ def _should_flag_out_of_scope(
 class ResponseGeneratorAgent(dspy.Module):
     """
     Creates a grounded, humanized answer from retrieved chunks.
-    Returns a dict: {"answer": str, "questionOutOfLLMScope": bool}
+    Returns a dict: {"answer": str, "questionOutOfLLMScope": bool, "usage": dict}
     """
 
     def __init__(self, max_retries: int = 2) -> None:
@@ -122,6 +123,11 @@ class ResponseGeneratorAgent(dspy.Module):
         self, question: str, chunks: List[Dict[str, Any]], max_blocks: int = 10
     ) -> Dict[str, Any]:
         logger.info(f"Generating response for question: '{question}...'")
+
+        # Record history length before operation
+        lm = dspy.settings.lm
+        history_length_before = len(lm.history) if lm and hasattr(lm, "history") else 0
+
         context_blocks, citation_labels, has_real_context = build_context_and_citations(
             chunks, use_top_k=max_blocks
         )
@@ -145,6 +151,9 @@ class ResponseGeneratorAgent(dspy.Module):
             )
             valid = self._validate_prediction(pred)
 
+        # Extract usage using centralized utility
+        usage_info = get_lm_usage_since(history_length_before)
+
         # If still invalid after retries, apply fallback
         if not valid:
             logger.warning(
@@ -159,7 +168,11 @@ class ResponseGeneratorAgent(dspy.Module):
                 answer = OUT_OF_SCOPE_MESSAGE
                 scope_flag = True
 
-            return {"answer": answer, "questionOutOfLLMScope": scope_flag}
+            return {
+                "answer": answer,
+                "questionOutOfLLMScope": scope_flag,
+                "usage": usage_info,
+            }
 
         # Valid prediction with required fields
         ans: str = getattr(pred, "answer", "")
@@ -170,4 +183,8 @@ class ResponseGeneratorAgent(dspy.Module):
             logger.warning("Flipping out-of-scope to True based on heuristics.")
             scope = True
 
-        return {"answer": ans.strip(), "questionOutOfLLMScope": scope}
+        return {
+            "answer": ans.strip(),
+            "questionOutOfLLMScope": scope,
+            "usage": usage_info,
+        }

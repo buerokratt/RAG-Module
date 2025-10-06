@@ -6,6 +6,7 @@ import dspy
 from pydantic import BaseModel, Field
 
 from llm_orchestrator_config import LLMManager, LLMProvider
+from src.utils.cost_utils import get_lm_usage_since
 
 LOGGER = logging.getLogger(__name__)
 
@@ -219,10 +220,23 @@ class PromptRefinerAgent(dspy.Module):
         question: str,
         n: int | None = None,
     ) -> Dict[str, Any]:
-        """Generate refined questions and return structured output.
+        """Generate refined questions and return structured output with usage info.
 
         Returns:
-            Dict with 'original_question' and 'refined_questions' keys
+            Dict with 'original_question', 'refined_questions', and 'usage' keys
         """
+        # Record history length before operation
+        lm = dspy.settings.lm
+        history_length_before = len(lm.history) if lm and hasattr(lm, "history") else 0
+
+        # Perform refinement
         refined = self.forward(history, question, n)
-        return {"original_question": question, "refined_questions": refined}
+
+        # Extract usage using centralized utility
+        usage_info = get_lm_usage_since(history_length_before)
+
+        return {
+            "original_question": question,
+            "refined_questions": refined,
+            "usage": usage_info,
+        }

@@ -19,14 +19,22 @@ from src.llm_orchestrator_config.llm_cochestrator_constants import (
     OUT_OF_SCOPE_MESSAGE,
     TECHNICAL_ISSUE_MESSAGE,
 )
+from src.utils.cost_utils import calculate_total_costs
 
 
 class LLMOrchestrationService:
-    """Stateless service class for handling LLM orchestration business logic."""
+    """
+    Service class for handling LLM orchestration business logic.
+    The service does not maintain state between requests (stateless in the architectural sense),
+    but tracks per-request state (such as costs) internally during the execution of a request.
+    """
 
     def __init__(self) -> None:
-        """Initialize the stateless orchestration service."""
-        # No instance variables - completely stateless
+        """
+        Initialize the orchestration service.
+        Note: The service does not persist state between requests, but tracks per-request
+        information (e.g., costs) internally during request processing.
+        """
         pass
 
     def process_orchestration_request(
@@ -44,6 +52,9 @@ class LLMOrchestrationService:
         Raises:
             Exception: For any processing errors
         """
+        # Initialize cost tracking dictionary
+        costs_dict: Dict[str, Dict[str, Any]] = {}
+
         try:
             logger.info(
                 f"Processing orchestration request for chatId: {request.chatId}, "
@@ -76,15 +87,17 @@ class LLMOrchestrationService:
                 logger.warning(
                     f"Response Generator initialization failed: {str(generator_error)}"
                 )
-                # Do not attempt any other LLM path; we'll return the technical issue message later.
                 response_generator = None
 
             # Step 2: Refine user prompt using loaded configuration
-            refined_output = self._refine_user_prompt(
+            refined_output, refiner_usage = self._refine_user_prompt(
                 llm_manager=llm_manager,
                 original_message=request.message,
                 conversation_history=request.conversationHistory,
             )
+
+            # Store prompt refiner costs
+            costs_dict["prompt_refiner"] = refiner_usage
 
             # Step 3: Retrieve relevant chunks using hybrid retrieval (optional)
             relevant_chunks: List[Dict[str, Union[str, float, Dict[str, Any]]]] = []
@@ -99,7 +112,9 @@ class LLMOrchestrationService:
                     logger.warning(
                         "Returning out-of-scope message due to retrieval failure"
                     )
-                    # Return out-of-scope response immediately
+                    # Log costs before returning
+                    self._log_costs(costs_dict)
+
                     return OrchestrationResponse(
                         chatId=request.chatId,
                         llmServiceActive=True,
@@ -110,7 +125,7 @@ class LLMOrchestrationService:
             else:
                 logger.info("Hybrid Retriever not available, skipping chunk retrieval")
 
-            # Step 4: Generate response with ResponseGenerator only (no extra LLM fallbacks)
+            # Step 4: Generate response with ResponseGenerator only
             try:
                 response = self._generate_rag_response(
                     llm_manager=llm_manager,
@@ -118,7 +133,12 @@ class LLMOrchestrationService:
                     refined_output=refined_output,
                     relevant_chunks=relevant_chunks,
                     response_generator=response_generator,
+                    costs_dict=costs_dict,
                 )
+
+                # Log final costs
+                self._log_costs(costs_dict)
+
                 logger.info(
                     f"Successfully generated RAG response for chatId: {request.chatId}"
                 )
@@ -126,7 +146,9 @@ class LLMOrchestrationService:
 
             except Exception as response_error:
                 logger.error(f"RAG response generation failed: {str(response_error)}")
-                # Standardized technical issue; no second LLM call, no citations
+                # Log costs before returning
+                self._log_costs(costs_dict)
+
                 return OrchestrationResponse(
                     chatId=request.chatId,
                     llmServiceActive=False,
@@ -140,7 +162,9 @@ class LLMOrchestrationService:
                 f"Error processing orchestration request for chatId: {request.chatId}, "
                 f"error: {str(e)}"
             )
-            # Technical issue at top-level
+            # Log costs even on error
+            self._log_costs(costs_dict)
+
             return OrchestrationResponse(
                 chatId=request.chatId,
                 llmServiceActive=False,
@@ -148,6 +172,35 @@ class LLMOrchestrationService:
                 inputGuardFailed=False,
                 content=TECHNICAL_ISSUE_MESSAGE,
             )
+
+    def _log_costs(self, costs_dict: Dict[str, Dict[str, Any]]) -> None:
+        """
+        Log cost information for tracking.
+
+        Args:
+            costs_dict: Dictionary of costs per component
+        """
+        try:
+            if not costs_dict:
+                return
+
+            total_costs = calculate_total_costs(costs_dict)
+
+            logger.info("LLM USAGE COSTS:")
+
+            for component, costs in costs_dict.items():
+                logger.info(
+                    f"  {component}: ${costs['total_cost']:.6f} "
+                    f"({costs['num_calls']} calls, {costs['total_tokens']} tokens)"
+                )
+
+            logger.info(
+                f"  TOTAL: ${total_costs['total_cost']:.6f} "
+                f"({total_costs['total_calls']} calls, {total_costs['total_tokens']} tokens)"
+            )
+
+        except Exception as e:
+            logger.warning(f"Failed to log costs: {str(e)}")
 
     def _initialize_llm_manager(
         self, environment: str, connection_id: Optional[str]
@@ -183,9 +236,9 @@ class LLMOrchestrationService:
         llm_manager: LLMManager,
         original_message: str,
         conversation_history: List[ConversationItem],
-    ) -> PromptRefinerOutput:
+    ) -> tuple[PromptRefinerOutput, Dict[str, Any]]:
         """
-        Refine user prompt using loaded LLM configuration and log all variants.
+        Refine user prompt using loaded LLM configuration and return usage info.
 
         Args:
             llm_manager: The LLM manager instance to use
@@ -193,7 +246,7 @@ class LLMOrchestrationService:
             conversation_history: Previous conversation context
 
         Returns:
-            PromptRefinerOutput: The refined prompt output containing original and refined questions
+            Tuple of (PromptRefinerOutput, usage_dict): The refined prompt output and usage info
 
         Raises:
             ValueError: When LLM Manager is not initialized
@@ -212,14 +265,29 @@ class LLMOrchestrationService:
             # Create prompt refiner using the same LLM manager instance
             refiner = PromptRefinerAgent(llm_manager=llm_manager)
 
-            # Generate structured prompt refinement output
+            # Generate structured prompt refinement output with usage tracking
             refinement_result = refiner.forward_structured(
                 history=history, question=original_message
             )
 
-            # Validate the output schema using Pydantic - this will raise ValidationError if invalid
+            # Extract usage information
+            usage_info = refinement_result.get(
+                "usage",
+                {
+                    "total_cost": 0.0,
+                    "total_prompt_tokens": 0,
+                    "total_completion_tokens": 0,
+                    "total_tokens": 0,
+                    "num_calls": 0,
+                },
+            )
+
+            # Validate the output schema using Pydantic
             try:
-                validated_output = PromptRefinerOutput(**refinement_result)
+                validated_output = PromptRefinerOutput(
+                    original_question=refinement_result["original_question"],
+                    refined_questions=refinement_result["refined_questions"],
+                )
             except Exception as validation_error:
                 logger.error(
                     f"Prompt refinement output validation failed: {str(validation_error)}"
@@ -235,7 +303,7 @@ class LLMOrchestrationService:
             )
 
             logger.info("Prompt refinement completed successfully")
-            return validated_output
+            return validated_output, usage_info
 
         except ValueError:
             raise
@@ -354,6 +422,7 @@ class LLMOrchestrationService:
         refined_output: PromptRefinerOutput,
         relevant_chunks: List[Dict[str, Union[str, float, Dict[str, Any]]]],
         response_generator: Optional[ResponseGeneratorAgent] = None,
+        costs_dict: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> OrchestrationResponse:
         """
         Generate response using retrieved chunks and ResponseGeneratorAgent only.
@@ -361,7 +430,10 @@ class LLMOrchestrationService:
         """
         logger.info("Starting RAG response generation")
 
-        # If response generator is not available -> standardized technical issue (no extra LLM calls)
+        if costs_dict is None:
+            costs_dict = {}
+
+        # If response generator is not available -> standardized technical issue
         if response_generator is None:
             logger.warning(
                 "Response generator unavailable – returning technical issue message."
@@ -386,6 +458,19 @@ class LLMOrchestrationService:
             question_out_of_scope = bool(
                 generator_result.get("questionOutOfLLMScope", False)
             )
+
+            # Extract and store response generator costs
+            generator_usage = generator_result.get(
+                "usage",
+                {
+                    "total_cost": 0.0,
+                    "total_prompt_tokens": 0,
+                    "total_completion_tokens": 0,
+                    "total_tokens": 0,
+                    "num_calls": 0,
+                },
+            )
+            costs_dict["response_generator"] = generator_usage
 
             if question_out_of_scope:
                 logger.info("Question determined out-of-scope – sending fixed message.")
