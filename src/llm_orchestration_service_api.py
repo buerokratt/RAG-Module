@@ -58,6 +58,7 @@ def health_check(request: Request) -> dict[str, str]:
         "orchestration_service": service_status,
     }
 
+
 @observe()
 @app.post(
     "/orchestrate",
