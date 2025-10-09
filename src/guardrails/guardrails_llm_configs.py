@@ -1,0 +1,3 @@
+TEMPERATURE = 0.7
+MAX_TOKENS = 1024
+MODEL_NAME = "dspy-llm"

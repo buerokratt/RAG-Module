@@ -30,6 +30,7 @@ dependencies = [
     "pytest-json-report>=1.5.0",
     "deepteam>=0.2.5",
     "anthropic>=0.69.0",
+    "nemoguardrails>=0.16.0",
 ]
 
 [tool.pyright]

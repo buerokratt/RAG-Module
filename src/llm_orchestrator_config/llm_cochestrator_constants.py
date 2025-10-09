@@ -10,3 +10,7 @@ TECHNICAL_ISSUE_MESSAGE = (
 )
 
 UNKNOWN_SOURCE = "Unknown source"
+
+INPUT_GUARDRAIL_VIOLATION_MESSAGE = "I apologize, but I'm unable to assist with that request as it violates our usage policies."
+
+OUTPUT_GUARDRAIL_VIOLATION_MESSAGE = "I apologize, but I'm unable to provide a response as it may violate our usage policies."
