@@ -1,0 +1,62 @@
+# Contextual Retrieval Configuration
+# Centralized configuration for all contextual retrieval components
+
+contextual_retrieval:
+  # Search parameters (using proven values from commented hybrid retriever)
+  search:
+    topk_semantic: 40        # Semantic search results
+    topk_bm25: 40           # BM25 lexical search results  
+    final_top_n: 12         # Final chunks returned to LLM (from your proven config)
+    score_threshold: 0.5     # Minimum score threshold for results
+    
+  # HTTP Client Configuration
+  http_client:
+    # Service resilience / Circuit breaker
+    failure_threshold: 5     # Circuit breaker failure threshold
+    recovery_timeout: 60.0   # Circuit breaker recovery timeout (seconds)
+    
+    # Timeouts (seconds)
+    read_timeout: 30.0       # Default read timeout
+    connect_timeout: 10.0    # Connection timeout
+    write_timeout: 10.0      # Write timeout
+    pool_timeout: 60.0       # Pool timeout
+    
+    # Connection pooling
+    max_connections: 100     # Total connection pool size
+    max_keepalive_connections: 20  # Persistent connections
+    keepalive_expiry: 30.0   # Connection reuse duration
+    
+    # Retry logic
+    max_retries: 3           # Maximum retry attempts
+    retry_delay: 1.0         # Initial delay between retries (seconds)
+    backoff_factor: 2.0      # Exponential backoff multiplier
+    
+  # Collection settings
+  collections:
+    auto_detect_provider: true    # Dynamic collection selection
+    search_timeout_seconds: 2     # Sub-3 second requirement
+    
+    # Collection names (configurable for different environments)
+    azure_collection: "contextual_chunks_azure"
+    aws_collection: "contextual_chunks_aws"
+    
+    # Provider detection keywords
+    azure_keywords: ["azure", "text-embedding", "ada-002"]
+    aws_keywords: ["titan", "amazon", "aws", "bedrock"]
+    
+  # BM25 settings
+  bm25:
+    library: "rank-bm25"         # Lightweight BM25 implementation
+    refresh_strategy: "smart"     # Refresh only when data changes
+    max_refresh_interval_seconds: 3600  # 1 hour max interval
+    
+  # Rank Fusion Configuration
+  rank_fusion:
+    rrf_k: 60                    # Reciprocal Rank Fusion constant
+    content_preview_length: 150  # Content preview truncation length
+    
+  # Performance settings
+  performance:
+    enable_parallel_search: true  # Run semantic + BM25 concurrently
+    enable_dynamic_scoring: true  # No hardcoded collection weights
+    batch_size: 1                # Default batch size for operations

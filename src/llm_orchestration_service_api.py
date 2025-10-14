@@ -10,8 +10,6 @@ import uvicorn
 from llm_orchestration_service import LLMOrchestrationService
 from models.request_models import OrchestrationRequest, OrchestrationResponse
 
-from langfuse import observe
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
@@ -59,7 +57,6 @@ def health_check(request: Request) -> dict[str, str]:
     }
 
 
-@observe()
 @app.post(
     "/orchestrate",
     response_model=OrchestrationResponse,

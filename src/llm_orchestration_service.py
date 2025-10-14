@@ -2,6 +2,8 @@
 
 from typing import Optional, List, Dict, Union, Any
 import json
+import asyncio
+import os
 from loguru import logger
 
 from llm_orchestrator_config.llm_manager import LLMManager
@@ -10,16 +12,19 @@ from models.request_models import (
     OrchestrationResponse,
     ConversationItem,
     PromptRefinerOutput,
+    ContextGenerationRequest,
 )
 from prompt_refine_manager.prompt_refiner import PromptRefinerAgent
-from vector_indexer.chunk_config import ChunkConfig
-from vector_indexer.hybrid_retrieval import HybridRetriever
 from src.response_generator.response_generate import ResponseGeneratorAgent
 from src.llm_orchestrator_config.llm_cochestrator_constants import (
     OUT_OF_SCOPE_MESSAGE,
     TECHNICAL_ISSUE_MESSAGE,
+    INPUT_GUARDRAIL_VIOLATION_MESSAGE,
+    OUTPUT_GUARDRAIL_VIOLATION_MESSAGE,
 )
 from src.utils.cost_utils import calculate_total_costs
+from src.guardrails import NeMoRailsAdapter, GuardrailCheckResult
+from src.contextual_retrieval import ContextualRetriever
 
 from langfuse import Langfuse, observe
 
@@ -56,17 +61,15 @@ class LangfuseConfig:
 
 class LLMOrchestrationService:
     """
-    Service class for handling LLM orchestration business logic.
-    The service does not maintain state between requests (stateless in the architectural sense),
-    but tracks per-request state (such as costs) internally during the execution of a request.
+    Service class for handling LLM orchestration with integrated guardrails.
+    Features:
+    - Input guardrails before prompt refinement
+    - Output guardrails after response generation
+    - Comprehensive cost tracking for all components
     """
 
     def __init__(self) -> None:
-        """
-        Initialize the orchestration service.
-        Note: The service does not persist state between requests, but tracks per-request
-        information (e.g., costs) internally during request processing.
-        """
+        """Initialize the orchestration service."""
         self.langfuse_config = LangfuseConfig()
 
     @observe(name="orchestration_request", as_type="agent")
@@ -74,7 +77,15 @@ class LLMOrchestrationService:
         self, request: OrchestrationRequest
     ) -> OrchestrationResponse:
         """
-        Process an orchestration request and return response.
+        Process an orchestration request with guardrails and return response.
+
+        Pipeline:
+        1. Input Guardrails Check
+        2. Prompt Refinement (if input allowed)
+        3. Chunk Retrieval
+        4. Response Generation
+        5. Output Guardrails Check
+        6. Cost Logging
 
         Args:
             request: The orchestration request containing user message and context
@@ -85,161 +96,510 @@ class LLMOrchestrationService:
         Raises:
             Exception: For any processing errors
         """
-        # Initialize cost tracking dictionary
         costs_dict: Dict[str, Dict[str, Any]] = {}
-        # add user tracking
-        if self.langfuse_config.langfuse_client:
-            langfuse = self.langfuse_config.langfuse_client
-            langfuse.update_current_trace(
-                user_id=request.authorId,
-                session_id=request.chatId,
-            )
+
         try:
             logger.info(
                 f"Processing orchestration request for chatId: {request.chatId}, "
                 f"authorId: {request.authorId}, environment: {request.environment}"
             )
 
-            # Initialize LLM Manager with configuration (per-request)
-            llm_manager = self._initialize_llm_manager(
-                environment=request.environment, connection_id=request.connection_id
+            # Initialize all service components
+            components = self._initialize_service_components(request)
+
+            # Execute the orchestration pipeline
+            response = self._execute_orchestration_pipeline(
+                request, components, costs_dict
             )
 
-            # Initialize Hybrid Retriever (per-request)
-            hybrid_retriever: Optional[HybridRetriever] = None
-            try:
-                hybrid_retriever = self._initialize_hybrid_retriever()
-                logger.info("Hybrid Retriever initialization successful")
-            except Exception as retriever_error:
-                logger.warning(
-                    f"Hybrid Retriever initialization failed: {str(retriever_error)}"
+            # Log final costs and return response
+            self._log_costs(costs_dict)
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                total_costs = calculate_total_costs(costs_dict)
+
+                total_input_tokens = sum(
+                    c.get("total_prompt_tokens", 0) for c in costs_dict.values()
                 )
-                logger.warning("Continuing without chunk retrieval capabilities")
-                hybrid_retriever = None
-
-            # Initialize Response Generator
-            response_generator: Optional[ResponseGeneratorAgent] = None
-            try:
-                response_generator = self._initialize_response_generator(llm_manager)
-                logger.info("Response Generator initialization successful")
-            except Exception as generator_error:
-                logger.warning(
-                    f"Response Generator initialization failed: {str(generator_error)}"
-                )
-                response_generator = None
-
-            # Step 2: Refine user prompt using loaded configuration
-            refined_output, refiner_usage = self._refine_user_prompt(
-                llm_manager=llm_manager,
-                original_message=request.message,
-                conversation_history=request.conversationHistory,
-            )
-
-            # Store prompt refiner costs
-            costs_dict["prompt_refiner"] = refiner_usage
-
-            # Step 3: Retrieve relevant chunks using hybrid retrieval (optional)
-            relevant_chunks: List[Dict[str, Union[str, float, Dict[str, Any]]]] = []
-            if hybrid_retriever is not None:
-                try:
-                    relevant_chunks = self._retrieve_relevant_chunks(
-                        hybrid_retriever=hybrid_retriever, refined_output=refined_output
-                    )
-                    logger.info(f"Successfully retrieved {len(relevant_chunks)} chunks")
-                except Exception as retrieval_error:
-                    logger.warning(f"Chunk retrieval failed: {str(retrieval_error)}")
-                    logger.warning(
-                        "Returning out-of-scope message due to retrieval failure"
-                    )
-                    # Log costs before returning
-                    self._log_costs(costs_dict)
-
-                    return OrchestrationResponse(
-                        chatId=request.chatId,
-                        llmServiceActive=True,
-                        questionOutOfLLMScope=True,
-                        inputGuardFailed=False,
-                        content=OUT_OF_SCOPE_MESSAGE,
-                    )
-            else:
-                logger.info("Hybrid Retriever not available, skipping chunk retrieval")
-
-            # Step 4: Generate response with ResponseGenerator only
-            try:
-                response = self._generate_rag_response(
-                    llm_manager=llm_manager,
-                    request=request,
-                    refined_output=refined_output,
-                    relevant_chunks=relevant_chunks,
-                    response_generator=response_generator,
-                    costs_dict=costs_dict,
+                total_output_tokens = sum(
+                    c.get("total_completion_tokens", 0) for c in costs_dict.values()
                 )
 
-                # Log final costs
-                self._log_costs(costs_dict)
-
-                logger.info(
-                    f"Successfully generated RAG response for chatId: {request.chatId}"
+                langfuse.update_current_generation(
+                    model=components["llm_manager"]
+                    .get_provider_info()
+                    .get("model", "unknown"),
+                    usage_details={
+                        "input": total_input_tokens,
+                        "output": total_output_tokens,
+                        "total": total_costs.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": total_costs.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "total_calls": total_costs.get("total_calls", 0),
+                        "cost_breakdown": costs_dict,
+                        "chat_id": request.chatId,
+                        "author_id": request.authorId,
+                        "environment": request.environment,
+                    },
                 )
-                if self.langfuse_config.langfuse_client:
-                    langfuse = self.langfuse_config.langfuse_client
-                    total_costs = calculate_total_costs(costs_dict)
-
-                    total_input_tokens = sum(
-                        c.get("total_prompt_tokens", 0) for c in costs_dict.values()
-                    )
-                    total_output_tokens = sum(
-                        c.get("total_completion_tokens", 0) for c in costs_dict.values()
-                    )
-
-                    langfuse.update_current_generation(
-                        model=llm_manager.get_provider_info().get("model", "unknown"),
-                        usage_details={
-                            "input": total_input_tokens,
-                            "output": total_output_tokens,
-                            "total": total_costs.get("total_tokens", 0),
-                        },
-                        cost_details={
-                            "total": total_costs.get("total_cost", 0.0),
-                        },
-                        metadata={
-                            "total_calls": total_costs.get("total_calls", 0),
-                            "cost_breakdown": costs_dict,
-                            "chat_id": request.chatId,
-                            "author_id": request.authorId,
-                            "environment": request.environment,
-                        },
-                    )
-
-                return response
-
-            except Exception as response_error:
-                logger.error(f"RAG response generation failed: {str(response_error)}")
-                # Log costs before returning
-                self._log_costs(costs_dict)
-
-                return OrchestrationResponse(
-                    chatId=request.chatId,
-                    llmServiceActive=False,
-                    questionOutOfLLMScope=False,
-                    inputGuardFailed=False,
-                    content=TECHNICAL_ISSUE_MESSAGE,
-                )
+                langfuse.flush()
+            return response
 
         except Exception as e:
             logger.error(
                 f"Error processing orchestration request for chatId: {request.chatId}, "
                 f"error: {str(e)}"
             )
-            # Log costs even on error
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "response_type": "technical_issue",
+                    }
+                )
+                langfuse.flush()
             self._log_costs(costs_dict)
+            return self._create_error_response(request)
 
+    @observe(name="initialize_service_components", as_type="span")
+    def _initialize_service_components(
+        self, request: OrchestrationRequest
+    ) -> Dict[str, Any]:
+        """Initialize all service components and return them as a dictionary."""
+        components: Dict[str, Any] = {}
+
+        # Initialize LLM Manager
+        components["llm_manager"] = self._initialize_llm_manager(
+            environment=request.environment, connection_id=request.connection_id
+        )
+
+        # Initialize Guardrails Adapter (optional)
+        components["guardrails_adapter"] = self._safe_initialize_guardrails(
+            request.environment, request.connection_id
+        )
+
+        # Initialize Contextual Retriever (replaces hybrid retriever)
+        components["contextual_retriever"] = self._safe_initialize_contextual_retriever(
+            request.environment, request.connection_id
+        )
+
+        # Initialize Response Generator
+        components["response_generator"] = self._safe_initialize_response_generator(
+            components["llm_manager"]
+        )
+
+        return components
+
+    @observe(name="execute_orchestration_pipeline", as_type="span")
+    def _execute_orchestration_pipeline(
+        self,
+        request: OrchestrationRequest,
+        components: Dict[str, Any],
+        costs_dict: Dict[str, Dict[str, Any]],
+    ) -> OrchestrationResponse:
+        """Execute the main orchestration pipeline with all components."""
+        # Step 1: Input Guardrails Check
+        if components["guardrails_adapter"]:
+            input_blocked_response = self.handle_input_guardrails(
+                components["guardrails_adapter"], request, costs_dict
+            )
+            if input_blocked_response:
+                return input_blocked_response
+
+        # Step 2: Refine user prompt
+        refined_output, refiner_usage = self._refine_user_prompt(
+            llm_manager=components["llm_manager"],
+            original_message=request.message,
+            conversation_history=request.conversationHistory,
+        )
+        costs_dict["prompt_refiner"] = refiner_usage
+
+        # Step 3: Retrieve relevant chunks using contextual retrieval
+        relevant_chunks = self._safe_retrieve_contextual_chunks(
+            components["contextual_retriever"], refined_output, request
+        )
+        if relevant_chunks is None:  # Retrieval failed
+            return self._create_out_of_scope_response(request)
+
+        # Handle zero chunks scenario - return out-of-scope response
+        if len(relevant_chunks) == 0:
+            logger.info("No relevant chunks found - returning out-of-scope response")
+            return self._create_out_of_scope_response(request)
+
+        # Step 4: Generate response
+        generated_response = self._generate_rag_response(
+            llm_manager=components["llm_manager"],
+            request=request,
+            refined_output=refined_output,
+            relevant_chunks=relevant_chunks,
+            response_generator=components["response_generator"],
+            costs_dict=costs_dict,
+        )
+
+        # Step 5: Output Guardrails Check
+        return self.handle_output_guardrails(
+            components["guardrails_adapter"], generated_response, request, costs_dict
+        )
+
+    @observe(name="safe_initialize_guardrails", as_type="span")
+    def _safe_initialize_guardrails(
+        self, environment: str, connection_id: Optional[str]
+    ) -> Optional[NeMoRailsAdapter]:
+        """Safely initialize guardrails adapter with error handling."""
+        try:
+            adapter = self._initialize_guardrails(environment, connection_id)
+            logger.info("Guardrails adapter initialization successful")
+            return adapter
+        except Exception as guardrails_error:
+            logger.warning(f"Guardrails initialization failed: {str(guardrails_error)}")
+            logger.warning("Continuing without guardrails protection")
+            return None
+
+    @observe(name="safe_initialize_contextual_retriever", as_type="span")
+    def _safe_initialize_contextual_retriever(
+        self, environment: str, connection_id: Optional[str]
+    ) -> Optional[ContextualRetriever]:
+        """Safely initialize contextual retriever with error handling."""
+        try:
+            retriever = self._initialize_contextual_retriever(
+                environment, connection_id
+            )
+            logger.info("Contextual Retriever initialization successful")
+            return retriever
+        except Exception as retriever_error:
+            logger.warning(
+                f"Contextual Retriever initialization failed: {str(retriever_error)}"
+            )
+            logger.warning("Continuing without chunk retrieval capabilities")
+            return None
+
+    @observe(name="safe_initialize_response_generator", as_type="span")
+    def _safe_initialize_response_generator(
+        self, llm_manager: LLMManager
+    ) -> Optional[ResponseGeneratorAgent]:
+        """Safely initialize response generator with error handling."""
+        try:
+            generator = self._initialize_response_generator(llm_manager)
+            logger.info("Response Generator initialization successful")
+            return generator
+        except Exception as generator_error:
+            logger.warning(
+                f"Response Generator initialization failed: {str(generator_error)}"
+            )
+            return None
+
+    def handle_input_guardrails(
+        self,
+        guardrails_adapter: NeMoRailsAdapter,
+        request: OrchestrationRequest,
+        costs_dict: Dict[str, Dict[str, Any]],
+    ) -> Optional[OrchestrationResponse]:
+        """Check input guardrails and return blocked response if needed."""
+        input_check_result = self._check_input_guardrails(
+            guardrails_adapter=guardrails_adapter,
+            user_message=request.message,
+            costs_dict=costs_dict,
+        )
+
+        if not input_check_result.allowed:
+            logger.warning(f"Input blocked by guardrails: {input_check_result.reason}")
             return OrchestrationResponse(
                 chatId=request.chatId,
-                llmServiceActive=False,
+                llmServiceActive=True,
                 questionOutOfLLMScope=False,
-                inputGuardFailed=False,
-                content=TECHNICAL_ISSUE_MESSAGE,
+                inputGuardFailed=True,
+                content=INPUT_GUARDRAIL_VIOLATION_MESSAGE,
+            )
+
+        logger.info("Input guardrails check passed")
+        return None
+
+    def _safe_retrieve_contextual_chunks(
+        self,
+        contextual_retriever: Optional[ContextualRetriever],
+        refined_output: PromptRefinerOutput,
+        request: OrchestrationRequest,
+    ) -> Optional[List[Dict[str, Union[str, float, Dict[str, Any]]]]]:
+        """Safely retrieve chunks using contextual retrieval with error handling."""
+        if not contextual_retriever:
+            logger.info("Contextual Retriever not available, skipping chunk retrieval")
+            return []
+
+        try:
+            # Define async wrapper for initialization and retrieval
+            async def async_retrieve():
+                # Ensure retriever is initialized
+                if not contextual_retriever.initialized:
+                    initialization_success = await contextual_retriever.initialize()
+                    if not initialization_success:
+                        logger.warning("Failed to initialize contextual retriever")
+                        return None
+
+                relevant_chunks = await contextual_retriever.retrieve_contextual_chunks(
+                    original_question=refined_output.original_question,
+                    refined_questions=refined_output.refined_questions,
+                    environment=request.environment,
+                    connection_id=request.connection_id,
+                )
+                return relevant_chunks
+
+            # Run async retrieval synchronously
+            relevant_chunks = asyncio.run(async_retrieve())
+
+            if relevant_chunks is None:
+                return None
+
+            logger.info(
+                f"Successfully retrieved {len(relevant_chunks)} contextual chunks"
+            )
+            return relevant_chunks
+        except Exception as retrieval_error:
+            logger.warning(f"Contextual chunk retrieval failed: {str(retrieval_error)}")
+            logger.warning("Returning out-of-scope message due to retrieval failure")
+            return None
+
+    def handle_output_guardrails(
+        self,
+        guardrails_adapter: Optional[NeMoRailsAdapter],
+        generated_response: OrchestrationResponse,
+        request: OrchestrationRequest,
+        costs_dict: Dict[str, Dict[str, Any]],
+    ) -> OrchestrationResponse:
+        """Check output guardrails and handle blocked responses."""
+        if (
+            guardrails_adapter is not None
+            and generated_response.llmServiceActive
+            and not generated_response.questionOutOfLLMScope
+        ):
+            output_check_result = self._check_output_guardrails(
+                guardrails_adapter=guardrails_adapter,
+                assistant_message=generated_response.content,
+                costs_dict=costs_dict,
+            )
+
+            if not output_check_result.allowed:
+                logger.warning(
+                    f"Output blocked by guardrails: {output_check_result.reason}"
+                )
+                return OrchestrationResponse(
+                    chatId=request.chatId,
+                    llmServiceActive=True,
+                    questionOutOfLLMScope=False,
+                    inputGuardFailed=False,
+                    content=OUTPUT_GUARDRAIL_VIOLATION_MESSAGE,
+                )
+
+            logger.info("Output guardrails check passed")
+        else:
+            logger.info("Skipping output guardrails check")
+
+        logger.info(f"Successfully generated RAG response for chatId: {request.chatId}")
+        return generated_response
+
+    def _create_error_response(
+        self, request: OrchestrationRequest
+    ) -> OrchestrationResponse:
+        """Create standardized error response."""
+        return OrchestrationResponse(
+            chatId=request.chatId,
+            llmServiceActive=False,
+            questionOutOfLLMScope=False,
+            inputGuardFailed=False,
+            content=TECHNICAL_ISSUE_MESSAGE,
+        )
+
+    def _create_out_of_scope_response(
+        self, request: OrchestrationRequest
+    ) -> OrchestrationResponse:
+        """Create standardized out-of-scope response."""
+        return OrchestrationResponse(
+            chatId=request.chatId,
+            llmServiceActive=True,
+            questionOutOfLLMScope=True,
+            inputGuardFailed=False,
+            content=OUT_OF_SCOPE_MESSAGE,
+        )
+
+    @observe(name="initialize_guardrails", as_type="span")
+    def _initialize_guardrails(
+        self, environment: str, connection_id: Optional[str]
+    ) -> NeMoRailsAdapter:
+        """
+        Initialize NeMo Guardrails adapter.
+
+        Args:
+            environment: Environment context (production/test/development)
+            connection_id: Optional connection identifier
+
+        Returns:
+            NeMoRailsAdapter: Initialized guardrails adapter instance
+
+        Raises:
+            Exception: For initialization errors
+        """
+        try:
+            logger.info(f"Initializing Guardrails for environment: {environment}")
+
+            guardrails_adapter = NeMoRailsAdapter(
+                environment=environment, connection_id=connection_id
+            )
+
+            logger.info("Guardrails adapter initialized successfully")
+            return guardrails_adapter
+
+        except Exception as e:
+            logger.error(f"Failed to initialize Guardrails adapter: {str(e)}")
+            raise
+
+    @observe(name="check_input_guardrails", as_type="span")
+    def _check_input_guardrails(
+        self,
+        guardrails_adapter: NeMoRailsAdapter,
+        user_message: str,
+        costs_dict: Dict[str, Dict[str, Any]],
+    ) -> GuardrailCheckResult:
+        """
+        Check user input against guardrails and track costs.
+
+        Args:
+            guardrails_adapter: The guardrails adapter instance
+            user_message: The user message to check
+            costs_dict: Dictionary to store cost information
+
+        Returns:
+            GuardrailCheckResult: Result of the guardrail check
+        """
+        logger.info("Starting input guardrails check")
+
+        try:
+            result = guardrails_adapter.check_input(user_message)
+
+            # Store guardrail costs
+            costs_dict["input_guardrails"] = result.usage
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    input=user_message,
+                    metadata={
+                        "guardrail_type": "input",
+                        "allowed": result.allowed,
+                        "verdict": result.verdict,
+                        "blocked_reason": result.reason if not result.allowed else None,
+                        "error": result.error if result.error else None,
+                    },
+                    usage_details={
+                        "input": result.usage.get("total_prompt_tokens", 0),
+                        "output": result.usage.get("total_completion_tokens", 0),
+                        "total": result.usage.get("total_tokens", 0),
+                    },  # type: ignore
+                    cost_details={
+                        "total": result.usage.get("total_cost", 0.0),
+                    },
+                )
+            logger.info(
+                f"Input guardrails check completed: allowed={result.allowed}, "
+                f"cost=${result.usage.get('total_cost', 0):.6f}"
+            )
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Input guardrails check failed: {str(e)}")
+            # Return conservative result on error
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "guardrail_type": "input",
+                    }
+                )
+            return GuardrailCheckResult(
+                allowed=False,
+                verdict="yes",
+                content="Error during input guardrail check",
+                error=str(e),
+                usage={},
+            )
+
+    @observe(name="check_output_guardrails", as_type="span")
+    def _check_output_guardrails(
+        self,
+        guardrails_adapter: NeMoRailsAdapter,
+        assistant_message: str,
+        costs_dict: Dict[str, Dict[str, Any]],
+    ) -> GuardrailCheckResult:
+        """
+        Check assistant output against guardrails and track costs.
+
+        Args:
+            guardrails_adapter: The guardrails adapter instance
+            assistant_message: The assistant message to check
+            costs_dict: Dictionary to store cost information
+
+        Returns:
+            GuardrailCheckResult: Result of the guardrail check
+        """
+        logger.info("Starting output guardrails check")
+
+        try:
+            result = guardrails_adapter.check_output(assistant_message)
+
+            # Store guardrail costs
+            costs_dict["output_guardrails"] = result.usage
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    input=assistant_message[:500],  # Truncate for readability
+                    output=result.verdict,
+                    metadata={
+                        "guardrail_type": "output",
+                        "allowed": result.allowed,
+                        "verdict": result.verdict,
+                        "reason": result.reason if not result.allowed else None,
+                        "error": result.error if result.error else None,
+                        "response_length": len(assistant_message),
+                    },
+                    usage_details={
+                        "input": result.usage.get("total_prompt_tokens", 0),
+                        "output": result.usage.get("total_completion_tokens", 0),
+                        "total": result.usage.get("total_tokens", 0),
+                    },  # type: ignore
+                    cost_details={
+                        "total": result.usage.get("total_cost", 0.0),
+                    },
+                )
+            logger.info(
+                f"Output guardrails check completed: allowed={result.allowed}, "
+                f"cost=${result.usage.get('total_cost', 0):.6f}"
+            )
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Output guardrails check failed: {str(e)}")
+            # Return conservative result on error
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "guardrail_type": "output",
+                    }
+                )
+            return GuardrailCheckResult(
+                allowed=False,
+                verdict="yes",
+                content="Error during output guardrail check",
+                error=str(e),
+                usage={},
             )
 
     def _log_costs(self, costs_dict: Dict[str, Dict[str, Any]]) -> None:
@@ -255,17 +615,19 @@ class LLMOrchestrationService:
 
             total_costs = calculate_total_costs(costs_dict)
 
-            logger.info("LLM USAGE COSTS:")
+            logger.info("LLM USAGE COSTS BREAKDOWN:")
 
             for component, costs in costs_dict.items():
                 logger.info(
-                    f"  {component}: ${costs['total_cost']:.6f} "
-                    f"({costs['num_calls']} calls, {costs['total_tokens']} tokens)"
+                    f"  {component:20s}: ${costs.get('total_cost', 0):.6f} "
+                    f"({costs.get('num_calls', 0)} calls, "
+                    f"{costs.get('total_tokens', 0)} tokens)"
                 )
 
             logger.info(
-                f"  TOTAL: ${total_costs['total_cost']:.6f} "
-                f"({total_costs['total_calls']} calls, {total_costs['total_tokens']} tokens)"
+                f"  {'TOTAL':20s}: ${total_costs['total_cost']:.6f} "
+                f"({total_costs['total_calls']} calls, "
+                f"{total_costs['total_tokens']} tokens)"
             )
 
         except Exception as e:
@@ -301,7 +663,7 @@ class LLMOrchestrationService:
             logger.error(f"Failed to initialize LLM Manager: {str(e)}")
             raise
 
-    @observe(name="prompt_refinement", as_type="chain")
+    @observe(name="refine_user_prompt", as_type="chain")
     def _refine_user_prompt(
         self,
         llm_manager: LLMManager,
@@ -352,22 +714,6 @@ class LLMOrchestrationService:
                     "num_calls": 0,
                 },
             )
-            if self.langfuse_config.langfuse_client:
-                langfuse = self.langfuse_config.langfuse_client
-                langfuse.update_current_generation(
-                    model=llm_manager.get_provider_info().get("model", "unknown"),
-                    usage_details={
-                        "input": usage_info.get("total_prompt_tokens", 0),
-                        "output": usage_info.get("total_completion_tokens", 0),
-                        "total": usage_info.get("total_tokens", 0),
-                    },
-                    cost_details={
-                        "total": usage_info.get("total_cost", 0.0),
-                    },
-                    metadata={
-                        "num_calls": usage_info.get("num_calls", 0),
-                    },
-                )
 
             # Validate the output schema using Pydantic
             try:
@@ -383,7 +729,32 @@ class LLMOrchestrationService:
                 raise ValueError(
                     f"Prompt refinement validation failed: {str(validation_error)}"
                 ) from validation_error
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                refinement_applied = (
+                    original_message.strip()
+                    != validated_output.original_question.strip()
+                )
+                langfuse.update_current_generation(
+                    model=llm_manager.get_provider_info().get("model", "unknown"),
+                    input=original_message,
+                    usage_details={
+                        "input": usage_info.get("total_prompt_tokens", 0),
+                        "output": usage_info.get("total_completion_tokens", 0),
+                        "total": usage_info.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": usage_info.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "num_calls": usage_info.get("num_calls", 0),
+                        "num_refined_questions": len(
+                            validated_output.refined_questions
+                        ),
+                        "refinement_applied": refinement_applied,
+                        "conversation_history_length": len(history),
+                    },  # type: ignore
+                )
             output_json = validated_output.model_dump()
             logger.info(
                 f"Prompt refinement output: {json.dumps(output_json, indent=2)}"
@@ -396,29 +767,50 @@ class LLMOrchestrationService:
             raise
         except Exception as e:
             logger.error(f"Prompt refinement failed: {str(e)}")
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "refinement_failed": True,
+                    }
+                )
             logger.error(f"Failed to refine message: {original_message}")
             raise RuntimeError(f"Prompt refinement process failed: {str(e)}") from e
 
-    @observe(name="initialize_hybrid_retriever", as_type="span")
-    def _initialize_hybrid_retriever(self) -> HybridRetriever:
+    @observe(name="initialize_contextual_retriever", as_type="span")
+    def _initialize_contextual_retriever(
+        self, environment: str, connection_id: Optional[str]
+    ) -> ContextualRetriever:
         """
-        Initialize hybrid retriever for document retrieval.
+        Initialize contextual retriever for enhanced document retrieval.
+
+        Args:
+            environment: Environment for model resolution
+            connection_id: Optional connection ID
 
         Returns:
-            HybridRetriever: Initialized hybrid retriever instance
+            ContextualRetriever: Initialized contextual retriever instance
         """
-        logger.info("Initializing hybrid retriever")
+        logger.info("Initializing contextual retriever")
 
         try:
-            # Initialize vector store with chunk config
-            chunk_config = ChunkConfig()
-            hybrid_retriever = HybridRetriever(cfg=chunk_config)
+            # Initialize with Qdrant URL - use environment variable or default
+            qdrant_url = os.getenv("QDRANT_URL", "http://qdrant:6333")
 
-            logger.info("Hybrid retriever initialized successfully")
-            return hybrid_retriever
+            contextual_retriever = ContextualRetriever(
+                qdrant_url=qdrant_url,
+                environment=environment,
+                connection_id=connection_id,
+                llm_service=self,  # Inject self to eliminate circular dependency
+            )
+
+            logger.info("Contextual retriever initialized successfully")
+            return contextual_retriever
 
         except Exception as e:
-            logger.error(f"Failed to initialize hybrid retriever: {str(e)}")
+            logger.error(f"Failed to initialize contextual retriever: {str(e)}")
             raise
 
     @observe(name="initialize_response_generator", as_type="span")
@@ -448,76 +840,7 @@ class LLMOrchestrationService:
             logger.error(f"Failed to initialize response generator: {str(e)}")
             raise
 
-    @observe(name="chunk_retrieval", as_type="retriever")
-    def _retrieve_relevant_chunks(
-        self, hybrid_retriever: HybridRetriever, refined_output: PromptRefinerOutput
-    ) -> List[Dict[str, Union[str, float, Dict[str, Any]]]]:
-        """
-        Retrieve relevant chunks using hybrid retrieval approach.
-
-        Args:
-            hybrid_retriever: The hybrid retriever instance to use
-            refined_output: The output from prompt refinement containing original and refined questions
-
-        Returns:
-            List of relevant document chunks with scores and metadata
-
-        Raises:
-            ValueError: When Hybrid Retriever is not initialized
-            Exception: For retrieval errors
-        """
-        logger.info("Starting chunk retrieval process")
-
-        try:
-            # Use the hybrid retriever to get relevant chunks
-            relevant_chunks = hybrid_retriever.retrieve(
-                original_question=refined_output.original_question,
-                refined_questions=refined_output.refined_questions,
-                topk_dense=40,
-                topk_bm25=40,
-                fused_cap=120,
-                final_topn=12,
-            )
-            # Update Langfuse with retrieval metadata
-            if self.langfuse_config.langfuse_client:
-                langfuse = self.langfuse_config.langfuse_client
-                langfuse.update_current_generation(
-                    metadata={
-                        "num_chunks_retrieved": len(relevant_chunks),
-                        "topk_dense": 40,
-                        "topk_bm25": 40,
-                        "fused_cap": 120,
-                        "final_topn": 12,
-                    }
-                )
-
-            logger.info(f"Retrieved {len(relevant_chunks)} relevant chunks")
-
-            # Log first 3 for debugging (safe formatting for score)
-            for i, chunk in enumerate(relevant_chunks[:3]):
-                score = chunk.get("score", 0.0)
-                try:
-                    score_str = (
-                        f"{float(score):.4f}"
-                        if isinstance(score, (int, float))
-                        else str(score)
-                    )
-                except Exception:
-                    score_str = str(score)
-                logger.info(
-                    f"Chunk {i + 1}: ID={chunk.get('id', 'N/A')}, Score={score_str}"
-                )
-
-            return relevant_chunks
-
-        except Exception as e:
-            logger.error(f"Chunk retrieval failed: {str(e)}")
-            logger.error(
-                f"Failed to retrieve chunks for question: {refined_output.original_question}"
-            )
-            raise RuntimeError(f"Chunk retrieval process failed: {str(e)}") from e
-
-    @observe(name="response_generation", as_type="generation")
+    @observe(name="generate_rag_response", as_type="generation")
     def _generate_rag_response(
         self,
         llm_manager: LLMManager,
@@ -541,6 +864,15 @@ class LLMOrchestrationService:
             logger.warning(
                 "Response generator unavailable – returning technical issue message."
             )
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": "Response generator unavailable",
+                        "error_type": "technical_issue",
+                        "retrieval_failed": True,
+                    }
+                )
             return OrchestrationResponse(
                 chatId=request.chatId,
                 llmServiceActive=False,
@@ -618,6 +950,16 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"RAG Response generation failed: {str(e)}")
             # Standardized technical issue; no second LLM call, no citations
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "response_type": "technical_issue",
+                        "refinement_failed": False,
+                    }
+                )
             return OrchestrationResponse(
                 chatId=request.chatId,
                 llmServiceActive=False,
@@ -625,3 +967,152 @@ class LLMOrchestrationService:
                 inputGuardFailed=False,
                 content=TECHNICAL_ISSUE_MESSAGE,
             )
+
+    # ========================================================================
+    # Vector Indexer Support Methods (Isolated from RAG Pipeline)
+    # ========================================================================
+
+    def create_embeddings_for_indexer(
+        self,
+        texts: List[str],
+        environment: str = "production",
+        connection_id: Optional[str] = None,
+        batch_size: int = 50,
+    ) -> Dict[str, Any]:
+        """Create embeddings for vector indexer using vault-driven model resolution.
+
+        This method is completely isolated from the RAG pipeline and uses lazy
+        initialization to avoid interfering with the main orchestration flow.
+
+        Args:
+            texts: List of texts to embed
+            environment: Environment (production, development, test)
+            connection_id: Optional connection ID for dev/test environments
+            batch_size: Batch size for processing
+
+        Returns:
+            Dictionary with embeddings and metadata
+        """
+        logger.info(
+            f"Creating embeddings for vector indexer: {len(texts)} texts in {environment} environment"
+        )
+
+        try:
+            # Lazy initialization of embedding manager
+            embedding_manager = self._get_embedding_manager()
+
+            return embedding_manager.create_embeddings(
+                texts=texts,
+                environment=environment,
+                connection_id=connection_id,
+                batch_size=batch_size,
+            )
+        except Exception as e:
+            logger.error(f"Vector indexer embedding creation failed: {e}")
+            raise
+
+    def generate_context_for_chunks(
+        self, request: ContextGenerationRequest
+    ) -> Dict[str, Any]:
+        """Generate context for chunks using Anthropic methodology.
+
+        This method is completely isolated from the RAG pipeline and uses lazy
+        initialization to avoid interfering with the main orchestration flow.
+
+        Args:
+            request: Context generation request with document and chunk prompts
+
+        Returns:
+            Dictionary with generated context and metadata
+        """
+        logger.info("Generating context for chunks using Anthropic methodology")
+
+        try:
+            # Lazy initialization of context manager
+            context_manager = self._get_context_manager()
+
+            return context_manager.generate_context_with_caching(request)
+        except Exception as e:
+            logger.error(f"Vector indexer context generation failed: {e}")
+            raise
+
+    def get_available_embedding_models_for_indexer(
+        self, environment: str = "production"
+    ) -> Dict[str, Any]:
+        """Get available embedding models for vector indexer.
+
+        Args:
+            environment: Environment (production, development, test)
+
+        Returns:
+            Dictionary with available models and default model info
+        """
+        try:
+            # Lazy initialization of embedding manager
+            embedding_manager = self._get_embedding_manager()
+            config_loader = self._get_config_loader()
+
+            available_models: List[str] = embedding_manager.get_available_models(
+                environment
+            )
+
+            # Get default model by resolving what would be used
+            try:
+                provider_name, model_name = config_loader.resolve_embedding_model(
+                    environment
+                )
+                default_model: str = f"{provider_name}/{model_name}"
+            except Exception as e:
+                logger.warning(f"Could not resolve default embedding model: {e}")
+                default_model = "azure_openai/text-embedding-3-large"  # Fallback
+
+            return {
+                "available_models": available_models,
+                "default_model": default_model,
+                "environment": environment,
+            }
+        except Exception as e:
+            logger.error(f"Failed to get embedding models for vector indexer: {e}")
+            raise
+
+    # ========================================================================
+    # Lazy Initialization Helpers for Vector Indexer (Private Methods)
+    # ========================================================================
+
+    def _get_embedding_manager(self):
+        """Lazy initialization of EmbeddingManager for vector indexer."""
+        if not hasattr(self, "_embedding_manager"):
+            from src.llm_orchestrator_config.embedding_manager import EmbeddingManager
+            from src.llm_orchestrator_config.vault.vault_client import VaultAgentClient
+
+            vault_client = VaultAgentClient()
+            config_loader = self._get_config_loader()
+
+            self._embedding_manager = EmbeddingManager(vault_client, config_loader)
+            logger.debug("Lazy initialized EmbeddingManager for vector indexer")
+
+        return self._embedding_manager
+
+    def _get_context_manager(self):
+        """Lazy initialization of ContextGenerationManager for vector indexer."""
+        if not hasattr(self, "_context_manager"):
+            from src.llm_orchestrator_config.context_manager import (
+                ContextGenerationManager,
+            )
+
+            # Use existing LLM manager or create new one for context generation
+            llm_manager = LLMManager()
+            self._context_manager = ContextGenerationManager(llm_manager)
+            logger.debug("Lazy initialized ContextGenerationManager for vector indexer")
+
+        return self._context_manager
+
+    def _get_config_loader(self):
+        """Lazy initialization of ConfigurationLoader for vector indexer."""
+        if not hasattr(self, "_config_loader"):
+            from src.llm_orchestrator_config.config.loader import ConfigurationLoader
+
+            self._config_loader = ConfigurationLoader()
+            logger.debug("Lazy initialized ConfigurationLoader for vector indexer")
+
+        return self._config_loader
