@@ -4,9 +4,6 @@ llm:
     url: "${VAULT_ADDR:http://vault:8200}"
     enabled: true
   
-  # Default provider to use when none is specified
-  default_provider: "azure_openai"
-  
   # Provider configurations
   providers:
     # Azure OpenAI Configuration
@@ -14,21 +11,23 @@ llm:
       api_version: "2024-02-15-preview"
       cache: true
       num_retries: 3
-      model_type: "chat"
       
       # Multiple model configurations
       models:
         gpt-4o-mini:
+          model_type: "chat"
           max_tokens: 4096
           temperature: 0.7
           deployment_name: "gpt-4o-mini"
         
         text-embedding-3-large:
+          model_type: "embedding"
           max_tokens: 2048
           temperature: 0.0
           deployment_name: "text-embedding-3-large"
           
         gpt-4o:
+          model_type: "chat"
           max_tokens: 8192
           temperature: 0.5
           deployment_name: "gpt-4o-deployment"
@@ -41,21 +40,26 @@ llm:
       # Multiple model configurations
       models:
         "eu.anthropic.claude-3-haiku-20240307-v1:0":
+          model_type: "chat"
           max_tokens: 4096
           temperature: 0.7
           region: "eu-west-1"
           
         "eu.anthropic.claude-3-sonnet-20240229-v1:0":
+          model_type: "chat"
           max_tokens: 8192
           temperature: 0.5
           region: "eu-west-1"
           
         "eu.anthropic.claude-3-opus-20240229-v1:0":
+          model_type: "chat"
           max_tokens: 4096
           temperature: 0.3
           region: "eu-west-1"
-          
-        "amazon.titan-text-express-v1":
-          max_tokens: 8192
-          temperature: 0.7
-          region: "us-east-1"
+
+        "amazon.titan-embed-text-v2:0":
+          model_type: "embedding"
+          max_tokens: 8000
+          temperature: 0.0
+          vector_size: 1024
+          region: "eu-west-1"

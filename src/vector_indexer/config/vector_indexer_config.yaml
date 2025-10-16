@@ -1,0 +1,95 @@
+# Vector Indexer Configuration
+vector_indexer:
+  # API Configuration
+  api:
+    base_url: "http://localhost:8100"
+    qdrant_url: "http://qdrant:6333"
+    timeout: 300  # seconds
+  
+  # Environment Configuration
+  processing:
+    environment: "production"  # Default: production
+    connection_id: null  # For dev/test environments
+  
+  # Chunking Configuration
+  chunking:
+    chunk_size: 800  # tokens
+    chunk_overlap: 100  # tokens
+    
+    # Additional chunking parameters
+    min_chunk_size: 50  # minimum tokens per chunk
+    max_chunk_size: 2000  # maximum tokens per chunk
+    chars_per_token: 4  # character-to-token ratio for fallback
+    tokenizer_encoding: "cl100k_base"  # tiktoken encoding
+    
+    # Content formatting
+    chunk_id_pattern: "{document_hash}_chunk_{index:03d}"
+    contextual_template: "{context}\n\n{content}"
+    
+    # Quality validation
+    min_word_count: 5  # minimum words per chunk
+    max_whitespace_ratio: 0.8  # maximum whitespace ratio
+    max_repetition_ratio: 0.5  # maximum content repetition
+  
+  # Concurrency Configuration
+  concurrency:
+    max_concurrent_documents: 3  # Process 3 documents simultaneously
+    max_concurrent_chunks_per_doc: 5  # Generate context for 5 chunks simultaneously
+  
+  # Batch Configuration (Small batches)
+  batching:
+    embedding_batch_size: 10  # Small batch size for embeddings
+    context_batch_size: 5     # Small batch size for context generation
+  
+  # Error Handling
+  error_handling:
+    max_retries: 3
+    retry_delay_base: 2  # seconds (exponential backoff)
+    continue_on_failure: true
+    log_failures: true
+  
+  # Processing Configuration
+  processing:
+    batch_delay_seconds: 0.1  # delay between embedding batches
+    context_delay_seconds: 0.05  # delay between context batches
+    
+  # Provider Detection
+  providers:
+    azure_patterns: ["azure", "text-embedding-3"]
+    aws_patterns: ["amazon", "titan"]
+    openai_patterns: ["openai", "gpt"]
+  
+  # Logging Configuration
+  logging:
+    level: "INFO"
+    failure_log_file: "logs/vector_indexer_failures.jsonl"
+    processing_log_file: "logs/vector_indexer_processing.log"
+    stats_log_file: "logs/vector_indexer_stats.json"
+  
+  # Dataset Configuration
+  dataset:
+    base_path: "datasets"
+    supported_extensions: [".txt"]
+    metadata_file: "source.meta.json"
+    target_file: "cleaned.txt"
+    
+  # Document Loader Configuration
+  document_loader:
+    # File discovery (existing behavior maintained)
+    target_file: "cleaned.txt"
+    metadata_file: "source.meta.json"
+    
+    # Validation rules
+    min_content_length: 10
+    max_content_length: 10000000  # 10MB
+    encoding: "utf-8"
+    required_metadata_fields:
+      - "source_url"
+    
+    # Performance settings
+    enable_content_caching: false
+    max_scan_depth: 5
+    
+    # File validation
+    min_file_size_bytes: 1
+    max_file_size_bytes: 50000000  # 50MB

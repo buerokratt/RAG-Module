@@ -12,6 +12,23 @@ class LLMProvider(str, Enum):
     AWS_BEDROCK = "aws_bedrock"
 
 
+class ModelType(str, Enum):
+    """Enumeration of model types."""
+
+    CHAT = "chat"
+    COMPLETION = "completion"
+    EMBEDDING = "embedding"
+    CONTEXT_GENERATION = "context_generation"
+
+
+class EmbeddingProvider(str, Enum):
+    """Enumeration of supported embedding providers."""
+
+    AZURE_OPENAI = "azure_openai"
+    AWS_BEDROCK = "aws_bedrock"
+    OPENAI = "openai"
+
+
 class LLMResponse(BaseModel):
     """Pydantic model for LLM response objects."""
 

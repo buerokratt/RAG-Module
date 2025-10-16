@@ -23,6 +23,7 @@ class LLMManager:
     """
 
     _instance: Optional["LLMManager"] = None
+    _instance_lock: threading.Lock = threading.Lock()
     _initialized: bool = False
     _configured: bool = False
     _config_lock: threading.Lock = threading.Lock()
@@ -30,7 +31,7 @@ class LLMManager:
     def __new__(
         cls,
         config_path: Optional[str] = None,
-        environment: str = "development",
+        environment: str = "production",
         connection_id: Optional[str] = None,
     ) -> "LLMManager":
         """Create or return the singleton instance.
@@ -43,14 +44,17 @@ class LLMManager:
         Returns:
             LLMManager singleton instance.
         """
+        # Thread-safe singleton creation
         if cls._instance is None:
-            cls._instance = super().__new__(cls)
+            with cls._instance_lock:
+                if cls._instance is None:
+                    cls._instance = super().__new__(cls)
         return cls._instance
 
     def __init__(
         self,
         config_path: Optional[str] = None,
-        environment: str = "development",
+        environment: str = "production",
         connection_id: Optional[str] = None,
     ) -> None:
         """Initialize the LLM Manager.
@@ -257,6 +261,7 @@ class LLMManager:
 
         This is primarily useful for testing purposes.
         """
-        cls._instance = None
-        cls._initialized = False
-        cls._configured = False
+        with cls._instance_lock:
+            cls._instance = None
+            cls._initialized = False
+            cls._configured = False

@@ -17,6 +17,7 @@ from llm_orchestrator_config.config.schema import (
     VaultConfig,
 )
 from llm_orchestrator_config.vault.secret_resolver import SecretResolver
+from llm_orchestrator_config.vault.models import AzureOpenAISecret, AWSBedrockSecret
 from llm_orchestrator_config.types import LLMProvider
 from llm_orchestrator_config.exceptions import (
     ConfigurationError,
@@ -429,24 +430,38 @@ class ConfigurationLoader:
         return providers_to_process
 
     def _update_default_provider(self, config: Dict[str, Any]) -> None:
-        """Update default_provider if it's not available.
+        """Update default_provider if it's not available or set automatically from vault-resolved providers.
 
         Args:
             config: Configuration dictionary to update
         """
-        if "default_provider" in config and "providers" in config:
-            default_provider = config["default_provider"]
-            available_providers = config["providers"]
+        if "providers" not in config:
+            return
 
+        available_providers = config["providers"]
+
+        if not available_providers:
+            return
+
+        # Auto-set default provider if not specified
+        if "default_provider" not in config:
+            new_default = next(iter(available_providers.keys()))
+            logger.info(
+                f"No default provider specified, auto-selected '{new_default}' "
+                f"from vault-resolved providers"
+            )
+            config["default_provider"] = new_default
+        else:
+            # Check if existing default provider is available
+            default_provider = config["default_provider"]
             if default_provider not in available_providers:
                 # Set default to the first available provider
-                if available_providers:
-                    new_default = next(iter(available_providers.keys()))
-                    logger.warning(
-                        f"Default provider '{default_provider}' not available, "
-                        f"using '{new_default}' instead"
-                    )
-                    config["default_provider"] = new_default
+                new_default = next(iter(available_providers.keys()))
+                logger.warning(
+                    f"Default provider '{default_provider}' not available, "
+                    f"using '{new_default}' instead"
+                )
+                config["default_provider"] = new_default
 
     def _process_environment_variables(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """Process environment variable substitutions in configuration.
@@ -508,21 +523,18 @@ class ConfigurationLoader:
         """
         try:
             # Validate required fields
-            if "default_provider" not in config:
-                raise InvalidConfigurationError(
-                    "Missing required field: default_provider"
-                )
-
             if "providers" not in config:
                 raise InvalidConfigurationError("Missing required field: providers")
 
-            # Parse default provider
-            try:
-                default_provider = LLMProvider(config["default_provider"])
-            except ValueError as e:
-                raise InvalidConfigurationError(
-                    f"Invalid default_provider: {config['default_provider']}"
-                ) from e
+            # Parse default provider - it might be auto-selected after vault resolution
+            default_provider = None
+            if "default_provider" in config:
+                try:
+                    default_provider = LLMProvider(config["default_provider"])
+                except ValueError as e:
+                    raise InvalidConfigurationError(
+                        f"Invalid default_provider: {config['default_provider']}"
+                    ) from e
 
             # Parse provider configurations
             providers: Dict[str, ProviderConfig] = {}
@@ -536,6 +548,25 @@ class ConfigurationLoader:
                 except ValueError as e:
                     raise InvalidConfigurationError(
                         f"Invalid provider name: {provider_name}"
+                    ) from e
+
+            # Auto-select default provider if not set
+            if default_provider is None:
+                # Find the first enabled provider
+                enabled_providers = [
+                    name for name, config in providers.items() if config.enabled
+                ]
+                if not enabled_providers:
+                    raise InvalidConfigurationError("No enabled providers found")
+
+                try:
+                    default_provider = LLMProvider(enabled_providers[0])
+                    logger.info(
+                        f"Auto-selected default provider: {default_provider.value}"
+                    )
+                except ValueError as e:
+                    raise InvalidConfigurationError(
+                        f"Invalid auto-selected provider: {enabled_providers[0]}"
                     ) from e
 
             # Validate that default provider exists and is enabled
@@ -611,3 +642,239 @@ class ConfigurationLoader:
             raise InvalidConfigurationError(
                 f"Unsupported provider type: {provider_type}"
             )
+
+    # Embedding-specific methods for vault-driven model resolution
+
+    def resolve_embedding_model(
+        self, environment: str, connection_id: Optional[str] = None
+    ) -> tuple[str, str]:
+        """Resolve embedding model from vault based on environment and connection_id.
+
+        Args:
+            environment: Environment (production, development, test)
+            connection_id: Optional connection ID for dev/test environments
+
+        Returns:
+            Tuple of (provider_name, model_name) resolved from vault
+
+        Raises:
+            ConfigurationError: If no embedding models are available
+        """
+        # Load raw config to get vault settings
+        try:
+            with open(self.config_path, "r", encoding="utf-8") as file:
+                raw_config: Dict[str, Any] = yaml.safe_load(file)
+
+            if not raw_config or "llm" not in raw_config:
+                raise ConfigurationError("Invalid configuration: missing 'llm' section")
+
+            config: Dict[str, Any] = self._process_environment_variables(
+                raw_config["llm"]
+            )
+            resolver: SecretResolver = self._initialize_vault_resolver(config)
+
+            # Get available providers from config
+            providers: List[str] = ["azure_openai", "aws_bedrock"]  # Hardcoded for now
+
+            if environment == "production":
+                # Find first available embedding model across all providers
+                for provider in providers:
+                    try:
+                        models: List[str] = resolver.list_available_embedding_models(
+                            provider, environment
+                        )
+                        embedding_models: List[str] = [
+                            m for m in models if self._is_embedding_model(m)
+                        ]
+                        if embedding_models:
+                            logger.info(
+                                f"Resolved production embedding model: {provider}/{embedding_models[0]}"
+                            )
+                            return provider, embedding_models[0]
+                    except Exception as e:
+                        logger.debug(
+                            f"Provider {provider} not available for embeddings: {e}"
+                        )
+                        continue
+
+                raise ConfigurationError("No embedding models available in production")
+            else:
+                # Use connection_id to find specific embedding model
+                if not connection_id:
+                    raise ConfigurationError(
+                        f"connection_id is required for {environment} environment"
+                    )
+
+                for provider in providers:
+                    try:
+                        secret: Optional[Union[AzureOpenAISecret, AWSBedrockSecret]] = (
+                            resolver.get_embedding_secret_for_model(
+                                provider, environment, "", connection_id
+                            )
+                        )
+                        if secret and self._is_embedding_model(secret.model):
+                            logger.info(
+                                f"Resolved {environment} embedding model: {provider}/{secret.model}"
+                            )
+                            return provider, secret.model
+                    except Exception as e:
+                        logger.debug(
+                            f"Provider {provider} not available with connection {connection_id}: {e}"
+                        )
+                        continue
+
+                raise ConfigurationError(
+                    f"No embedding models available for {environment} with connection_id {connection_id}"
+                )
+
+        except yaml.YAMLError as e:
+            raise ConfigurationError(f"Failed to parse YAML configuration: {e}") from e
+        except Exception as e:
+            if isinstance(e, ConfigurationError):
+                raise
+            raise ConfigurationError(f"Failed to resolve embedding model: {e}") from e
+
+    def get_embedding_provider_config(
+        self,
+        provider: str,
+        model: str,
+        environment: str,
+        connection_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Get embedding provider configuration with vault secrets merged.
+
+        Args:
+            provider: Provider name (azure_openai, aws_bedrock)
+            model: Embedding model name
+            environment: Environment (production, development, test)
+            connection_id: Optional connection ID for dev/test environments
+
+        Returns:
+            Complete provider configuration with secrets
+
+        Raises:
+            ConfigurationError: If configuration cannot be loaded or secrets not found
+        """
+        try:
+            # Load raw config
+            with open(self.config_path, "r", encoding="utf-8") as file:
+                raw_config: Dict[str, Any] = yaml.safe_load(file)
+
+            if not raw_config or "llm" not in raw_config:
+                raise ConfigurationError("Invalid configuration: missing 'llm' section")
+
+            config: Dict[str, Any] = self._process_environment_variables(
+                raw_config["llm"]
+            )
+            resolver: SecretResolver = self._initialize_vault_resolver(config)
+
+            # Get base provider config from llm_config.yaml
+            base_config: Dict[str, Any] = config.get("providers", {}).get(provider, {})
+            if not base_config:
+                raise ConfigurationError(
+                    f"Provider {provider} not found in configuration"
+                )
+
+            # Get secrets from embeddings vault path
+            secret: Optional[Union[AzureOpenAISecret, AWSBedrockSecret]] = (
+                resolver.get_embedding_secret_for_model(
+                    provider, environment, model, connection_id
+                )
+            )
+
+            if not secret:
+                raise ConfigurationError(
+                    f"No embedding secrets found for {provider}/{model} in {environment}"
+                )
+
+            # Merge configuration with secrets using existing method
+            merged_config: Dict[str, Any] = self._merge_config_with_secrets(
+                base_config, secret, model
+            )
+
+            logger.debug(f"Successfully loaded embedding config for {provider}/{model}")
+            return merged_config
+
+        except yaml.YAMLError as e:
+            raise ConfigurationError(f"Failed to parse YAML configuration: {e}") from e
+        except Exception as e:
+            if isinstance(e, ConfigurationError):
+                raise
+            raise ConfigurationError(
+                f"Failed to get embedding provider config: {e}"
+            ) from e
+
+    def get_available_embedding_models(self, environment: str) -> Dict[str, List[str]]:
+        """Get available embedding models across all providers.
+
+        Args:
+            environment: Environment (production, development, test)
+
+        Returns:
+            Dictionary mapping provider names to available embedding models
+
+        Raises:
+            ConfigurationError: If configuration cannot be loaded
+        """
+        try:
+            # Load raw config
+            with open(self.config_path, "r", encoding="utf-8") as file:
+                raw_config: Dict[str, Any] = yaml.safe_load(file)
+
+            if not raw_config or "llm" not in raw_config:
+                raise ConfigurationError("Invalid configuration: missing 'llm' section")
+
+            config: Dict[str, Any] = self._process_environment_variables(
+                raw_config["llm"]
+            )
+            resolver: SecretResolver = self._initialize_vault_resolver(config)
+
+            available_models: Dict[str, List[str]] = {}
+            providers: List[str] = ["azure_openai", "aws_bedrock"]
+
+            for provider in providers:
+                try:
+                    models: List[str] = resolver.list_available_embedding_models(
+                        provider, environment
+                    )
+                    embedding_models: List[str] = [
+                        m for m in models if self._is_embedding_model(m)
+                    ]
+                    if embedding_models:
+                        available_models[provider] = embedding_models
+                except Exception as e:
+                    logger.debug(f"Provider {provider} not available: {e}")
+                    continue
+
+            return available_models
+
+        except yaml.YAMLError as e:
+            raise ConfigurationError(f"Failed to parse YAML configuration: {e}") from e
+        except Exception as e:
+            if isinstance(e, ConfigurationError):
+                raise
+            raise ConfigurationError(
+                f"Failed to get available embedding models: {e}"
+            ) from e
+
+    def _is_embedding_model(self, model_name: str) -> bool:
+        """Detect if model is an embedding model based on name patterns.
+
+        Args:
+            model_name: Model name to check
+
+        Returns:
+            True if model appears to be an embedding model
+        """
+        embedding_patterns: List[str] = [
+            "embedding",
+            "embed",
+            "text-embedding",
+            "titan-embed",
+            "e5-",
+            "instructor-",
+            "sentence-transformer",
+        ]
+
+        model_lower: str = model_name.lower()
+        return any(pattern in model_lower for pattern in embedding_patterns)

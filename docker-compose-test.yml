@@ -1,0 +1,291 @@
+services:
+  # === Core Infrastructure ===
+  
+  # Shared PostgreSQL database (used by both application and Langfuse)
+  rag_search_db:
+    image: postgres:14.1
+    container_name: rag_search_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dbadmin
+      POSTGRES_DB: rag-search
+    volumes:
+      - test_rag_search_db:/var/lib/postgresql/data
+    ports:
+      - "5436:5432"
+    networks:
+      - test-network
+
+  # Vector database for RAG
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    container_name: qdrant
+    restart: always
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - test_qdrant_data:/qdrant/storage
+    networks:
+      - test-network
+
+  # === Secret Management ===
+  
+  # Vault - Secret management (dev mode)
+  vault:
+    image: hashicorp/vault:1.20.3
+    container_name: vault
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_ADDR: http://0.0.0.0:8200
+      VAULT_API_ADDR: http://0.0.0.0:8200
+    command: server -dev -dev-listen-address=0.0.0.0:8200
+    networks:
+      - test-network
+
+  # Vault Agent - Automatic token management via AppRole
+  vault-agent-llm:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-llm
+    depends_on:
+      - vault
+    volumes:
+      - ./test-vault/agents/llm:/agent/in
+      - ./test-vault/agent-out:/agent/out
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        # Wait for Vault to be ready
+        sleep 5
+        echo "Waiting for AppRole credentials..."
+        while [ ! -f /agent/in/role_id ] || [ ! -s /agent/in/role_id ]; do
+          sleep 1
+        done
+        while [ ! -f /agent/in/secret_id ] || [ ! -s /agent/in/secret_id ]; do
+          sleep 1
+        done
+        echo "Credentials found, starting Vault Agent..."
+        exec vault agent -config=/agent/in/agent.hcl -log-level=debug
+    networks:
+      - test-network
+
+  # === Langfuse Observability Stack ===
+  
+  # Redis - Queue and cache for Langfuse
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: always
+    command: --requirepass myredissecret
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      - test-network
+
+  # MinIO - S3-compatible storage for Langfuse
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    restart: always
+    entrypoint: sh
+    command: -c "mkdir -p /data/langfuse && minio server /data --address ':9000' --console-address ':9001'"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniosecret
+    ports:
+      - "9090:9000"
+      - "127.0.0.1:9091:9001"
+    volumes:
+      - test_minio_data:/data
+    networks:
+      - test-network
+
+  # ClickHouse - Analytics database for Langfuse (REQUIRED in v3)
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.3
+    container_name: clickhouse
+    restart: always
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse
+    volumes:
+      - test_clickhouse_data:/var/lib/clickhouse
+    ports:
+      - "127.0.0.1:8123:8123"
+      - "127.0.0.1:9000:9000"
+    networks:
+      - test-network
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  # Langfuse Worker - Background job processor
+  langfuse-worker:
+    image: langfuse/langfuse-worker:3
+    container_name: langfuse-worker
+    restart: always
+    depends_on:
+      - rag_search_db
+      - minio
+      - redis
+      - clickhouse
+    ports:
+      - "127.0.0.1:3030:3030"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://postgres:dbadmin@rag_search_db:5432/rag-search
+      
+      # Auth & Security (TEST VALUES ONLY - NOT FOR PRODUCTION)
+      # gitleaks:allow - These are test-only hex strings
+      NEXTAUTH_URL: http://localhost:3000
+      SALT: ef9d6c6f8b4a5e2c1d3f7a9b8c5e4d2a1f6b8c9d4e5f7a8b1c2d3e4f5a6b7c8d
+      ENCRYPTION_KEY: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
+      
+      # Features
+      TELEMETRY_ENABLED: "false"
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "false"
+      
+      # ClickHouse (REQUIRED for Langfuse v3)
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000/default
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
+      
+      # S3/MinIO Event Upload
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: us-east-1
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      
+      # S3/MinIO Media Upload
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: us-east-1
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+      
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_AUTH: myredissecret
+    networks:
+      - test-network
+
+  # Langfuse Web - UI and API
+  langfuse-web:
+    image: langfuse/langfuse:3
+    container_name: langfuse-web
+    restart: always
+    depends_on:
+      - langfuse-worker
+      - rag_search_db
+      - clickhouse
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://postgres:dbadmin@rag_search_db:5432/rag-search
+      
+      # Auth & Security (TEST VALUES ONLY - NOT FOR PRODUCTION)
+      # gitleaks:allow - These are test-only hex strings
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: 9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e
+      SALT: ef9d6c6f8b4a5e2c1d3f7a9b8c5e4d2a1f6b8c9d4e5f7a8b1c2d3e4f5a6b7c8d
+      ENCRYPTION_KEY: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
+      
+      # Features
+      TELEMETRY_ENABLED: "false"
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "false"
+      
+      # ClickHouse (REQUIRED for Langfuse v3)
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000/default
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
+      
+      # S3/MinIO Event Upload
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: us-east-1
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      
+      # S3/MinIO Media Upload
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: us-east-1
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+      
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_AUTH: myredissecret
+      
+      # Initialize test project with known credentials
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: pk-lf-test
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: sk-lf-test
+    networks:
+      - test-network
+
+  # === LLM Orchestration Service ===
+  
+  llm-orchestration-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.llm_orchestration_service
+    container_name: llm-orchestration-service
+    restart: always
+    ports:
+      - "8100:8100"
+    environment:
+      - ENVIRONMENT=test
+      - VAULT_ADDR=http://vault:8200
+      - VAULT_TOKEN_FILE=/agent/out/token
+      - QDRANT_URL=http://qdrant:6333
+      - TESTING_MODE=true
+    volumes:
+      - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
+      - ./test-vault/agent-out:/agent/out:ro
+      - test_llm_orchestration_logs:/app/logs
+    depends_on:
+      - qdrant
+      - langfuse-web
+      - vault-agent-llm
+    networks:
+      - test-network
+
+# === Networks ===
+
+networks:
+  test-network:
+    name: test-network
+    driver: bridge
+
+# === Volumes ===
+
+volumes:
+  test_rag_search_db:
+    name: test_rag_search_db
+  test_qdrant_data:
+    name: test_qdrant_data
+  test_minio_data:
+    name: test_minio_data
+  test_clickhouse_data:
+    name: test_clickhouse_data
+  test_llm_orchestration_logs:
+    name: test_llm_orchestration_logs

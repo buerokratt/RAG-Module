@@ -2,7 +2,7 @@
 
 import threading
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any, Union
+from typing import Optional, Dict, Any, Union, List
 from pydantic import BaseModel
 from loguru import logger
 
@@ -293,3 +293,170 @@ class SecretResolver:
         # Use threading for background refresh
         thread = threading.Thread(target=refresh_task, daemon=True)
         thread.start()
+
+    # Embedding-specific methods using separate vault paths
+
+    def get_embedding_secret_for_model(
+        self,
+        provider: str,
+        environment: str,
+        model_name: str,
+        connection_id: Optional[str] = None,
+    ) -> Optional[Union[AzureOpenAISecret, AWSBedrockSecret]]:
+        """Get secret for a specific embedding model.
+
+        Args:
+            provider: Provider name (azure_openai, aws_bedrock)
+            environment: Environment (production, development, test)
+            model_name: Embedding model name from vault
+            connection_id: Optional connection ID for dev/test environments
+
+        Returns:
+            Validated secret object or None if not found
+        """
+        # Build embeddings-specific vault path
+        vault_path: str = self._build_embedding_vault_path(
+            provider, environment, model_name, connection_id
+        )
+
+        # Try cache first
+        cached_secret: Optional[Union[AzureOpenAISecret, AWSBedrockSecret]] = (
+            self._get_from_cache(vault_path)
+        )
+        if cached_secret:
+            return cached_secret
+
+        # Fetch from Vault
+        try:
+            secret_data: Optional[Dict[str, Any]] = self.vault_client.get_secret(
+                vault_path
+            )
+            if not secret_data:
+                logger.debug(f"Embedding secret not found in Vault: {vault_path}")
+                return self._get_fallback(vault_path)
+
+            # Validate and parse secret
+            secret_model: type = get_secret_model(provider)
+            validated_secret: Union[AzureOpenAISecret, AWSBedrockSecret] = secret_model(
+                **secret_data
+            )
+
+            # Verify model name matches (more flexible for production)
+            if environment == "production":
+                # For production, trust the model name from vault secret
+                logger.debug(
+                    f"Production embedding model: {validated_secret.model}, requested: {model_name}"
+                )
+            elif validated_secret.model != model_name:
+                logger.warning(
+                    f"Embedding model name mismatch: vault={validated_secret.model}, "
+                    f"requested={model_name}"
+                )
+                # Continue anyway - vault might have updated model name
+
+            # Cache the secret
+            self._cache_secret(vault_path, validated_secret)
+
+            # Update fallback cache
+            self._fallback_cache[vault_path] = validated_secret
+
+            logger.debug(
+                f"Successfully resolved embedding secret for {provider}/{model_name}"
+            )
+            return validated_secret
+
+        except VaultConnectionError:
+            logger.warning(
+                f"Vault unavailable, trying fallback for embedding {vault_path}"
+            )
+            return self._get_fallback(vault_path)
+        except Exception as e:
+            logger.error(f"Error resolving embedding secret for {vault_path}: {e}")
+            return self._get_fallback(vault_path)
+
+    def list_available_embedding_models(
+        self, provider: str, environment: str
+    ) -> List[str]:
+        """List available embedding models for a provider and environment.
+
+        Args:
+            provider: Provider name (azure_openai, aws_bedrock)
+            environment: Environment (production, development, test)
+
+        Returns:
+            List of available embedding model names
+        """
+        if environment == "production":
+            # For production: Check embeddings/connections/provider/production path
+            production_path: str = f"embeddings/connections/{provider}/{environment}"
+            try:
+                models_result: Optional[list[str]] = self.vault_client.list_secrets(
+                    production_path
+                )
+                if models_result:
+                    logger.debug(
+                        f"Found {len(models_result)} production embedding models for {provider}: {models_result}"
+                    )
+                    return models_result
+                else:
+                    logger.debug(f"No production embedding models found for {provider}")
+                    return []
+
+            except Exception as e:
+                logger.debug(
+                    f"Provider {provider} embedding models not available in production: {e}"
+                )
+                return []
+        else:
+            # For dev/test: Use embeddings path with connection_id paths
+            base_path: str = f"embeddings/connections/{provider}/{environment}"
+            try:
+                models_result: Optional[list[str]] = self.vault_client.list_secrets(
+                    base_path
+                )
+                if models_result:
+                    logger.debug(
+                        f"Found {len(models_result)} embedding models for {provider}/{environment}"
+                    )
+                    return models_result
+                else:
+                    logger.debug(
+                        f"No embedding models found for {provider}/{environment}"
+                    )
+                    return []
+
+            except Exception as e:
+                logger.error(
+                    f"Error listing embedding models for {provider}/{environment}: {e}"
+                )
+                return []
+
+    def _build_embedding_vault_path(
+        self,
+        provider: str,
+        environment: str,
+        model_name: str,
+        connection_id: Optional[str] = None,
+    ) -> str:
+        """Build Vault path for embedding secrets.
+
+        Args:
+            provider: Provider name (azure_openai, aws_bedrock)
+            environment: Environment (production, development, test)
+            model_name: Embedding model name
+            connection_id: Optional connection ID for dev/test environments
+
+        Returns:
+            Vault path for embedding secrets
+
+        Examples:
+            Production: embeddings/connections/azure_openai/production/text-embedding-3-large
+            Dev/Test: embeddings/connections/azure_openai/development/dev-conn-123
+        """
+        if environment == "production":
+            # Production uses embeddings/connections/{provider}/production/{model_name} path
+            return f"embeddings/connections/{provider}/{environment}/{model_name}"
+        else:
+            # Development/test can use connection_id or fall back to model name
+            model_identifier: str = connection_id if connection_id else model_name
+            return f"embeddings/connections/{provider}/{environment}/{model_identifier}"

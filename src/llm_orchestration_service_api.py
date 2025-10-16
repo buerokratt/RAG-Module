@@ -1,14 +1,24 @@
 """LLM Orchestration Service API - FastAPI application."""
 
+import os
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from typing import Any, AsyncGenerator, Dict
 
 from fastapi import FastAPI, HTTPException, status, Request
 from loguru import logger
 import uvicorn
 
 from llm_orchestration_service import LLMOrchestrationService
-from models.request_models import OrchestrationRequest, OrchestrationResponse
+from models.request_models import (
+    OrchestrationRequest,
+    OrchestrationResponse,
+    EmbeddingRequest,
+    EmbeddingResponse,
+    ContextGenerationRequest,
+    ContextGenerationResponse,
+    EmbeddingErrorResponse,
+    TestOrchestrationResponse,
+)
 
 
 @asynccontextmanager
@@ -110,6 +120,178 @@ def orchestrate_llm_request(
         raise
     except Exception as e:
         logger.error(f"Unexpected error processing request: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error occurred",
+        )
+
+
+@app.post(
+    "/embeddings",
+    response_model=EmbeddingResponse,
+    responses={500: {"model": EmbeddingErrorResponse}},
+)
+async def create_embeddings(request: EmbeddingRequest) -> EmbeddingResponse:
+    """
+    Create embeddings using DSPy with vault-driven model resolution.
+
+    Model selection is automatic based on environment and connection_id:
+    - Production: Uses first available embedding model from vault
+    - Development/Test: Uses model associated with connection_id
+
+    Supports Azure OpenAI, AWS Bedrock, and OpenAI embedding models.
+    Includes automatic retry with exponential backoff.
+    """
+    try:
+        logger.info(
+            f"Creating embeddings for {len(request.texts)} texts in {request.environment} environment"
+        )
+
+        result: Dict[str, Any] = (
+            app.state.orchestration_service.create_embeddings_for_indexer(
+                texts=request.texts,
+                environment=request.environment,
+                connection_id=request.connection_id,
+                batch_size=request.batch_size or 50,
+            )
+        )
+
+        return EmbeddingResponse(**result)
+
+    except Exception as e:
+        logger.error(f"Embedding creation failed: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": str(e),
+                "failed_texts": request.texts[:5],  # Don't log all texts for privacy
+                "retry_after": 30,
+            },
+        )
+
+
+@app.post("/generate-context", response_model=ContextGenerationResponse)
+async def generate_context_with_caching(
+    request: ContextGenerationRequest,
+) -> ContextGenerationResponse:
+    """
+    Generate contextual descriptions using Anthropic methodology.
+
+    Uses exact Anthropic prompt templates and supports structure for
+    future prompt caching implementation for cost optimization.
+    """
+    try:
+        result = app.state.orchestration_service.generate_context_for_chunks(request)
+
+        return ContextGenerationResponse(**result)
+
+    except Exception as e:
+        logger.error(f"Context generation failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/embedding-models")
+async def get_available_embedding_models(
+    environment: str = "production",
+) -> Dict[str, Any]:
+    """Get available embedding models from vault configuration.
+
+    Args:
+        environment: Environment to get models for (production, development, test)
+
+    Returns:
+        Dictionary with available models and default model information
+    """
+    try:
+        # Get available embedding models using vault-driven resolution
+        result: Dict[str, Any] = (
+            app.state.orchestration_service.get_available_embedding_models_for_indexer(
+                environment=environment
+            )
+        )
+        return result
+
+    except Exception as e:
+        logger.error(f"Failed to get embedding models: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post(
+    "/orchestrate-test",
+    response_model=TestOrchestrationResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Process LLM orchestration request with test data",
+    description="Testing-only endpoint that returns additional context for DeepEval evaluation",
+    include_in_schema=os.getenv("TESTING_MODE", "false").lower() == "true",
+)
+def orchestrate_llm_request_test(
+    http_request: Request,
+    request: OrchestrationRequest,
+) -> TestOrchestrationResponse:
+    """
+    Process LLM orchestration request with additional testing data.
+
+    This endpoint is only available when TESTING_MODE=true and returns
+    retrieval context and refined questions for DeepEval metrics evaluation.
+
+    Args:
+        http_request: FastAPI Request object for accessing app state
+        request: OrchestrationRequest containing user message and context
+
+    Returns:
+        TestOrchestrationResponse: Response with LLM output, status flags, and test data
+
+    Raises:
+        HTTPException: For processing errors or if not in testing mode
+    """
+    # Check if testing mode is enabled
+    testing_mode = os.getenv("TESTING_MODE", "false").lower() == "true"
+    if not testing_mode:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Testing endpoint not available in production mode",
+        )
+
+    try:
+        logger.info(f"Received TEST orchestration request for chatId: {request.chatId}")
+
+        if not hasattr(http_request.app.state, "orchestration_service"):
+            logger.error("Orchestration service not found in app state")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        orchestration_service = http_request.app.state.orchestration_service
+        if orchestration_service is None:
+            logger.error("Orchestration service is None")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        # Process the request (will include test data due to TESTING_MODE env var)
+        response = orchestration_service.process_orchestration_request(request)
+
+        # Convert to test response with additional fields
+        test_response = TestOrchestrationResponse(
+            chatId=response.chatId,
+            llmServiceActive=response.llmServiceActive,
+            questionOutOfLLMScope=response.questionOutOfLLMScope,
+            inputGuardFailed=response.inputGuardFailed,
+            content=response.content,
+            retrieval_context=response.retrieval_context,
+            refined_questions=response.refined_questions,
+            expected_output=None,  # Will be populated by test framework
+        )
+
+        logger.info(f"Successfully processed TEST request for chatId: {request.chatId}")
+        return test_response
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error processing TEST request: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error occurred",

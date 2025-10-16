@@ -26,6 +26,12 @@ dependencies = [
     "qdrant-client>=1.15.1",
     "rank-bm25>=0.2.2",
     "nemoguardrails>=0.16.0",
+    "rerankers[transformers]>=0.10.0",
+    "tiktoken>=0.11.0",
+    "langfuse>=3.6.2",
+    "deepeval>=3.6.6",
+    "pytest-json-report>=1.5.0",
+    "deepteam>=0.2.5",
 ]
 
 [tool.pyright]
