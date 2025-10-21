@@ -2,8 +2,6 @@
 
 from typing import Optional, List, Dict, Union, Any
 import json
-import asyncio
-import os
 from loguru import logger
 
 from llm_orchestrator_config.llm_manager import LLMManager
@@ -12,9 +10,10 @@ from models.request_models import (
     OrchestrationResponse,
     ConversationItem,
     PromptRefinerOutput,
-    ContextGenerationRequest,
 )
 from prompt_refine_manager.prompt_refiner import PromptRefinerAgent
+from vector_indexer.chunk_config import ChunkConfig
+from vector_indexer.hybrid_retrieval import HybridRetriever
 from src.response_generator.response_generate import ResponseGeneratorAgent
 from src.llm_orchestrator_config.llm_cochestrator_constants import (
     OUT_OF_SCOPE_MESSAGE,
@@ -24,7 +23,6 @@ from src.llm_orchestrator_config.llm_cochestrator_constants import (
 )
 from src.utils.cost_utils import calculate_total_costs
 from src.guardrails import NeMoRailsAdapter, GuardrailCheckResult
-from src.contextual_retrieval import ContextualRetriever
 
 from langfuse import Langfuse, observe
 
@@ -183,12 +181,10 @@ class LLMOrchestrationService:
             request.environment, request.connection_id
         )
 
-        # Initialize Contextual Retriever (replaces hybrid retriever)
-        components["contextual_retriever"] = self._safe_initialize_contextual_retriever(
-            request.environment, request.connection_id
-        )
+        # Initialize Hybrid Retriever (optional)
+        components["hybrid_retriever"] = self._safe_initialize_hybrid_retriever()
 
-        # Initialize Response Generator
+        # Initialize Response Generator (optional)
         components["response_generator"] = self._safe_initialize_response_generator(
             components["llm_manager"]
         )
@@ -219,16 +215,11 @@ class LLMOrchestrationService:
         )
         costs_dict["prompt_refiner"] = refiner_usage
 
-        # Step 3: Retrieve relevant chunks using contextual retrieval
-        relevant_chunks = self._safe_retrieve_contextual_chunks(
-            components["contextual_retriever"], refined_output, request
+        # Step 3: Retrieve relevant chunks
+        relevant_chunks = self._safe_retrieve_chunks(
+            components["hybrid_retriever"], refined_output
         )
         if relevant_chunks is None:  # Retrieval failed
-            return self._create_out_of_scope_response(request)
-
-        # Handle zero chunks scenario - return out-of-scope response
-        if len(relevant_chunks) == 0:
-            logger.info("No relevant chunks found - returning out-of-scope response")
             return self._create_out_of_scope_response(request)
 
         # Step 4: Generate response
@@ -261,19 +252,15 @@ class LLMOrchestrationService:
             return None
 
     @observe(name="safe_initialize_contextual_retriever", as_type="span")
-    def _safe_initialize_contextual_retriever(
-        self, environment: str, connection_id: Optional[str]
-    ) -> Optional[ContextualRetriever]:
-        """Safely initialize contextual retriever with error handling."""
+    def _safe_initialize_hybrid_retriever(self) -> Optional[HybridRetriever]:
+        """Safely initialize hybrid retriever with error handling."""
         try:
-            retriever = self._initialize_contextual_retriever(
-                environment, connection_id
-            )
-            logger.info("Contextual Retriever initialization successful")
+            retriever = self._initialize_hybrid_retriever()
+            logger.info("Hybrid Retriever initialization successful")
             return retriever
         except Exception as retriever_error:
             logger.warning(
-                f"Contextual Retriever initialization failed: {str(retriever_error)}"
+                f"Hybrid Retriever initialization failed: {str(retriever_error)}"
             )
             logger.warning("Continuing without chunk retrieval capabilities")
             return None
@@ -319,47 +306,24 @@ class LLMOrchestrationService:
         logger.info("Input guardrails check passed")
         return None
 
-    def _safe_retrieve_contextual_chunks(
+    def _safe_retrieve_chunks(
         self,
-        contextual_retriever: Optional[ContextualRetriever],
+        hybrid_retriever: Optional[HybridRetriever],
         refined_output: PromptRefinerOutput,
-        request: OrchestrationRequest,
     ) -> Optional[List[Dict[str, Union[str, float, Dict[str, Any]]]]]:
-        """Safely retrieve chunks using contextual retrieval with error handling."""
-        if not contextual_retriever:
-            logger.info("Contextual Retriever not available, skipping chunk retrieval")
+        """Safely retrieve chunks with error handling."""
+        if not hybrid_retriever:
+            logger.info("Hybrid Retriever not available, skipping chunk retrieval")
             return []
 
         try:
-            # Define async wrapper for initialization and retrieval
-            async def async_retrieve():
-                # Ensure retriever is initialized
-                if not contextual_retriever.initialized:
-                    initialization_success = await contextual_retriever.initialize()
-                    if not initialization_success:
-                        logger.warning("Failed to initialize contextual retriever")
-                        return None
-
-                relevant_chunks = await contextual_retriever.retrieve_contextual_chunks(
-                    original_question=refined_output.original_question,
-                    refined_questions=refined_output.refined_questions,
-                    environment=request.environment,
-                    connection_id=request.connection_id,
-                )
-                return relevant_chunks
-
-            # Run async retrieval synchronously
-            relevant_chunks = asyncio.run(async_retrieve())
-
-            if relevant_chunks is None:
-                return None
-
-            logger.info(
-                f"Successfully retrieved {len(relevant_chunks)} contextual chunks"
+            relevant_chunks = self._retrieve_relevant_chunks(
+                hybrid_retriever=hybrid_retriever, refined_output=refined_output
             )
+            logger.info(f"Successfully retrieved {len(relevant_chunks)} chunks")
             return relevant_chunks
         except Exception as retrieval_error:
-            logger.warning(f"Contextual chunk retrieval failed: {str(retrieval_error)}")
+            logger.warning(f"Chunk retrieval failed: {str(retrieval_error)}")
             logger.warning("Returning out-of-scope message due to retrieval failure")
             return None
 
@@ -501,6 +465,7 @@ class LLMOrchestrationService:
                         "total": result.usage.get("total_cost", 0.0),
                     },
                 )
+
             logger.info(
                 f"Input guardrails check completed: allowed={result.allowed}, "
                 f"cost=${result.usage.get('total_cost', 0):.6f}"
@@ -510,7 +475,6 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"Input guardrails check failed: {str(e)}")
-            # Return conservative result on error
             if self.langfuse_config.langfuse_client:
                 langfuse = self.langfuse_config.langfuse_client
                 langfuse.update_current_generation(
@@ -520,6 +484,7 @@ class LLMOrchestrationService:
                         "guardrail_type": "input",
                     }
                 )
+            # Return conservative result on error
             return GuardrailCheckResult(
                 allowed=False,
                 verdict="yes",
@@ -584,7 +549,6 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"Output guardrails check failed: {str(e)}")
-            # Return conservative result on error
             if self.langfuse_config.langfuse_client:
                 langfuse = self.langfuse_config.langfuse_client
                 langfuse.update_current_generation(
@@ -594,6 +558,7 @@ class LLMOrchestrationService:
                         "guardrail_type": "output",
                     }
                 )
+            # Return conservative result on error
             return GuardrailCheckResult(
                 allowed=False,
                 verdict="yes",
@@ -780,37 +745,25 @@ class LLMOrchestrationService:
             raise RuntimeError(f"Prompt refinement process failed: {str(e)}") from e
 
     @observe(name="initialize_contextual_retriever", as_type="span")
-    def _initialize_contextual_retriever(
-        self, environment: str, connection_id: Optional[str]
-    ) -> ContextualRetriever:
+    def _initialize_hybrid_retriever(self) -> HybridRetriever:
         """
-        Initialize contextual retriever for enhanced document retrieval.
-
-        Args:
-            environment: Environment for model resolution
-            connection_id: Optional connection ID
+        Initialize hybrid retriever for document retrieval.
 
         Returns:
-            ContextualRetriever: Initialized contextual retriever instance
+            HybridRetriever: Initialized hybrid retriever instance
         """
-        logger.info("Initializing contextual retriever")
+        logger.info("Initializing hybrid retriever")
 
         try:
-            # Initialize with Qdrant URL - use environment variable or default
-            qdrant_url = os.getenv("QDRANT_URL", "http://qdrant:6333")
+            # Initialize vector store with chunk config
+            chunk_config = ChunkConfig()
+            hybrid_retriever = HybridRetriever(cfg=chunk_config)
 
-            contextual_retriever = ContextualRetriever(
-                qdrant_url=qdrant_url,
-                environment=environment,
-                connection_id=connection_id,
-                llm_service=self,  # Inject self to eliminate circular dependency
-            )
-
-            logger.info("Contextual retriever initialized successfully")
-            return contextual_retriever
+            logger.info("Hybrid retriever initialized successfully")
+            return hybrid_retriever
 
         except Exception as e:
-            logger.error(f"Failed to initialize contextual retriever: {str(e)}")
+            logger.error(f"Failed to initialize hybrid retriever: {str(e)}")
             raise
 
     @observe(name="initialize_response_generator", as_type="span")
@@ -839,6 +792,63 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize response generator: {str(e)}")
             raise
+
+    @observe(name="retrieve_relevant_chunks", as_type="retriever")
+    def _retrieve_relevant_chunks(
+        self, hybrid_retriever: HybridRetriever, refined_output: PromptRefinerOutput
+    ) -> List[Dict[str, Union[str, float, Dict[str, Any]]]]:
+        """
+        Retrieve relevant chunks using hybrid retrieval approach.
+
+        Args:
+            hybrid_retriever: The hybrid retriever instance to use
+            refined_output: The output from prompt refinement containing original and refined questions
+
+        Returns:
+            List of relevant document chunks with scores and metadata
+
+        Raises:
+            ValueError: When Hybrid Retriever is not initialized
+            Exception: For retrieval errors
+        """
+        logger.info("Starting chunk retrieval process")
+
+        try:
+            # Use the hybrid retriever to get relevant chunks
+            relevant_chunks = hybrid_retriever.retrieve(
+                original_question=refined_output.original_question,
+                refined_questions=refined_output.refined_questions,
+                topk_dense=40,
+                topk_bm25=40,
+                fused_cap=120,
+                final_topn=12,
+            )
+
+            logger.info(f"Retrieved {len(relevant_chunks)} relevant chunks")
+
+            # Log first 3 for debugging (safe formatting for score)
+            for i, chunk in enumerate(relevant_chunks[:3]):
+                score = chunk.get("score", 0.0)
+                try:
+                    score_str = (
+                        f"{float(score):.4f}"
+                        if isinstance(score, (int, float))
+                        else str(score)
+                    )
+                except Exception:
+                    score_str = str(score)
+                logger.info(
+                    f"Chunk {i + 1}: ID={chunk.get('id', 'N/A')}, Score={score_str}"
+                )
+
+            return relevant_chunks
+
+        except Exception as e:
+            logger.error(f"Chunk retrieval failed: {str(e)}")
+            logger.error(
+                f"Failed to retrieve chunks for question: {refined_output.original_question}"
+            )
+            raise RuntimeError(f"Chunk retrieval process failed: {str(e)}") from e
 
     @observe(name="generate_rag_response", as_type="generation")
     def _generate_rag_response(
@@ -949,7 +959,6 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"RAG Response generation failed: {str(e)}")
-            # Standardized technical issue; no second LLM call, no citations
             if self.langfuse_config.langfuse_client:
                 langfuse = self.langfuse_config.langfuse_client
                 langfuse.update_current_generation(
@@ -960,6 +969,7 @@ class LLMOrchestrationService:
                         "refinement_failed": False,
                     }
                 )
+            # Standardized technical issue; no second LLM call, no citations
             return OrchestrationResponse(
                 chatId=request.chatId,
                 llmServiceActive=False,
@@ -967,152 +977,3 @@ class LLMOrchestrationService:
                 inputGuardFailed=False,
                 content=TECHNICAL_ISSUE_MESSAGE,
             )
-
-    # ========================================================================
-    # Vector Indexer Support Methods (Isolated from RAG Pipeline)
-    # ========================================================================
-
-    def create_embeddings_for_indexer(
-        self,
-        texts: List[str],
-        environment: str = "production",
-        connection_id: Optional[str] = None,
-        batch_size: int = 50,
-    ) -> Dict[str, Any]:
-        """Create embeddings for vector indexer using vault-driven model resolution.
-
-        This method is completely isolated from the RAG pipeline and uses lazy
-        initialization to avoid interfering with the main orchestration flow.
-
-        Args:
-            texts: List of texts to embed
-            environment: Environment (production, development, test)
-            connection_id: Optional connection ID for dev/test environments
-            batch_size: Batch size for processing
-
-        Returns:
-            Dictionary with embeddings and metadata
-        """
-        logger.info(
-            f"Creating embeddings for vector indexer: {len(texts)} texts in {environment} environment"
-        )
-
-        try:
-            # Lazy initialization of embedding manager
-            embedding_manager = self._get_embedding_manager()
-
-            return embedding_manager.create_embeddings(
-                texts=texts,
-                environment=environment,
-                connection_id=connection_id,
-                batch_size=batch_size,
-            )
-        except Exception as e:
-            logger.error(f"Vector indexer embedding creation failed: {e}")
-            raise
-
-    def generate_context_for_chunks(
-        self, request: ContextGenerationRequest
-    ) -> Dict[str, Any]:
-        """Generate context for chunks using Anthropic methodology.
-
-        This method is completely isolated from the RAG pipeline and uses lazy
-        initialization to avoid interfering with the main orchestration flow.
-
-        Args:
-            request: Context generation request with document and chunk prompts
-
-        Returns:
-            Dictionary with generated context and metadata
-        """
-        logger.info("Generating context for chunks using Anthropic methodology")
-
-        try:
-            # Lazy initialization of context manager
-            context_manager = self._get_context_manager()
-
-            return context_manager.generate_context_with_caching(request)
-        except Exception as e:
-            logger.error(f"Vector indexer context generation failed: {e}")
-            raise
-
-    def get_available_embedding_models_for_indexer(
-        self, environment: str = "production"
-    ) -> Dict[str, Any]:
-        """Get available embedding models for vector indexer.
-
-        Args:
-            environment: Environment (production, development, test)
-
-        Returns:
-            Dictionary with available models and default model info
-        """
-        try:
-            # Lazy initialization of embedding manager
-            embedding_manager = self._get_embedding_manager()
-            config_loader = self._get_config_loader()
-
-            available_models: List[str] = embedding_manager.get_available_models(
-                environment
-            )
-
-            # Get default model by resolving what would be used
-            try:
-                provider_name, model_name = config_loader.resolve_embedding_model(
-                    environment
-                )
-                default_model: str = f"{provider_name}/{model_name}"
-            except Exception as e:
-                logger.warning(f"Could not resolve default embedding model: {e}")
-                default_model = "azure_openai/text-embedding-3-large"  # Fallback
-
-            return {
-                "available_models": available_models,
-                "default_model": default_model,
-                "environment": environment,
-            }
-        except Exception as e:
-            logger.error(f"Failed to get embedding models for vector indexer: {e}")
-            raise
-
-    # ========================================================================
-    # Lazy Initialization Helpers for Vector Indexer (Private Methods)
-    # ========================================================================
-
-    def _get_embedding_manager(self):
-        """Lazy initialization of EmbeddingManager for vector indexer."""
-        if not hasattr(self, "_embedding_manager"):
-            from src.llm_orchestrator_config.embedding_manager import EmbeddingManager
-            from src.llm_orchestrator_config.vault.vault_client import VaultAgentClient
-
-            vault_client = VaultAgentClient()
-            config_loader = self._get_config_loader()
-
-            self._embedding_manager = EmbeddingManager(vault_client, config_loader)
-            logger.debug("Lazy initialized EmbeddingManager for vector indexer")
-
-        return self._embedding_manager
-
-    def _get_context_manager(self):
-        """Lazy initialization of ContextGenerationManager for vector indexer."""
-        if not hasattr(self, "_context_manager"):
-            from src.llm_orchestrator_config.context_manager import (
-                ContextGenerationManager,
-            )
-
-            # Use existing LLM manager or create new one for context generation
-            llm_manager = LLMManager()
-            self._context_manager = ContextGenerationManager(llm_manager)
-            logger.debug("Lazy initialized ContextGenerationManager for vector indexer")
-
-        return self._context_manager
-
-    def _get_config_loader(self):
-        """Lazy initialization of ConfigurationLoader for vector indexer."""
-        if not hasattr(self, "_config_loader"):
-            from src.llm_orchestrator_config.config.loader import ConfigurationLoader
-
-            self._config_loader = ConfigurationLoader()
-            logger.debug("Lazy initialized ConfigurationLoader for vector indexer")
-
-        return self._config_loader
