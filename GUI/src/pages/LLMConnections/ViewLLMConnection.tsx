@@ -112,7 +112,42 @@ const ViewLLMConnection = () => {
   });
 
   const handleSubmit = async (data: LLMConnectionFormData) => {
-    updateConnectionMutation.mutate(data);
+    const isCurrentlyProduction = connectionData?.environment === 'production';
+    const isChangingToTesting = data.deploymentEnvironment === 'testing';
+    
+    if (isCurrentlyProduction && isChangingToTesting) {
+      openDialog({
+        title: 'Confirm Production Environment Change',
+        content: (
+          <div>
+            <p>You are about to change a <strong>production</strong> connection to <strong>testing</strong> environment.</p>
+            <p>This will affect the current production setup. Are you sure you want to proceed?</p>
+          </div>
+        ),
+        footer: (
+          <div className="button-wrapper">
+            <Button
+              appearance={ButtonAppearanceTypes.SECONDARY}
+              onClick={closeDialog}
+            >
+              Cancel
+            </Button>
+            <Button
+              appearance={ButtonAppearanceTypes.PRIMARY}
+              onClick={() => {
+                closeDialog();
+                updateConnectionMutation.mutate(data);
+              }}
+              showLoadingIcon={updateConnectionMutation.isLoading}
+            >
+              Yes, Change Environment
+            </Button>
+          </div>
+        ),
+      });
+    } else {
+      updateConnectionMutation.mutate(data);
+    }
   };
 
   const handleCancel = () => {
@@ -122,29 +157,51 @@ const ViewLLMConnection = () => {
 
 
   const handleDelete = () => {
-    openDialog({
-      title: 'Confirm Delete',
-      content: <p>Are you sure you want to delete this LLM connection? This action cannot be undone.</p>,
-      footer: (
-        <div className="button-wrapper">
+    const isProductionConnection = connectionData?.environment === 'production';
+    
+    if (isProductionConnection) {
+      openDialog({
+        title: 'Cannot Delete Production Connection',
+        content: (
+          <div>
+            <p>This LLM connection is currently set as the production connection and cannot be deleted.</p>
+            <p>To delete this connection, please ensure another connection is set as the production connection.</p>
+          </div>
+        ),
+        footer: (
           <Button
-            appearance={ButtonAppearanceTypes.SECONDARY}
+            appearance={ButtonAppearanceTypes.PRIMARY}
             onClick={closeDialog}
           >
-            Cancel
+            OK
           </Button>
-          <Button
-            appearance={ButtonAppearanceTypes.ERROR}
-            onClick={() => {
-              deleteConnectionMutation.mutate();
-            }}
-            showLoadingIcon={deleteConnectionMutation.isLoading}
-          >
-            Delete
-          </Button>
-        </div>
-      ),
-    });
+        ),
+      });
+    } else {
+      openDialog({
+        title: 'Confirm Delete',
+        content: <p>Are you sure you want to delete this LLM connection? This action cannot be undone.</p>,
+        footer: (
+          <div className="button-wrapper">
+            <Button
+              appearance={ButtonAppearanceTypes.SECONDARY}
+              onClick={closeDialog}
+            >
+              Cancel
+            </Button>
+            <Button
+              appearance={ButtonAppearanceTypes.ERROR}
+              onClick={() => {
+                deleteConnectionMutation.mutate();
+              }}
+              showLoadingIcon={deleteConnectionMutation.isLoading}
+            >
+              Delete
+            </Button>
+          </div>
+        ),
+      });
+    }
   };
 
   if (isLoading) {
@@ -179,6 +236,9 @@ const ViewLLMConnection = () => {
     embeddingModelPlatform: connectionData.embeddingPlatform,
     embeddingModel: connectionData.embeddingModel,
     monthlyBudget: connectionData.monthlyBudget.toString(),
+    warnBudget: connectionData.warnBudgetThreshold.toString(),
+    stopBudget: connectionData.disconnectOnBudgetExceed ? connectionData.stopBudgetThreshold.toString() : '0',
+    disconnectOnBudgetExceed: connectionData.disconnectOnBudgetExceed,
     deploymentEnvironment: connectionData.environment,
     // Azure credentials (don't show sensitive data, but include structure)
     deploymentName: connectionData.deploymentName || '',

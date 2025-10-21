@@ -2,7 +2,7 @@ import { forwardRef, InputHTMLAttributes, PropsWithChildren, useId } from 'react
 import clsx from 'clsx';
 import './FormInput.scss';
 import { DefaultTFuncReturn } from 'i18next';
-import { formatNumberWithCommas, removeCommasFromNumber } from 'utils/commonUtilts';
+import { formatNumberWithCommas, removeCommasFromNumber } from 'utils/commonUtils';
 
 type InputProps = PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> & {
   label: string;

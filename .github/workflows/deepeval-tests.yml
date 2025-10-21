@@ -151,7 +151,7 @@ jobs:
             echo "Total Tests: $total_tests"
             echo "Passed Tests: $passed_tests"
             echo "Pass Rate: $pass_rate%"
-            
+
             if (( $(echo "$pass_rate < 70" | bc -l) )); then
               echo "TEST FAILURE: Pass rate $pass_rate% is below threshold 70%"
               echo "RAG system performance is below acceptable standards."

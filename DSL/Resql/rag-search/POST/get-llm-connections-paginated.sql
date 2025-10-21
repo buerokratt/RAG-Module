@@ -6,20 +6,25 @@ SELECT
     embedding_platform,
     embedding_model,
     monthly_budget,
+    warn_budget_threshold,
+    stop_budget_threshold,
+    disconnect_on_budget_exceed,
     used_budget,
     environment,
     connection_status,
     created_at,
     CEIL(COUNT(*) OVER() / :page_size::DECIMAL) AS totalPages,
-    -- Calculate budget status based on usage percentage
+    -- Calculate budget status based on usage percentage and configured thresholds
     CASE 
-        WHEN used_budget IS NULL OR monthly_budget IS NULL OR monthly_budget = 0 THEN 'within_budget'
-        WHEN (used_budget::DECIMAL / monthly_budget::DECIMAL) >= 1.0 THEN 'over_budget'
-        WHEN (used_budget::DECIMAL / monthly_budget::DECIMAL) >= 0.8 THEN 'close_to_exceed'
+        WHEN used_budget IS NULL OR used_budget = 0 OR (used_budget::DECIMAL / monthly_budget::DECIMAL) < (warn_budget_threshold::DECIMAL / 100.0) THEN 'within_budget'
+        WHEN stop_budget_threshold != 0 AND (used_budget::DECIMAL / monthly_budget::DECIMAL) >= (stop_budget_threshold::DECIMAL / 100.0) THEN 'over_budget'
+        WHEN stop_budget_threshold = 0 AND (used_budget::DECIMAL / monthly_budget::DECIMAL) >= 1 THEN 'over_budget'
+        WHEN (used_budget::DECIMAL / monthly_budget::DECIMAL) >= (warn_budget_threshold::DECIMAL / 100.0) THEN 'close_to_exceed'
         ELSE 'within_budget'
     END AS budget_status
 FROM llm_connections
 WHERE connection_status <> 'deleted'
+    AND environment = 'testing'
     AND (:llm_platform IS NULL OR :llm_platform = '' OR llm_platform = :llm_platform)
     AND (:llm_model IS NULL OR :llm_model = '' OR llm_model = :llm_model)
     AND (:environment IS NULL OR :environment = '' OR environment = :environment)

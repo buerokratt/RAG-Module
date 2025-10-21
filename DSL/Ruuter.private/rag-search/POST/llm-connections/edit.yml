@@ -29,6 +29,15 @@ declaration:
       - field: monthly_budget
         type: number
         description: "Monthly budget amount"
+      - field: warn_budget_threshold
+        type: number
+        description: "Warn budget threshold percentage"
+      - field: stop_budget_threshold
+        type: number
+        description: "Stop budget threshold percentage"
+      - field: disconnect_on_budget_exceed
+        type: boolean
+        description: "Automatically disconnect when budget threshold is exceeded"
       - field: deployment_environment
         type: string
         description: "Deployment environment (Testing or Production)"
@@ -60,6 +69,9 @@ extract_request_data:
     embedding_platform: ${incoming.body.embedding_platform}
     embedding_model: ${incoming.body.embedding_model}
     monthly_budget: ${Number(incoming.body.monthly_budget)}
+    warn_budget_threshold: ${Number(incoming.body.warn_budget_threshold)}
+    stop_budget_threshold: ${Number(incoming.body.stop_budget_threshold)}
+    disconnect_on_budget_exceed: ${incoming.body.disconnect_on_budget_exceed}
     environment: ${incoming.body.deployment_environment}
     deployment_name: ${incoming.body.deployment_name || ""}
     target_uri: ${incoming.body.target_uri || ""}
@@ -103,6 +115,9 @@ update_llm_connection:
       embedding_platform: ${embedding_platform}
       embedding_model: ${embedding_model}
       monthly_budget: ${monthly_budget}
+      warn_budget_threshold: ${warn_budget_threshold}
+      stop_budget_threshold: ${stop_budget_threshold}
+      disconnect_on_budget_exceed: ${disconnect_on_budget_exceed}
       environment: ${environment}
       deployment_name: ${deployment_name}
       target_uri: ${target_uri}

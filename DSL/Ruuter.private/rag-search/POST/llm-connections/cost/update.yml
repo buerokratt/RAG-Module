@@ -1,0 +1,150 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Update used budget for an LLM connection"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+      - field: usage
+        type: number
+        description: "Usage amount to add to current used_budget"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+    usage: ${Number(incoming.body.usage)}
+  next: validate_request
+
+validate_request:
+  switch:
+    - condition: ${connection_id && usage >= 0}
+      next: check_connection_exists
+  next: return_bad_request
+
+check_connection_exists:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: existing_connection
+  next: validate_connection_exists
+
+validate_connection_exists:
+  switch:
+    - condition: "${existing_connection.response.body.length > 0}"
+      next: update_used_budget
+  next: return_not_found
+
+update_used_budget:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection-used-budget"
+    body:
+      connection_id: ${connection_id}
+      usage: ${usage}
+  result: update_result
+  next: check_update_status
+
+check_update_status:
+  switch:
+    - condition: ${200 <= update_result.response.statusCodeValue && update_result.response.statusCodeValue < 300}
+      next: check_budget_threshold
+  next: return_update_failed
+
+check_budget_threshold:
+  assign:
+    updated_connection: ${update_result.response.body[0]}
+    disconnect_flag: ${updated_connection.disconnectOnBudgetExceed}
+    monthly_budget: ${Number(updated_connection.monthlyBudget)}
+    used_budget: ${Number(updated_connection.usedBudget)}
+    stop_threshold: ${Number(updated_connection.stopBudgetThreshold)}
+    threshold_amount: ${(monthly_budget / 100) * stop_threshold}
+    should_deactivate: ${disconnect_flag && used_budget >= threshold_amount}
+  next: evaluate_deactivation
+
+evaluate_deactivation:
+  switch:
+    - condition: ${should_deactivate}
+      next: deactivate_connection
+  next: format_success_response
+
+deactivate_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/deactivate-llm-connection-budget-exceed"
+    body:
+      connection_id: ${connection_id}
+  result: deactivate_result
+  next: check_deactivate_status
+
+check_deactivate_status:
+  switch:
+    - condition: ${200 <= deactivate_result.response.statusCodeValue && deactivate_result.response.statusCodeValue < 300}
+      next: assignDisconnectResponse
+  next: format_success_response
+
+assignDisconnectResponse:
+    assign:
+      data_budget_exceeded: {
+        data: '${deactivate_result.response.body[0]}',
+      }
+    next: format_budget_exceeded_response
+
+format_budget_exceeded_response:
+  assign:
+    response_budget_exceeded: {
+      data: '${data_budget_exceeded.data}',
+      message: 'Used budget updated successfully. Connection deactivated due to budget threshold exceeded.',
+      budgetExceeded: true,
+      operationSuccess: true,
+      statusCode: 200
+    }
+  next: return_budget_exceeded
+
+format_success_response:
+  assign:
+    response_success: {
+      data: '${update_result.response.body[0]}',
+      budgetExceeded: false,
+      message: 'Used budget updated successfully',
+      operationSuccess: true,
+      statusCode: 200
+    }
+  next: return_success
+
+return_budget_exceeded:
+  return: ${response_budget_exceeded}
+  status: 200
+  next: end
+
+return_success:
+  return: ${response_success}
+  status: 200
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_bad_request:
+  status: 400
+  return: "error: connection_id and usage (>= 0) are required"
+  next: end
+
+return_update_failed:
+  status: 500
+  return: "error: failed to update used budget"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end

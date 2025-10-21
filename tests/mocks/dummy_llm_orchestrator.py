@@ -182,13 +182,14 @@ class DummyLLMOrchestrator:
     def _generate_with_anthropic(self, prompt: str) -> str:
         """Generate response using Anthropic Claude."""
         try:
-            response = self.client.messages.create(  # type: ignore
+            response = self.client.messages.create(
                 model="claude-3-7-sonnet-20250219",
                 max_tokens=1024,
                 temperature=0.7,
                 messages=[{"role": "user", "content": prompt}],
             )
-            return response.content[0].text  # type: ignore
+            text: str = response.content[0].text
+            return text
         except Exception as e:
             return f"Error generating response with Anthropic: {str(e)}"
 

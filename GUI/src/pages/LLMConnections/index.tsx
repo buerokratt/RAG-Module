@@ -2,17 +2,18 @@ import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, FormSelect } from 'components';
 import Pagination from 'components/molecules/Pagination';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { formattedArray } from 'utils/commonUtilts';
+import { formattedArray } from 'utils/commonUtils';
 import DataModelCard from 'components/molecules/LLMConnectionCard';
 import CircularSpinner from 'components/molecules/CircularSpinner/CircularSpinner';
 import { ButtonAppearanceTypes } from 'enums/commonEnums';
 import NoDataView from 'components/molecules/NoDataView';
+import BudgetBanner from 'components/molecules/BudgetBanner';
 import './LLMConnections.scss';
 import { platforms, trainingStatuses } from 'config/dataModelsConfig';
 import LLMConnectionCard from 'components/molecules/LLMConnectionCard';
-import { fetchLLMConnectionsPaginated, LLMConnectionFilters, LLMConnection } from 'services/llmConnections';
+import { fetchLLMConnectionsPaginated, LLMConnectionFilters, LLMConnection, getProductionConnection } from 'services/llmConnections';
 import { llmConnectionsQueryKeys } from 'utils/queryKeys';
 
 const LLMConnections: FC = () => {
@@ -34,6 +35,13 @@ const LLMConnections: FC = () => {
     queryFn: () => fetchLLMConnectionsPaginated(filters),
   });
 
+  // Fetch production connection separately
+  const { data: productionConnection, isLoading: isProductionLoading } = useQuery({
+    queryKey: llmConnectionsQueryKeys.production(),
+    queryFn: getProductionConnection,
+  });
+
+
   const llmConnections = connectionsResponse;
   const totalPages = connectionsResponse?.[0]?.totalPages || 1;
 
@@ -47,12 +55,12 @@ const LLMConnections: FC = () => {
     value: string | number | undefined | { name: string; id: string }
   ) => {
     let filterUpdate: Partial<LLMConnectionFilters> = {};
-    
+
     if (name === 'sorting') {
       // Handle sorting format - no conversion needed, use snake_case directly
       const sortingValue = value as string;
       const [sortBy, sortOrder] = sortingValue.split(' ');
-      
+
       filterUpdate = {
         sortBy: sortBy,
         sortOrder: sortOrder as 'asc' | 'desc'
@@ -65,7 +73,7 @@ const LLMConnections: FC = () => {
       ...prevFilters,
       ...filterUpdate,
     }));
-    
+
     // Reset to first page when filters change
     if (name !== 'pageNumber') {
       setPageIndex(1);
@@ -75,23 +83,17 @@ const LLMConnections: FC = () => {
   // Platform filter options
   const platformOptions = [
     { label: 'All Platforms', value: 'all' },
-    { label: 'OpenAI', value: 'openai' },
-    { label: 'Anthropic', value: 'anthropic' },
     { label: 'Azure OpenAI', value: 'azure' },
-    { label: 'Google AI', value: 'google' },
-    { label: 'AWS Bedrock', value: 'bedrock' },
-    { label: 'Hugging Face', value: 'huggingface' },
+    { label: 'AWS Bedrock', value: 'aws' },
   ];
 
   // LLM Model filter options - these would ideally come from an API
   const llmModelOptions = [
     { label: 'All Models', value: 'all' },
-    { label: 'GPT-4', value: 'gpt-4' },
-    { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
-    { label: 'GPT-3.5 Turbo', value: 'gpt-3.5-turbo' },
-    { label: 'Claude-3 Sonnet', value: 'claude-3-sonnet' },
-    { label: 'Claude-3 Haiku', value: 'claude-3-haiku' },
-    { label: 'Gemini Pro', value: 'gemini-pro' },
+    { label: 'GPT-4 Mini', value: 'gpt-4o-mini' },
+    { label: 'GPT-4o', value: 'gpt-4o' },
+    { label: 'Anthropic Claude 3.5 Sonnet', value: 'anthropic-claude-3.5-sonnet' },
+    { label: 'Anthropic Claude 3.7 Sonnet', value: 'anthropic-claude-3.7-sonnet' },
   ];
 
   // Environment filter options
@@ -99,7 +101,6 @@ const LLMConnections: FC = () => {
     { label: 'All Environments', value: 'all' },
     { label: 'Testing', value: 'testing' },
     { label: 'Production', value: 'production' },
-    { label: 'Development', value: 'development' },
   ];
 
   // Sort options - using snake_case format for backend
@@ -116,14 +117,13 @@ const LLMConnections: FC = () => {
 
   const currentSorting = `${filters.sortBy || 'created_at'} ${filters.sortOrder || 'desc'}`;
 
-  // Find featured connection (first active one)
-  const featuredConnection = llmConnections?.[0];
+  // Use production connection as featured connection
   const otherConnections = llmConnections || [];
 
   return (
     <div>
       <div className="container">
-        {!isModelDataLoading ? (
+        {!isModelDataLoading && !isProductionLoading ? (
           <div>
             <div>
               <div className="title_container">
@@ -202,19 +202,19 @@ const LLMConnections: FC = () => {
                 </div>
               </div>
 
-              {featuredConnection && (
+              {productionConnection && (
                 <div className="m-30-0">
                   <p>Production LLM Connection</p>
                   <div className="grid-container m-30-0">
                     <LLMConnectionCard
-                      key={featuredConnection.id}
-                      llmConnectionId={featuredConnection.id}
-                      llmConnectionName={`${featuredConnection.llmPlatform} - ${featuredConnection.llmModel}`}
-                      isActive={featuredConnection.status === 'active'}
-                      deploymentEnv={featuredConnection.environment}
-                      budgetStatus={featuredConnection.budgetStatus}
-                      platform={featuredConnection.llmPlatform}
-                      model={featuredConnection.llmModel}
+                      key={productionConnection.id}
+                      llmConnectionId={productionConnection.id}
+                      llmConnectionName={productionConnection.connectionName}
+                      isActive={productionConnection.connectionStatus === 'active'}
+                      deploymentEnv={productionConnection.environment}
+                      budgetStatus={productionConnection.budgetStatus}
+                      platform={productionConnection.llmPlatform}
+                      model={productionConnection.llmModel}
                     />
                   </div>
                 </div>
@@ -229,8 +229,8 @@ const LLMConnections: FC = () => {
                         <LLMConnectionCard
                           key={llmConnection.id}
                           llmConnectionId={llmConnection.id}
-                          llmConnectionName={`${llmConnection.llmPlatform} - ${llmConnection.llmModel}`}
-                          isActive={llmConnection.status === 'active'}
+                          llmConnectionName={llmConnection.connectionName}
+                          isActive={llmConnection.connectionStatus === 'active'}
                           deploymentEnv={llmConnection.environment}
                           budgetStatus={llmConnection.budgetStatus}
                           platform={llmConnection.llmPlatform}
@@ -240,7 +240,7 @@ const LLMConnections: FC = () => {
                     })}
                   </div>
                 </div>
-              ) : !featuredConnection ? (
+              ) : !productionConnection ? (
                 <NoDataView text={t('dataModels.noModels') ?? 'No LLM connections found'} />
               ) : null}
 

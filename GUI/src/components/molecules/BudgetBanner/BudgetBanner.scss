@@ -1,0 +1,64 @@
+.budget-banner {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid;
+
+    &__content {
+        display: flex;
+        align-items: center;
+
+    }
+
+    &__message {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+
+    &__description {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+
+    &--warning {
+        background-color: #fef3cd;
+        border-color: #b57c00;
+        color: #94690d;
+
+        .budget-banner__message {
+            color: #94690d;
+        }
+    }
+
+    &--error {
+        background-color: #ffeaeb;
+        border-color: #dc3545;
+        color: #721c24;
+
+        .budget-banner__message {
+            color: #721c24;
+        }
+    }
+
+    // Responsive design
+    @media (max-width: 768px) {
+        padding: 10px 12px;
+
+        &__content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        &__message {
+            font-size: 13px;
+        }
+    }
+}
+
+.m-3 {
+    margin-top: .75rem !important;
+}

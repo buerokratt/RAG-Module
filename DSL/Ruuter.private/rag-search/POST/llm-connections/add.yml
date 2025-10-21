@@ -26,6 +26,15 @@ declaration:
       - field: monthly_budget
         type: number
         description: "Monthly budget amount"
+      - field: warn_budget_threshold
+        type: number
+        description: "Warn budget threshold percentage"
+      - field: stop_budget_threshold
+        type: number
+        description: "Stop budget threshold percentage"
+      - field: disconnect_on_budget_exceed
+        type: boolean
+        description: "Automatically disconnect when budget threshold is exceeded"
       - field: deployment_environment
         type: string
         description: "Deployment environment (Testing or Production)"
@@ -59,6 +68,9 @@ extract_request_data:
     embedding_platform: ${incoming.body.embedding_platform}
     embedding_model: ${incoming.body.embedding_model}
     monthly_budget: ${incoming.body.monthly_budget}
+    warn_budget_threshold: ${incoming.body.warn_budget_threshold || 0}
+    stop_budget_threshold: ${incoming.body.stop_budget_threshold || 0}
+    disconnect_on_budget_exceed: ${incoming.body.disconnect_on_budget_exceed || false}
     deployment_environment: ${incoming.body.deployment_environment}
     deployment_name: ${incoming.body.deployment_name || ""}
     target_uri: ${incoming.body.target_uri || ""}
@@ -72,8 +84,37 @@ extract_request_data:
 validate_environment:
   switch:
     - condition: ${deployment_environment == "testing" || deployment_environment == "production"}
-      next: add_llm_connection
+      next: check_production_environment
   next: return_invalid_environment
+
+check_production_environment:
+  switch:
+    - condition: ${deployment_environment == "production"}
+      next: get_existing_production_connection
+  next: add_llm_connection
+
+get_existing_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection"
+  result: existing_production_result
+  next: update_existing_production_to_testing
+
+update_existing_production_to_testing:
+  switch:
+    - condition: ${existing_production_result.response.body && existing_production_result.response.body.length > 0}
+      next: update_production_connection
+  next: add_llm_connection
+
+update_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection-environment"
+    body:
+      connection_id: ${existing_production_result.response.body[0].id}
+      environment: "testing"
+  result: update_result
+  next: add_llm_connection
 
 add_llm_connection:
   call: http.post
@@ -86,6 +127,9 @@ add_llm_connection:
       embedding_platform: ${embedding_platform}
       embedding_model: ${embedding_model}
       monthly_budget: ${monthly_budget}
+      warn_budget_threshold: ${warn_budget_threshold}
+      stop_budget_threshold: ${stop_budget_threshold}
+      disconnect_on_budget_exceed: ${disconnect_on_budget_exceed}
       environment: ${deployment_environment}
       connection_status: "active"
       created_at: ${new Date().toISOString()}

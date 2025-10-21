@@ -10,14 +10,17 @@ CREATE TABLE llm_connections (
     embedding_platform VARCHAR(100) NOT NULL, -- e.g. Azure AI, OpenAI
     embedding_model VARCHAR(100) NOT NULL,    -- e.g. Ada-200-1
     
-    -- Budget and Environment
+    -- Budget and Usage Tracking
     monthly_budget NUMERIC(12,2) NOT NULL,    -- e.g. 1000.00
     used_budget NUMERIC(12,2) DEFAULT 0.00,  -- e.g. 250.00
-    environment VARCHAR(50) NOT NULL,
+    warn_budget_threshold NUMERIC(5) DEFAULT 80, -- percentage to warn at
+    stop_budget_threshold NUMERIC(5) DEFAULT 100, -- percentage to stop at
+    disconnect_on_budget_exceed BOOLEAN DEFAULT TRUE,
     
     -- Metadata
     connection_status VARCHAR(50) DEFAULT 'active',      -- active / inactive
     created_at TIMESTAMP DEFAULT NOW(),
+    environment VARCHAR(50) NOT NULL,
 
     -- Mocked Credentials and Access Info
     -- Azure

@@ -29,6 +29,8 @@ export const llmConnectionsQueryKeys = {
   paginatedList: (filters: LLMConnectionFilters) => [...llmConnectionsQueryKeys.paginatedLists(), filters] as const,
   details: () => [...llmConnectionsQueryKeys.all(), 'detail'] as const,
   detail: (id: string | number) => [...llmConnectionsQueryKeys.details(), id] as const,
+  budgetStatus: () => [...llmConnectionsQueryKeys.all(), 'budget-status'] as const,
+  production: () => [...llmConnectionsQueryKeys.all(), 'production'] as const,
 };
 
 export const inferenceQueryKeys = {
