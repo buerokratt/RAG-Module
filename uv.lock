@@ -1579,6 +1579,39 @@ name = "openai"
 version = "1.106.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d6/47/f9ee32467fe92744474a8c72e138113f3b529fc266eea76abfdec9a33f3b/ollama-0.6.0.tar.gz", hash = "sha256:da2b2d846b5944cfbcee1ca1e6ee0585f6c9d45a2fe9467cbcd096a37383da2f", size = 50811, upload-time = "2025-09-24T22:46:02.417Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b5/c1/edc9f41b425ca40b26b7c104c5f6841a4537bb2552bfa6ca66e81405bb95/ollama-0.6.0-py3-none-any.whl", hash = "sha256:534511b3ccea2dff419ae06c3b58d7f217c55be7897c8ce5868dfb6b219cf7a0", size = 14130, upload-time = "2025-09-24T22:46:01.19Z" },
+]
+
+[[package]]
+name = "onnxruntime"
+version = "1.23.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "coloredlogs" },
+    { name = "flatbuffers" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "protobuf" },
+    { name = "sympy" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fb/33/ec5395c9539423246e4976d6ec7c4e7a4624ad8bcbe783fea5c629d7980a/onnxruntime-1.23.0-cp312-cp312-macosx_13_0_arm64.whl", hash = "sha256:5921f2e106f5faf2b32095b2ecdfae047e445c3bce063e439dadc75c212e7be7", size = 17081368, upload-time = "2025-09-25T19:16:46.585Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/3c/d1976a9933e075291a3d67f4e949c667ff36a3e3a4a0cbd883af3c4eae5a/onnxruntime-1.23.0-cp312-cp312-macosx_13_0_x86_64.whl", hash = "sha256:053df2f9c6522b258055bce4b776aa9ea3adb4b28d2530ab07b204a3d4b04bf9", size = 19028636, upload-time = "2025-09-25T18:56:34.457Z" },
+    { url = "https://files.pythonhosted.org/packages/1a/1f/5b76864a970a23dc85f8745d045b81a9151aa101bbb426af6fa489f59364/onnxruntime-1.23.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:974e327ca3b6d43da404b9a45df1f61e2503667fde46843ee7ad1567a98f3f0b", size = 15140544, upload-time = "2025-09-25T18:56:15.9Z" },
+    { url = "https://files.pythonhosted.org/packages/0b/62/84f23952d01e07ce8aa02e657e3a0c8fa40aba0d5e11a0e9904a9063af76/onnxruntime-1.23.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:05f67edb93678cab5cd77eda89b65bb1b58f3d4c0742058742cfad8b172cfa83", size = 17274126, upload-time = "2025-09-25T19:16:11.21Z" },
+    { url = "https://files.pythonhosted.org/packages/19/90/d5b4ea0bd6805f3f21aac2fe549a5b58ee10d1c99c499d867539620a002b/onnxruntime-1.23.0-cp312-cp312-win_amd64.whl", hash = "sha256:e100f3869da4c12b17a9b942934a96a542406f860eb8beb74a68342ea43aaa55", size = 13392437, upload-time = "2025-09-25T19:16:36.066Z" },
+]
+
+[[package]]
+name = "openai"
+version = "1.106.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
     { name = "anyio" },
     { name = "distro" },
     { name = "httpx" },

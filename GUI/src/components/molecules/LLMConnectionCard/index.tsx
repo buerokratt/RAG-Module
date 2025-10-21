@@ -1,13 +1,17 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useState } from 'react';
 import Button from 'components/Button';
 import Label from 'components/Label';
 import { useDialog } from 'hooks/useDialog';
 import './LLMConnectionCard.scss';
 import { useTranslation } from 'react-i18next';
-import { formatDate } from 'utils/commonUtilts';
 import { useNavigate } from 'react-router-dom';
-import { pl } from 'date-fns/locale';
 import { Switch } from 'components/FormElements';
+import { updateLLMConnectionStatus } from 'services/llmConnections';
+import { useToast } from 'hooks/useToast';
+import { ToastTypes } from 'enums/commonEnums';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { llmConnectionsQueryKeys } from 'utils/queryKeys';
+import { AxiosError } from 'axios';
 
 type LLMConnectionCardProps = {
   llmConnectionId: number | string;
@@ -17,6 +21,7 @@ type LLMConnectionCardProps = {
   isActive?: boolean;
   deploymentEnv?: string;
   budgetStatus?: string;
+  onStatusChange?: (id: number | string, newStatus: boolean) => void;
 };
 
 const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
@@ -27,19 +32,69 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
   isActive,
   deploymentEnv,
   budgetStatus,
-
+  onStatusChange,
 }) => {
   const { open, close } = useDialog();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const updateStatusMutation = useMutation({
+    mutationFn: ({ id, status }: { id: string | number; status: 'active' | 'inactive' }) =>
+      updateLLMConnectionStatus(id, status),
+    onSuccess: async (data, variables) => {
+      // Invalidate queries to refresh the data
+      await queryClient.invalidateQueries({
+        queryKey: llmConnectionsQueryKeys.all()
+      });
+      
+      toast.open({
+        type: ToastTypes.SUCCESS,
+        title: t('toast.success.title'),
+        message: `Connection ${variables.status === 'active' ? 'activated' : 'deactivated'} successfully`,
+      });
+      
+      // Call the parent callback to update the list immediately
+      if (onStatusChange) {
+        onStatusChange(llmConnectionId, variables.status === 'active');
+      }
+    },
+    onError: (error: AxiosError) => {
+      console.error('Error updating connection status:', error);
+      toast.open({
+        type: ToastTypes.ERROR,
+        title: t('toast.error.title'),
+        message: 'Failed to update connection status',
+      });
+    },
+  });
+
+  const handleStatusChange = async (checked: boolean) => {
+    if (updateStatusMutation.isLoading) return;
+    
+    const newStatus = checked ? 'active' : 'inactive';
+    updateStatusMutation.mutate({
+      id: llmConnectionId,
+      status: newStatus
+    });
+  };
 
 
   const renderDeploymentEnv = (deploymentEnvironment: string | undefined) => {
-    return (
-        <Label type="success">
-          {deploymentEnvironment}
+    if (deploymentEnvironment === "testing") {
+      return (
+        <Label type="info">
+          testing
         </Label>
       );
+    } else if (deploymentEnvironment === "production") {
+      return (
+        <Label type="success">
+         production
+        </Label>
+      );
+    }
   };
 
   const renderBudgetStatus = (status: string | undefined) => {
@@ -71,8 +126,9 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
           <p>{llmConnectionName}</p>
           <Switch
             label=""
-            checked={false}
-            onCheckedChange={() => {}}
+            checked={isActive ?? false}
+            onCheckedChange={handleStatusChange}
+            disabled={updateStatusMutation.isLoading}
           />
         </div>
 

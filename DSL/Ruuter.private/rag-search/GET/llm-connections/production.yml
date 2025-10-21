@@ -1,0 +1,19 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get production LLM connection"
+  method: get
+  returns: json
+  namespace: rag-search
+
+get_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection"
+  result: connection_result
+  next: return_success
+
+return_success:
+  return: ${connection_result.response.body}
+  status: 200
+  next: end

@@ -112,3 +112,6 @@ export const formatNumberWithCommas = (value: string | number): string => {
 export const removeCommasFromNumber = (value: string): string => {
   return value.replace(/,/g, '');
 };
+
+export const toOptions = <T extends { label: string; value: string }>(data?: T[]) =>
+  data?.map(({ label, value }) => ({ label, value }));

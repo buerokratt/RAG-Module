@@ -1,9 +1,9 @@
 import BackArrowButton from "assets/BackArrowButton";
 import LLMConnectionForm, { LLMConnectionFormData } from "components/molecules/LLMConnectionForm";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { useDialog } from 'hooks/useDialog';
-import { createLLMConnection } from 'services/llmConnections';
+import { createLLMConnection, getProductionConnection } from 'services/llmConnections';
 import { llmConnectionsQueryKeys } from 'utils/queryKeys';
 import { ButtonAppearanceTypes } from 'enums/commonEnums';
 import { Button } from 'components';
@@ -12,6 +12,12 @@ const CreateLLMConnection = () => {
     const navigate = useNavigate();
     const { open: openDialog, close: closeDialog } = useDialog();
     const queryClient = useQueryClient();
+    
+    // Query to check for existing production connection
+    const { data: existingProductionConnection } = useQuery({
+      queryKey: ['production-connection'],
+      queryFn: getProductionConnection,
+    });
     
     const createConnectionMutation = useMutation({
       mutationFn: createLLMConnection,
@@ -54,7 +60,41 @@ const CreateLLMConnection = () => {
     });
     
     const handleSubmit = async (data: LLMConnectionFormData) => {
-      createConnectionMutation.mutate(data);
+      const isCreatingProductionConnection = data.deploymentEnvironment === 'production';
+      const hasExistingProductionConnection = existingProductionConnection && existingProductionConnection.id;
+      
+      if (isCreatingProductionConnection && hasExistingProductionConnection) {
+        openDialog({
+          title: 'Replace Production Connection',
+          content: (
+            <div>
+              <p>A production connection <strong>"{existingProductionConnection.connectionName}"</strong> already exists.</p>
+              <p>Creating this new production connection will replace the current one. Are you sure you want to proceed?</p>
+            </div>
+          ),
+          footer: (
+            <div className="button-wrapper">
+              <Button
+                appearance={ButtonAppearanceTypes.SECONDARY}
+                onClick={closeDialog}
+              >
+                Cancel
+              </Button>
+              <Button
+                appearance={ButtonAppearanceTypes.PRIMARY}
+                onClick={() => {
+                  createConnectionMutation.mutate(data);
+                }}
+                showLoadingIcon={createConnectionMutation.isLoading}
+              >
+                Yes, Replace Production Connection
+              </Button>
+            </div>
+          ),
+        });
+      } else {
+        createConnectionMutation.mutate(data);
+      }
     };
     
     const handleCancel = () => {

@@ -1,0 +1,91 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Update LLM connection status (active/inactive)"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+      - field: connection_status
+        type: string
+        description: "Connection status (active/inactive)"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+    connection_status: ${incoming.body.connection_status}
+  next: validate_request
+
+validate_request:
+  switch:
+    - condition: ${!connection_id || !connection_status}
+      next: return_bad_request
+    - condition: ${connection_status !== "active" && connection_status !== "inactive"}
+      next: return_invalid_status
+  next: check_connection_exists
+
+check_connection_exists:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: existing_connection
+  next: validate_connection_exists
+
+validate_connection_exists:
+  switch:
+    - condition: "${existing_connection.response.body.length > 0}"
+      next: update_connection_status
+  next: return_not_found
+
+update_connection_status:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection-status"
+    body:
+      connection_id: ${connection_id}
+      connection_status: ${connection_status}
+  result: update_result
+  next: check_update_status
+
+check_update_status:
+  switch:
+    - condition: ${200 <= update_result.response.statusCodeValue && update_result.response.statusCodeValue < 300}
+      next: return_success
+  next: return_update_failed
+
+return_success:
+  return: ${update_result.response.body[0]}
+  status: 200
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_bad_request:
+  status: 400
+  return: "error: connection_id and connection_status are required"
+  next: end
+
+return_invalid_status:
+  status: 400
+  return: "error: connection_status must be 'active' or 'inactive'"
+  next: end
+
+return_update_failed:
+  status: 500
+  return: "error: failed to update connection status"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end
