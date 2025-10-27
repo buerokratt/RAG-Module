@@ -71,7 +71,7 @@ class LLMOrchestrationService:
     def __init__(self) -> None:
         """Initialize the orchestration service."""
         self.langfuse_config = LangfuseConfig()
-        
+
     @observe(name="orchestration_request", as_type="agent")
     def process_orchestration_request(
         self, request: OrchestrationRequest
@@ -286,7 +286,7 @@ class LLMOrchestrationService:
                 logger.info(" Generator: BASE (no optimization)")
         except Exception as e:
             logger.warning(f" Generator: Status check failed - {str(e)}")
-    
+
     @observe(name="execute_orchestration_pipeline", as_type="span")
     def _execute_orchestration_pipeline(
         self,
@@ -351,7 +351,7 @@ class LLMOrchestrationService:
             logger.warning(f"Guardrails initialization failed: {str(guardrails_error)}")
             logger.warning("Continuing without guardrails protection")
             return None
-        
+
     @observe(name="safe_initialize_contextual_retriever", as_type="span")
     def _safe_initialize_contextual_retriever(
         self, environment: str, connection_id: Optional[str]
@@ -369,7 +369,7 @@ class LLMOrchestrationService:
             )
             logger.warning("Continuing without chunk retrieval capabilities")
             return None
-        
+
     @observe(name="safe_initialize_response_generator", as_type="span")
     def _safe_initialize_response_generator(
         self, llm_manager: LLMManager
@@ -527,6 +527,7 @@ class LLMOrchestrationService:
             inputGuardFailed=False,
             content=OUT_OF_SCOPE_MESSAGE,
         )
+
     @observe(name="initialize_guardrails", as_type="span")
     def _initialize_guardrails(
         self, environment: str, connection_id: Optional[str]
@@ -557,7 +558,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize Guardrails adapter: {str(e)}")
             raise
-        
+
     @observe(name="check_input_guardrails", as_type="span")
     def _check_input_guardrails(
         self,
@@ -769,7 +770,7 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.warning(f"Failed to log costs: {str(e)}")
-    
+
     @observe(name="initialize_llm_manager", as_type="span")
     def _initialize_llm_manager(
         self, environment: str, connection_id: Optional[str]
@@ -799,7 +800,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize LLM Manager: {str(e)}")
             raise
-        
+
     @observe(name="refine_user_prompt", as_type="chain")
     def _refine_user_prompt(
         self,
@@ -949,6 +950,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize contextual retriever: {str(e)}")
             raise
+
     @observe(name="initialize_response_generator", as_type="span")
     def _initialize_response_generator(
         self, llm_manager: LLMManager
@@ -975,7 +977,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize response generator: {str(e)}")
             raise
-        
+
     @observe(name="generate_rag_response", as_type="generation")
     def _generate_rag_response(
         self,
