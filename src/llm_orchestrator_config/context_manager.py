@@ -6,7 +6,7 @@ from loguru import logger
 
 from src.llm_orchestrator_config.llm_manager import LLMManager
 from src.models.request_models import ContextGenerationRequest
-
+from langfuse import observe
 
 class ContextGenerationManager:
     """Manager for context generation with Anthropic methodology."""
@@ -29,7 +29,7 @@ Answer only with the succinct context and nothing else."""
         self.llm_manager = llm_manager
         # Cache structure prepared for future prompt caching implementation
         self._cache: Dict[str, Any] = {}
-
+    @observe(name="generate_context_with_caching", as_type="generation")
     def generate_context_with_caching(
         self, request: ContextGenerationRequest
     ) -> Dict[str, Any]:

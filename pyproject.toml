@@ -34,6 +34,7 @@ dependencies = [
     "anthropic>=0.69.0",
     "nemoguardrails>=0.16.0",
     "tiktoken>=0.11.0",
+    "langfuse>=3.8.1",
 ]
 
 [tool.pyright]

@@ -14,7 +14,7 @@ from typing import List, Dict, Any, Optional, Union, TYPE_CHECKING
 from loguru import logger
 import asyncio
 import time
-
+from langfuse import observe
 from contextual_retrieval.config import ConfigLoader, ContextualRetrievalConfig
 
 # Type checking import to avoid circular dependency at runtime
@@ -126,6 +126,7 @@ class ContextualRetriever:
             logger.debug("Clearing session LLM service cache")
             self._session_llm_service = None
 
+    @observe(name="retrieve_contextual_chunks", as_type="retriever")
     async def retrieve_contextual_chunks(
         self,
         original_question: str,

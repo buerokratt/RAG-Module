@@ -5,6 +5,7 @@ import json
 import asyncio
 import os
 from loguru import logger
+from langfuse import Langfuse, observe
 
 from llm_orchestrator_config.llm_manager import LLMManager
 from models.request_models import (
@@ -28,6 +29,36 @@ from src.guardrails import NeMoRailsAdapter, GuardrailCheckResult
 from src.contextual_retrieval import ContextualRetriever
 
 
+class LangfuseConfig:
+    """Configuration for Langfuse integration."""
+
+    def __init__(self):
+        self.langfuse_client: Optional[Langfuse] = None
+        self._initialize_langfuse()
+
+    def _initialize_langfuse(self):
+        """Initialize Langfuse client with Vault secrets."""
+        try:
+            from llm_orchestrator_config.vault.vault_client import VaultAgentClient
+
+            vault = VaultAgentClient()
+            if vault.is_vault_available():
+                langfuse_secrets = vault.get_secret("langfuse/config")
+                if langfuse_secrets:
+                    self.langfuse_client = Langfuse(
+                        public_key=langfuse_secrets.get("public_key"),
+                        secret_key=langfuse_secrets.get("secret_key"),
+                        host=langfuse_secrets.get("host", "http://langfuse-web:3000"),
+                    )
+                    logger.info("Langfuse client initialized successfully")
+                else:
+                    logger.warning("Langfuse secrets not found in Vault")
+            else:
+                logger.warning("Vault not available, Langfuse tracing disabled")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Langfuse: {e}")
+
+
 class LLMOrchestrationService:
     """
     Service class for handling LLM orchestration with integrated guardrails.
@@ -39,8 +70,9 @@ class LLMOrchestrationService:
 
     def __init__(self) -> None:
         """Initialize the orchestration service."""
-        pass
-
+        self.langfuse_config = LangfuseConfig()
+        
+    @observe(name="orchestration_request", as_type="agent")
     def process_orchestration_request(
         self, request: OrchestrationRequest
     ) -> Union[OrchestrationResponse, TestOrchestrationResponse]:
@@ -82,6 +114,38 @@ class LLMOrchestrationService:
 
             # Log final costs and return response
             self._log_costs(costs_dict)
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                total_costs = calculate_total_costs(costs_dict)
+
+                total_input_tokens = sum(
+                    c.get("total_prompt_tokens", 0) for c in costs_dict.values()
+                )
+                total_output_tokens = sum(
+                    c.get("total_completion_tokens", 0) for c in costs_dict.values()
+                )
+
+                langfuse.update_current_generation(
+                    model=components["llm_manager"]
+                    .get_provider_info()
+                    .get("model", "unknown"),
+                    usage_details={
+                        "input": total_input_tokens,
+                        "output": total_output_tokens,
+                        "total": total_costs.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": total_costs.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "total_calls": total_costs.get("total_calls", 0),
+                        "cost_breakdown": costs_dict,
+                        "chat_id": request.chatId,
+                        "author_id": request.authorId,
+                        "environment": request.environment,
+                    },
+                )
+                langfuse.flush()
             return response
 
         except Exception as e:
@@ -89,9 +153,20 @@ class LLMOrchestrationService:
                 f"Error processing orchestration request for chatId: {request.chatId}, "
                 f"error: {str(e)}"
             )
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "response_type": "technical_issue",
+                    }
+                )
+                langfuse.flush()
             self._log_costs(costs_dict)
             return self._create_error_response(request)
 
+    @observe(name="initialize_service_components", as_type="span")
     def _initialize_service_components(
         self, request: OrchestrationRequest
     ) -> Dict[str, Any]:
@@ -211,7 +286,8 @@ class LLMOrchestrationService:
                 logger.info(" Generator: BASE (no optimization)")
         except Exception as e:
             logger.warning(f" Generator: Status check failed - {str(e)}")
-
+    
+    @observe(name="execute_orchestration_pipeline", as_type="span")
     def _execute_orchestration_pipeline(
         self,
         request: OrchestrationRequest,
@@ -262,6 +338,7 @@ class LLMOrchestrationService:
             components["guardrails_adapter"], generated_response, request, costs_dict
         )
 
+    @observe(name="safe_initialize_guardrails", as_type="span")
     def _safe_initialize_guardrails(
         self, environment: str, connection_id: Optional[str]
     ) -> Optional[NeMoRailsAdapter]:
@@ -274,7 +351,8 @@ class LLMOrchestrationService:
             logger.warning(f"Guardrails initialization failed: {str(guardrails_error)}")
             logger.warning("Continuing without guardrails protection")
             return None
-
+        
+    @observe(name="safe_initialize_contextual_retriever", as_type="span")
     def _safe_initialize_contextual_retriever(
         self, environment: str, connection_id: Optional[str]
     ) -> Optional[ContextualRetriever]:
@@ -291,7 +369,8 @@ class LLMOrchestrationService:
             )
             logger.warning("Continuing without chunk retrieval capabilities")
             return None
-
+        
+    @observe(name="safe_initialize_response_generator", as_type="span")
     def _safe_initialize_response_generator(
         self, llm_manager: LLMManager
     ) -> Optional[ResponseGeneratorAgent]:
@@ -448,7 +527,7 @@ class LLMOrchestrationService:
             inputGuardFailed=False,
             content=OUT_OF_SCOPE_MESSAGE,
         )
-
+    @observe(name="initialize_guardrails", as_type="span")
     def _initialize_guardrails(
         self, environment: str, connection_id: Optional[str]
     ) -> NeMoRailsAdapter:
@@ -478,7 +557,8 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize Guardrails adapter: {str(e)}")
             raise
-
+        
+    @observe(name="check_input_guardrails", as_type="span")
     def _check_input_guardrails(
         self,
         guardrails_adapter: NeMoRailsAdapter,
@@ -503,7 +583,26 @@ class LLMOrchestrationService:
 
             # Store guardrail costs
             costs_dict["input_guardrails"] = result.usage
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    input=user_message,
+                    metadata={
+                        "guardrail_type": "input",
+                        "allowed": result.allowed,
+                        "verdict": result.verdict,
+                        "blocked_reason": result.reason if not result.allowed else None,
+                        "error": result.error if result.error else None,
+                    },
+                    usage_details={
+                        "input": result.usage.get("total_prompt_tokens", 0),
+                        "output": result.usage.get("total_completion_tokens", 0),
+                        "total": result.usage.get("total_tokens", 0),
+                    },  # type: ignore
+                    cost_details={
+                        "total": result.usage.get("total_cost", 0.0),
+                    },
+                )
             logger.info(
                 f"Input guardrails check completed: allowed={result.allowed}, "
                 f"cost=${result.usage.get('total_cost', 0):.6f}"
@@ -513,6 +612,15 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"Input guardrails check failed: {str(e)}")
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "guardrail_type": "input",
+                    }
+                )
             # Return conservative result on error
             return GuardrailCheckResult(
                 allowed=False,
@@ -522,6 +630,7 @@ class LLMOrchestrationService:
                 usage={},
             )
 
+    @observe(name="check_output_guardrails", as_type="span")
     def _check_output_guardrails(
         self,
         guardrails_adapter: NeMoRailsAdapter,
@@ -546,7 +655,28 @@ class LLMOrchestrationService:
 
             # Store guardrail costs
             costs_dict["output_guardrails"] = result.usage
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    input=assistant_message[:500],  # Truncate for readability
+                    output=result.verdict,
+                    metadata={
+                        "guardrail_type": "output",
+                        "allowed": result.allowed,
+                        "verdict": result.verdict,
+                        "reason": result.reason if not result.allowed else None,
+                        "error": result.error if result.error else None,
+                        "response_length": len(assistant_message),
+                    },
+                    usage_details={
+                        "input": result.usage.get("total_prompt_tokens", 0),
+                        "output": result.usage.get("total_completion_tokens", 0),
+                        "total": result.usage.get("total_tokens", 0),
+                    },  # type: ignore
+                    cost_details={
+                        "total": result.usage.get("total_cost", 0.0),
+                    },
+                )
             logger.info(
                 f"Output guardrails check completed: allowed={result.allowed}, "
                 f"cost=${result.usage.get('total_cost', 0):.6f}"
@@ -556,6 +686,15 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"Output guardrails check failed: {str(e)}")
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "guardrail_type": "output",
+                    }
+                )
             # Return conservative result on error
             return GuardrailCheckResult(
                 allowed=False,
@@ -630,7 +769,8 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.warning(f"Failed to log costs: {str(e)}")
-
+    
+    @observe(name="initialize_llm_manager", as_type="span")
     def _initialize_llm_manager(
         self, environment: str, connection_id: Optional[str]
     ) -> LLMManager:
@@ -659,7 +799,8 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize LLM Manager: {str(e)}")
             raise
-
+        
+    @observe(name="refine_user_prompt", as_type="chain")
     def _refine_user_prompt(
         self,
         llm_manager: LLMManager,
@@ -725,7 +866,32 @@ class LLMOrchestrationService:
                 raise ValueError(
                     f"Prompt refinement validation failed: {str(validation_error)}"
                 ) from validation_error
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                refinement_applied = (
+                    original_message.strip()
+                    != validated_output.original_question.strip()
+                )
+                langfuse.update_current_generation(
+                    model=llm_manager.get_provider_info().get("model", "unknown"),
+                    input=original_message,
+                    usage_details={
+                        "input": usage_info.get("total_prompt_tokens", 0),
+                        "output": usage_info.get("total_completion_tokens", 0),
+                        "total": usage_info.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": usage_info.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "num_calls": usage_info.get("num_calls", 0),
+                        "num_refined_questions": len(
+                            validated_output.refined_questions
+                        ),
+                        "refinement_applied": refinement_applied,
+                        "conversation_history_length": len(history),
+                    },  # type: ignore
+                )
             output_json = validated_output.model_dump()
             logger.info(
                 f"Prompt refinement output: {json.dumps(output_json, indent=2)}"
@@ -738,9 +904,19 @@ class LLMOrchestrationService:
             raise
         except Exception as e:
             logger.error(f"Prompt refinement failed: {str(e)}")
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "refinement_failed": True,
+                    }
+                )
             logger.error(f"Failed to refine message: {original_message}")
             raise RuntimeError(f"Prompt refinement process failed: {str(e)}") from e
 
+    @observe(name="initialize_contextual_retriever", as_type="span")
     def _initialize_contextual_retriever(
         self, environment: str, connection_id: Optional[str]
     ) -> ContextualRetriever:
@@ -773,7 +949,7 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize contextual retriever: {str(e)}")
             raise
-
+    @observe(name="initialize_response_generator", as_type="span")
     def _initialize_response_generator(
         self, llm_manager: LLMManager
     ) -> ResponseGeneratorAgent:
@@ -799,7 +975,8 @@ class LLMOrchestrationService:
         except Exception as e:
             logger.error(f"Failed to initialize response generator: {str(e)}")
             raise
-
+        
+    @observe(name="generate_rag_response", as_type="generation")
     def _generate_rag_response(
         self,
         llm_manager: LLMManager,
@@ -867,7 +1044,27 @@ class LLMOrchestrationService:
                 },
             )
             costs_dict["response_generator"] = generator_usage
-
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    model=llm_manager.get_provider_info().get("model", "unknown"),
+                    usage_details={
+                        "input": generator_usage.get("total_prompt_tokens", 0),
+                        "output": generator_usage.get("total_completion_tokens", 0),
+                        "total": generator_usage.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": generator_usage.get("total_cost", 0.0),
+                    },
+                    metadata={
+                        "num_calls": generator_usage.get("num_calls", 0),
+                        "question_out_of_scope": question_out_of_scope,
+                        "num_chunks_used": len(relevant_chunks)
+                        if relevant_chunks
+                        else 0,
+                    },
+                    output=answer,
+                )
             if question_out_of_scope:
                 logger.info("Question determined out-of-scope – sending fixed message.")
                 if request.environment == "test":
@@ -910,6 +1107,16 @@ class LLMOrchestrationService:
 
         except Exception as e:
             logger.error(f"RAG Response generation failed: {str(e)}")
+            if self.langfuse_config.langfuse_client:
+                langfuse = self.langfuse_config.langfuse_client
+                langfuse.update_current_generation(
+                    metadata={
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "response_type": "technical_issue",
+                        "refinement_failed": False,
+                    }
+                )
             # Standardized technical issue; no second LLM call, no citations
             if request.environment == "test":
                 logger.info(
@@ -933,7 +1140,7 @@ class LLMOrchestrationService:
     # ========================================================================
     # Vector Indexer Support Methods (Isolated from RAG Pipeline)
     # ========================================================================
-
+    @observe(name="create_embeddings_for_indexer", as_type="span")
     def create_embeddings_for_indexer(
         self,
         texts: List[str],
