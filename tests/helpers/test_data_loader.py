@@ -27,7 +27,7 @@ def load_test_data_into_qdrant(
             f"{orchestration_url}/embeddings",
             json={
                 "texts": texts,
-                "environment": "test",  # ← MUST be "test"
+                "environment": "development",  # ← MUST be "development"
                 "connection_id": "evalconnection-1",  # ← MUST match Vault
                 "batch_size": 50,
             },

@@ -141,7 +141,7 @@ class TestRAGSystem:
             "authorId": "deepeval-tester",
             "conversationHistory": [],
             "url": "https://test.example.com",
-            "environment": "test",
+            "environment": "development",
             "connection_id": "evalconnection-1",
         }
 
