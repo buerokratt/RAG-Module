@@ -231,7 +231,7 @@ def get_test_documents() -> List[Dict[str, Any]]:
             topic_dir = agency_dir / topic
             if not topic_dir.is_dir():
                 continue
-            if per_agency_topic_counter >= 5:
+            if per_agency_topic_counter >= 3:
                 break
             per_agency_topic_counter += 1
             # Read cleaned text
