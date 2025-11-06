@@ -208,56 +208,112 @@ def _determine_collection_from_model(model_name: str) -> str:
 
 
 def get_test_documents() -> List[Dict[str, Any]]:
-    """
-    Get test documents in contextual retrieval format.
-    """
-    contexts: List[dict[str, Any]] = []
+    """Get test documents in contextual retrieval format."""
     
-    # Get absolute path to data directory
-    current_file = Path(__file__)  # tests/helpers/test_data_loader.py
-    project_root = current_file.parent.parent.parent  # Go up to project root
-    data_dir = project_root / "tests" / "data" / "agencies_data"
+    # Get path to tests/data/agencies_data
+    current_file = Path(__file__)
+    tests_dir = current_file.parent.parent
+    data_dir = tests_dir / "data" / "agencies_data"
     
-    # Check if directory exists
     if not data_dir.exists():
         logger.error(f"Data directory not found: {data_dir}")
         raise FileNotFoundError(f"Data directory not found: {data_dir}")
     
-    i = 0
-    for i, agency in enumerate(os.listdir(data_dir)):
+    contexts: List[dict[str, Any]] = []
+    doc_counter = 0
+    
+    for agency in os.listdir(data_dir):
         agency_dir = data_dir / agency
-        for _, topic in enumerate(os.listdir(agency_dir)):
+        if not agency_dir.is_dir():
+            continue
+            
+        for topic in os.listdir(agency_dir):
             topic_dir = agency_dir / topic
+            if not topic_dir.is_dir():
+                continue
             
             # Read cleaned text
             cleaned_file = topic_dir / "cleaned.txt"
-            with open(cleaned_file, "r") as f:
-                context_temp = f.read().strip().split("\n\n\n")
-            
-            current_contexts = [
-                context.replace("\n\n", "\n") for context in context_temp
-            ]
+            if not cleaned_file.exists():
+                logger.warning(f"Skipping {cleaned_file} - file not found")
+                continue
+                
+            with open(cleaned_file, "r", encoding="utf-8") as f:
+                content = f.read().strip()
             
             # Read metadata
             meta_file = topic_dir / "cleaned.meta.json"
-            with open(meta_file, "r") as f:
-                metadata = json.load(f)
+            if meta_file.exists():
+                with open(meta_file, "r", encoding="utf-8") as f:
+                    metadata = json.load(f)
+            else:
+                metadata = {}
             
-            for k, context in enumerate(current_contexts):
+            # Split into chunks (split by \n\n\n or limit by character count)
+            raw_chunks = content.split("\n\n\n")
+            
+            for chunk_idx, raw_chunk in enumerate(raw_chunks):
+                # Clean the chunk
+                chunk_text = raw_chunk.replace("\n\n", "\n").strip()
+                
+                # Skip empty chunks
+                if not chunk_text or len(chunk_text) < 10:
+                    continue
+                
+                # Limit chunk size (rough estimate: 1 token ≈ 4 chars)
+                # Max 8000 tokens = ~32000 chars, but be conservative
+                MAX_CHUNK_SIZE = 20000
+                if len(chunk_text) > MAX_CHUNK_SIZE:
+                    logger.warning(f"Chunk too long ({len(chunk_text)} chars), truncating")
+                    chunk_text = chunk_text[:MAX_CHUNK_SIZE]
+                
+                # Clean up navigation artifacts and dates
+                # Remove common noise patterns
+                chunk_text = _clean_chunk_text(chunk_text)
+                
+                if len(chunk_text) < 10:  # Skip if too short after cleaning
+                    continue
+                
                 context_dict = {
-                    "chunk_id": f"test_doc_{i:03d}_chunk_{k:03d}",
-                    "document_hash": f"test_doc_{i:03d}",
-                    "chunk_index": k,
-                    "original_content": context,
-                    "context": context,
-                    "contextual_content": context,
+                    "chunk_id": f"test_doc_{doc_counter:03d}_chunk_{chunk_idx:03d}",
+                    "document_hash": f"test_doc_{doc_counter:03d}",
+                    "chunk_index": chunk_idx,
+                    "original_content": chunk_text,
+                    "context": f"This is a document about {agency} - {topic}",
+                    "contextual_content": f"This is a document about {agency} - {topic}\n\n{chunk_text}",
                     "metadata": {
-                        "category": metadata.get(agency, "general"),
+                        "category": metadata.get(agency, agency),
                         "language": "et",
-                        "source": metadata.get("source_url", "unknown"),
+                        "source": metadata.get("source_url", f"{agency}/{topic}"),
+                        "agency": agency,
+                        "topic": topic,
                     },
                 }
                 contexts.append(context_dict)
-                i += 1
-
+            
+            doc_counter += 1
+    
+    logger.info(f"Loaded {len(contexts)} test document chunks from {doc_counter} documents")
     return contexts
+
+
+def _clean_chunk_text(text: str) -> str:
+    """Clean chunk text to remove navigation elements and artifacts."""
+    import re
+    
+    # Remove date patterns like "10.07.2025 11:22"
+    text = re.sub(r'\d{2}\.\d{2}\.\d{4}\s+\d{2}:\d{2}', '', text)
+    
+    # Remove pagination (1\n2\n3\n...)
+    text = re.sub(r'(?:\d+\n){3,}', '', text)
+    
+
+    
+    # Remove multiple consecutive newlines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    
+    # Remove leading/trailing whitespace
+    text = text.strip()
+    
+    return text
+    
