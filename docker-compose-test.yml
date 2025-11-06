@@ -253,7 +253,6 @@ services:
     ports:
       - "8100:8100"
     environment:
-      - ENVIRONMENT=test
       - VAULT_ADDR=http://vault:8200
       - VAULT_TOKEN_FILE=/agent/out/token
       - QDRANT_URL=http://qdrant:6333
