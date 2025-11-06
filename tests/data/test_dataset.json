@@ -179,5 +179,293 @@
         ],
         "category": "health_cooperation",
         "language": "ru"
+    },
+    {
+        "input": "How can I use my ID-card to sign documents on my phone without a card reader?",
+        "expected_output": "You can sign documents on your phone with an ID-card without a card reader by using NFC (Near Field Communication). You need the RIA DigiDoc mobile application and an ID-card that supports NFC functionality.",
+        "retrieval_context": [
+            "Did you know that you can sign documents on your phone with an ID card without a card reader, i.e. using NFC? All you need is the RIA DigiDoc mobile app and an ID card."
+        ],
+        "category": "id_card_usage",
+        "language": "en"
+    },
+    {
+        "input": "Kuidas saan telefonis dokumente allkirjastada ID-kaardiga ilma kaardilugejata?",
+        "expected_output": "Saad telefonis dokumente allkirjastada ID-kaardiga ilma kaardilugejata NFC abil. Selleks vajad RIA DigiDoc mobiilirakendust ja ID-kaarti, mis toetab NFC funktsionaalsust.",
+        "retrieval_context": [
+            "Kas teadsid, et ID-kaardiga on telefonis võimalik dokumente allkirjastada ka ilma kaardilugejata ehk NFC abil? Allkirjastamiseks vajad vaid RIA DigiDoc mobiilirakendust ja ID-kaarti."
+        ],
+        "category": "id_card_usage",
+        "language": "et"
+    },
+    {
+        "input": "Как я могу подписывать документы на телефоне с ID-картой без считывателя карт?",
+        "expected_output": "Вы можете подписывать документы на телефоне с ID-картой без считывателя карт, используя NFC (беспроводную связь ближнего радиуса действия). Для этого вам нужно мобильное приложение RIA DigiDoc и ID-карта с поддержкой NFC.",
+        "retrieval_context": [
+            "Did you know that you can sign documents on your phone with an ID card without a card reader, i.e. using NFC? All you need is the RIA DigiDoc mobile app and an ID card."
+        ],
+        "category": "id_card_usage",
+        "language": "ru"
+    },
+    {
+        "input": "What is the difference between Mobile-ID and Smart-ID?",
+        "expected_output": "Mobile-ID is SIM card-based and works on devices where the SIM card is located, requiring a special SIM card from mobile operators with a monthly fee (typically 1 euro). Smart-ID is a mobile app that works independently of SIM cards, is free to use, and can be installed on any smart device with internet connection.",
+        "retrieval_context": [
+            "Mobile-ID is SIM card-based and works on devices where the SIM card is located and can be transferred from one device to another. Smart-ID is a mobile app and works independently of SIM cards on the device where it is installed.",
+            "Mobile-ID monthly fee is usually 1 euro. Smart-ID application download and use is free for everyone."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Mis vahe on Mobiil-ID ja Smart-ID vahel?",
+        "expected_output": "Mobiil-ID on SIM-kaardipõhine ja töötab nutiseadmes, kus SIM-kaart asub, vajades mobiilioperaatori spetsiaalset SIM-kaarti ja kuutasu (tavaliselt 1 euro). Smart-ID on mobiiliäpp, mis töötab SIM-kaardist sõltumatult, on tasuta kasutada ja seda saab installida igasse nutiseadmesse internetiühendusega.",
+        "retrieval_context": [
+            "Mobiil-ID on SIM-kaardipõhine ja töötab nutiseadmes, kus SIM-kaart asub ja seda saab teisaldada ühest nutiseadmest teise. Smart-ID on mobiiliäpp ja see töötab SIM-kaardist sõltumata nutiseadmes, kuhu see on installeeritud.",
+            "Mobiil-ID kuutasu on tavaliselt 1 euro. Smart-ID rakenduse allalaadimine ja kasutamine on kõigile tasuta."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "В чем разница между Mobiil-ID и Smart-ID?",
+        "expected_output": "Mobiil-ID основан на SIM-карте и работает на устройстве, где находится SIM-карта, требуя специальной SIM-карты от мобильного оператора с ежемесячной платой (обычно 1 евро). Smart-ID - это мобильное приложение, которое работает независимо от SIM-карт, бесплатно в использовании и может быть установлено на любое умное устройство с интернет-соединением.",
+        "retrieval_context": [
+            "Mobile-ID is SIM card-based and works on devices where the SIM card is located. Smart-ID is a mobile app and works independently of SIM cards on the device where it is installed.",
+            "Mobile-ID monthly fee is usually 1 euro. Smart-ID application download and use is free for everyone."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "How long are Mobile-ID certificates valid?",
+        "expected_output": "Mobile-ID certificates are valid for 5 years and are issued together with the Mobile-ID SIM card. Certificates cannot be renewed - when they expire, you must contact your mobile operator to replace the Mobile-ID SIM card and reactivate Mobile-ID.",
+        "retrieval_context": [
+            "Mobile-ID certificates are valid for 5 years and are issued together with the Mobile-ID SIM card.",
+            "Mobile-ID certificates cannot be renewed. When certificates expire, you must contact your mobile operator to replace the Mobile-ID SIM card and reactivate Mobile-ID."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Kui kaua kehtivad Mobiil-ID sertifikaadid?",
+        "expected_output": "Mobiil-ID sertifikaadid kehtivad 5 aastat ja need väljastatakse koos Mobiil-ID SIM-kaardiga. Sertifikaate ei saa uuendada - nende aegumisel tuleb pöörduda mobiilioperaatori poole ning Mobiil-ID SIM-kaart välja vahetada ja Mobiil-ID uuesti aktiveerida.",
+        "retrieval_context": [
+            "Mobiil-ID sertifikaadid kehtivad 5 aastat ja need väljastatakse koos mobiil-ID SIM-kaardiga.",
+            "Mobiil-ID sertifikaate ei saa uuendada. Sertifikaatide aegumisel tuleb pöörduda oma mobiilsideoperaatori poole ning mobiil-ID SIM-kaart välja vahetada ja mobiil-ID uuesti aktiveerida."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Как долго действительны сертификаты Mobiil-ID?",
+        "expected_output": "Сертификаты Mobiil-ID действительны в течение 5 лет и выдаются вместе с SIM-картой Mobiil-ID. Сертификаты нельзя обновить - при истечении срока действия необходимо обратиться к мобильному оператору для замены SIM-карты Mobiil-ID и повторной активации Mobiil-ID.",
+        "retrieval_context": [
+            "Mobile-ID certificates are valid for 5 years and are issued together with the Mobile-ID SIM card.",
+            "Mobile-ID certificates cannot be renewed. When certificates expire, you must contact your mobile operator to replace the Mobile-ID SIM card and reactivate Mobile-ID."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "What should I do if my phone with Smart-ID is stolen?",
+        "expected_output": "If your phone with Smart-ID is stolen, you should immediately log into the Smart-ID self-service portal and delete your account. To access the portal, you need to use your ID-card or Mobile-ID for authentication.",
+        "retrieval_context": [
+            "If your phone is stolen, the first thing you should do is log into the Smart-ID self-service portal and delete your account. You need to use ID-card or Mobile-ID to access the portal."
+        ],
+        "category": "digital_identity_security",
+        "language": "en"
+    },
+    {
+        "input": "Mida teha, kui telefon Smart-ID-ga varastatakse?",
+        "expected_output": "Kui telefon Smart-ID-ga varastatakse, peaks kõige esimese asjana sisse logima Smart-ID iseteenindusportaali ja oma konto kustutama. Portaali sisenemiseks tuleb kasutada ID-kaarti või Mobiil-ID-d.",
+        "retrieval_context": [
+            "Kui juhtub nii, et telefon varastatakse, siis kõige esimese asjana peaksite sisse logime Smart-ID iseteenindusportaali ja oma konto kustutama. Portaali sisenemiseks peaksite kasutama ID-kaarti või Mobiil-IDga."
+        ],
+        "category": "digital_identity_security",
+        "language": "et"
+    },
+    {
+        "input": "Что делать, если телефон со Smart-ID украли?",
+        "expected_output": "Если ваш телефон со Smart-ID украли, вам следует немедленно войти в портал самообслуживания Smart-ID и удалить свой аккаунт. Для доступа к порталу необходимо использовать ID-карту или Mobiil-ID для аутентификации.",
+        "retrieval_context": [
+            "If your phone is stolen, the first thing you should do is log into the Smart-ID self-service portal and delete your account. You need to use ID-card or Mobile-ID to access the portal."
+        ],
+        "category": "digital_identity_security",
+        "language": "ru"
+    },
+    {
+        "input": "Which mobile operators provide Mobile-ID in Estonia?",
+        "expected_output": "Mobile-ID SIM cards in Estonia are issued by three mobile operators: Telia, Elisa, and Tele2. All operators must follow the same national requirements, ensuring Mobile-ID is a safe solution that works the same way regardless of which operator you use.",
+        "retrieval_context": [
+            "Mobile-ID SIM cards are issued by mobile operators Telia, Elisa and Tele2 at their service points.",
+            "However, all mobile operators must follow the same national requirements, so mobile-ID is a safe solution and works the same way irrespective of which operator you are using."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Millised mobiilioperaatorid pakuvad Eestis Mobiil-ID-d?",
+        "expected_output": "Eestis pakuvad Mobiil-ID SIM-kaarte kolm mobiilioperaatorit: Telia, Elisa ja Tele2. Kõik operaatorid peavad järgima samu riiklikke nõudeid, tagades, et Mobiil-ID on turvaline lahendus, mis töötab samamoodi olenemata kasutatud operaatorist.",
+        "retrieval_context": [
+            "Mobiil-ID toega SIM-kaarte väljastavad mobiilsideoperaatorid Telia, Elisa ja Tele2.",
+            "Kõik operaatorid peavad järgima samu riiklikke nõudeid, seega on Mobiil-ID turvaline lahendus, mis töötab samamoodi olenemata sellest, millist operaatorit kasutate."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Какие мобильные операторы предоставляют Mobiil-ID в Эстонии?",
+        "expected_output": "SIM-карты Mobiil-ID в Эстонии выдают три мобильных оператора: Telia, Elisa и Tele2. Все операторы должны следовать одним и тем же национальным требованиям, обеспечивая безопасность Mobiil-ID и его одинаковую работу независимо от используемого оператора.",
+        "retrieval_context": [
+            "Mobile-ID SIM cards are issued by mobile operators Telia, Elisa and Tele2 at their service points.",
+            "However, all mobile operators must follow the same national requirements, so mobile-ID is a safe solution and works the same way irrespective of which operator you are using."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "What is the minimum age to join Mobile-ID?",
+        "expected_output": "To join Mobile-ID, you must be at least 15 years old. More detailed conditions can be obtained from your mobile operator.",
+        "retrieval_context": [
+            "To join Mobile-ID you must be at least 15 years old. More detailed conditions can be obtained from your mobile operator."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Kui vana peab olema, et Mobiil-ID-ga liituda?",
+        "expected_output": "Mobiil-ID-ga liitumiseks peab olema vähemalt 15-aastane. Täpsemad tingimused saab oma mobiilioperaatorilt.",
+        "retrieval_context": [
+            "Mobiil-ID-ga liitumiseks pead olema vähemalt 15-aastane. Täpsemad tingimused saate oma mobiilioperaatorilt."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Какой минимальный возраст для получения Mobiil-ID?",
+        "expected_output": "Для получения Mobiil-ID необходимо быть не моложе 15 лет. Более подробные условия можно получить у своего мобильного оператора.",
+        "retrieval_context": [
+            "To join Mobile-ID you must be at least 15 years old. More detailed conditions can be obtained from your mobile operator."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "How do I create a Smart-ID account?",
+        "expected_output": "To create a Smart-ID account, download the Smart-ID app from App Store or Google Play and install it on your phone. During registration, you will need to personalize your account using either your ID-card or Mobile-ID. Step-by-step instructions are displayed on screen, and once registered, you can immediately start using Smart-ID.",
+        "retrieval_context": [
+            "You can download the Smart-ID app free of charge from the App Store and Google Play. Install it on your phone.",
+            "In order to personalise your account, you either need your ID-card or mobile-ID. Step-by-step instructions are displayed on your phone screen. Once you have registered an account, you can immediately start using your Smart-ID."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Kuidas luua Smart-ID kontot?",
+        "expected_output": "Smart-ID konto loomiseks laadi alla Smart-ID äpp App Store'ist või Google Play'st ja installi see oma telefoni. Registreerimise käigus tuleb konto isikustada kas ID-kaardi või Mobiil-ID abil. Ekraanil kuvatakse samm-sammult juhised ja pärast registreerimist saad kohe Smart-ID-d kasutama hakata.",
+        "retrieval_context": [
+            "Smart-ID äpi saad tasuta alla laadida App Store'ist ja Google Play'st. Installi see oma telefoni.",
+            "Konto isikustamiseks vajad kas ID-kaarti või Mobiil-ID-d. Telefoni ekraanil kuvatakse samm-sammult juhised. Kui oled konto registreerinud, saad kohe Smart-ID-d kasutama hakata."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Как создать учетную запись Smart-ID?",
+        "expected_output": "Чтобы создать учетную запись Smart-ID, загрузите приложение Smart-ID из App Store или Google Play и установите его на свой телефон. Во время регистрации необходимо персонализировать учетную запись, используя либо ID-карту, либо Mobiil-ID. Пошаговые инструкции отображаются на экране, и после регистрации вы можете сразу начать использовать Smart-ID.",
+        "retrieval_context": [
+            "You can download the Smart-ID app free of charge from the App Store and Google Play. Install it on your phone.",
+            "In order to personalise your account, you either need your ID-card or mobile-ID. Step-by-step instructions are displayed on your phone screen. Once you have registered an account, you can immediately start using your Smart-ID."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "What happens if I enter my Smart-ID PIN code incorrectly three times?",
+        "expected_output": "If you enter your Smart-ID PIN code incorrectly three times, your account will be blocked for three hours. If this happens multiple times, the second time your account will be locked for 24 hours, and the third time it will be locked permanently. PIN codes cannot be changed or restored for security reasons.",
+        "retrieval_context": [
+            "If you have entered your PIN codes incorrectly three times, your account will be blocked for three hours.",
+            "If this happens multiple times, the second time your account will be locked for 24 hours and the third time permanently. PIN codes cannot be changed or restored for security reasons."
+        ],
+        "category": "digital_identity_security",
+        "language": "en"
+    },
+    {
+        "input": "Mis juhtub, kui sisestan Smart-ID PIN-koodi kolm korda valesti?",
+        "expected_output": "Kui sisestad Smart-ID PIN-koodi kolm korda valesti, blokeeritakse sinu konto kolmeks tunniks. Kui see juhtub mitu korda, siis teisel korral lukustatakse konto 24 tunniks ja kolmandal korral igaveseks. PIN-koode ei ole turvalisuse huvides võimalik muuta ega taastada.",
+        "retrieval_context": [
+            "Kui oled oma PIN koode kolm korda valesti sisestanud, siis blokeeritakse sinu konto kolmeks tunniks.",
+            "Kui selline asi juhtub mitmeid kordi, siis teisel korral lukustatakse sinu konto 24 tunniks ja kolmandal korral igaveseks. PIN-koodid ei ole turvalisuse huvides võimalik muuta ega taastada."
+        ],
+        "category": "digital_identity_security",
+        "language": "et"
+    },
+    {
+        "input": "Что произойдет, если я трижды неправильно введу PIN-код Smart-ID?",
+        "expected_output": "Если вы трижды неправильно введете PIN-код Smart-ID, ваша учетная запись будет заблокирована на три часа. Если это произойдет несколько раз, во второй раз учетная запись будет заблокирована на 24 часа, а в третий раз - навсегда. PIN-коды нельзя изменить или восстановить по соображениям безопасности.",
+        "retrieval_context": [
+            "If you have entered your PIN codes incorrectly three times, your account will be blocked for three hours.",
+            "If this happens multiple times, the second time your account will be locked for 24 hours and the third time permanently. PIN codes cannot be changed or restored for security reasons."
+        ],
+        "category": "digital_identity_security",
+        "language": "ru"
+    },
+    {
+        "input": "Are there age restrictions for using Smart-ID?",
+        "expected_output": "There are no age restrictions for using Smart-ID. However, for creating an account for a person under 18 years old, parental authorization is required. Both the minor and the parent must have an Estonian personal identification code for account registration.",
+        "retrieval_context": [
+            "There are no age restrictions for using Smart-ID. For creating an account for a person under 18, parental authorization is required.",
+            "Both the minor and the parent must have an Estonian personal identification code for account registration."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Kas Smart-ID kasutamisel on vanusepiirangud?",
+        "expected_output": "Smart-ID kasutamisel puuduvad vanusepiirangud. Kuid alla 18-aastasele konto loomiseks on vajalik lapsevanema autoriseerimine. Konto registreerimiseks peavad nii alaelisel kui lapsevanemal olema Eesti isikukood.",
+        "retrieval_context": [
+            "Smart-ID kasutamisel puuduvad vanusepiirangud. Alla 18-aastasele konto loomiseks on vajalik lapsevanema autoriseerimine.",
+            "Konto registreerimiseks peavad nii alaelisel kui lapsevanemal olema Eesti isikukood."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Есть ли возрастные ограничения для использования Smart-ID?",
+        "expected_output": "Возрастных ограничений для использования Smart-ID нет. Однако для создания учетной записи для лица младше 18 лет требуется разрешение родителей. Для регистрации учетной записи как у несовершеннолетнего, так и у родителя должен быть эстонский личный идентификационный код.",
+        "retrieval_context": [
+            "There are no age restrictions for using Smart-ID. For creating an account for a person under 18, parental authorization is required.",
+            "Both the minor and the parent must have an Estonian personal identification code for account registration."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
+    },
+    {
+        "input": "How many Smart-ID users are there currently?",
+        "expected_output": "Currently there are over 2,500,000 Smart-ID users.",
+        "retrieval_context": [
+            "Currently there are over 2,500,000 users."
+        ],
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Mitu Smart-ID kasutajat on praegu?",
+        "expected_output": "Praegu on üle 2 500 000 Smart-ID kasutaja.",
+        "retrieval_context": [
+            "Hetkel on kokku juba üle 2 500 000 kasutaja."
+        ],
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Сколько пользователей Smart-ID в настоящее время?",
+        "expected_output": "В настоящее время насчитывается более 2 500 000 пользователей Smart-ID.",
+        "retrieval_context": [
+            "Currently there are over 2,500,000 users."
+        ],
+        "category": "digital_identity",
+        "language": "ru"
     }
 ]
