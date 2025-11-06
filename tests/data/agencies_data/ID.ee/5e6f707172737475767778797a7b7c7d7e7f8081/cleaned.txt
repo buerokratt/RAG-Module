@@ -1,0 +1,159 @@
+Soovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust.
+PIN-koodide muutmiseks on sul kaks võimalust:
+kui kehtivad PIN-koodid on meeles, saad nende abil DigiDoc4 või RIA DigiDoc rakenduses uued määrata.  kui kehtivad PIN-koodid on meelest läinud, vajad uute PIN-koodide loomiseks PUK-koodi.  Kui meelest on läinud PUK-kood, tulebtaotleda uus koodiümbrik.
+- kui kehtivad PIN-koodid on meeles, saad nende abil DigiDoc4 või RIA DigiDoc rakenduses uued määrata.
+- kui kehtivad PIN-koodid on meelest läinud, vajad uute PIN-koodide loomiseks PUK-koodi.
+- Kui meelest on läinud PUK-kood, tuleb taotleda uus koodiümbrik (https://www.id.ee/artikkel/pin-koodid-uue-koodiumbriku-tellimine) .
+PIN- ja PUK-koodid: PIN-koodide vahetamine DigiDoc4 rakenduse abilPIN-koodide muutmine on väga lihtne:sisesta oma ID-kaart kaardilugejasseja ava arvutis ID-tarkvara „DigiDoc4“ ("DigiDoc4" rakenduse leidmise juhend arvutist on leitavsiit). Oota, kuni DigiDoc4 on sinu ID-kaardi andmed sisse lugenud ja vali siis menüüst „Minu eID“.Seejärel vali, millist koodi muuta soovid. PIN1 koodi vahetamiseks klõpsa „MUUDA PIN1“ nupulSul tuleb sisestada kehtiv PIN1-kood ning seejärel kaks korda järjest uus valitud PIN1-kood. Sulle automaatselt väljastatud PIN1-kood on 4-kohaline. Uue PIN1-koodi võid aga valida 4-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PIN1 ei kattuks sinu eelmise PIN1’ga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 0000, 1111, 1234 ja muude kergesti tuletatavate koodide kasutamist!PIN2 koodi vahetamiseks klõpsa „MUUDA PIN2“ nupulSul tuleb sisestada kehtiv PIN2-kood ning seejärel kaks korda järjest uus valitud PIN2-kood. Sulle automaatselt väljastatud PIN2-kood on 5-kohaline. Uue PIN2-koodi võid aga valida 5-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PIN2 ei kattuks sinu eelmise PIN2’ga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 00000, 12345 ja muude kergesti tuletatavate koodide kasutamist!PUK koodi vahetamiseks klõpsa „MUUDA PUK“ nupulSul tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PUK-kood. Sulle automaatselt väljastatud PUK-kood on 8-kohaline. Uue PUK-koodi võid aga valida 8-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PUK ei kattuks sinu eelmise PUK-koodiga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 00000000, 12345678 ja muude kergesti tuletatavate koodide kasutamist!Koodide eduka muutmise kohta näed teadet oma ekraanil.  PIN- ja PUK-koodid: PIN-koodide blokeeringu tühistamine DigiDoc4 rakenduse abilSamm 1: sisesta ID-kaart kaardilugejasse ja ava DigiDoc4 rakendusDigiDoc4 ikoon peaks olema nähtav arvutiprogrammide loetelus. Järgmiste operatsioonisüsteemide kasutajate jaoks on DigiDoc4 rakendus leitav järgmiselt:Windowsikasutaja leiab selle ka „Start → All Programs → ID-kaart → DigiDoc4“ teekonda läbides. MacOSikasutaja leiab selle ka „Finder → Go → Applications → DigiDoc4“ teekonda läbides. Ubuntukasutaja leiab selle aga ka „Rakenduste menüü (klõpsates üheksat punkti ekraani vasakus allservas) → DigiDoc4“ teekonda läbides. Samm 2: ava DigiDoc4 menüüst „Minu eID“.Kontrolli, et DigiDoc4 näitaks sinu isikuandmeid, ja ava vasakmenüüst valik „Minu eID“. Seal on näha, millise sertifikaadi PIN-kood blokeeritud on. Samm 3: tühista blokeeringBlokeeringu tühistamiseks vajuta"TÜHISTA BLOKEERING" nuppu. Sinu ekraanile ilmub nüüd PIN-koodi blokeeringu tühistamise aken, kus tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PIN-kood. PIN1 (isiku tuvastamiseks) ja PIN2 (allkirjastamiseks) lahti blokeerimine toimub ühte moodi, aga meeles tuleks pidada, et:PIN1-kood peab olema 4-12 numbrit pikk;PIN2-kood peab olema 5-12 numbrit pikk. Uus kood peab erinema eelmisest PIN-koodist, koosnema ainult numbritest ning ei tohi osaliselt ega täielikult kattuda sinu isikukoodiga. Täida lahtrid ning vajuta „BLOKEERI LAHTI“ nupul. Kui PUK-kood sai õigesti sisestanud ja sinu poolt valitud uued PIN-koodid vastasid nõuetele ning olid omavahel kattuvad, näed ekraanil teadet PIN-koodi blokeeringu maha võtmise kohta. Mis siis, kui PUK-kood läheb lukku?Kui sisestasid PUK-koodi kolm korda järjest valesti, läheb ka see lukku. ID-kaardi elektroonilise kasutamise jätkamiseks tuleb siis Politsei- ja Piirivalveametist või Eesti Vabariigi välisesindusestuute PIN- ja PUK-koodidega koodiümbrik taotleda.  PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil Android seadmesSamm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äppVali peamenüü vaates„Minu eID“. Edasi on vaja identifitseerida kas läbi"ID-kaart NFC abil"või"ID-kaart kaardilugeja abil".ID-kaart NFC abilSisesta ID-kaardi 6 kohaline CAN number ning vajuta "Identifitseeri" nuppu. Peale edukat ID-kaardilt andmete päringut suunatakse automaatselt "Minu eID" vaatesse. ID-kaart kaardilugeja abilÜhenda seadmega toetatud ID-kaardi lugeja ning sisesta lugejasse ID-kaart. Peale edukat ID-kaardilt andmete päringut suunatakse automaatselt "Minu eID" vaatesse. Samm 2: Vali, millist PIN-koodi muutma hakkad"Minu eID" vaatest vali "PIN-koodid ja sertifikaadid". Vali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi. Samm 3: Ava PIN-koodi muutmine või avamineJuhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul„Muuda PIN1“või„Muuda PIN2“. Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali„Unustasid PIN1 koodi?“või„Unustasid PIN2 koodi?“Samm 4: Määra uued PIN-koodid. Kui mäletasid oma seniseid PIN-koode, saad need “Muuda PIN-koodi” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „jätka“ nupul ning jälgi ekraanil olevaid juhiseid. Kui sa omakehtivaid PIN-koode ei mäleta või need on blokeeritud, tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa„Tühista PIN1 või PIN2 blokeering“nupul. Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!NB! PIN-koodide valimisel pea meeles, et:Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest. PIN1 peab olema 4-12 numbriline. PIN2 peab olema 5-12 numbriline. Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!  PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil iOS seadmesSamm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äppSeejärel sisesta kaardilugejasse ID-kaart ja vali aknas„Minu eID“. Oota, kuni sinu andmed onRIA DigiDocäppi sisse loetud ning kliki lahti„PIN/PUK KOODID JA SERTIFIKAATIDE KONTROLL“.Samm 2: Vali, millist PIN-koodi muutma hakkadVali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi. Samm 3: Ava PIN-koodi muutmine või avamineJuhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul„Muuda PIN1“või„Muuda PIN2“. Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali nupu all olev link„Unustasid PIN1 koodi?“või„Unustasid PIN2 koodi?“Samm 4: Määra uued PIN-koodid. Kui mäletasid oma seniseid PIN-koode, saad need “Muuda PIN-koodi” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „Muuda“ nupul. Kui sa omakehtivaid PIN-koode ei mäleta või need on blokeeritud, tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa „Tühista blokeering“ nupul. Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!NB! PIN-koodide valimisel pea meeles, et:Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest. PIN1 peab olema 4-12 numbriline. PIN2 peab olema 5-12 numbriline. Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!  PIN- ja PUK-koodid: uue koodiümbriku taotlemineUue koodiümbriku taotlemiseks tuleb sul pöördudaPolitsei- ja Piirivalveameti teenindussevõiEesti Vabariigi välisesindusse. Kindlasti ära unusta, et kaasa tuleks võtta ka isikut tõendav dokument!Võimalusel validamobiilne piletenne teeninduse külastamist. Koodiümbriku riigilõivu määrad on leitavadPolitsei- ja Piirivalveameti kodulehelt. Kindlasti soovitame automaatselt väljastatud PIN-koodid kohe ära vahetada – selliste vastu, mida sul on lihtne meeles pidada ilma, et sa need üles kirjutama peaksid!PIN-koode saad ise muutaDigiDoc4 rakenduse kaudu: see käib lihtsalt ja võtab vaid minuti. Hoia oma PIN- ja PUK-koode turvaliselt!Kui ID-kaardi PIN-koodid lähevad kadumavälismaalolles ja Eestisse tulek ei ole võimalik, saad uue koodiümbrikuEesti Vabariigi välisesindusest.
+- PIN- ja PUK-koodid: PIN-koodide vahetamine DigiDoc4 rakenduse abil  PIN-koodide muutmine on väga lihtne:sisesta oma ID-kaart kaardilugejasseja ava arvutis ID-tarkvara „DigiDoc4“ ("DigiDoc4" rakenduse leidmise juhend arvutist on leitavsiit). Oota, kuni DigiDoc4 on sinu ID-kaardi andmed sisse lugenud ja vali siis menüüst „Minu eID“.Seejärel vali, millist koodi muuta soovid. PIN1 koodi vahetamiseks klõpsa „MUUDA PIN1“ nupulSul tuleb sisestada kehtiv PIN1-kood ning seejärel kaks korda järjest uus valitud PIN1-kood. Sulle automaatselt väljastatud PIN1-kood on 4-kohaline. Uue PIN1-koodi võid aga valida 4-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PIN1 ei kattuks sinu eelmise PIN1’ga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 0000, 1111, 1234 ja muude kergesti tuletatavate koodide kasutamist!PIN2 koodi vahetamiseks klõpsa „MUUDA PIN2“ nupulSul tuleb sisestada kehtiv PIN2-kood ning seejärel kaks korda järjest uus valitud PIN2-kood. Sulle automaatselt väljastatud PIN2-kood on 5-kohaline. Uue PIN2-koodi võid aga valida 5-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PIN2 ei kattuks sinu eelmise PIN2’ga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 00000, 12345 ja muude kergesti tuletatavate koodide kasutamist!PUK koodi vahetamiseks klõpsa „MUUDA PUK“ nupulSul tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PUK-kood. Sulle automaatselt väljastatud PUK-kood on 8-kohaline. Uue PUK-koodi võid aga valida 8-12 kohalise, peaasi, et:See koosneks ainult numbritest. Uus PUK ei kattuks sinu eelmise PUK-koodiga. Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!Väldi oma sünnipäeva, 00000000, 12345678 ja muude kergesti tuletatavate koodide kasutamist!Koodide eduka muutmise kohta näed teadet oma ekraanil.
+PIN- ja PUK-koodid: PIN-koodide vahetamine DigiDoc4 rakenduse abil  (#pin-ja-puk-koodid_1)
+
+
+
+
+
+PIN-koodide muutmine on väga lihtne: sisesta oma ID-kaart kaardilugejasse ja ava arvutis ID-tarkvara „DigiDoc4“ ("DigiDoc4" rakenduse leidmise juhend arvutist on leitav siit (https://www.id.ee/artikkel/soovid-id-tarkvara-digidoc4-oma-arvutis-ules-leida/) ). Oota, kuni DigiDoc4 on sinu ID-kaardi andmed sisse lugenud ja vali siis menüüst „Minu eID“.
+Seejärel vali, millist koodi muuta soovid.
+PIN1 koodi vahetamiseks klõpsa „MUUDA PIN1“ nupul
+Sul tuleb sisestada kehtiv PIN1-kood ning seejärel kaks korda järjest uus valitud PIN1-kood.
+Sulle automaatselt väljastatud PIN1-kood on 4-kohaline. Uue PIN1-koodi võid aga valida 4-12 kohalise, peaasi, et:
+See koosneks ainult numbritest.  Uus PIN1 ei kattuks sinu eelmise PIN1’ga.  Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!  Väldi oma sünnipäeva, 0000, 1111, 1234 ja muude kergesti tuletatavate koodide kasutamist!
+- See koosneks ainult numbritest.
+- Uus PIN1 ei kattuks sinu eelmise PIN1’ga.
+- Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!
+- Väldi oma sünnipäeva, 0000, 1111, 1234 ja muude kergesti tuletatavate koodide kasutamist!
+PIN2 koodi vahetamiseks klõpsa „MUUDA PIN2“ nupul
+Sul tuleb sisestada kehtiv PIN2-kood ning seejärel kaks korda järjest uus valitud PIN2-kood.
+Sulle automaatselt väljastatud PIN2-kood on 5-kohaline. Uue PIN2-koodi võid aga valida 5-12 kohalise, peaasi, et:
+See koosneks ainult numbritest.  Uus PIN2 ei kattuks sinu eelmise PIN2’ga.  Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!  Väldi oma sünnipäeva, 00000, 12345 ja muude kergesti tuletatavate koodide kasutamist!
+- See koosneks ainult numbritest.
+- Uus PIN2 ei kattuks sinu eelmise PIN2’ga.
+- Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!
+- Väldi oma sünnipäeva, 00000, 12345 ja muude kergesti tuletatavate koodide kasutamist!
+PUK koodi vahetamiseks klõpsa „MUUDA PUK“ nupul
+Sul tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PUK-kood.
+Sulle automaatselt väljastatud PUK-kood on 8-kohaline. Uue PUK-koodi võid aga valida 8-12 kohalise, peaasi, et:
+See koosneks ainult numbritest.  Uus PUK ei kattuks sinu eelmise PUK-koodiga.  Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!  Väldi oma sünnipäeva, 00000000, 12345678 ja muude kergesti tuletatavate koodide kasutamist!
+- See koosneks ainult numbritest.
+- Uus PUK ei kattuks sinu eelmise PUK-koodiga.
+- Sa ei valiks enda PIN1-, PIN2- ja PUK-koodiks ühte ja sama numbrit!
+- Väldi oma sünnipäeva, 00000000, 12345678 ja muude kergesti tuletatavate koodide kasutamist!
+Koodide eduka muutmise kohta näed teadet oma ekraanil.
+
+
+- PIN- ja PUK-koodid: PIN-koodide blokeeringu tühistamine DigiDoc4 rakenduse abil  Samm 1: sisesta ID-kaart kaardilugejasse ja ava DigiDoc4 rakendusDigiDoc4 ikoon peaks olema nähtav arvutiprogrammide loetelus. Järgmiste operatsioonisüsteemide kasutajate jaoks on DigiDoc4 rakendus leitav järgmiselt:Windowsikasutaja leiab selle ka „Start → All Programs → ID-kaart → DigiDoc4“ teekonda läbides. MacOSikasutaja leiab selle ka „Finder → Go → Applications → DigiDoc4“ teekonda läbides. Ubuntukasutaja leiab selle aga ka „Rakenduste menüü (klõpsates üheksat punkti ekraani vasakus allservas) → DigiDoc4“ teekonda läbides. Samm 2: ava DigiDoc4 menüüst „Minu eID“.Kontrolli, et DigiDoc4 näitaks sinu isikuandmeid, ja ava vasakmenüüst valik „Minu eID“. Seal on näha, millise sertifikaadi PIN-kood blokeeritud on. Samm 3: tühista blokeeringBlokeeringu tühistamiseks vajuta"TÜHISTA BLOKEERING" nuppu. Sinu ekraanile ilmub nüüd PIN-koodi blokeeringu tühistamise aken, kus tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PIN-kood. PIN1 (isiku tuvastamiseks) ja PIN2 (allkirjastamiseks) lahti blokeerimine toimub ühte moodi, aga meeles tuleks pidada, et:PIN1-kood peab olema 4-12 numbrit pikk;PIN2-kood peab olema 5-12 numbrit pikk. Uus kood peab erinema eelmisest PIN-koodist, koosnema ainult numbritest ning ei tohi osaliselt ega täielikult kattuda sinu isikukoodiga. Täida lahtrid ning vajuta „BLOKEERI LAHTI“ nupul. Kui PUK-kood sai õigesti sisestanud ja sinu poolt valitud uued PIN-koodid vastasid nõuetele ning olid omavahel kattuvad, näed ekraanil teadet PIN-koodi blokeeringu maha võtmise kohta. Mis siis, kui PUK-kood läheb lukku?Kui sisestasid PUK-koodi kolm korda järjest valesti, läheb ka see lukku. ID-kaardi elektroonilise kasutamise jätkamiseks tuleb siis Politsei- ja Piirivalveametist või Eesti Vabariigi välisesindusestuute PIN- ja PUK-koodidega koodiümbrik taotleda.
+PIN- ja PUK-koodid: PIN-koodide blokeeringu tühistamine DigiDoc4 rakenduse abil  (#pin-ja-puk-koodid_2)
+
+
+
+
+
+Samm 1: sisesta ID-kaart kaardilugejasse ja ava DigiDoc4 rakendus
+DigiDoc4 ikoon peaks olema nähtav arvutiprogrammide loetelus. Järgmiste operatsioonisüsteemide kasutajate jaoks on DigiDoc4 rakendus leitav järgmiselt:
+Windowsikasutaja leiab selle ka „Start → All Programs → ID-kaart → DigiDoc4“ teekonda läbides.  MacOSikasutaja leiab selle ka „Finder → Go → Applications → DigiDoc4“ teekonda läbides.  Ubuntukasutaja leiab selle aga ka „Rakenduste menüü (klõpsates üheksat punkti ekraani vasakus allservas) → DigiDoc4“ teekonda läbides.
+- Windowsi kasutaja leiab selle ka „Start → All Programs → ID-kaart → DigiDoc4“ teekonda läbides.
+- MacOSi kasutaja leiab selle ka „Finder → Go → Applications → DigiDoc4“ teekonda läbides.
+- Ubuntu kasutaja leiab selle aga ka „Rakenduste menüü (klõpsates üheksat punkti ekraani vasakus allservas) → DigiDoc4“ teekonda läbides.
+Samm 2: ava DigiDoc4 menüüst „Minu eID“.
+Kontrolli, et DigiDoc4 näitaks sinu isikuandmeid, ja ava vasakmenüüst valik „Minu eID“. Seal on näha, millise sertifikaadi PIN-kood blokeeritud on.
+Samm 3: tühista blokeering
+Blokeeringu tühistamiseks vajuta "TÜHISTA BLOKEERING" nuppu. Sinu ekraanile ilmub nüüd PIN-koodi blokeeringu tühistamise aken, kus tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PIN-kood.
+PIN1 (isiku tuvastamiseks) ja PIN2 (allkirjastamiseks) lahti blokeerimine toimub ühte moodi, aga meeles tuleks pidada, et:
+PIN1-kood peab olema 4-12 numbrit pikk;  PIN2-kood peab olema 5-12 numbrit pikk.
+- PIN1-kood peab olema 4-12 numbrit pikk;
+- PIN2-kood peab olema 5-12 numbrit pikk.
+Uus kood peab erinema eelmisest PIN-koodist, koosnema ainult numbritest ning ei tohi osaliselt ega täielikult kattuda sinu isikukoodiga.
+
+Täida lahtrid ning vajuta „BLOKEERI LAHTI“ nupul. Kui PUK-kood sai õigesti sisestanud ja sinu poolt valitud uued PIN-koodid vastasid nõuetele ning olid omavahel kattuvad, näed ekraanil teadet PIN-koodi blokeeringu maha võtmise kohta.
+Mis siis, kui PUK-kood läheb lukku?
+Kui sisestasid PUK-koodi kolm korda järjest valesti, läheb ka see lukku. ID-kaardi elektroonilise kasutamise jätkamiseks tuleb siis Politsei- ja Piirivalveametist või Eesti Vabariigi välisesindusest uute PIN- ja PUK-koodidega koodiümbrik taotleda .
+
+
+- PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil Android seadmes  Samm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äppVali peamenüü vaates„Minu eID“. Edasi on vaja identifitseerida kas läbi"ID-kaart NFC abil"või"ID-kaart kaardilugeja abil".ID-kaart NFC abilSisesta ID-kaardi 6 kohaline CAN number ning vajuta "Identifitseeri" nuppu. Peale edukat ID-kaardilt andmete päringut suunatakse automaatselt "Minu eID" vaatesse. ID-kaart kaardilugeja abilÜhenda seadmega toetatud ID-kaardi lugeja ning sisesta lugejasse ID-kaart. Peale edukat ID-kaardilt andmete päringut suunatakse automaatselt "Minu eID" vaatesse. Samm 2: Vali, millist PIN-koodi muutma hakkad"Minu eID" vaatest vali "PIN-koodid ja sertifikaadid". Vali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi. Samm 3: Ava PIN-koodi muutmine või avamineJuhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul„Muuda PIN1“või„Muuda PIN2“. Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali„Unustasid PIN1 koodi?“või„Unustasid PIN2 koodi?“Samm 4: Määra uued PIN-koodid. Kui mäletasid oma seniseid PIN-koode, saad need “Muuda PIN-koodi” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „jätka“ nupul ning jälgi ekraanil olevaid juhiseid. Kui sa omakehtivaid PIN-koode ei mäleta või need on blokeeritud, tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa„Tühista PIN1 või PIN2 blokeering“nupul. Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!NB! PIN-koodide valimisel pea meeles, et:Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest. PIN1 peab olema 4-12 numbriline. PIN2 peab olema 5-12 numbriline. Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil Android seadmes  (#pin-ja-puk-koodid_3)
+
+
+
+
+
+Samm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äpp
+Vali peamenüü vaates „Minu eID“ . Edasi on vaja identifitseerida kas läbi "ID-kaart NFC abil" või "ID-kaart kaardilugeja abil" .
+
+
+
+
+
+
+
+
+
+
+Samm 2: Vali, millist PIN-koodi muutma hakkad
+"Minu eID" vaatest vali "PIN-koodid ja sertifikaadid". Vali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi.
+Samm 3: Ava PIN-koodi muutmine või avamine
+Juhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul „Muuda PIN1“ või „Muuda PIN2“ . Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali „Unustasid PIN1 koodi?“ või „Unustasid PIN2 koodi?“
+Samm 4: Määra uued PIN-koodid.
+Kui mäletasid oma seniseid PIN-koode, saad need “ Muuda PIN-koodi ” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „jätka“ nupul ning jälgi ekraanil olevaid juhiseid.
+Kui sa oma kehtivaid PIN-koode ei mäleta või need on blokeeritud , tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa „Tühista PIN1 või PIN2 blokeering“ nupul. Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!
+NB! PIN-koodide valimisel pea meeles, et:
+Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest.  PIN1 peab olema 4-12 numbriline.  PIN2 peab olema 5-12 numbriline.  Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+- Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest.
+- PIN1 peab olema 4-12 numbriline.
+- PIN2 peab olema 5-12 numbriline.
+- Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+
+
+- PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil iOS seadmes  Samm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äppSeejärel sisesta kaardilugejasse ID-kaart ja vali aknas„Minu eID“. Oota, kuni sinu andmed onRIA DigiDocäppi sisse loetud ning kliki lahti„PIN/PUK KOODID JA SERTIFIKAATIDE KONTROLL“.Samm 2: Vali, millist PIN-koodi muutma hakkadVali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi. Samm 3: Ava PIN-koodi muutmine või avamineJuhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul„Muuda PIN1“või„Muuda PIN2“. Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali nupu all olev link„Unustasid PIN1 koodi?“või„Unustasid PIN2 koodi?“Samm 4: Määra uued PIN-koodid. Kui mäletasid oma seniseid PIN-koode, saad need “Muuda PIN-koodi” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „Muuda“ nupul. Kui sa omakehtivaid PIN-koode ei mäleta või need on blokeeritud, tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa „Tühista blokeering“ nupul. Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!NB! PIN-koodide valimisel pea meeles, et:Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest. PIN1 peab olema 4-12 numbriline. PIN2 peab olema 5-12 numbriline. Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+PIN- ja PUK-koodid: PIN-koodide vahetamine ja blokeeringu tühistamine RIA DigiDoc abil iOS seadmes  (#pin-ja-puk-koodid_4)
+
+
+
+
+
+Samm 1: Ava oma telefonis RIA DigiDoc rakendus ehk äpp
+Seejärel sisesta kaardilugejasse ID-kaart ja vali aknas „Minu eID“ . Oota, kuni sinu andmed on RIA DigiDoc äppi sisse loetud ning kliki lahti „PIN/PUK KOODID JA SERTIFIKAATIDE KONTROLL“ .
+Samm 2: Vali, millist PIN-koodi muutma hakkad
+Vali see PIN-kood, mida muuta tahad. Kui lukustunud või unustatud on nii PIN1- kui PIN2-koodid, tuleb sul muuta mõlemaid eraldi.
+Samm 3: Ava PIN-koodi muutmine või avamine
+Juhul, kui sa mäletad oma senist PIN-koodi, klõpsa nupul „Muuda PIN1“ või „Muuda PIN2“ . Kui PIN-koodid on lukku läinud ehk blokeeritud ja soovid neid PUK-koodi abil taas luua, vali nupu all olev link „Unustasid PIN1 koodi?“ või „Unustasid PIN2 koodi?“
+
+Samm 4: Määra uued PIN-koodid.
+Kui mäletasid oma seniseid PIN-koode, saad need “ Muuda PIN-koodi ” nupu kaudu ära vahetada: sul tuleb sisestada nii kehtiv PIN-kood kui uus PIN-kood. Kui uus PIN-kood sisestatud, vajuta „Muuda“ nupul.
+Kui sa oma kehtivaid PIN-koode ei mäleta või need on blokeeritud , tuleb sul sisestada kehtiv PUK-kood ja seejärel uus valitud PIN-kood. Kui uus PIN-kood sisestatud, klõpsa „Tühista blokeering“ nupul.
+Järgi telefoniekraanil olevaid juhiseid ja kõik sujub!
+NB! PIN-koodide valimisel pea meeles, et:
+Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest.  PIN1 peab olema 4-12 numbriline.  PIN2 peab olema 5-12 numbriline.  Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+- Need ei tohi sisaldada sinu isikukoodi ega selle osi, peavad koosnema ainult numbritest ja erinema senikehtinud PIN-koodidest.
+- PIN1 peab olema 4-12 numbriline.
+- PIN2 peab olema 5-12 numbriline.
+- Vali sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata!
+
+
+- PIN- ja PUK-koodid: uue koodiümbriku taotlemine  Uue koodiümbriku taotlemiseks tuleb sul pöördudaPolitsei- ja Piirivalveameti teenindussevõiEesti Vabariigi välisesindusse. Kindlasti ära unusta, et kaasa tuleks võtta ka isikut tõendav dokument!Võimalusel validamobiilne piletenne teeninduse külastamist. Koodiümbriku riigilõivu määrad on leitavadPolitsei- ja Piirivalveameti kodulehelt. Kindlasti soovitame automaatselt väljastatud PIN-koodid kohe ära vahetada – selliste vastu, mida sul on lihtne meeles pidada ilma, et sa need üles kirjutama peaksid!PIN-koode saad ise muutaDigiDoc4 rakenduse kaudu: see käib lihtsalt ja võtab vaid minuti. Hoia oma PIN- ja PUK-koode turvaliselt!Kui ID-kaardi PIN-koodid lähevad kadumavälismaalolles ja Eestisse tulek ei ole võimalik, saad uue koodiümbrikuEesti Vabariigi välisesindusest.
+PIN- ja PUK-koodid: uue koodiümbriku taotlemine  (#pin-ja-puk-koodid_5)
+
+
+
+
+
+Uue koodiümbriku taotlemiseks tuleb sul pöörduda Politsei- ja Piirivalveameti teenindusse (https://www.politsei.ee/et/asukohad/teenindused) või Eesti Vabariigi välisesindusse (https://www.politsei.ee/et/dokumente-vaeljastavad-eesti-vabariigi-vaelisesindused) . Kindlasti ära unusta, et kaasa tuleks võtta ka isikut tõendav dokument!
+Võimalusel valida mobiilne pilet (https://mobiilnepilet.politsei.ee/) enne teeninduse külastamist.
+Koodiümbriku riigilõivu määrad on leitavad Politsei- ja Piirivalveameti kodulehelt (https://www.politsei.ee/et/juhend/riigiloivude-maeaerad/) . Kindlasti soovitame automaatselt väljastatud PIN-koodid kohe ära vahetada – selliste vastu, mida sul on lihtne meeles pidada ilma, et sa need üles kirjutama peaksid! PIN-koode saad ise muuta (/artikkel/pin-koodide-ja-puk-koodi-muutmine) DigiDoc4 rakenduse kaudu: see käib lihtsalt ja võtab vaid minuti. Hoia oma PIN- ja PUK-koode turvaliselt!
+Kui ID-kaardi PIN-koodid lähevad kaduma välismaal olles ja Eestisse tulek ei ole võimalik, saad uue koodiümbriku Eesti Vabariigi välisesindusest (https://www.politsei.ee/et/dokumente-vaeljastavad-eesti-vabariigi-vaelisesindused) .
+
+
+Mis siis, kui PUK-kood läheb lukku?
+Kui sisestasid PUK-koodi kolm korda järjest valesti, läheb ka see lukku. ID-kaardi elektroonilise kasutamise jätkamiseks tuleb siis Politsei- ja Piirivalveametist või Eesti Vabariigi välisesindusest uute PIN- ja PUK-koodidega koodiümbrik taotleda .
+Soovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui…
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

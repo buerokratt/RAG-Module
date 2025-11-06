@@ -1,0 +1,63 @@
+Sul on alati võimalus vaadata ning salvestada oma ID-kaardi sertifikaate. Kõige mugavam on seda teha DigiDoc4 abil.
+Ühenda kaardilugeja arvutiga, sisesta sellesse oma ID-kaart, ava DigiDoc4 ning oota, kuni sinu ID-kaardi andmed on sisse loetud. Edasised juhised sõltuvad natuke sellest, millise operatsioonisüsteemiga arvutit kasutad. Vali allolevast valikust endale sobivaim:
+Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Windows arvutitesSamm 1: Ava DigiDoc4 ja „Minu eID“Vali sealt kasIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatja klõpsa tekstilingil "Vaata sertifikaadi detaile".Samm 2: sertifikaadi salvestamineSertifikaadi salvestamiseks vali avanenud aknast „Üksikasjad“ (Details) ja vali „Kopeeri faili“ (Copy to File...) ning klõpsa avanenud aknast nupul „Edasi“ (Next).Järgmises sammus vali dokumendiformaadiks „Base-64 kodeeritud X.509 (.CER)“ (Base-64 encoded X.509 (.CER))" ning klõpsa jätkamiseks taas Edasi ("Next"):Siis vali kaust, kuhu soovid sertifikaadi salvestada, ning vajuta veelkord „Edasi“ (Next):Faili salvestamiseks klõpsa „Valmis“ (Finish)nupul:Kui sertifikaat salvestatakse edukalt, kuvatakse selle kohta teade (Eksport oli edukas):  Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine macOS arvutitesSamm 1: Ava DigiDoc4 ja „Minu eID“Seejärel valiIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatalt tekstilink "Vaata sertifikaadi detaile".Samm 2: sertifikaadi salvestamineAvaneb uus aken koos sertifikaadi detailidega. Juhul, kui soovid sertifikaadi salvestada, vajuta ekraani ülemises paremas nurgas oleval „share“ nupul (kast ja nool üles) ning vali tekkinud menüüst programm „Notes“.Sulle avatakse nüüd Notes programmi salvestusaken – kui soovid sertifikaadi eraldi failina salvestada, vajuta „Save“ nupul. Samm 3: Salvestatud sertifikaadiinfo kasutamineSertifikaadi kasutamiseks ava arvutis programm "Notes" ning lohista nähtavale ilmunud sertifikaadifail endale sobivasse kataloogi, näiteks Desktopile. Samuti saad sertifikaadi topeltklõpsuga Notes’is avada.  Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Linux arvutitesSamm 1: ava DigiDoc4 ja „Minu eID“Seejärel vali valiIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatalt "Vaata sertifikaadi detaile"Samm 2: sertifikaadi salvestamineSertifikaadi detailvaates on sul võimalik sertifikaadi info salvestada – ekraani allosas asuval „Salvesta“ nupul klikates.
+- Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Windows arvutites  Samm 1: Ava DigiDoc4 ja „Minu eID“Vali sealt kasIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatja klõpsa tekstilingil "Vaata sertifikaadi detaile".Samm 2: sertifikaadi salvestamineSertifikaadi salvestamiseks vali avanenud aknast „Üksikasjad“ (Details) ja vali „Kopeeri faili“ (Copy to File...) ning klõpsa avanenud aknast nupul „Edasi“ (Next).Järgmises sammus vali dokumendiformaadiks „Base-64 kodeeritud X.509 (.CER)“ (Base-64 encoded X.509 (.CER))" ning klõpsa jätkamiseks taas Edasi ("Next"):Siis vali kaust, kuhu soovid sertifikaadi salvestada, ning vajuta veelkord „Edasi“ (Next):Faili salvestamiseks klõpsa „Valmis“ (Finish)nupul:Kui sertifikaat salvestatakse edukalt, kuvatakse selle kohta teade (Eksport oli edukas):
+Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Windows arvutites  (#sertifikaadid-id-kaardi-sertifikaatide_1)
+
+
+
+
+
+Samm 1: Ava DigiDoc4 ja „Minu eID“
+Vali sealt kas Isikutuvastamise sertifikaat või Allkirjastamise sertifikaat ja klõpsa tekstilingil "Vaata sertifikaadi detaile".
+Samm 2: sertifikaadi salvestamin e
+Sertifikaadi salvestamiseks vali avanenud aknast „Üksikasjad“ ( Details ) ja vali „Kopeeri faili“ ( Copy to File... ) ning klõpsa avanenud aknast nupul „Edasi“ ( Next ).
+Järgmises sammus vali dokumendiformaadiks „Base-64 kodeeritud X.509 (.CER)“ ( Base-64 encoded X.509 (.CER) ) " ning klõpsa jätkamiseks taas Edasi (" Next "):
+Siis vali kaust, kuhu soovid sertifikaadi salvestada, ning vajuta veelkord „Edasi“ ( Next ):
+Faili salvestamiseks klõpsa „Valmis“ ( Finish) nupul:
+Kui sertifikaat salvestatakse edukalt, kuvatakse selle kohta teade (Eksport oli edukas):
+
+
+- Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine macOS arvutites  Samm 1: Ava DigiDoc4 ja „Minu eID“Seejärel valiIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatalt tekstilink "Vaata sertifikaadi detaile".Samm 2: sertifikaadi salvestamineAvaneb uus aken koos sertifikaadi detailidega. Juhul, kui soovid sertifikaadi salvestada, vajuta ekraani ülemises paremas nurgas oleval „share“ nupul (kast ja nool üles) ning vali tekkinud menüüst programm „Notes“.Sulle avatakse nüüd Notes programmi salvestusaken – kui soovid sertifikaadi eraldi failina salvestada, vajuta „Save“ nupul. Samm 3: Salvestatud sertifikaadiinfo kasutamineSertifikaadi kasutamiseks ava arvutis programm "Notes" ning lohista nähtavale ilmunud sertifikaadifail endale sobivasse kataloogi, näiteks Desktopile. Samuti saad sertifikaadi topeltklõpsuga Notes’is avada.
+Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine macOS arvutites  (#sertifikaadid-id-kaardi-sertifikaatide_2)
+
+
+
+
+
+Samm 1: Ava DigiDoc4 ja „Minu eID“
+Seejärel vali Isikutuvastamise sertifikaat või Allkirjastamise sertifikaat alt tekstilink "Vaata sertifikaadi detaile".
+Samm 2: sertifikaadi salvestamine
+Avaneb uus aken koos sertifikaadi detailidega. Juhul, kui soovid sertifikaadi salvestada, vajuta ekraani ülemises paremas nurgas oleval „share“ nupul (kast ja nool üles) ning vali tekkinud menüüst programm „Notes“.
+Sulle avatakse nüüd Notes programmi salvestusaken – kui soovid sertifikaadi eraldi failina salvestada, vajuta „Save“ nupul.
+
+Samm 3: Salvestatud sertifikaadiinfo kasutamine
+Sertifikaadi kasutamiseks ava arvutis programm "Notes" ning lohista nähtavale ilmunud sertifikaadifail endale sobivasse kataloogi, näiteks Desktopile. Samuti saad sertifikaadi topeltklõpsuga Notes’is avada.
+
+
+- Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Linux arvutites  Samm 1: ava DigiDoc4 ja „Minu eID“Seejärel vali valiIsikutuvastamise sertifikaatvõiAllkirjastamise sertifikaatalt "Vaata sertifikaadi detaile"Samm 2: sertifikaadi salvestamineSertifikaadi detailvaates on sul võimalik sertifikaadi info salvestada – ekraani allosas asuval „Salvesta“ nupul klikates.
+Sertifikaadid: ID-kaardi sertifikaatide vaatamine ja salvestamine Linux arvutites  (#sertifikaadid-id-kaardi-sertifikaatide_3)
+
+
+
+
+
+Samm 1: ava DigiDoc4 ja „Minu eID“
+Seejärel vali vali Isikutuvastamise sertifikaat või Allkirjastamise sertifikaat alt "Vaata sertifikaadi detaile"
+Samm 2: sertifikaadi salvestamine
+Sertifikaadi detailvaates on sul võimalik sertifikaadi info salvestada – ekraani allosas asuval „Salvesta“ nupul klikates.
+
+
+Juhised, kuidas vaadata ja salvestada oma ID-kaardi sertifikaate.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

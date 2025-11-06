@@ -1,0 +1,56 @@
+Viga esineb nii DigiDoc4, kui ka RIA DigiDoc rakendustes siis, kui allkirjastamiseks kasutatava seadme kellaaeg erineb kehtivuskinnituse ajast. Altpoolt leiate juhised vea kõrvaldamiseks.
+DigiDoc4 rakenduse viga: Palun kontrollige oma arvuti kellaaegaEkraanipildilt nähtavat viga võib kohata DigiDoc4 rakenduses allkirjastamisel. Vea detailid:Viga esineb DigiDoc4 rakenduses siis, kui allkirjastamiseks kasutatava arvuti kellaaeg erineb kehtivuskinnituse ajast. Vea parandamiseks palun kontrollige, et teie arvuti süsteemikell on seadistatud õigele kuupäevale, kellaajale ja ajavööndile. Windowsiskellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas start menüüle (Windows logo) ja kirjutage "Juhtpaneel" (Control panel) ning avage. Uue akna tekkimisel minge "Kuupäev ja kellaaeg" (Date and time).macOSkellaaja, kuupäeva ning regiooni muutmiseks: avage "Spotlight Search" ning kirjutage otsingusse "System Settings". Avaneb uus aken ekraanile, kust valida "General". General valikus on "Language & Region" ja "Date & Time".Ubuntukellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas olevale "Näita rakendusi" (Show applications) ikoonile ja otsinguribas sisestage ning minge "Kuupäev ja kellaaeg" (Date & time).  Enne muudatusi veenduge, etAutomaatseadistuson maha võetud. Kui tõrge püsib, kontrollige palun järgmist:Kui teie seadmel on aktiivne VPN-ühendus, katkestage see ära ja järgige uuesti ülaltoodud samme. Taaskäivitage seade ja kontrollige, kas kogu haldus- ja viirusetõrjetarkvara, kui see on olemas, on välja lülitatud. Probleemi püsimisel võtke ühendust ID-toegaveebivormikaudu.  RIA DigiDoc viga: palun kontrollige oma nutiseadme kellaaegaEkraanipildilt nähtavat viga võib kohataRIA DigiDocmobiilirakendusega allkirjastamisel. Viga esinebRIA DigiDoc-is siis, kui allkirjastamiseks kasutatava nutiseadme kellaaeg erineb kehtivuskinnituse ajast. AndroidiOSVea parandamiseks palunkontrollige, et teienutiseadme süsteemikellon seadistatudõigele kuupäevale, kellaajale ja ajavööndile. Kellaaja määramine mobiiltelefonisAndroidis kellaaja, kuupäeva ning regiooni muutmiseks: avage “Seaded“, sealt järgnevalt “Üldine haldus” ning “Kuupäev ja kellaaeg“.Veendu, et vaikimisi oleks aktiveeritud “Automaatne kuupäev ja kellaaeg“.iOS-is kellaaja, kuupäeva ning regiooni muutmiseks: avage “Settings” (Seaded), sealt järgnevalt “General” (Üldine) ning “Date & Time“.Veendu, et vaikimisi oleks aktiveeritud “Set Automatically” (Seadista automaatselt) ja “Time Zone” oleksTallinn. AndroidiOS
+- DigiDoc4 rakenduse viga: Palun kontrollige oma arvuti kellaaega  Ekraanipildilt nähtavat viga võib kohata DigiDoc4 rakenduses allkirjastamisel. Vea detailid:Viga esineb DigiDoc4 rakenduses siis, kui allkirjastamiseks kasutatava arvuti kellaaeg erineb kehtivuskinnituse ajast. Vea parandamiseks palun kontrollige, et teie arvuti süsteemikell on seadistatud õigele kuupäevale, kellaajale ja ajavööndile. Windowsiskellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas start menüüle (Windows logo) ja kirjutage "Juhtpaneel" (Control panel) ning avage. Uue akna tekkimisel minge "Kuupäev ja kellaaeg" (Date and time).macOSkellaaja, kuupäeva ning regiooni muutmiseks: avage "Spotlight Search" ning kirjutage otsingusse "System Settings". Avaneb uus aken ekraanile, kust valida "General". General valikus on "Language & Region" ja "Date & Time".Ubuntukellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas olevale "Näita rakendusi" (Show applications) ikoonile ja otsinguribas sisestage ning minge "Kuupäev ja kellaaeg" (Date & time).  Enne muudatusi veenduge, etAutomaatseadistuson maha võetud. Kui tõrge püsib, kontrollige palun järgmist:Kui teie seadmel on aktiivne VPN-ühendus, katkestage see ära ja järgige uuesti ülaltoodud samme. Taaskäivitage seade ja kontrollige, kas kogu haldus- ja viirusetõrjetarkvara, kui see on olemas, on välja lülitatud. Probleemi püsimisel võtke ühendust ID-toegaveebivormikaudu.
+DigiDoc4 rakenduse viga: Palun kontrollige oma arvuti kellaaega  (#digidoc4-rakenduse-viga_1)
+
+
+
+
+
+Ekraanipildilt nähtavat viga võib kohata DigiDoc4 rakenduses allkirjastamisel.
+Vea detailid:
+Viga esineb DigiDoc4 rakenduses siis, kui allkirjastamiseks kasutatava arvuti kellaaeg erineb kehtivuskinnituse ajast.
+Vea parandamiseks palun kontrollige, et teie arvuti süsteemikell on seadistatud õigele kuupäevale, kellaajale ja ajavööndile.
+Windowsis kellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas start menüüle ( Windows logo ) ja kirjutage " Juhtpaneel " (Control panel) ning avage. Uue akna tekkimisel minge " Kuupäev ja kellaaeg " (Date and time).
+macOS kellaaja, kuupäeva ning regiooni muutmiseks: avage "Spotlight Search" ning kirjutage otsingusse "System Settings". Avaneb uus aken ekraanile, kust valida "General". General valikus on " Language & Region " ja " Date & Time ".
+Ubuntu kellaaja, kuupäeva ning regiooni muutmiseks: vajutage all vasakus servas olevale " Näita rakendusi " (Show applications) ikoonile ja otsinguribas sisestage ning minge " Kuupäev ja kellaaeg " (Date & time).  Enne muudatusi veenduge, et Automaatseadistus on maha võetud.
+Kui tõrge püsib, kontrollige palun järgmist:
+Kui teie seadmel on aktiivne VPN-ühendus, katkestage see ära ja järgige uuesti ülaltoodud samme.  Taaskäivitage seade ja kontrollige, kas kogu haldus- ja viirusetõrjetarkvara, kui see on olemas, on välja lülitatud.  Probleemi püsimisel võtke ühendust ID-toegaveebivormikaudu.
+- Kui teie seadmel on aktiivne VPN-ühendus, katkestage see ära ja järgige uuesti ülaltoodud samme.
+- Taaskäivitage seade ja kontrollige, kas kogu haldus- ja viirusetõrjetarkvara, kui see on olemas, on välja lülitatud.
+- Probleemi püsimisel võtke ühendust ID-toega veebivormi (https://www.id.ee/artikkel/teavita-meid-probleemist/) kaudu.
+
+
+- RIA DigiDoc viga: palun kontrollige oma nutiseadme kellaaega  Ekraanipildilt nähtavat viga võib kohataRIA DigiDocmobiilirakendusega allkirjastamisel. Viga esinebRIA DigiDoc-is siis, kui allkirjastamiseks kasutatava nutiseadme kellaaeg erineb kehtivuskinnituse ajast. AndroidiOSVea parandamiseks palunkontrollige, et teienutiseadme süsteemikellon seadistatudõigele kuupäevale, kellaajale ja ajavööndile. Kellaaja määramine mobiiltelefonisAndroidis kellaaja, kuupäeva ning regiooni muutmiseks: avage “Seaded“, sealt järgnevalt “Üldine haldus” ning “Kuupäev ja kellaaeg“.Veendu, et vaikimisi oleks aktiveeritud “Automaatne kuupäev ja kellaaeg“.iOS-is kellaaja, kuupäeva ning regiooni muutmiseks: avage “Settings” (Seaded), sealt järgnevalt “General” (Üldine) ning “Date & Time“.Veendu, et vaikimisi oleks aktiveeritud “Set Automatically” (Seadista automaatselt) ja “Time Zone” oleksTallinn. AndroidiOS
+RIA DigiDoc viga: palun kontrollige oma nutiseadme kellaaega  (#ria-digidoc-viga_2)
+
+
+
+
+
+Ekraanipildilt nähtavat viga võib kohata RIA DigiDoc mobiilirakendusega allkirjastamisel.
+Viga esineb RIA DigiDoc -is siis, kui allkirjastamiseks kasutatava nutiseadme kellaaeg erineb kehtivuskinnituse ajast.
+Vea parandamiseks palun kontrollige , et teie nutiseadme süsteemikell on seadistatud õigele kuupäevale, kellaajale ja ajavööndile .
+Kellaaja määramine mobiiltelefonis
+Androidis kellaaja, kuupäeva ning regiooni muutmiseks: avage “ Seaded “, sealt järgnevalt “ Üldine haldus ” ning “ Kuupäev ja kellaaeg “.
+
+
+Veendu, et vaikimisi oleks aktiveeritud “ Automaatne kuupäev ja kellaaeg “.
+iOS-is kellaaja, kuupäeva ning regiooni muutmiseks: avage “ Settings ” (Seaded), sealt järgnevalt “ General ” (Üldine) ning “ Date & Time “.
+
+Veendu, et vaikimisi oleks aktiveeritud “ Set Automatically ” (Seadista automaatselt) ja “ Time Zone ” oleks Tallinn .
+
+
+Viga esineb nii DigiDoc4, kui ka RIA DigiDoc rakendustes siis, kui allkirjastamiseks kasutatava seadme kellaaeg erineb kehtivuskinnituse ajast. Altpoolt leiate juhised vea kõrvaldamiseks.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

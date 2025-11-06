@@ -1,0 +1,30 @@
+Kas oled oma arvutisse ID-tarkvara paigaldanud ega suuda nüüd ID-kaardi kasutamiseks DigiDoc4 rakendust leida?
+DigiDoc4 käivitamine Windowsis  (#digidoc4-kaivitamine-win)
+
+Windowsi operatsioonisüsteemides luuakse ID-kaardi tarkvara paigalduse käigus otsetee ehk shortcut sinu arvuti töölauale ( desktop ) juhul, kui sa paigalduse käigus ei määranud teisiti.
+DigiDoc4 avamiseks tee arvuti töölaual oleval DigiDoc4 ikoonil hiirega topeltklõps.
+Kui sul ei ole töölaual ikooni, millel klõpsata, siis üldjuhul on olemas otsetee ka START-menüüs.
+Windows 10 kasutajad leiavad DigiDoc4 Start menüüst järgmiselt: D tähe all on rakenduse nimega DigiDoc4.
+Windows 11 kasutajad leiavad DigiDoc4 ikooni Start menüüst, kui vajutavad lisaks veel valikule Kõik rakendused >, siis leiavad D tähe alt DigiDoc4 . Avamiseks tee valik hiirega.
+DigiDoc4 käivitamine macOS’is  (#digidoc4-kaivitamine-macos)
+
+macOS tarkvaras paigaldatakse otsetee ikoon süsteemsesse Applications kataloogi või sinu töölauale ( desktop ). Avamiseks klõpsa hiirega DigiDoc4 ikoonil.
+Lisaks võib kasutada ülal paremal nurgas Spotlight otsingut märksõnaga digidoc .
+DigiDoc4 käivitamine Linuxis  (#digidoc4-kaivitamine-linuxis)
+
+DigiDoc4 rakenduse otsetee ikooni asukoht võib erineda sõltuvalt kasutusel olevast Linux versioonist. Parim moodus on kasutada süsteemset otsingut, mis on olemas kõikidel Linuxi versioonidel. Otsingul kasuta märksõna ID või ID-card .
+Näide: Ubuntu, versioon 18.04 LTS
+Üleval vasakus nurgas on süsteemse otsingu otsetee ikoon ( Dash home ), klõpsa sellel ja kirjuta otsisõnaks  ID. DigiDoc4 avamiseks klõpsa hiirega ikoonil.
+Kas oled oma arvutisse ID-tarkvara paigaldanud ega suuda nüüd ID-kaardi kasutamiseks DigiDoc4 programmi leida? Juhised Windows, macOS ja Linux operatsioonisüsteemis DigiDoc4 käivitamiseks.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

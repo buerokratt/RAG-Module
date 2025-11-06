@@ -1,0 +1,90 @@
+Mobiil-ID PIN-koodid väljastatakse sulle koos mobiil-ID SIM-kaardiga. Leiad need SIM-kaardi ümbriselt kraabitava pinna alt. Koos mobiil-ID toega SIM-kaardiga saad kaasa kolm koodi:
+PIN1-kood– isiku tuvastamiseks ehk sisselogimiseks;  PIN2-kood– digitaalallkirja andmiseks ehk tehingute/tegevuste kinnitamiseks;  PUK-kood– lukku läinud mobiil-ID PIN-koodide taasavamiseks.
+- PIN1-kood – isiku tuvastamiseks ehk sisselogimiseks;
+- PIN2-kood – digitaalallkirja andmiseks ehk tehingute/tegevuste kinnitamiseks;
+- PUK-kood – lukku läinud mobiil-ID PIN-koodide taasavamiseks.
+Kindlasti soovitame automaatselt väljastatud PIN- ja PUK-koodid esimesel võimalusel välja vahetada. Vali endale kasutamiseks sellised PIN-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata. PUK-kood hoia aga alati turvalises kohas: nii saad omale uued PIN-koodid määrata juhul, kui need kogemata meelest või lukku lähevad!
+Teada tasub ka, et PIN-koodide lubatud pikkused on erinevad:
+PIN1-kood peab olema 4–8  numbriline;  PIN2-kood peab olema 5–8 numbriline;  PUK-kood peab olema 8 numbriline.
+- PIN1-kood peab olema 4–8  numbriline;
+- PIN2-kood peab olema 5–8 numbriline;
+- PUK-kood peab olema 8 numbriline.
+Mobiil-ID toega SIM-kaardi paigaldamisel tekib sinu telefoni ka mobiil-ID menüü. Seal saad teha kõiki mobiil-IDga seotud toiminguid, näiteks vahetada välja oma PIN- ja PUK-koodid. Kui seda menüüd pole või te ei leia seda, saab kõik tingimusega vajalikud toimingud teha vastava rakenduse kaudu. Vaata jaotist "Mobiil-ID: PIN-koodide vahetamine" .
+Mobiil-ID: mID PIN-koodidMobiil-ID kasutamiseks vajalikud PIN-koodid leiad oma SIM-kaardi ümbrise tagumiselt küljelt:NB! Ära aja omavahel segi SIM-kaardi üldiseid ning mobiil-ID kasutamiseks vajalikke PIN-koode!PIN- ja PUK-koodide vahetamiseks ava oma nutitelefonis olev mobiil-ID menüü.  Mobiil-ID: PIN-koodide vahetamineKui sa oled unustanud PIN1 ja/või PIN2-koodi ningei tea oma PUK-koodi, on ainus viis mobiil-ID kasutamise jätkamiseks uus SIM-kaart tellida. Mobiil-ID puhul ei ole uute PIN-koodide väljastamine ilma SIM-kaardi vahetuseta võimalik. Täpsemalt Mobiil-ID ja PIN-koodide vahetamise kohta saab lugeda operaatorite kodulehelt:Kuisul on PUK-kood alles, saad PIN-koode taastada ja vahetada oma telefonis asuva mobiil-ID menüü kaudu. NB! PUK-kood lukustub kolme järjestikuse vale sisestuse korral. Lukustunud või kaotatud PUK-koodi korral tuleb samuti mobiil-ID kasutamise jätkamiseks SIM-kaart välja vahetada. Uue SIM-kaardi saab enda operaatori poole pöördumisel. Android seadmetes mobiil-ID PIN-koodide muutmine:Android seadmetes võivad asukohad ja Mobiil-ID rakenduste nimetuste osas erineda, enamjaolt asuvad Mobiil-ID seadistused rakenduste all. Ava oma telefonis valikrakendused(applications, apps) ja vali vastavalt oma mobiilioperaatorile kasTelia(Telia),Tele2 Menu(Tele2) võiElisa(Elisa). Osadel mudelitel võib esineda kaMobiil-ID,SIM-tööriistakomplektvõiSIM-toolkitnimeline rakendus. Sul on kaks valikut:“Tühista blokeering” vabastab lukku läinud PIN-koodid.“Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta.iOS seadmetes mobiil-ID PIN-koodide muutmineAva telefoni seaded (Settings) ning liiguMobile Service→ (kui telefonis on mitu SIM kaarti, siis vali mobiil-IDga kaart) →SIM Applications. Sul on kaks valikut:“Tühista blokeering” vabastab lukku läinud PIN-koodid“Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta  Mobiil-ID: PIN-koodide turvalisusSelleks, et PIN-koodid hästi meeles püsiksid, ent siiski sinu elektroonilise identiteedi turvaliselt kaitstuna hoiaksid, tuleks sulle automaatselt väljastatud PIN- ja PUK-koodid ära vahetada. Soovitused turvaliste PIN-koodide valikuks:Vali sellised PIN- ja PUK-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata.Ära muuda oma PIN1-, PIN2- ja PUK-koode ühesuguseks! Loo selle asemel mõni vaid sulle teadaolev süsteem, mille abil õige koodi vajadusel tuletada suudad. Sinu jaoks tähendusrikaste kuupäevade kasutamine PIN-koodides on hea mõte juhul, kui need kuupäevad kõigi teiste jaoks ilmselged pole. Väldi iseenda ja oma pereliikmete sünnikuupäevi, oma abiellumise kuupäeva jms.Ära kasuta PIN-koodidena liiga lihtsaid numbrikombinatsioone (0000, 1111, 1234 jms), oma aadressi või oma isikukoodi osi!Kuidas hoida PIN-koode kaitstuna?Õpi oma PIN-koodid pähe! Kui kardad, et need võivad meelest minna, siis kirjuta koodid üles “šifreerituna” – näiteks maskeeri need telefoninumbriteks ja säilita neid kindlas kohas, oma arvuti ja telefoni juurest turvalises kauguses.Ära mitte kunagi hoia oma mobiiltelefoni ja PIN- ja PUK-koode ühes kohas koos! Kui vajad PIN-koode harva, on oht, et need lähevad meelest, ja nii tundub mugav koodid kohe “käepärast” hoida. Ära siiski tee seda, sest kui sinu koju, kontorisse või koti lähedusse  satub pahatahtlik inimene, võid lisaks telefonist ilma jäämisele langeda ka identiteedivarguse ohvriks. Kui annad oma mobiiltelefoni teise isiku kasutusse, ära jaga temaga oma mobiil-ID PIN- ja PUK-koode! Kohe, kui sul on kahtluseid, et sinu PIN-koodid on kellelegi teisele teada, kel võib tekkida ligipääs su nutiseadmetele, tuleks PIN- ja PUK-koodid välja vahetada!Mida teha, kui su mobiiltelefon on varastatud või kadunud?Kui sa oledkaotanud oma mobiil-ID SIM-kaardi(enamasti juhtub see koos nutitelefoni kadumise või vargusega), teavita sellest koheselt oma mobiilsideoperaatorit. Mobiilsideoperaator saab seejärel peatada sinu mobiil-ID sertifikaadid: nii oled kaitstud identiteedivarguse eest. Juhul,kui leiad oma telefoni taas üles, saad jätkata vana SIM-kaardi kasutamist helistamiseks, sõnumineerimiseks jne, ent mobiil-ID funktsionaalsuse taastamiseks on sul vaja oma mobiilioperaatorilt uus mobiil-ID SIM-kaart tellida. Uue mobiil-ID SIM-kaardi saamiseks võta ühendust oma operaatoriga!
+- Mobiil-ID: mID PIN-koodid  Mobiil-ID kasutamiseks vajalikud PIN-koodid leiad oma SIM-kaardi ümbrise tagumiselt küljelt:NB! Ära aja omavahel segi SIM-kaardi üldiseid ning mobiil-ID kasutamiseks vajalikke PIN-koode!PIN- ja PUK-koodide vahetamiseks ava oma nutitelefonis olev mobiil-ID menüü.
+Mobiil-ID: mID PIN-koodid  (#mobiil-id-mid-pin-koodid_1)
+
+
+
+
+
+Mobiil-ID kasutamiseks vajalikud PIN-koodid leiad oma SIM-kaardi ümbrise tagumiselt küljelt:
+NB! Ära aja omavahel segi SIM-kaardi üldiseid ning mobiil-ID kasutamiseks vajalikke PIN-koode!
+PIN- ja PUK-koodide vahetamiseks ava oma nutitelefonis olev mobiil-ID menüü.
+
+
+- Mobiil-ID: PIN-koodide vahetamine  Kui sa oled unustanud PIN1 ja/või PIN2-koodi ningei tea oma PUK-koodi, on ainus viis mobiil-ID kasutamise jätkamiseks uus SIM-kaart tellida. Mobiil-ID puhul ei ole uute PIN-koodide väljastamine ilma SIM-kaardi vahetuseta võimalik. Täpsemalt Mobiil-ID ja PIN-koodide vahetamise kohta saab lugeda operaatorite kodulehelt:Kuisul on PUK-kood alles, saad PIN-koode taastada ja vahetada oma telefonis asuva mobiil-ID menüü kaudu. NB! PUK-kood lukustub kolme järjestikuse vale sisestuse korral. Lukustunud või kaotatud PUK-koodi korral tuleb samuti mobiil-ID kasutamise jätkamiseks SIM-kaart välja vahetada. Uue SIM-kaardi saab enda operaatori poole pöördumisel. Android seadmetes mobiil-ID PIN-koodide muutmine:Android seadmetes võivad asukohad ja Mobiil-ID rakenduste nimetuste osas erineda, enamjaolt asuvad Mobiil-ID seadistused rakenduste all. Ava oma telefonis valikrakendused(applications, apps) ja vali vastavalt oma mobiilioperaatorile kasTelia(Telia),Tele2 Menu(Tele2) võiElisa(Elisa). Osadel mudelitel võib esineda kaMobiil-ID,SIM-tööriistakomplektvõiSIM-toolkitnimeline rakendus. Sul on kaks valikut:“Tühista blokeering” vabastab lukku läinud PIN-koodid.“Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta.iOS seadmetes mobiil-ID PIN-koodide muutmineAva telefoni seaded (Settings) ning liiguMobile Service→ (kui telefonis on mitu SIM kaarti, siis vali mobiil-IDga kaart) →SIM Applications. Sul on kaks valikut:“Tühista blokeering” vabastab lukku läinud PIN-koodid“Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta
+Mobiil-ID: PIN-koodide vahetamine  (#mobiil-id-pin-koodide-vahetamine_2)
+
+
+
+
+
+Kui sa oled unustanud PIN1 ja/või PIN2-koodi ning ei tea oma PUK-koodi , on ainus viis mobiil-ID kasutamise jätkamiseks uus SIM-kaart tellida. Mobiil-ID puhul ei ole uute PIN-koodide väljastamine ilma SIM-kaardi vahetuseta võimalik.
+Täpsemalt Mobiil-ID ja PIN-koodide vahetamise kohta saab lugeda operaatorite kodulehelt:
+(https://www.telia.ee/abi/juhend/1505/mobiil-id-pin-koodid)
+(https://www.elisa.ee/et/abi/abikeskus/telefon/mobiiltelefon/sim-kaardid-puk-telefon-kadunud/kust-saan-teada-oma-pin-ja-puk)
+(https://tele2.ee/abi/artikkel/4412918893329-mobiil-id-pin-ja-puk-koodid)
+Kui sul on PUK-kood alles , saad PIN-koode taastada ja vahetada oma telefonis asuva mobiil-ID menüü kaudu. NB! PUK-kood lukustub kolme järjestikuse vale sisestuse korral. Lukustunud või kaotatud PUK-koodi korral tuleb samuti mobiil-ID kasutamise jätkamiseks SIM-kaart välja vahetada. Uue SIM-kaardi saab enda operaatori poole pöördumisel.
+Android seadmetes mobiil-ID PIN-koodide muutmine:
+Android seadmetes võivad asukohad ja Mobiil-ID rakenduste nimetuste osas erineda, enamjaolt asuvad Mobiil-ID seadistused rakenduste all. Ava oma telefonis valik rakendused ( applications, apps ) ja vali vastavalt oma mobiilioperaatorile kas Telia (Telia), Tele2 Menu (Tele2) või Elisa (Elisa). Osadel mudelitel võib esineda ka Mobiil-ID,SIM-tööriistakomplekt või SIM-toolkit nimeline rakendus.
+Sul on kaks valikut:
+“Tühista blokeering” vabastab lukku läinud PIN-koodid.  “Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta.
+- “Tühista blokeering” vabastab lukku läinud PIN-koodid.
+- “Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta.
+iOS seadmetes mobiil-ID PIN-koodide muutmine
+Ava telefoni seaded ( Settings ) ning liigu Mobile Service → (kui telefonis on mitu SIM kaarti, siis vali mobiil-IDga kaart) → SIM Applications.
+Sul on kaks valikut:
+“Tühista blokeering” vabastab lukku läinud PIN-koodid  “Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta
+- “Tühista blokeering” vabastab lukku läinud PIN-koodid
+- “Muuda koode” võimaldab PIN1-, PIN2- ja PUK-koodid ära muuta
+
+
+- Mobiil-ID: PIN-koodide turvalisus  Selleks, et PIN-koodid hästi meeles püsiksid, ent siiski sinu elektroonilise identiteedi turvaliselt kaitstuna hoiaksid, tuleks sulle automaatselt väljastatud PIN- ja PUK-koodid ära vahetada. Soovitused turvaliste PIN-koodide valikuks:Vali sellised PIN- ja PUK-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata.Ära muuda oma PIN1-, PIN2- ja PUK-koode ühesuguseks! Loo selle asemel mõni vaid sulle teadaolev süsteem, mille abil õige koodi vajadusel tuletada suudad. Sinu jaoks tähendusrikaste kuupäevade kasutamine PIN-koodides on hea mõte juhul, kui need kuupäevad kõigi teiste jaoks ilmselged pole. Väldi iseenda ja oma pereliikmete sünnikuupäevi, oma abiellumise kuupäeva jms.Ära kasuta PIN-koodidena liiga lihtsaid numbrikombinatsioone (0000, 1111, 1234 jms), oma aadressi või oma isikukoodi osi!Kuidas hoida PIN-koode kaitstuna?Õpi oma PIN-koodid pähe! Kui kardad, et need võivad meelest minna, siis kirjuta koodid üles “šifreerituna” – näiteks maskeeri need telefoninumbriteks ja säilita neid kindlas kohas, oma arvuti ja telefoni juurest turvalises kauguses.Ära mitte kunagi hoia oma mobiiltelefoni ja PIN- ja PUK-koode ühes kohas koos! Kui vajad PIN-koode harva, on oht, et need lähevad meelest, ja nii tundub mugav koodid kohe “käepärast” hoida. Ära siiski tee seda, sest kui sinu koju, kontorisse või koti lähedusse  satub pahatahtlik inimene, võid lisaks telefonist ilma jäämisele langeda ka identiteedivarguse ohvriks. Kui annad oma mobiiltelefoni teise isiku kasutusse, ära jaga temaga oma mobiil-ID PIN- ja PUK-koode! Kohe, kui sul on kahtluseid, et sinu PIN-koodid on kellelegi teisele teada, kel võib tekkida ligipääs su nutiseadmetele, tuleks PIN- ja PUK-koodid välja vahetada!Mida teha, kui su mobiiltelefon on varastatud või kadunud?Kui sa oledkaotanud oma mobiil-ID SIM-kaardi(enamasti juhtub see koos nutitelefoni kadumise või vargusega), teavita sellest koheselt oma mobiilsideoperaatorit. Mobiilsideoperaator saab seejärel peatada sinu mobiil-ID sertifikaadid: nii oled kaitstud identiteedivarguse eest. Juhul,kui leiad oma telefoni taas üles, saad jätkata vana SIM-kaardi kasutamist helistamiseks, sõnumineerimiseks jne, ent mobiil-ID funktsionaalsuse taastamiseks on sul vaja oma mobiilioperaatorilt uus mobiil-ID SIM-kaart tellida. Uue mobiil-ID SIM-kaardi saamiseks võta ühendust oma operaatoriga!
+Mobiil-ID: PIN-koodide turvalisus  (#mobiil-id-pin-koodide-turvalisus_3)
+
+
+
+
+
+Selleks, et PIN-koodid hästi meeles püsiksid, ent siiski sinu elektroonilise identiteedi turvaliselt kaitstuna hoiaksid, tuleks sulle automaatselt väljastatud PIN- ja PUK-koodid ära vahetada.
+Soovitused turvaliste PIN-koodide valikuks:
+Vali sellised PIN- ja PUK-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata.  Ära muuda oma PIN1-, PIN2- ja PUK-koode ühesuguseks! Loo selle asemel mõni vaid sulle teadaolev süsteem, mille abil õige koodi vajadusel tuletada suudad.  Sinu jaoks tähendusrikaste kuupäevade kasutamine PIN-koodides on hea mõte juhul, kui need kuupäevad kõigi teiste jaoks ilmselged pole. Väldi iseenda ja oma pereliikmete sünnikuupäevi, oma abiellumise kuupäeva jms.  Ära kasuta PIN-koodidena liiga lihtsaid numbrikombinatsioone (0000, 1111, 1234 jms), oma aadressi või oma isikukoodi osi!
+- Vali sellised PIN- ja PUK-koodid, mida sul on lihtne meeles pidada või tuletada, teistel aga keeruline ära arvata.
+- Ära muuda oma PIN1-, PIN2- ja PUK-koode ühesuguseks! Loo selle asemel mõni vaid sulle teadaolev süsteem, mille abil õige koodi vajadusel tuletada suudad.
+- Sinu jaoks tähendusrikaste kuupäevade kasutamine PIN-koodides on hea mõte juhul, kui need kuupäevad kõigi teiste jaoks ilmselged pole. Väldi iseenda ja oma pereliikmete sünnikuupäevi, oma abiellumise kuupäeva jms.
+- Ära kasuta PIN-koodidena liiga lihtsaid numbrikombinatsioone (0000, 1111, 1234 jms), oma aadressi või oma isikukoodi osi!
+Kuidas hoida PIN-koode kaitstuna?
+Õpi oma PIN-koodid pähe! Kui kardad, et need võivad meelest minna, siis kirjuta koodid üles “šifreerituna” – näiteks maskeeri need telefoninumbriteks ja säilita neid kindlas kohas, oma arvuti ja telefoni juurest turvalises kauguses.  Ära mitte kunagi hoia oma mobiiltelefoni ja PIN- ja PUK-koode ühes kohas koos! Kui vajad PIN-koode harva, on oht, et need lähevad meelest, ja nii tundub mugav koodid kohe “käepärast” hoida. Ära siiski tee seda, sest kui sinu koju, kontorisse või koti lähedusse  satub pahatahtlik inimene, võid lisaks telefonist ilma jäämisele langeda ka identiteedivarguse ohvriks.  Kui annad oma mobiiltelefoni teise isiku kasutusse, ära jaga temaga oma mobiil-ID PIN- ja PUK-koode! Kohe, kui sul on kahtluseid, et sinu PIN-koodid on kellelegi teisele teada, kel võib tekkida ligipääs su nutiseadmetele, tuleks PIN- ja PUK-koodid välja vahetada!
+- Õpi oma PIN-koodid pähe ! Kui kardad, et need võivad meelest minna, siis kirjuta koodid üles “šifreerituna” – näiteks maskeeri need telefoninumbriteks ja säilita neid kindlas kohas, oma arvuti ja telefoni juurest turvalises kauguses.
+- Ära mitte kunagi hoia oma mobiiltelefoni ja PIN- ja PUK-koode ühes kohas koos! Kui vajad PIN-koode harva, on oht, et need lähevad meelest, ja nii tundub mugav koodid kohe “käepärast” hoida. Ära siiski tee seda, sest kui sinu koju, kontorisse või koti lähedusse  satub pahatahtlik inimene, võid lisaks telefonist ilma jäämisele langeda ka identiteedivarguse ohvriks.
+- Kui annad oma mobiiltelefoni teise isiku kasutusse, ära jaga temaga oma mobiil-ID PIN- ja PUK-koode! Kohe, kui sul on kahtluseid, et sinu PIN-koodid on kellelegi teisele teada, kel võib tekkida ligipääs su nutiseadmetele, tuleks PIN- ja PUK-koodid välja vahetada!
+Mida teha, kui su mobiiltelefon on varastatud või kadunud?
+Kui sa oled kaotanud oma mobiil-ID SIM-kaardi (enamasti juhtub see koos nutitelefoni kadumise või vargusega), teavita sellest koheselt oma mobiilsideoperaatorit.
+Mobiilsideoperaator saab seejärel peatada sinu mobiil-ID sertifikaadid: nii oled kaitstud identiteedivarguse eest.
+Juhul, kui leiad oma telefoni taas üles , saad jätkata vana SIM-kaardi kasutamist helistamiseks, sõnumineerimiseks jne, ent mobiil-ID funktsionaalsuse taastamiseks on sul vaja oma mobiilioperaatorilt uus mobiil-ID SIM-kaart tellida. Uue mobiil-ID SIM-kaardi saamiseks võta ühendust oma operaatoriga!
+
+
+Mobiil-ID PIN-koodid väljastatakse sulle koos mobiil-ID SIM-kaardiga. Leiad need SIM-kaardi ümbriselt kraabitava pinna alt. Koos mobiil-ID toega SIM-kaardiga saad kaasa kolm koodi.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

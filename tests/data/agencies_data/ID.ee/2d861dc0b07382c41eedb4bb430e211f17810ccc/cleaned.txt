@@ -1,0 +1,25 @@
+Kas soovisid oma arvutisse ID-tarkvara paigaldada ja said vastuseks veateate:
+„Teie arvuti sätted lubavad Store’st installida ainult kinnitatud rakendusi“?
+See veateade tähendab, et hetkeseadete juures on sinu arvutisse lubatud tarkvara paigaldada ainult Store kaudu. ID-tarkvara paigaldamiseks on vaja, et muudaksid oma arvuti seadeid ja lubaksid tarkvara paigaldamise kõikidest kanalitest.
+Veateade: teie arvuti sätted lubavad Store’ist installida ainult kinnitatud rakendusi  (#veateade-teie-arvuti_1886)
+
+1. Ava “Windows start” ning sealt “Sätted”.
+Leiad selle, klõpsates arvutiekraani vasakus alumises nurgas oleval Windows ikoonil (nelja ruuduga aken) ning seejärel Sätted ( Settings ) valikul (hammasratta ikoon).
+2. Vali avanenud valikust “Rakendused”
+“Rakenduste” (inglise keeles Applications ) valik on tähistatud loetelu ikooniga (täpid ja kriipsud reas). Klõpsa sellel.
+3. Ava “Rakendused ja funktsioonid”
+Ava Rakenduste alajaotuse vasakust menüüst punkt “Rakendused ja funktsioonid” ( Applications and functions ). Seejärel leia avanenud aknas pealkiri “Rakenduste installimine” ning vali rippmenüüst “Luba rakendused kõikjalt” ( Allow all applications ).
+Pärast seda peaks sul õnnestuma ka ID-tarkvara paigaldamine (/artikkel/paigalda-id-tarkvara) arvutisse!
+Arvuti seadete muutmine veateate „Teie arvuti sätted lubavad Store’st installida ainult kinnitatud rakendusi“ lahendamiseks.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

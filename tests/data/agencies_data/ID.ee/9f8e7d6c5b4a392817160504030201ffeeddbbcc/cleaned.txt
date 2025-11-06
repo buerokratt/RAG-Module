@@ -1,0 +1,116 @@
+ID kasutajatugi aitab sul lahendada ID-kaardi või mobiil-ID kasutamisel tekkinud probleeme. Kõige lihtsam on meiega ühendust võtta läbi id.ee veebis asuva „Kirjuta ID-abile“ (https://www.id.ee/artikkel/teavita-meid-probleemist/) – siis saad oma küsimustele vastused kirjalike juhistena.
+Mida täpsem info on ID kasutajatoel olemas sinu arvuti ja seadete kohta, seda lihtsamalt järgitavad juhised saame me sulle saata. Lisaks oma probleemi täpsele kirjeldamisele tasub abivormiga kaasa panna ka arvuti diagnostika- või/ja logifailid .
+Nende salvestamine on lihtne ning sul ei tasu muretseda, need ei sisalda sinu isikuandmeid: ainult infot sinu poolt kasutatava tarkvara ning seadmete versioonide kohta. Saada eelnevalt arvutisse kausta või töölauale salvestatud failid ning oota edasisi juhtnööre.
+Diagnostika faili ning logifaili genereerimine DigiDoc4 abilDigiDoc4 rakenduse abil on sul võimalik genereerida ja salvestadadiagnostika faili,libdigidocppteegining DigiDoc4 rakenduselogifailid. Vaikimisi on DigiDoc4 rakenduses logifailide genereeriminevälja lülitatud. Diagnostika salvestamiseks oma arvutisse tee nii:Ava DigiDoc4 rakendus ja vali sealt „Seaded“.Leiad seadete hammasrattaga ikooni DigiDoc4 paremast ülemisest nurgast. Vali avanevast aknast „Diagnostika“.See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:Salvesta diagnostika raport. Saad seda teha kahel lihtsal moel – kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil„Salvesta diagnostika“.Vali diagnostika failile oma arvutis hästileitav asukoht! Diagnostika raport salvestatakse.txtformaadis. Millist infot DigiDoc4 diagnostika sisaldab?DigiDoc4 diagnostika kogub informatsiooni operatsioonisüsteemi, baastarkvara versioonide ja kaardilugeja draiverite kohta ja kontrollib ID-kaardiga seotud funktsioone: kaardi tuvastamine, kaardilugeja tuvastamine jms. Logfailide ning libdigidocpp teegi salvestamiseks oma arvutisse tee nii:Ava DigiDoc4 rakenduse seaded ning tee lahti „Diagnostika“.Ava DigiDoc4 rakendus ja selle ülemisest paremast nurgast„Seaded“. Vasakul vertikaalses menüüs on valik„Diagnostika“. Tee see lahti. Aktiveeri logifaili genereerimineLogifailide genereerimiseks märgi ära valik“Aktiveeri ühekordne logifaili genereerimine”.Pärast“Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada DigiDoc4 rakendus. WindowsijaUbuntuoperatsioonisüsteemis tuleb DigiDoc4 rakenduse taaskäivitamiseks vajutada“Jah”nupule. Nende operatsioonisüsteemide puhul näeb teavituse aken väljaselline:macOSoperatsioonisüsteemis tuleb sulgeda DigiDoc4 rakendus ja see uuesti avada. Selle operatsioonisüsteemi puhul näeb teavituse aken väljaselline:Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus. Logifailide salvestamine. Logifailide salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul“Salvesta logifail”.Vali logifailidele oma arvutis hästi leitav asukoht (nt. arvuti töölauale).Logifaile on 1 või rohkem ja need salvestatakse.txtformaadis.  Diagnostika faili ning logifaili genereerimine RIA DigiDoc rakenduse abilRIA DigiDoc abil on sul võimalik genereerida ja salvestadadiagnostika failininglibdigidocpp teegi logifaili. Vaikimisi on RIA DigiDocis logifaili genereeriminevälja lülitatud. Diagnostika salvestamiseks oma mobiiltelefoni tee nii:Ava RIA DigiDoc seaded ning vali„Diagnostika“.Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti. Diagnostika faili eelvaade. See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:Androidis:iOS's:Salvesta diagnostika raport. Diagnostika faili salvestamiseks klõpsa diagnostika akna alaservas oleval nupul„SALVESTA DIAGNOSTIKA”.Vali diagnostika failile oma telefonis hästileitav asukoht. Diagnostika fail salvestatakse.txtformaadis. Logfaili (ning ka libdigidocpp teegi) salvestamiseks oma mobiiltelefoni tee nii:Ava RIA DigiDoc seaded ning vali „Diagnostika“Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti. Aktiveeri logifaili genereerimineLogifaili genereerimiseks märgi diagnostika all olev valik„Aktiveeri ühekordne logifaili genereerimine”.Androidis:iOS's:Pärast„Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada RIA DigiDoc. RIA DigiDoci taaskäivitamiseks vajutada„JAH”või„OK”nupule. Androidis:iOS's:Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus. Logifaili salvestamine. Logifaili salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul„SALVESTA LOGIFAIL”.Androidis:iOS's:Vali logifailile oma telefonis hästileitav asukoht. Logifail salvestatakse .txt formaadis.  Windows arvutites ID-tarkvara logifailide salvestamineSelleks, et saaksime sind kiiresti ja täpsete juhistega abistada, on meil vaja lisainfot sinu arvuti ja seadete kohta. See aitab sul tekkinud probleemi täpsustada ning võimaldab kõik vajalikud failid probleemikirjeldusega kaasa panna. Tavaliselt võivad need logifailid olla kasulikud, kui ID-tarkvarapole võimalikinstallida, värskendada või käivitada. Vajalike failide leidmine sinu (Windows) arvutist on lihtne:Ava„Start”menüü, kuhu kirjuta„Run”ning vajuta„Enter” või vajuta klaviatuuril Windows klahvi(WinKey)+ R. Avanenud aknasse kirjuta„%temp%” ning vajuta„Enter”.Akna paremasse serva kirjuta eID ning leia kõik„eID_software”nimelised logifailid selle päeva seisuga, kui ID-tarkvara käivitamine või paigaldus/uuendus ebaõnnestus ning salvesta need nt. kausta või töölauale. Kui selliseid logifaile on üsna palju, on parem need arhiivi lisadazip- võirar-vormingus.
+- Diagnostika faili ning logifaili genereerimine DigiDoc4 abil  DigiDoc4 rakenduse abil on sul võimalik genereerida ja salvestadadiagnostika faili,libdigidocppteegining DigiDoc4 rakenduselogifailid. Vaikimisi on DigiDoc4 rakenduses logifailide genereeriminevälja lülitatud. Diagnostika salvestamiseks oma arvutisse tee nii:Ava DigiDoc4 rakendus ja vali sealt „Seaded“.Leiad seadete hammasrattaga ikooni DigiDoc4 paremast ülemisest nurgast. Vali avanevast aknast „Diagnostika“.See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:Salvesta diagnostika raport. Saad seda teha kahel lihtsal moel – kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil„Salvesta diagnostika“.Vali diagnostika failile oma arvutis hästileitav asukoht! Diagnostika raport salvestatakse.txtformaadis. Millist infot DigiDoc4 diagnostika sisaldab?DigiDoc4 diagnostika kogub informatsiooni operatsioonisüsteemi, baastarkvara versioonide ja kaardilugeja draiverite kohta ja kontrollib ID-kaardiga seotud funktsioone: kaardi tuvastamine, kaardilugeja tuvastamine jms. Logfailide ning libdigidocpp teegi salvestamiseks oma arvutisse tee nii:Ava DigiDoc4 rakenduse seaded ning tee lahti „Diagnostika“.Ava DigiDoc4 rakendus ja selle ülemisest paremast nurgast„Seaded“. Vasakul vertikaalses menüüs on valik„Diagnostika“. Tee see lahti. Aktiveeri logifaili genereerimineLogifailide genereerimiseks märgi ära valik“Aktiveeri ühekordne logifaili genereerimine”.Pärast“Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada DigiDoc4 rakendus. WindowsijaUbuntuoperatsioonisüsteemis tuleb DigiDoc4 rakenduse taaskäivitamiseks vajutada“Jah”nupule. Nende operatsioonisüsteemide puhul näeb teavituse aken väljaselline:macOSoperatsioonisüsteemis tuleb sulgeda DigiDoc4 rakendus ja see uuesti avada. Selle operatsioonisüsteemi puhul näeb teavituse aken väljaselline:Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus. Logifailide salvestamine. Logifailide salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul“Salvesta logifail”.Vali logifailidele oma arvutis hästi leitav asukoht (nt. arvuti töölauale).Logifaile on 1 või rohkem ja need salvestatakse.txtformaadis.
+Diagnostika faili ning logifaili genereerimine DigiDoc4 abil  (#diagnostika-faili-ning_1)
+
+
+
+
+
+DigiDoc4 rakenduse abil on sul võimalik genereerida ja salvestada diagnostika faili , libdigidocpp  teegi ning DigiDoc4 rakenduse logifailid . Vaikimisi on DigiDoc4 rakenduses logifailide genereerimine välja lülitatud .
+Diagnostika salvestamiseks oma arvutisse tee nii:
+Ava DigiDoc4 rakendus ja vali sealt „Seaded“.Leiad seadete hammasrattaga ikooni DigiDoc4 paremast ülemisest nurgast.  Vali avanevast aknast „Diagnostika“.See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:  Salvesta diagnostika raport. Saad seda teha kahel lihtsal moel – kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil„Salvesta diagnostika“.Vali diagnostika failile oma arvutis hästileitav asukoht! Diagnostika raport salvestatakse.txtformaadis.
+- Ava DigiDoc4 rakendus ja vali sealt „Seaded“ .  Leiad seadete hammasrattaga ikooni DigiDoc4 paremast ülemisest nurgast.
+
+
+- Vali avanevast aknast „Diagnostika“ .  See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:
+
+- Salvesta diagnostika raport .  Saad seda teha kahel lihtsal moel – kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil „Salvesta diagnostika“ .    Vali diagnostika failile oma arvutis hästileitav asukoht! Diagnostika raport salvestatakse .txt formaadis.
+
+
+
+
+Millist infot DigiDoc4 diagnostika sisaldab?
+DigiDoc4 diagnostika kogub informatsiooni operatsioonisüsteemi, baastarkvara versioonide ja kaardilugeja draiverite kohta ja kontrollib ID-kaardiga seotud funktsioone: kaardi tuvastamine, kaardilugeja tuvastamine jms.
+Logfailide ning libdigidocpp teegi salvestamiseks oma arvutisse tee nii:
+Ava DigiDoc4 rakenduse seaded ning tee lahti „Diagnostika“.Ava DigiDoc4 rakendus ja selle ülemisest paremast nurgast„Seaded“. Vasakul vertikaalses menüüs on valik„Diagnostika“. Tee see lahti.  Aktiveeri logifaili genereerimineLogifailide genereerimiseks märgi ära valik“Aktiveeri ühekordne logifaili genereerimine”.Pärast“Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada DigiDoc4 rakendus. WindowsijaUbuntuoperatsioonisüsteemis tuleb DigiDoc4 rakenduse taaskäivitamiseks vajutada“Jah”nupule. Nende operatsioonisüsteemide puhul näeb teavituse aken väljaselline:macOSoperatsioonisüsteemis tuleb sulgeda DigiDoc4 rakendus ja see uuesti avada. Selle operatsioonisüsteemi puhul näeb teavituse aken väljaselline:  Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus.  Logifailide salvestamine. Logifailide salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul“Salvesta logifail”.Vali logifailidele oma arvutis hästi leitav asukoht (nt. arvuti töölauale).Logifaile on 1 või rohkem ja need salvestatakse.txtformaadis.
+- Ava DigiDoc4 rakenduse seaded ning tee lahti „Diagnostika“ .  Ava DigiDoc4 rakendus ja selle ülemisest paremast nurgast „Seaded“ . Vasakul vertikaalses menüüs on valik „Diagnostika“ . Tee see lahti.
+
+
+- Aktiveeri logifaili genereerimine  Logifailide genereerimiseks märgi ära valik “Aktiveeri ühekordne logifaili genereerimine” .   Pärast “Aktiveeri ühekordne logifaili genereerimine” valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada DigiDoc4 rakendus. Windowsi ja Ubuntu operatsioonisüsteemis tuleb DigiDoc4 rakenduse taaskäivitamiseks vajutada “Jah” nupule. Nende operatsioonisüsteemide puhul näeb teavituse aken välja selline :  macOS operatsioonisüsteemis tuleb sulgeda DigiDoc4 rakendus ja see uuesti avada. Selle operatsioonisüsteemi puhul näeb teavituse aken välja selline :
+
+
+
+
+- Korda tavapäraseid toiminguid .  Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus.
+
+
+- Logifailide salvestamine .  Logifailide salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul “Salvesta logifail” .  Vali logifailidele oma arvutis hästi leitav asukoht (nt. arvuti töölauale).  Logifaile on 1 või rohkem ja need salvestatakse .txt formaadis.
+
+
+
+
+- Diagnostika faili ning logifaili genereerimine RIA DigiDoc rakenduse abil  RIA DigiDoc abil on sul võimalik genereerida ja salvestadadiagnostika failininglibdigidocpp teegi logifaili. Vaikimisi on RIA DigiDocis logifaili genereeriminevälja lülitatud. Diagnostika salvestamiseks oma mobiiltelefoni tee nii:Ava RIA DigiDoc seaded ning vali„Diagnostika“.Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti. Diagnostika faili eelvaade. See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:Androidis:iOS's:Salvesta diagnostika raport. Diagnostika faili salvestamiseks klõpsa diagnostika akna alaservas oleval nupul„SALVESTA DIAGNOSTIKA”.Vali diagnostika failile oma telefonis hästileitav asukoht. Diagnostika fail salvestatakse.txtformaadis. Logfaili (ning ka libdigidocpp teegi) salvestamiseks oma mobiiltelefoni tee nii:Ava RIA DigiDoc seaded ning vali „Diagnostika“Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti. Aktiveeri logifaili genereerimineLogifaili genereerimiseks märgi diagnostika all olev valik„Aktiveeri ühekordne logifaili genereerimine”.Androidis:iOS's:Pärast„Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada RIA DigiDoc. RIA DigiDoci taaskäivitamiseks vajutada„JAH”või„OK”nupule. Androidis:iOS's:Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus. Logifaili salvestamine. Logifaili salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul„SALVESTA LOGIFAIL”.Androidis:iOS's:Vali logifailile oma telefonis hästileitav asukoht. Logifail salvestatakse .txt formaadis.
+Diagnostika faili ning logifaili genereerimine RIA DigiDoc rakenduse abil  (#diagnostika-faili-ning_2)
+
+
+
+
+
+RIA DigiDoc abil on sul võimalik genereerida ja salvestada diagnostika faili ning libdigidocpp teegi logifaili .    Vaikimisi on RIA DigiDocis logifaili genereerimine välja lülitatud .
+
+
+Diagnostika salvestamiseks oma mobiiltelefoni tee nii:
+Ava RIA DigiDoc seaded ning vali„Diagnostika“.Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti.  Diagnostika faili eelvaade. See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:Androidis:iOS's:  Salvesta diagnostika raport. Diagnostika faili salvestamiseks klõpsa diagnostika akna alaservas oleval nupul„SALVESTA DIAGNOSTIKA”.Vali diagnostika failile oma telefonis hästileitav asukoht. Diagnostika fail salvestatakse.txtformaadis.
+- Ava RIA DigiDoc seaded ning vali„Diagnostika“ .  Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast „kolm punkti“ . Vasakul vertikaalses menüüs on valik „DIAGNOSTIKA“ . Tee see lahti.
+
+
+- Diagnostika faili eelvaade .  See käivitab infokogumise protsessi, mille tulemusena ilmub su ekraanile umbes selline raport:  Androidis:iOS's:
+
+
+- Salvesta diagnostika raport .  Diagnostika faili salvestamiseks klõpsa diagnostika akna alaservas oleval nupul „SALVESTA DIAGNOSTIKA” .   Vali diagnostika failile oma telefonis hästileitav asukoht. Diagnostika fail salvestatakse .txt formaadis.
+
+
+Logfaili (ning ka libdigidocpp teegi) salvestamiseks oma mobiiltelefoni tee nii:
+Ava RIA DigiDoc seaded ning vali „Diagnostika“Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast„kolm punkti“. Vasakul vertikaalses menüüs on valik„DIAGNOSTIKA“. Tee see lahti.  Aktiveeri logifaili genereerimineLogifaili genereerimiseks märgi diagnostika all olev valik„Aktiveeri ühekordne logifaili genereerimine”.Androidis:iOS's:Pärast„Aktiveeri ühekordne logifaili genereerimine”valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada RIA DigiDoc. RIA DigiDoci taaskäivitamiseks vajutada„JAH”või„OK”nupule. Androidis:iOS's:  Korda tavapäraseid toiminguid. Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus.  Logifaili salvestamine. Logifaili salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul„SALVESTA LOGIFAIL”.Androidis:iOS's:Vali logifailile oma telefonis hästileitav asukoht. Logifail salvestatakse .txt formaadis.
+- Ava RIA DigiDoc seaded ning vali „Diagnostika“  Ava  RIA DigiDoc rakendus ja selle ülemisest paremast nurgast „kolm punkti“ . Vasakul vertikaalses menüüs on valik „DIAGNOSTIKA“ . Tee see lahti.
+
+
+- Aktiveeri logifaili genereerimine  Logifaili genereerimiseks märgi diagnostika all olev valik „Aktiveeri ühekordne logifaili genereerimine” . Androidis:iOS's: Pärast „Aktiveeri ühekordne logifaili genereerimine” valimist kuvatakse sulle teade, et logifaili genereerimiseks ehk koostamiseks on vaja taaskäivitada RIA DigiDoc.    RIA DigiDoci taaskäivitamiseks vajutada „JAH” või „OK” nupule.   Androidis:iOS's:
+
+
+
+
+- Korda tavapäraseid toiminguid .  Seejärel proovi uuesti korrata sama toimingut, mis enne ebaõnnestus.
+
+
+- Logifaili salvestamine .  Logifaili salvestamiseks klõpsa diagnostikaakna alaservas oleval nupul „SALVESTA LOGIFAIL” .  Androidis:iOS's: Vali logifailile oma telefonis hästileitav asukoht. Logifail salvestatakse .txt formaadis.
+
+
+
+
+
+
+- Windows arvutites ID-tarkvara logifailide salvestamine  Selleks, et saaksime sind kiiresti ja täpsete juhistega abistada, on meil vaja lisainfot sinu arvuti ja seadete kohta. See aitab sul tekkinud probleemi täpsustada ning võimaldab kõik vajalikud failid probleemikirjeldusega kaasa panna. Tavaliselt võivad need logifailid olla kasulikud, kui ID-tarkvarapole võimalikinstallida, värskendada või käivitada. Vajalike failide leidmine sinu (Windows) arvutist on lihtne:Ava„Start”menüü, kuhu kirjuta„Run”ning vajuta„Enter” või vajuta klaviatuuril Windows klahvi(WinKey)+ R. Avanenud aknasse kirjuta„%temp%” ning vajuta„Enter”.Akna paremasse serva kirjuta eID ning leia kõik„eID_software”nimelised logifailid selle päeva seisuga, kui ID-tarkvara käivitamine või paigaldus/uuendus ebaõnnestus ning salvesta need nt. kausta või töölauale. Kui selliseid logifaile on üsna palju, on parem need arhiivi lisadazip- võirar-vormingus.
+Windows arvutites ID-tarkvara logifailide salvestamine  (#windows-arvutites-id-tarkvara_3)
+
+
+
+
+
+Selleks, et saaksime sind kiiresti ja täpsete juhistega abistada, on meil vaja lisainfot sinu arvuti ja seadete kohta. See aitab sul tekkinud probleemi täpsustada ning võimaldab kõik vajalikud failid probleemikirjeldusega kaasa panna.
+Tavaliselt võivad need logifailid olla kasulikud, kui ID-tarkvara pole võimalik installida, värskendada või käivitada.
+Vajalike failide leidmine sinu (Windows) arvutist on lihtne:
+Ava„Start”menüü, kuhu kirjuta„Run”ning vajuta„Enter” või vajuta klaviatuuril Windows klahvi(WinKey)+ R.  Avanenud aknasse kirjuta„%temp%” ning vajuta„Enter”.
+- Ava „Start” menüü, kuhu kirjuta „Run” ning vajuta „Enter ” või vajuta klaviatuuril Windows klahvi (WinKey) (/wp-content/uploads/2021/06/winkey.jpg) + R.
+- Avanenud aknasse kirjuta „%temp% ” ning vajuta „Enter ”.
+Akna paremasse serva kirjuta eID ning leia kõik„eID_software”nimelised logifailid selle päeva seisuga, kui ID-tarkvara käivitamine või paigaldus/uuendus ebaõnnestus ning salvesta need nt. kausta või töölauale.
+- Akna paremasse serva kirjuta eID ning leia kõik „eID_software” nimelised logifailid selle päeva seisuga, kui ID-tarkvara käivitamine või paigaldus/uuendus ebaõnnestus ning salvesta need nt. kausta või töölauale.
+Kui selliseid logifaile on üsna palju, on parem need arhiivi lisada zip - või rar -vormingus.
+
+
+ID kasutajatugi aitab sul lahendada ID-kaardi või mobiil-ID kasutamisel tekkinud probleeme. Kõige lihtsam on meiega ühendust võtta läbi id.ee veebis asuva „Kirjuta ID-abile“ – siis saad oma küsimustele vastused kirjalike juhistena. Mida täpsem info on…
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

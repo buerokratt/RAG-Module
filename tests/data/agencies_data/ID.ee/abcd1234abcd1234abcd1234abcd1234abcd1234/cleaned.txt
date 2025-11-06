@@ -1,0 +1,72 @@
+Kõige värskema ID-tarkvara paketi leiad alati paigalda ID-tarkvara lehelt. Meie veebileht kontrollib automaatselt, millist operatsioonisüsteemi sa kasutad, ning pakub sulle alla laadimiseks just sinu arvuti jaoks sobivaima(d) tarkvarapaki(d). Sul pole vaja teha muud, kui tarkvara alla laadida ning arvutis paigaldamine käivitada!
+Kuidas tarkvara „värskust“ eristada?  (#kuidas-tarkvara)
+
+ID-tarkvara, nagu kõiki tarkvarasid, eristatakse versiooninumbri järgi. Mida suurem on number, seda uuem ehk värskem antud tarkvara on. Kui sul on vaja valida, millist versiooni alla laadima hakkad, eelista alati kõige uuemaid tarkvaralahendusi! Nii võid olla kindel, et oled võimalikult paljude turvariskide eest kaitstud, sinu nutiseade/arvuti on töökindel ning sinu käsutuses on kõige viimasem, kasutajamugavam ja kiirem versioon töövahenditest.
+Tegelikult koosneb ID-tarkvara (ehk eID tarkvara) paljudest erinevatest komponentidest, mida me sinu elu lihtsustamiseks ühtse „pakina“ edastame. Oma versiooninumber on olemas ka igal komponendil eraldi: lisaks uudsusele võib versiooninumber eristada ka operatsioonisüsteeme, mille jaoks antud komponent mõeldud on.
+Alljärgnevad tabelid annavad ülevaate kõige uuema ID-tarkvara komponentide versioonidest.
+NB!  Kõik vajalikud tarkvara komponendid paigaldatakse arvutisse ID-tarkvara paigalduspaketi poolt, mille saab ID-tarkvara paigaldamise lehelt. Erandiks on macOS kasutajate jaoks App Store kaudu levitatav Web eID ja DigiDoc4 rakendus.
+Tarkvara paigaldamine: Windows opsüsteemi ID-tarkvara komponentide versiooniinfoInfo on uuendatud 20.08.2025, ID-tarkvara versiooni 25.8 avalikustamise järgselt. Toetatud operatsioonisüsteemid:Windows 10 (64-bit), Windows 11, Windows Server 2019, Windows Server 2022, Windows Server 2025Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarPaigalduspakkOpen-EID-25.8.18.8398.exe25.8.18.8398QTqt6.8.2RaamistikLibdigidocppdigidocpp.dll4.2.1.8358BDOC, ASiC-E allkirjastamise teekDigiDoc4qdigidoc4.exe4.8.2.5375ID-updaterid-updater.exe3.17.0.5463ID-tarkvara automaatse uuendamise moodulEestiMinidriver64AWP2.4.0.865Baasdraiver Idemia toodetud ID-kaartidega suhtlemiselEsteidShellExtensionDigidoc_ShellExt3.13.9.16Shell laiendused DigiDoc4 kliendiga allkirjastamiseks ja krüpteerimiseksWeb eIDweb-eid.exe2.7.0.906Allkirjastamise moodul Chrome, Firefox ja Edge Chromium veebilehitsejaszlib11.3.1.0OpenSSLOpenSSL3.0.16Alusteek sertifikaatidega suhtlemisellibxml22.13.8.0libxmlsec11.3.7Kõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.  Tarkvara paigaldamine: macOS opsüsteemi ID-tarkvara komponentide versiooniinfoInfo on uuendatud 20.08.2025, ID-tarkvara versiooni 25.6 avalikustamise järgselt. Toetatud operatsioonisüsteemid:macOS 13, macOS 14, macOS 15Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarID-kaardiga veebis autentimise ja allkirjastamise komponendidOpen-EID_25.5.0.1954.dmg25.5.0.1954DigiDoc4qdigidoc4.app4.8.2.4487Libdigidocppdigidocpp.framework4.2.1.337BDOC, ASiC-E allkirjastamise teekesteid-ctk-tokendesteid-ctk-tokend_1.5.0.20.pkg1.5.0.20Baasdraiver ID-kaardiga suhtlemiseleu.web-eid.web-eidweb-eid_2.7.0.6602.7.0.660Allkirjastamise moodul Chrome ja Firefox veebilehitsejasOpenSCopensc0.26.1Autentimismoodul Chrome ja Firefox veebilehitsejasOpenSSLOpenSSL3.5.1Alusteek sertifikaatidega suhtlemiselID-Updaterupdater_3.15.0.1070.pkg3.15.0.1070ID-tarkvara automaatse uuendamise mooduleu.web-eid.web-eid-safariweb-eid_2.7.0.6602.7.0.660Allkirjastamise moodul Safari veebilehitsejasQTqt6.9.1RaamistikKõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.  ​Tarkvara paigaldamine: Ubuntu opsüsteemi ID-tarkvara komponentide versiooniinfoInfo on uuendatud 20.08.2025, ID-tarkvara versiooni 25.5 avalikustamise järgselt. Toetatud operatsioonisüsteemid:Ubuntu 22.04, 24.04, 24.10, 25.04Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarMetapakkopeneid25.5.0.1953-2404Libdigidocpplibdigidocpp14.2.1.8360-2404BDOC, ASiC-E allkirjastamise teekDigiDoc4qdigidoc44.8.2.5377-2404Web eIDweb-eid2.7.0.660-2404Allkirjastamise moodul Chrome ja Firefox veebilehitsejasOpenSSLopenssl3.0.2-0ubuntu1.193.0.13-0ubuntu3.53.3.1-2ubuntu2.13.4.1-1ubuntu3Alusteek sertifikaatidega suhtlemiseksLibpcsclite1libpcsclite11.9.5-3ubuntu12.0.3-1build12.3.0-12.3.1-1Baasdraiver ID-kaardiga suhtlemiselOpenSCopensc0.26.1-1RIA3Autentimise moodul Firefox ja Chrome veebilehitsejasQTqt6.2.4 (22.04)6.4.2 (24.04)6.6.2 (24.10)6.8.3 (25.04)Raamistiklibxml22.9.13+dfsg-1ubuntu0.72.9.14+dfsg-1.3ubuntu3.32.12.7+dfsg-3ubuntu0.32.12.7+dfsg+really2.9.14-0.4ubuntu0.1libxmlsec11.3.7Kõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.
+- Tarkvara paigaldamine: Windows opsüsteemi ID-tarkvara komponentide versiooniinfo  Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.8 avalikustamise järgselt. Toetatud operatsioonisüsteemid:Windows 10 (64-bit), Windows 11, Windows Server 2019, Windows Server 2022, Windows Server 2025Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarPaigalduspakkOpen-EID-25.8.18.8398.exe25.8.18.8398QTqt6.8.2RaamistikLibdigidocppdigidocpp.dll4.2.1.8358BDOC, ASiC-E allkirjastamise teekDigiDoc4qdigidoc4.exe4.8.2.5375ID-updaterid-updater.exe3.17.0.5463ID-tarkvara automaatse uuendamise moodulEestiMinidriver64AWP2.4.0.865Baasdraiver Idemia toodetud ID-kaartidega suhtlemiselEsteidShellExtensionDigidoc_ShellExt3.13.9.16Shell laiendused DigiDoc4 kliendiga allkirjastamiseks ja krüpteerimiseksWeb eIDweb-eid.exe2.7.0.906Allkirjastamise moodul Chrome, Firefox ja Edge Chromium veebilehitsejaszlib11.3.1.0OpenSSLOpenSSL3.0.16Alusteek sertifikaatidega suhtlemisellibxml22.13.8.0libxmlsec11.3.7Kõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.
+Tarkvara paigaldamine: Windows opsüsteemi ID-tarkvara komponentide versiooniinfo  (#tarkvara-paigaldamine-windows_1)
+
+
+
+
+
+Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.8 avalikustamise järgselt.
+Toetatud operatsioonisüsteemid:
+Windows 10 (64-bit), Windows 11, Windows Server 2019, Windows Server 2022, Windows Server 2025
+Kõige värskema ID-tarkvara versiooni saad alla laadida ID-tarkvara paigaldamise lehelt.
+
+
+- Tarkvara paigaldamine: macOS opsüsteemi ID-tarkvara komponentide versiooniinfo  Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.6 avalikustamise järgselt. Toetatud operatsioonisüsteemid:macOS 13, macOS 14, macOS 15Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarID-kaardiga veebis autentimise ja allkirjastamise komponendidOpen-EID_25.5.0.1954.dmg25.5.0.1954DigiDoc4qdigidoc4.app4.8.2.4487Libdigidocppdigidocpp.framework4.2.1.337BDOC, ASiC-E allkirjastamise teekesteid-ctk-tokendesteid-ctk-tokend_1.5.0.20.pkg1.5.0.20Baasdraiver ID-kaardiga suhtlemiseleu.web-eid.web-eidweb-eid_2.7.0.6602.7.0.660Allkirjastamise moodul Chrome ja Firefox veebilehitsejasOpenSCopensc0.26.1Autentimismoodul Chrome ja Firefox veebilehitsejasOpenSSLOpenSSL3.5.1Alusteek sertifikaatidega suhtlemiselID-Updaterupdater_3.15.0.1070.pkg3.15.0.1070ID-tarkvara automaatse uuendamise mooduleu.web-eid.web-eid-safariweb-eid_2.7.0.6602.7.0.660Allkirjastamise moodul Safari veebilehitsejasQTqt6.9.1RaamistikKõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.
+Tarkvara paigaldamine: macOS opsüsteemi ID-tarkvara komponentide versiooniinfo  (#tarkvara-paigaldamine-macos_2)
+
+
+
+
+
+Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.6 avalikustamise järgselt.
+Toetatud op eratsiooni süsteemid:
+macOS 13, macOS 14, macOS 15
+Kõige värskema ID-tarkvara versiooni saad alla laadida ID-tarkvara paigaldamise lehelt.
+
+
+- ​Tarkvara paigaldamine: Ubuntu opsüsteemi ID-tarkvara komponentide versiooniinfo  Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.5 avalikustamise järgselt. Toetatud operatsioonisüsteemid:Ubuntu 22.04, 24.04, 24.10, 25.04Tarkvara komponendi nimetusKomponendi nimetus failisüsteemisVersiooni nrKommentaarMetapakkopeneid25.5.0.1953-2404Libdigidocpplibdigidocpp14.2.1.8360-2404BDOC, ASiC-E allkirjastamise teekDigiDoc4qdigidoc44.8.2.5377-2404Web eIDweb-eid2.7.0.660-2404Allkirjastamise moodul Chrome ja Firefox veebilehitsejasOpenSSLopenssl3.0.2-0ubuntu1.193.0.13-0ubuntu3.53.3.1-2ubuntu2.13.4.1-1ubuntu3Alusteek sertifikaatidega suhtlemiseksLibpcsclite1libpcsclite11.9.5-3ubuntu12.0.3-1build12.3.0-12.3.1-1Baasdraiver ID-kaardiga suhtlemiselOpenSCopensc0.26.1-1RIA3Autentimise moodul Firefox ja Chrome veebilehitsejasQTqt6.2.4 (22.04)6.4.2 (24.04)6.6.2 (24.10)6.8.3 (25.04)Raamistiklibxml22.9.13+dfsg-1ubuntu0.72.9.14+dfsg-1.3ubuntu3.32.12.7+dfsg-3ubuntu0.32.12.7+dfsg+really2.9.14-0.4ubuntu0.1libxmlsec11.3.7Kõige värskema ID-tarkvara versiooni saad alla laadidaID-tarkvara paigaldamiselehelt.
+​Tarkvara paigaldamine: Ubuntu opsüsteemi ID-tarkvara komponentide versiooniinfo  (#tarkvara-paigaldamine-ubuntu_3)
+
+
+
+
+
+Info on uuendatud 20.08.2025, ID-tarkvara versiooni 25.5 avalikustamise järgselt.
+Toetatud operatsioonisüsteemid:
+Ubuntu 22.04, 24.04, 24.10, 25.04
+
+
+
+
+
+
+
+
+
+
+
+
+Kõige värskema ID-tarkvara versiooni saad alla laadida ID-tarkvara paigaldamise lehelt.
+
+
+Kõige värskeima ID-tarkvara versiooni komponentide versiooniinfo: Windows, macOS ja Linux operatsioonisüsteemide jaoks.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

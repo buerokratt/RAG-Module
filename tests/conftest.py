@@ -411,20 +411,20 @@ path "auth/token/renew-self" { capabilities = ["update"] }
         # GUARDRAILS CONFIGURATION
         # ============================================================
         logger.info("")
-        logger.info("Writing Guardrails configuration secret...")
-        guardrails_secret = {
-            "connection_id": "guardrails-test-1",
-            "api_key": os.getenv("ANTHROPIC_API_KEY", "TEST_ANTHROPIC_KEY"),
-            "model": "claude-3-5-sonnet-20241022",
-            "environment": "development",
-            "tags": "anthropic,guardrails,test",
-        }
-        client.secrets.kv.v2.create_or_update_secret(
-            mount_point="secret",
-            path="guardrails/anthropic/test/claude-3-5-sonnet",
-            secret=guardrails_secret,
-        )
-        logger.info("Guardrails configuration secret written")
+       # logger.info("Writing Guardrails configuration secret...")
+        #guardrails_secret = {
+        #    "connection_id": "guardrails-test-1",
+        #    "api_key": os.getenv("ANTHROPIC_API_KEY", "TEST_ANTHROPIC_KEY"),
+        #    "model": "claude-3-5-sonnet-20241022",
+        #    "environment": "development",
+        #    "tags": "anthropic,guardrails,test",
+        #}
+        #client.secrets.kv.v2.create_or_update_secret(
+        #    mount_point="secret",
+        #    path="guardrails/anthropic/test/claude-3-5-sonnet",
+        #    secret=guardrails_secret,
+        #)
+        #logger.info("Guardrails configuration secret written")
 
         logger.info("=" * 80)
         logger.info("ALL SECRETS WRITTEN SUCCESSFULLY")

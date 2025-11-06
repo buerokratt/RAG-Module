@@ -1,0 +1,121 @@
+Ubuntu puhul on kõige mugavam paigaldada ID-tarkvara automaatskripti abil.
+Selleks on sul vaja skript esmalt oma arvuti kõvakettale salvestada ja seejärel see Terminali aknas käivitada.
+Tarkvara paigaldamine  (#tarkvara-paigaldamine)
+
+Laadi alla vajalik skript:Leiad selle siit:https://installer.id.ee/media/install-scripts/install-open-eid.sh  Ava Terminal(avamiseks vajuta palun klahve Ctrl, Alt ja T)ning leia skripti kataloog:Ava Terminal ning navigeeri käsklusega “cd Kausta nimi” kataloogi, kuhu salvestasid paigaldusskripti.Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:
+- Laadi alla vajalik skript:  Leiad selle siit: https://installer.id.ee/media/install-scripts/install-open-eid.sh (https://installer.id.ee/media/install-scripts/install-open-eid.sh)
+
+- Ava Terminal(avamiseks vajuta palun klahve Ctrl, Alt ja T)ning leia skripti kataloog:  Ava Terminal ning navigeeri käsklusega “ cd Kausta nimi ” kataloogi, kuhu salvestasid paigaldusskripti.  Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:
+
+
+cd /home/kasutajanimi/Downloads
+Käivita automaatskript:Skripti käivitamiseks sisesta Terminali järgmine käsklus ja vajutaEnter.
+- Käivita automaatskript:   Skripti käivitamiseks sisesta Terminali järgmine käsklus ja vajuta Enter.
+
+sh install-open-eid.sh
+Sisesta kasutaja parool:Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajutaEnter.  Näed küsimust “Do you want to continue?”:Mõne hetke pärast jääb Terminali küsimus "Do you want yo continue? [Y/n]”.  Nõustu jätkamisega, sisesta klaviatuurilYja vajutadesEnter.
+- Sisesta kasutaja parool:  Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajuta Enter.
+
+- Näed küsimust “Do you want to continue?”:  Mõne hetke pärast jääb Terminali küsimus " Do you want yo continue? [Y/n] ”.
+
+- Nõustu jätkamisega , sisesta klaviatuuril Y ja vajutades Enter .
+Kui kasutad ID-tarkvara poolt toetatud Ubuntu versiooni (/artikkel/id-tarkvara-toetatud-operatsioonisusteemid) , peaks DigiDoc4/ID-tarkvara paigaldamine edukalt õnnestuma.
+Mozilla Firefox seadistamine ID-kaardi kasutamiseks  (#SNAP)
+
+Alates Ubuntu 21.10 versioonist on vaikimisi paigaldatud Mozilla Firefox SNAPna.
+Firefox SNAP veebilehitsejas õnnestub autentimine ja allkirjastamine e-teenustes, mis on läinud üle Web eID lahendusele (nt. TARA).
+Juhul kui soovite ID-kaardiga autentida e-teenuses, kus kasutatakse autentimiseks TLS-CCA lahendust siis soovitame Mozilla Firefox SNAP eemaldada ja paigaldada tavaversiooni.
+Altpoolt on leitavad juhendid SNAP brauseri seadistamiseks ja eemaldamiseks.
+Mozilla Firefox SNAP brauseri kasutamine Web eID’gaJuhul, kui Te soovite kasutada SNAP versiooni toetatud e-teenustes, läbige järgnevad sammud:Paigaldada ID-tarkvaraid.ee lehelt. Paigaldada Firefox laienduste poestWeb eID laiendusning anda nõusolekud lubamiseks:Järgmisel autentimisel/allkirjastamisel (kui veebileht kasutab Web eID), siis tuleb anda nõusolek:NB!Firefox SNAP veebilehitsejas õnnestub autentimine ja allkirjastamine e-teenustes mis on läinud üle Web eID lahendusele (nt. TARA). Juhul kui e-teenuses kasutatakse autentimiseks TLS-CCA lahendust siis autentimine ID-kaardiga ei toimi. NB!Juhul, kui esineb probleeme (nt. ei tule nõusoleku andmise dialoogi), siis tuleks veenduda, et Firefox on värskendatud. Soovi korral saab seda käsitsi, selleks:sulge Firefox veebilehitseja;sisesta terminali käsk:sudo snap refreshJuhul, kui Firefox on juba uuendatud või Firefoxi uuendamine ei aita, siis tuleks kustutada järgnev fail:~/.local/share/flatpak/db/webextensionsSeejärel teha arvutile taaskäivitus. Peale seda proovida uuesti autentida/allkirjastada.  Mozilla Firefox SNAP eemaldamine ja tavaversiooni paigaldamineEemaldage Firefox snap versioon sisestades käsud:snap remove --purge firefoxsudo apt remove --autoremove firefoxNB!Viimane käskeemaldabFirefoxist kaKOGUisikliku teabe, sealhulgas sirvimisajaloo, salvestatud paroolid, järjehoidjad ja palju muud. Vajadusel peaksite oma andmed Firefoxi kontoga sünkroonima või käsitsi salvestama. Firefoxi uusima stabiilse versiooni jaoks käsk:sudo add-apt-repository ppa:mozillateam/ppaTagamaks, et uuendused ei installiks uuesti Firefox snap`na, sisestage järgmised käsud:sudo nano /etc/apt/preferences.d/99mozillateamppaKui tekstiredaktor avaneb, lisage sinna (üksteise järel) järgmised read (pärast kolmandat rida, lisage tühi rida juurde):Package: firefox* Pin: release o=LP-PPA-mozillateam Pin-Priority: 501Package: firefox* Pin: release o=Ubuntu Pin-Priority: -1Muudatuste salvestamiseks vajutageCtrl+X, seejärelYvõiyjaEnter. Installeerige Firefox ilma snap`ta sisestades käsk:sudo apt install -t 'o=LP-PPA-mozillateam' firefoxKui teil palutakse käsureal toiming kinnitada, vajutageYvõiy.
+- Mozilla Firefox SNAP brauseri kasutamine Web eID’ga  Juhul, kui Te soovite kasutada SNAP versiooni toetatud e-teenustes, läbige järgnevad sammud:Paigaldada ID-tarkvaraid.ee lehelt. Paigaldada Firefox laienduste poestWeb eID laiendusning anda nõusolekud lubamiseks:Järgmisel autentimisel/allkirjastamisel (kui veebileht kasutab Web eID), siis tuleb anda nõusolek:NB!Firefox SNAP veebilehitsejas õnnestub autentimine ja allkirjastamine e-teenustes mis on läinud üle Web eID lahendusele (nt. TARA). Juhul kui e-teenuses kasutatakse autentimiseks TLS-CCA lahendust siis autentimine ID-kaardiga ei toimi. NB!Juhul, kui esineb probleeme (nt. ei tule nõusoleku andmise dialoogi), siis tuleks veenduda, et Firefox on värskendatud. Soovi korral saab seda käsitsi, selleks:sulge Firefox veebilehitseja;sisesta terminali käsk:sudo snap refreshJuhul, kui Firefox on juba uuendatud või Firefoxi uuendamine ei aita, siis tuleks kustutada järgnev fail:~/.local/share/flatpak/db/webextensionsSeejärel teha arvutile taaskäivitus. Peale seda proovida uuesti autentida/allkirjastada.
+Mozilla Firefox SNAP brauseri kasutamine Web eID’ga  (#mozilla-firefox-snap_1)
+
+
+
+
+
+Juhul, kui Te soovite kasutada SNAP versiooni toetatud e-teenustes, läbige järgnevad sammud:
+Paigaldada ID-tarkvaraid.ee lehelt.  Paigaldada Firefox laienduste poestWeb eID laiendusning anda nõusolekud lubamiseks:
+- Paigaldada ID-tarkvara id.ee lehelt (https://www.id.ee/artikkel/paigalda-id-tarkvara/) .
+- Paigaldada Firefox laienduste poest Web eID laiendus (https://addons.mozilla.org/et/firefox/addon/web-eid-webextension/) ning anda nõusolekud lubamiseks:
+Järgmisel autentimisel/allkirjastamisel (kui veebileht kasutab Web eID), siis tuleb anda nõusolek:
+- Järgmisel autentimisel/allkirjastamisel (kui veebileht kasutab Web eID), siis tuleb anda nõusolek:
+NB! Firefox SNAP veebilehitsejas õnnestub autentimine ja allkirjastamine e-teenustes mis on läinud üle Web eID lahendusele (nt. TARA). Juhul kui e-teenuses kasutatakse autentimiseks TLS-CCA lahendust siis autentimine ID-kaardiga ei toimi.
+NB! Juhul, kui esineb probleeme (nt. ei tule nõusoleku andmise dialoogi), siis tuleks veenduda, et Firefox on värskendatud. Soovi korral saab seda käsitsi, selleks:
+sulge Firefox veebilehitseja;  sisesta terminali käsk:sudo snap refresh
+- sulge Firefox veebilehitseja;
+- sisesta terminali käsk: sudo snap refresh
+Juhul, kui Firefox on juba uuendatud või Firefoxi uuendamine ei aita, siis tuleks kustutada järgnev fail:
+~/.local/share/flatpak/db/webextensions
+Seejärel teha arvutile taaskäivitus. Peale seda proovida uuesti autentida/allkirjastada.
+
+
+- Mozilla Firefox SNAP eemaldamine ja tavaversiooni paigaldamine  Eemaldage Firefox snap versioon sisestades käsud:snap remove --purge firefoxsudo apt remove --autoremove firefoxNB!Viimane käskeemaldabFirefoxist kaKOGUisikliku teabe, sealhulgas sirvimisajaloo, salvestatud paroolid, järjehoidjad ja palju muud. Vajadusel peaksite oma andmed Firefoxi kontoga sünkroonima või käsitsi salvestama. Firefoxi uusima stabiilse versiooni jaoks käsk:sudo add-apt-repository ppa:mozillateam/ppaTagamaks, et uuendused ei installiks uuesti Firefox snap`na, sisestage järgmised käsud:sudo nano /etc/apt/preferences.d/99mozillateamppaKui tekstiredaktor avaneb, lisage sinna (üksteise järel) järgmised read (pärast kolmandat rida, lisage tühi rida juurde):Package: firefox* Pin: release o=LP-PPA-mozillateam Pin-Priority: 501Package: firefox* Pin: release o=Ubuntu Pin-Priority: -1Muudatuste salvestamiseks vajutageCtrl+X, seejärelYvõiyjaEnter. Installeerige Firefox ilma snap`ta sisestades käsk:sudo apt install -t 'o=LP-PPA-mozillateam' firefoxKui teil palutakse käsureal toiming kinnitada, vajutageYvõiy.
+Mozilla Firefox SNAP eemaldamine ja tavaversiooni paigaldamine  (#mozilla-firefox-snap_2)
+
+
+
+
+
+Eemaldage Firefox snap versioon sisestades käsud:
+- Eemaldage Firefox snap versioon sisestades käsud:
+snap remove --purge firefox
+sudo apt remove --autoremove firefox
+NB! Viimane käsk eemaldab Firefoxist ka KOGU isikliku teabe, sealhulgas sirvimisajaloo, salvestatud paroolid, järjehoidjad ja palju muud. Vajadusel peaksite oma andmed Firefoxi kontoga sünkroonima või käsitsi salvestama.
+Firefoxi uusima stabiilse versiooni jaoks käsk:
+- Firefoxi uusima stabiilse versiooni jaoks käsk:
+sudo add-apt-repository ppa:mozillateam/ppa
+Tagamaks, et uuendused ei installiks uuesti Firefox snap`na, sisestage järgmised käsud:
+- Tagamaks, et uuendused ei installiks uuesti Firefox snap`na, sisestage järgmised käsud:
+sudo nano /etc/apt/preferences.d/99mozillateamppa
+Kui tekstiredaktor avaneb, lisage sinna (üksteise järel) järgmised read (pärast kolmandat rida, lisage tühi rida juurde):
+Package: firefox* Pin: release o=LP-PPA-mozillateam Pin-Priority: 501
+Package: firefox* Pin: release o=Ubuntu Pin-Priority: -1
+Muudatuste salvestamiseks vajutage Ctrl+X , seejärel Y või y ja Enter .
+Installeerige Firefox ilma snap`ta sisestades käsk:
+- Installeerige Firefox ilma snap`ta sisestades käsk:
+sudo apt install -t 'o=LP-PPA-mozillateam' firefox
+Kui teil palutakse käsureal toiming kinnitada, vajutage Y või y .
+
+
+Tarkvara uuendamine  (#tarkvara-uuendamine)
+
+Turvalisuse, kasutusmugavuse ja töökindluse huvides on oluline hoida kogu oma arvutis olev tarkvara ajakohasena.
+ID-tarkvara uuendamiseks ava Terminal, kirjuta sinna
+sudo apt-get update && sudo apt-get upgrade
+ja vajuta Enter . Pärast seda sisesta arvuti parool ning vajuta veel kord Enter . Uue eID tarkvara versiooni puhul paigaldatakse see arvutisse.
+Tarkvara eemaldamine  (#tarkvara-eemaldamine)
+
+Tarkvara eemaldamine toimub üsna sarnaselt tarkvara paigaldamisele – järgi allolevat juhist ja kõik peaks sujuma kiirelt ja mugavalt!
+Laadi alla tarkvara eemaldamise skript:Leiad selle siit:https://installer.id.ee/media/install-scripts/uninstall-open-eid.sh  Ava Terminal ning leia skripti kataloog:Ava Terminal ning navigeeri käsklusega “cd Kausta nimi”  kataloogi, kuhu salvestasid eemaldamiseks mõeldud skripti. Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:
+- Laadi alla tarkvara eemaldamise skript:  Leiad selle siit: https://installer.id.ee/media/install-scripts/uninstall-open-eid.sh (https://installer.id.ee/media/install-scripts/uninstall-open-eid.sh)
+
+- Ava Terminal ning leia skripti kataloog:  Ava Terminal ning navigeeri käsklusega “ cd Kausta nimi ”  kataloogi, kuhu salvestasid eemaldamiseks mõeldud skripti. Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:
+
+cd /home/kasutajanimi/Downloads
+Käivita automaatskript:Skripti käivitamiseks sisesta Terminali järgimine käsklus ja vajutaEnter.
+- Käivita automaatskript:  Skripti käivitamiseks sisesta Terminali järgimine käsklus ja vajuta Ente r.
+
+sh uninstall-open-eid.sh
+Sisesta kasutaja parool:Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajutaEnter.  Näed küsimust “Do you want to continue?”:Mõne hetke pärast jääb Terminali küsimus "Do you want to continue? [Y/n]”.Sinu ekraanil peaks see välja nägema nii:  Nõustu jätkamisega, sisestades klaviatuurilYja vajutadesEnter.
+- Sisesta kasutaja parool:  Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajuta Enter.
+
+- Näed küsimust “Do you want to continue?”:  Mõne hetke pärast jääb Terminali küsimus " Do you want to continue? [Y/n] ”.  Sinu ekraanil peaks see välja nägema nii:
+
+
+
+- Nõustu jätkamisega , sisestades klaviatuuril Y ja vajutades Enter .
+Nüüd on ID-tarkvara ja sellega seotud pakid arvutist eemaldatud!
+Ubuntu/Linux juhised ID-tarkvara paigaldamiseks, uuendamiseks ja eemaldamiseks automaatskripti abil.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

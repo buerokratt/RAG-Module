@@ -1,0 +1,49 @@
+Juhul, kui ID-kaardi kasutamisel tekib tõrkeid või oled alles alustamas ID-kaardi elektroonilist kasutamist, kontrolli esimese asjana, et sinu ID-kaardi ja kaardilugejaga oleks kõik korras.
+Ära unusta: enne ID-kaardi (või muu digitaalse dokumendi) kasutusele võtmist on sul vaja oma arvutisse ID-tarkvara paigaldada (https://www.id.ee/artikkel/paigalda-id-tarkvara) ning vajadusel ID-kaardi kasutamiseks ka veebilehitsejad seadistada!
+Tutvu toetatud kaardilugejate nimekirjaga (https://www.id.ee/artikkel/kasulik-info-kiipkaardi-lugejate-kohta/) .
+Kuidas ID-kaarti kaardilugejasse sisestada?  (#kuidas-id-kaarti)
+
+Enamikesse kaardilugejatesse sisestatakse ID-kaart kiibiga ots ees ja nii, et sinu nägu on allpool ja kiip üleval. Kui sul on uus kaardilugeja ja sa pole seda varem kasutanud, proovi kaardil teine külg keerata: ehk oli asi just selles? Ära karda, valet pidi sisestamine ei riku ID-kaarti! Kui kaardi küljevahetus ei toimi, sisesta see uuesti lugejasse nii, et kiibiga ots oleks ees ja sinu nägu asuks kaardil allpool.
+Kuidas aru saada, kas mu ID-kaart ja kaardilugeja töötavad korralikult?  (#kuidas-aru)
+
+Kui DigiDoc4 näitab sulle pärast kaardi sisestamistsinu nime ja andmeid, on kõik korras.  Kui DigiDoc4 näeb küll sinu andmeid, ent annab sulle mõneveateate või soovitusevõi hoiatab tarkvara, sertifikaatide vms aegumise eest, tegutse DigiDoc4 kaudu antud juhiste järgi!  Kui sa oma andmeid ei näe ning DigiDoc4 veateade ütleb, etlugejas puudub kaart,proovi ID-kaart uuesti lugejasse sisestada. Vajadusel tee arvutile taaskäivitus nii, et kaart oleks korralikult lugejas ja kaardilugeja arvutiga ühendatud.
+- Kui DigiDoc4 näitab sulle pärast kaardi sisestamist sinu nime ja andmeid , on kõik korras.
+- Kui DigiDoc4 näeb küll sinu andmeid, ent annab sulle mõne veateate või soovituse või hoiatab tarkvara, sertifikaatide vms aegumise eest, tegutse DigiDoc4 kaudu antud juhiste järgi!
+- Kui sa oma andmeid ei näe ning DigiDoc4 veateade ütleb, et lugejas puudub kaart, proovi ID-kaart uuesti lugejasse sisestada. Vajadusel tee arvutile taaskäivitus nii, et kaart oleks korralikult lugejas ja kaardilugeja arvutiga ühendatud.
+Kuidas kontrollida, kas ühendus kaardilugeja ja arvuti vahel töötab?  (#kuidas-kontrollida)
+
+Kui DigiDoc4 veateade ütleb, et ühtegi kaardilugejat ei ole ühendatud, on probleem kas kaardilugejas (see on näiteks katki) või selle halvas ühenduses arvutiga (USB-pesa probleem või on kaardilugeja juhtmeots vigane).
+Paljudel kaardilugejatel on olemas märgutuluke. Mõne lugeja puhul on märgutuli alati ühte värvi (näiteks roheline või sinine), mõne puhul aga annab värvivahetus märku tekkinud probleemidest (näiteks muutub tavapärase rohelise asemel kollaseks või punaseks). Täpsemat infot saad oma kaardilugeja pakendilt.
+Kõige levinumad selgitused kaardilugeja märgtulukesele on:
+Tulukeei põle: arvutil puudub kontakt ID-kaardi lugejaga.  Tulukepõleb: side arvuti ja kaardilugeja vahel töötab.  Tulukevilgub: side arvuti ja kaardilugeja vahel töötab ning arvuti püüab aktiivselt kaardilugejalt/kaardilt infot saada.
+- Tuluke ei põle : arvutil puudub kontakt ID-kaardi lugejaga.
+- Tuluke põleb : side arvuti ja kaardilugeja vahel töötab.
+- Tuluke vilgub : side arvuti ja kaardilugeja vahel töötab ning arvuti püüab aktiivselt kaardilugejalt/kaardilt infot saada.
+Kui sinu kaardilugejal märgutuli puudub, tuleb sul lihtsalt katse-eksituse meetodil kaardilugeja toimivust testida.
+Juhul, kui kaardilugeja ja arvuti vahel kontakti pole , proovi ID-kaardi lugeja juhe uuesti arvutiga ühendada. Jälgi, et kaardilugeja otsik oleks arvutipesasse lõpuni/sügavalt sisestatud, võimaluse korral proovi, kas mõni teine USB-pesa töötaks paremini.
+Vahel juhtub, et probleemiks on aga kaardilugeja juhtme kvaliteet: võta kaardilugeja juhe USB-otsiku tagant sõrmede vahele ning hoia see sirgelt ning tihedalt USB-pesas samal ajal, kui arvutile restardi teed. Kui kaardilugeja niimoodi tööle hakkab, saad ehk ajutised kiiremad asjad aetud veel enne uue kaardilugeja hankimist.
+Kindlasti tuleb vigane kaardilugeja esimesel võimalusel välja vahetada!
+Uue lugeja saad osta enamikest arvutipoodidest, kaubanduskeskustest ja isegi paljudest tanklatest. Nagu kõik muugi, kipuvad ka kaardilugejad pideva kasutuse käigus väsima – eriti, kui lugeja juhe on näiteks kotis või kokku kerituna väänata saanud. Hea soovitus on alati üks tagavaralugeja varuks hoida!
+Teada tasub, et kaardilugeja hind on rohkem seotud kaardilugeja võimaluste ja mugavuse kui töökindlusega: odavam ei tähenda tingimata kehvemat. Küll aga tuleks ettevaatusega suhtuda lugeja tellimisele internetist: oksjoni- ja odavmüügilehtedel liigub palju kahtlase kvaliteediga tooteid, mis võivad, ent ei pruugi üldse töökorras olla. Internetist tellimisel eelista alati tootja enda veebilehti ja usaldusväärseid arvutipoode!
+Kuidas testida, kas veebilehitseja töötab ID-kaardiga?  (#kuidas-testida)
+
+ID-kaardi töötamise kontrollimiseks ava oma veebibrauseris Eesti.ee portaal ning klõpsa „Sisenen“ nupul. Vali sisse logimise viisiks  „ID-kaart“ ning järgi ekraanil olevaid juhised. Teenustesse sisenemisel küsitakse sinu käest ID-kaardi PIN1 koodi, tehingute või tegevuste kinnitamisel PIN2 koodi. Soovi korral saad oma ID-kaardi PIN-koode ise muuta .
+Juhul, kui DigiDoc4 näitas sinu andmeid korrektselt, ent e-teenustesse sisenemine veebilehitsejas ebaõnnestub, proovi uuesti mõne teise lehitsejaga (näiteks Chrome või Safari).
+Veebilehitseja tõrgete tekkides:
+Süvene ekraanil olevatesse veateadetesse – nende abil leiad id.ee veebist juhised olukorra lahendamiseks.  Loe lähemalt,mida teha, kui ID-kaardi kasutamine veebilehitsejas ebaõnnestub.  Kui sa ei ole kindel, millest probleem tekkis, proovi arvutile taaskäivitus teha nii, et kaardilugeja on arvutiga ühendatud ja kaart korralikult kaardilugejas sees.
+- Süvene ekraanil olevatesse veateadetesse – nende abil leiad id.ee veebist juhised olukorra lahendamiseks.
+- Loe lähemalt, mida teha, kui ID-kaardi kasutamine veebilehitsejas ebaõnnestub (/artikkel/e-teenustesse-sisenemine-ebaonnestub) .
+- Kui sa ei ole kindel, millest probleem tekkis, proovi arvutile taaskäivitus teha nii, et kaardilugeja on arvutiga ühendatud ja kaart korralikult kaardilugejas sees.
+ID-kaardi lugeja töökorras oleku kontrollimiseks sisesta oma ID-kaart kaardilugejasse, ühenda see arvutiga ning ava DigiDoc4.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

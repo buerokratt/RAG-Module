@@ -1,0 +1,22 @@
+Kas nägid DigiDoc4 käivitamisel sellist veateadet?
+Digiallkirjade kehtivuse kontrollimiseks kasutatava sertifikaatide usaldusnimekirja uuendamine ebaõnnestus. Palun kontrolli oma arvuti internetiühendust ja seda, kas arvutis on kõige uuem ID-tarkvara versioon. Allkirjade verifitseerimiseks kasutatakse aegunud nimekirja.
+Veateade viitab, et allkirjade kontrollimiseks ja andmiseks vajaliku usaldusnimekirja uuendamine ei õnnestunud. Aegunud usaldusnimekirja kasutamine on lubatud, ent sul ei pruugi olla võimalik osade allkirjade kehtivust kontrollida.
+Põhjuseid selle olukorra tekkeks võib olla mitu:
+Kõigepealt kontrolli, et sul oleks arvutis kõigeuuem ID-tarkvara, vajadusel uuenda seda.  Ehk on asi internetiühenduses, näiteks on sinu tööandja või internetiteenuse pakkuja keelanud usaldusnimekirjade allalaadimiseks vajaliku URL’i poole pöördumise?Saad seda kontrollida lehel „Veebiaadressid, kuhu ID-tarkvara sisemiselt pöördub“.  TSL nimekirja uuendamine käsitsi
+- Kõigepealt kontrolli, et sul oleks arvutis kõige uuem ID-tarkvara (/artikkel/paigalda-id-tarkvara/) , vajadusel uuenda seda.
+- Ehk on asi internetiühenduses, näiteks on sinu tööandja või internetiteenuse pakkuja keelanud usaldusnimekirjade allalaadimiseks vajaliku URL’i poole pöördumise?  Saad seda kontrollida lehel „ Veebiaadressid, kuhu ID-tarkvara sisemiselt pöördub“ (/artikkel/loetelu-urlidest-kuhu-id-kaardi-baastarkvara-sisemiselt-poordub/) .
+
+- T (/artikkel/digidoc-klient-tarkvaras-sertifikaatide-usaldusnimekirjade-kasitsi-paigaldamine) SL nimekirja uuendamine käsitsi (https://www.id.ee/artikkel/digidoc-klient-tarkvaras-sertifikaatide-usaldusnimekirjade-kasitsi-paigaldamine-2/)
+Mida teha, kui DigiDoc4 rakenduse veateade ütleb, et sertifikaatide usaldusnimekirja uuendamine ebaõnnestus.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

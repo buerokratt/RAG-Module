@@ -1,0 +1,22 @@
+Tavapäraselt digitaalallkirjastatakse korraga üks konteiner, sisestades selleks iga kord PIN2-kood. ID-kaardiga massallkirjastamine on aga olukord, kus inimene annab ühe korra digiallkirja ehk sisestab PIN2-koodi ning selle tulemusel allkirjastatakse suur hulk (näiteks sadu või tuhandeid) dokumente, igaüks neist eraldi konteineris.
+Digitaalallkirja eesmärk on kinnitada inimese tegelikku tahet elektroonilises keskkonnas. Digitaalallkiri on seaduse kohaselt võrdne omakäelise allkirjaga. Massallkirjastamise puhul võib aga tekkida kahtlus, kas allkirjastaja ikka on kõigi allkirjastatud dokumentide puhul väljendanud oma tegelikku tahet, sest allkirjastatu ja allkirjastaja seose on tekitanud massallkirjastamist võimaldav tehniline lahendus, mille toimemehhanism ei pruugi olla allkirjastajale arusaadav ega kontrollitav.
+Seega – isegi kui ID-kaardiga massallkirjastamine on tehniliselt võimalik, ei ole see alati soovitatav.
+Kindlasti tuleb silmas pidada, millise vorminõude on seadus või lepingupoolte kokkulepe ette näinud.
+Kui seadus või leping ei nõua omakäelist allkirja, saab kaaluda näiteks e-templi kasutamise võimalust.
+E-templit saab edukalt kasutada olukorras, kus on vaja anda dokumendi saajale kinnitus, et dokument pärineb asutusest, kus see väidetavalt välja on antud ning seda pole hiljem muudetud (st tõendada päritolu ja terviklust). E-tempel sisaldab reeglina ka ajatemplit, mis näitab dokumendi tembeldamise aega.
+E-templi andmiseks on lubatud ka automatiseeritud protsess. E-tempel on reguleeritud Eestis otsekohalduva ELi määrusega nr 910/2014.
+Digitaalallkiri ja elektrooniline allkiri (mis on laiem mõiste kui digitaalallkiri) on reguleeritud sama ELi määrusega (ning selle Eestis rakendamiseks antud e-identimise ja e-tehingute usaldusteenuste seaduse rakendussätetega) ning tsiviilseadustiku üldosa seadusega.
+E-templi lisainfo aadressilt support@sk.ee.
+Digitaalse massallkirjastamise asemel soovitame kasutada e-templit.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

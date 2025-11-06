@@ -1,0 +1,62 @@
+Elektroonilises maailmas esindavad sind digitaalse isikutuvastusvahendiga (/artikkel/digitaalsed-dokumendid-id-kaart-digi-id-elamisloakaart-ja-e-residendi-digi-id/) (näiteks ID-kaart, digi-ID, mobiil-ID, Smart-ID) seotud sertifikaadid. Seetõttu on väga tähtis, et sinu sertifikaadid oleksid alati kaitstud.
+Vaikimisi on sertifikaatide kehtivusaeg sama pikk kui nendega seotud isikutuvastusvahendil. Turvalisuse kaalutlustel võib aga juhtuda, et aeg-ajalt on sul vaja oma sertifikaate uute ning kindlamate vastu vahetada. Sellest annab sulle märku DigiDoc4. Kõikide suuremate turvauuenduste kohta saab alati lugeda id.ee veebilehelt ning massimeediast.
+Sinu ID-kaardiga on seotud kaks sertifikaati : isikutuvastuse sertifikaat (mille kasutamiseks läheb vaja PIN1-koodi) ja allkirjastamise sertifikaat (mille kasutamiseks läheb vaja PIN2-koodi).
+Sertifikaatide kasutamise muudavad turvaliseks PIN-koodid . Isegi, kui sinu dokument satub võõrastesse kätesse (näiteks oli varastatud/kaotatud rahakotis ka sinu ID-kaart), ei saa selle abil e-teenustesse sisse logida, tehinguid teostada ega allkirju anda ilma PIN-koode teadmata. Uute PIN-koodide loomiseks on aga vaja ligipääsu PUK-koodile.
+Seni, kuni pahategija ei oma üheaegselt nii sinu digitaalset dokumenti kui PIN- ja/või PUK-koode, on su elektrooniline identiteet kaitstud!
+Sertifikaadid: ID-kaardi sertifikaatide peatamineJuhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud. ID-kaartide ja muudedigitaalsete dokumentidesertifikaate saad peatada telefoni teel:helistades numbril+372 6773377. NB! Sinu käest küsitakse nime ning isikukoodi!Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardigaPolitsei- ja Piirivalveameti teenindussepöörduda: telefoni teel sertifikaate aktiveerida ei saa. Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadidkehtetukstunnistada lasta. Kas teadsid aga, et varguse korral tuleks peatada ka sinumobiilse nutivahendiga seotud sertifikaadid?  Sertifikaadid: mobiil-ID sertifikaatide peatamineKui sinu mobiiltelefon on kadunud või varastatud,siis helista esimesel võimalusel oma mobiilioperaatori klienditeenindusse ning peata mobiil-ID sertifikaadid või sulge mobiil-ID teenus:Elisa Eesti ASklienditeenindus: +372 6600 600Telia Eesti ASklienditeenindus: +372 6397 130Tele2 Eesti ASklienditeenindus: +372 686 6866Peatatud sertifikaatidegaei saa siseneda e-teenustesse, anda digitaalallkirja ega teha muid toiminguid elektroonilises keskkonnas. Lisaks saadetakse sinu @eesti.ee aadressile vastavasisuline kiri, kus sind teavitatakse mobiil-ID sertifikaatide peatamisest. NB!Kui Mobiil-ID on väljastatud enne 02.07.2022 tuleb pöörduda mobiiloperaatori teenindusse. Mobiil-ID kasutamise jätkamiseks pärast sertifikaatide staatuse muutmistJuhul, kui lasid mobiil-ID sertifikaadidomal soovil peatada(näiteks oli telefon kadunud, ent leidsid selle taas üles), on sul võimalik jätkata olemasoleva mobiil-ID SIM-kaardi kasutamist. Sertifikaatide taas-aktiveerimiseks tuleb sul koos isikut tõendava dokumendiga oma mobiilsideoperaatori esindusse pöörduda.
+- Sertifikaadid: ID-kaardi sertifikaatide peatamine  Juhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud. ID-kaartide ja muudedigitaalsete dokumentidesertifikaate saad peatada telefoni teel:helistades numbril+372 6773377. NB! Sinu käest küsitakse nime ning isikukoodi!Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardigaPolitsei- ja Piirivalveameti teenindussepöörduda: telefoni teel sertifikaate aktiveerida ei saa. Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadidkehtetukstunnistada lasta. Kas teadsid aga, et varguse korral tuleks peatada ka sinumobiilse nutivahendiga seotud sertifikaadid?
+Sertifikaadid: ID-kaardi sertifikaatide peatamine  (#sertifikaadid-id-kaardi-sertifikaatide_1)
+
+
+
+
+
+Juhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud.
+ID-kaartide ja muude digitaalsete dokumentide (/artikkel/digitaalsed-dokumendid-id-kaart-digi-id-elamisloakaart-ja-e-residendi-digi-id) sertifikaate saad peatada telefoni teel:
+helistades numbril+372 6773377.
+- helistades numbril +372 6773377 .
+NB! Sinu käest küsitakse nime ning isikukoodi!
+Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardiga Politsei- ja Piirivalveameti teenindusse (https://www.politsei.ee/et/asukohad/teenindused) pöörduda: telefoni teel sertifikaate aktiveerida ei saa.
+Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadid kehtetuks tunnistada lasta.
+Kas teadsid aga, et varguse korral tuleks peatada ka sinu mobiilse nutivahendiga seotud sertifikaadid (/artikkel/mobiil-id-sertifikaatide-peatamine) ?
+
+
+- Sertifikaadid: mobiil-ID sertifikaatide peatamine  Kui sinu mobiiltelefon on kadunud või varastatud,siis helista esimesel võimalusel oma mobiilioperaatori klienditeenindusse ning peata mobiil-ID sertifikaadid või sulge mobiil-ID teenus:Elisa Eesti ASklienditeenindus: +372 6600 600Telia Eesti ASklienditeenindus: +372 6397 130Tele2 Eesti ASklienditeenindus: +372 686 6866Peatatud sertifikaatidegaei saa siseneda e-teenustesse, anda digitaalallkirja ega teha muid toiminguid elektroonilises keskkonnas. Lisaks saadetakse sinu @eesti.ee aadressile vastavasisuline kiri, kus sind teavitatakse mobiil-ID sertifikaatide peatamisest. NB!Kui Mobiil-ID on väljastatud enne 02.07.2022 tuleb pöörduda mobiiloperaatori teenindusse. Mobiil-ID kasutamise jätkamiseks pärast sertifikaatide staatuse muutmistJuhul, kui lasid mobiil-ID sertifikaadidomal soovil peatada(näiteks oli telefon kadunud, ent leidsid selle taas üles), on sul võimalik jätkata olemasoleva mobiil-ID SIM-kaardi kasutamist. Sertifikaatide taas-aktiveerimiseks tuleb sul koos isikut tõendava dokumendiga oma mobiilsideoperaatori esindusse pöörduda.
+Sertifikaadid: mobiil-ID sertifikaatide peatamine  (#sertifikaadid-mobiil-id-sertifikaatide_2)
+
+
+
+
+
+Kui sinu mobiiltelefon on kadunud või varastatud, siis helista esimesel võimalusel oma mobiilioperaatori klienditeenindusse ning peata mobiil-ID sertifikaadid või sulge mobiil-ID teenus:
+Elisa Eesti ASklienditeenindus: +372 6600 600  Telia Eesti ASklienditeenindus: +372 6397 130  Tele2 Eesti ASklienditeenindus: +372 686 6866
+- Elisa Eesti AS (http://www.elisa.ee/) klienditeenindus: +372 6600 600
+- Telia Eesti AS (http://www.telia.ee/) klienditeenindus: +372 6397 130
+- Tele2 Eesti AS (http://www.tele2.ee/) klienditeenindus: +372 686 6866
+Peatatud sertifikaatidega ei saa siseneda e-teenustesse, anda digitaalallkirja ega teha muid toiminguid elektroonilises keskkonnas.
+Lisaks saadetakse sinu @eesti.ee aadressile vastavasisuline kiri, kus sind teavitatakse mobiil-ID sertifikaatide peatamisest.
+NB! Kui Mobiil-ID on väljastatud enne 02.07.2022 tuleb pöörduda mobiiloperaatori teenindusse.
+Mobiil-ID kasutamise jätkamiseks pärast sertifikaatide staatuse muutmist
+Juhul, kui lasid mobiil-ID sertifikaadid omal soovil peatada (näiteks oli telefon kadunud, ent leidsid selle taas üles), on sul võimalik jätkata olemasoleva mobiil-ID SIM-kaardi kasutamist. Sertifikaatide taas-aktiveerimiseks tuleb sul koos isikut tõendava dokumendiga oma mobiilsideoperaatori esindusse pöörduda.
+
+
+
+Hoia oma PIN- ja PUK-koodid alati saladuses!  (#hoia-oma)
+
+PIN-koode saad DigiDoc4 abil ise vahetada: vali endale sellised PIN-koodid, mida on lihtne meeles pidada (ent mida on võõral keeruline „ära mõistatada“). Nii ei ole sul vaja oma koode üles kirjutatuna säilitada!  Ära hoia kirja pandud PIN- ja PUK-koode oma ID-kaardi lähedal! Näiteks on ebaturvalisteks hoiukohtadeks rahakott, telefoni märkmed, töölaud, arvutiekraan jne.  Ära jaga oma PIN- ega PUK-koode teistega!
+- PIN-koode saad DigiDoc4 abil ise vahetada : vali endale sellised PIN-koodid, mida on lihtne meeles pidada (ent mida on võõral keeruline „ära mõistatada“). Nii ei ole sul vaja oma koode üles kirjutatuna säilitada!
+- Ära hoia kirja pandud PIN- ja PUK-koode oma ID-kaardi lähedal! Näiteks on ebaturvalisteks hoiukohtadeks rahakott, telefoni märkmed, töölaud, arvutiekraan jne.
+- Ära jaga oma PIN- ega PUK-koode teistega!
+Elektroonilises maailmas esindavad sind digitaalse isikutuvastusvahendiga (näiteks ID-kaart, digi-ID, mobiil-ID, Smart-ID) seotud sertifikaadid. Seetõttu on tähtis, et su sertifikaadid oleksid alati kaitstud.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

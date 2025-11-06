@@ -1,0 +1,41 @@
+Mitte ükski tarkvara ei ole täiuslik: koos ajaga muutuvad nii tehnilised võimalused kui vajadused. Iga uue ID-tarkvara versiooniga püütakse lahendada võimalikult palju teadaolevaid puuduseid, ent esikohal on alati kasutaja ning tema andmete turvalisuse tagamine ning tarkvara töökindlus.
+Huvi korral saad lugeda ka, milliseid on olnud muudatused ID-tarkvara eelmistes versioonides (https://www.id.ee/artikkel/id-tarkvara-versioonide-info-release-notes/) .
+Allpool on toodud teadaolevad puudused, mis esinevad ID-tarkvara viimases versioonis Windows (25.8), Linux (25.5) ning macOS (25.5):
+DigiDoc4
+DigiDoc4 ei kasuta Ubuntu ja macOS all süsteemseid proksi-seadeid. (IB-5533)  Kui Ubuntus on kolm DigiDoc4 akent avatud, küsitakse PIN-koodi ning kuvatakse veateade vales aknas. (IB-5808)  Krüptoadressaadi otsing LDAP kataloogist ebaõnnestub kui kasutusel on puhverserver. (IB-7077)
+- DigiDoc4 ei kasuta Ubuntu ja macOS all süsteemseid proksi-seadeid. (IB-5533)
+DigiDoc4 ei kasuta Ubuntu ja macOS all süsteemseid proksi-seadeid. (IB-5533)
+- Kui Ubuntus on kolm DigiDoc4 akent avatud, küsitakse PIN-koodi ning kuvatakse veateade vales aknas. (IB-5808)
+- Krüptoadressaadi otsing LDAP kataloogist ebaõnnestub kui kasutusel on puhverserver. (IB-7077)
+RIA DigiDoc mobiilirakendus
+Android nutiseadmetes ei ole võimalik avada .DDOC või .CDOC laiendiga faile läbi Google Drive keskkonna. (MOPPAND-603)  Osades Android nutiseadmetes ebaõnnestub RIA DigiDoc rakendusega allkirjastamine kui kasutusel on Knox viirusetõrje. (MOPPAND-723)  iOS nutiseadmetes ei ole võimalik GMAIL`i rakendusse lisada manuseid läbi RIA DigiDoc rakenduse. (MOPPIOS-1413)  Android nutiseadmetes võib esineda probleeme Google Drive kaudu RIA Digidoc rakendusega allkirjastatud konteinerite jagamine (MOPPAND-1425)
+- Android nutiseadmetes ei ole võimalik avada .DDOC või .CDOC laiendiga faile läbi Google Drive keskkonna. (MOPPAND-603)
+- Osades Android nutiseadmetes ebaõnnestub RIA DigiDoc rakendusega allkirjastamine kui kasutusel on Knox viirusetõrje. (MOPPAND-723)
+- iOS nutiseadmetes ei ole võimalik GMAIL`i rakendusse lisada manuseid läbi RIA DigiDoc rakenduse. (MOPPIOS-1413)
+- Android nutiseadmetes võib esineda probleeme Google Drive kaudu RIA Digidoc rakendusega allkirjastatud konteinerite jagamine (MOPPAND-1425)
+Veebilehitsejad
+Safaris autentimisel Cancel nupule vajutades ei kuvata DigiDoc4 rakenduses lugejas oleva kaardi andmeid. Aitab kaardilugeja eemaldamine. (IB-5726)  Ubuntus autentimine ebaõnnestub, kui kaart vahepeal lugejast eemaldatud, aitab veebilehitseja restart. (IB-6085)
+- Safaris autentimisel Cancel nupule vajutades ei kuvata DigiDoc4 rakenduses lugejas oleva kaardi andmeid. Aitab kaardilugeja eemaldamine. (IB-5726)
+Safaris autentimisel Cancel nupule vajutades ei kuvata DigiDoc4 rakenduses lugejas oleva kaardi andmeid. Aitab kaardilugeja eemaldamine. (IB-5726)
+- Ubuntus autentimine ebaõnnestub, kui kaart vahepeal lugejast eemaldatud, aitab veebilehitseja restart. (IB-6085)
+Ekraanilugejad
+Ekraanilugeja loeb allkirja detailide avamiseks teksti mitu korda. (IB-5948)  JAWS ekraanilugeja loeb faili lisamisel ette nii hiirekasutajate kui ka klaviatuurikasutajate käitumisvihje. (IB-6073)
+- Ekraanilugeja loeb allkirja detailide avamiseks teksti mitu korda. (IB-5948)
+- JAWS ekraanilugeja loeb faili lisamisel ette nii hiirekasutajate kui ka klaviatuurikasutajate käitumisvihje. (IB-6073)
+Kaardilugejad
+Firefox veebilehitsejas ei näidataPinPad kaardilugejakasutamisel vale koodi sisestamisel veateadet arvuti ekraanil. Veateadet kuvatakse (lühiajaliselt) pinpad lugeja ekraanil. (Firefoxi bugiraport)  PinPad lugejaekraanil öeldakse “Sisesta PUK” asemel “Sisesta PIN”. (IB-5815)
+- Firefox veebilehitsejas ei näidata PinPad kaardilugeja kasutamisel vale koodi sisestamisel veateadet arvuti ekraanil. Veateadet kuvatakse (lühiajaliselt) pinpad lugeja ekraanil. ( Firefoxi bugiraport (https://bugzilla.mozilla.org/show_bug.cgi?id=506939) )
+- PinPad lugeja ekraanil öeldakse “ Sisesta PUK ” asemel “ Sisesta PIN ”. (IB-5815)
+Iga uue ID-tarkvara versiooniga püütakse lahendada võimalikult palju teadaolevaid puuduseid, ent esikohal on alati kasutaja ning tema andmete turvalisuse tagamine ning tarkvara töökindlus.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

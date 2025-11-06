@@ -1,0 +1,310 @@
+Olukorra tuvastus  Pöördumise kirjutamine
+- Olukorra tuvastus
+- Pöördumise kirjutamine
+Millist isikutuvastusvahendit kasutad?
+ID-kaart  Mobiil-ID  Smart-ID  Muu
+- ID-kaart (#)
+ID-kaart
+- Mobiil-ID (#)
+Mobiil-ID
+- Smart-ID (#)
+Smart-ID
+- Muu (#)
+Muu
+Millise tegevuse juures tõrge tekkis?
+
+- 
+Veebilehitsejates ja e-teenustes autentimine/allkirjastamine  Tarkvara paigaldamine  ID-kaardi PIN-koodid kadunud/lukus  Allkirjastamine  Krüpteerimine  DigiDoc4  RIA DigiDoc mobiilirakendus  Testimine  Midagi muud
+- Veebilehitsejates ja e-teenustes autentimine/allkirjastamine (#)
+Veebilehitsejates ja e-teenustes autentimine/allkirjastamine
+- Tarkvara paigaldamine (#)
+Tarkvara paigaldamine
+- ID-kaardi PIN-koodid kadunud/lukus (#)
+ID-kaardi PIN-koodid kadunud/lukus
+- Allkirjastamine (#)
+Allkirjastamine
+- Krüpteerimine (#)
+Krüpteerimine
+- DigiDoc4 (#)
+DigiDoc4
+- RIA DigiDoc mobiilirakendus (#)
+RIA DigiDoc mobiilirakendus
+- Testimine (#)
+Testimine
+- Midagi muud (#)
+Midagi muud
+Mobiil-ID PIN-koodid  Allkirjastamine  Tarkvara paigaldamine  DigiDoc4  RIA DigiDoc mobiilirakendus  Midagi muud
+- Mobiil-ID PIN-koodid (#)
+Mobiil-ID PIN-koodid
+- Allkirjastamine (#)
+Allkirjastamine
+- Tarkvara paigaldamine (#)
+Tarkvara paigaldamine
+- DigiDoc4 (#)
+DigiDoc4
+- RIA DigiDoc mobiilirakendus (#)
+RIA DigiDoc mobiilirakendus
+- Midagi muud (#)
+Midagi muud
+DigiDoc4 kasutamine  RIA DigiDoc mobiilirakendus  Allkirjastamine  Midagi muud
+- DigiDoc4 kasutamine (#)
+DigiDoc4 kasutamine
+- RIA DigiDoc mobiilirakendus (#)
+RIA DigiDoc mobiilirakendus
+- Allkirjastamine (#)
+Allkirjastamine
+- Midagi muud (#)
+Midagi muud
+Veebilehitsejad ja e-teenused  Tarkvara paigaldamine  PIN-koodid  Allkirjastamine  Krüpteerimine  DigiDoc4  RIA DigiDoc mobiilirakendus  Testimine  Midagi muud
+- Veebilehitsejad ja e-teenused (#)
+Veebilehitsejad ja e-teenused
+- Tarkvara paigaldamine (#)
+Tarkvara paigaldamine
+- PIN-koodid (#)
+PIN-koodid
+- Allkirjastamine (#)
+Allkirjastamine
+- Krüpteerimine (#)
+Krüpteerimine
+- DigiDoc4 (#)
+DigiDoc4
+- RIA DigiDoc mobiilirakendus (#)
+RIA DigiDoc mobiilirakendus
+- Testimine (#)
+Testimine
+- Midagi muud (#)
+Midagi muud
+Tagasi
+Need artiklid kirjeldavad lahendusi, mis võivad sind aidata
+
+- 
+- 
+Veebilehitsejate seadistamine ID-kaardi kasutamiseksSelleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist.  ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestubKas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse!  Show More Button
+- Veebilehitsejate seadistamine ID-kaardi kasutamiseksSelleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist. (/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/)
+Veebilehitsejate seadistamine ID-kaardi kasutamiseks
+Selleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist.
+- ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestubKas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse! (/artikkel/id-kaardiga-sisenemine-voi-allkirjastamine-e-teenustes-ebaonnestub/)
+ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestub
+Kas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse!
+ID-tarkvara toetatud operatsioonisüsteemidID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.  Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?  Show More Button
+- ID-tarkvara toetatud operatsioonisüsteemidID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel. (/artikkel/id-tarkvara-toetatud-operatsioonisusteemid/)
+ID-tarkvara toetatud operatsioonisüsteemid
+ID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.
+- Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet? (/artikkel/windows-id-tarkvara-paigaldus-loppes-torkega/)
+Windows: ID-tarkvara paigaldus lõppes tõrkega
+Kas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?
+PIN-kood on blokeeritud ehk lukku läinudJuhul, kui sina – või keegi teine – on PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel.  ID-kaardi PIN- ja PUK-koodide muutmineSoovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust.  Show More Button
+- PIN-kood on blokeeritud ehk lukku läinudJuhul, kui sina – või keegi teine – on PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel. (/artikkel/pin-kood-on-blokeeritud-ehk-lukku-lainud/)
+PIN-kood on blokeeritud ehk lukku läinud
+Juhul, kui sina – või keegi teine – on PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel.
+- ID-kaardi PIN- ja PUK-koodide muutmineSoovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust. (/artikkel/id-kaardi-pin-ja-puk-koodide-muutmine/)
+ID-kaardi PIN- ja PUK-koodide muutmine
+Soovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust.
+Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.  Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!  DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidelKõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe.  Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust.  Show More Button  Vaata rohkem artikleid (1)
+- Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4. (/artikkel/soovid-arvutis-digiallkirja-anda/)
+Soovid DigiDoc4 rakenduses digiallkirja anda
+Digiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub! (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!
+- DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidelKõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe. (/artikkel/asutustele-kus-allkirjastatakse-digidoc4-kliendi-kaudu-suuremates-kogustes-dokumente/)
+DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidel
+Kõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe.
+- Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust. (/artikkel/kas-juriidiliselt-kehtivat-digitaalallkirja-on-voimalik-anda-ka-teiste-programmide-abil-3/)
+Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?
+Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust.
+Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusegaDokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks.  Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpigaFailide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks.  Show More Button
+- Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusegaDokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. (/artikkel/dokumentide-krupteerimine-ja-dekrupteerimine/)
+Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusega
+Dokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks.
+- Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpigaFailide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. (/artikkel/failide-krupteerimine-ja-dekrupteerimine-ria-digidoc-apiga/)
+Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpiga
+Failide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks.
+ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara.  Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!  Kasulik info kiipkaardi lugejate kohtaErinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest.  Show More Button
+- ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. (/id-kaart/)
+ID-kaart
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara.
+- Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel! (/artikkel/miks-on-vaja-uuendada-digidoc4-tarkvara/)
+Miks on vaja uuendada ID-tarkvara?
+Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!
+- Kasulik info kiipkaardi lugejate kohtaErinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest. (/artikkel/kasulik-info-kiipkaardi-lugejate-kohta/)
+Kasulik info kiipkaardi lugejate kohta
+Erinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest.
+Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.  Show More Button
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis. (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+RIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.
+ArendajaleSiin saad kontrollida oma ID-kaardi toimimist.  Show More Button
+- ArendajaleSiin saad kontrollida oma ID-kaardi toimimist. (/arendajale/)
+Arendajale
+Siin saad kontrollida oma ID-kaardi toimimist.
+Soovid uut ID-kaartiID-kaart on kõikidele Eesti kodanikele kohustuslik isikut tõendav dokument. Saad seda taotleda Politsei- ja Piirivalveametist.  Kuhu saab ID-kaardiga reisida?Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse.  ID-kaart ja selle kasutusvõimalusedID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet.  Show More Button
+- Soovid uut ID-kaartiID-kaart on kõikidele Eesti kodanikele kohustuslik isikut tõendav dokument. Saad seda taotleda Politsei- ja Piirivalveametist. (/artikkel/soovid-uut-id-kaarti/)
+Soovid uut ID-kaarti
+ID-kaart on kõikidele Eesti kodanikele kohustuslik isikut tõendav dokument. Saad seda taotleda Politsei- ja Piirivalveametist.
+- Kuhu saab ID-kaardiga reisida?Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse. (/artikkel/kuhu-saab-id-kaardiga-reisida/)
+Kuhu saab ID-kaardiga reisida?
+Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse.
+- ID-kaart ja selle kasutusvõimalusedID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet. (/artikkel/id-kaart-ja-selle-kasutusvoimalused/)
+ID-kaart ja selle kasutusvõimalused
+ID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet.
+Mobiil-IDSiit leiad informatsiooni ja juhiseid Mobiil-ID PIN-koodide kohta.  Mobiil-ID sertifikaatide peatamineJuhul, kui sinu mobiil-IDga seotud telefon on kadunud või varastatud, tuleks koheselt peatada mobiil-ID sertifikaadid: ainult nii oled kaitstud identiteedivarguste eest!  Show More Button
+- Mobiil-IDSiit leiad informatsiooni ja juhiseid Mobiil-ID PIN-koodide kohta. (/mobiil-id/)
+Mobiil-ID
+Siit leiad informatsiooni ja juhiseid Mobiil-ID PIN-koodide kohta.
+- Mobiil-ID sertifikaatide peatamineJuhul, kui sinu mobiil-IDga seotud telefon on kadunud või varastatud, tuleks koheselt peatada mobiil-ID sertifikaadid: ainult nii oled kaitstud identiteedivarguste eest! (/artikkel/mobiil-id-sertifikaatide-peatamine/)
+Mobiil-ID sertifikaatide peatamine
+Juhul, kui sinu mobiil-IDga seotud telefon on kadunud või varastatud, tuleks koheselt peatada mobiil-ID sertifikaadid: ainult nii oled kaitstud identiteedivarguste eest!
+Mobiil-IDga allkirjastamine ebaõnnestubJuhul, kui mobiil-IDga allkirjastamisel tekkis tõrkeid, loe läbi veateade: enamasti saad sealt vajaliku info olukorra lahendamiseks.  Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.  Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!  Show More Button
+- Mobiil-IDga allkirjastamine ebaõnnestubJuhul, kui mobiil-IDga allkirjastamisel tekkis tõrkeid, loe läbi veateade: enamasti saad sealt vajaliku info olukorra lahendamiseks. (/artikkel/mobiil-idga-digiallkirjastamine-ebaonnestub/)
+Mobiil-IDga allkirjastamine ebaõnnestub
+Juhul, kui mobiil-IDga allkirjastamisel tekkis tõrkeid, loe läbi veateade: enamasti saad sealt vajaliku info olukorra lahendamiseks.
+- Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4. (/artikkel/soovid-arvutis-digiallkirja-anda/)
+Soovid DigiDoc4 rakenduses digiallkirja anda
+Digiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub! (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!
+Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?  ID-tarkvara toetatud operatsioonisüsteemidID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.  Show More Button
+- Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet? (/artikkel/windows-id-tarkvara-paigaldus-loppes-torkega/)
+Windows: ID-tarkvara paigaldus lõppes tõrkega
+Kas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?
+- ID-tarkvara toetatud operatsioonisüsteemidID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel. (/artikkel/id-tarkvara-toetatud-operatsioonisusteemid/)
+ID-tarkvara toetatud operatsioonisüsteemid
+ID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.
+ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.  Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!  Show More Button
+- ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt. (/id-kaart/)
+ID-kaart
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.
+- Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel! (/artikkel/miks-on-vaja-uuendada-digidoc4-tarkvara/)
+Miks on vaja uuendada ID-tarkvara?
+Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!
+Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.  Show More Button
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis. (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+RIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.
+Mobiil-IDTänaseks on mobiil-ID tugi olemas pea kõikidel suurematel e-teenustel, mis pakuvad ID-kaardiga sisenemise võimalust, ning mobiil-ID töötab nii arvutis, tahvelarvutis kui mobiiltelefonis. E-teenuste kasutamiseks ei ole sul vaja eraldi kaardilugejat ega spetsiaalset tarkvara: piisab, kui mäletad oma mobiil-ID PIN-koode!  Mobiil-ID taotlemine ja aktiveerimineMobiil-ID taotlemine eeldab, et sõlmid mobiil-ID toega SIM-kaardi saamiseks oma mobiilsideoperaatoriga mobiil-ID lepingu.  Soovid alustada mobiil-ID kasutamistMobiil-ID on moodne, mugav, turvaline ja riiklikult tunnustatud digitaalne isikutunnistus, mille abil saad kiirelt ja lihtsalt näiteks internetipanka kasutada, e-valimistel osaleda eesti.ee teenuseid hallata jne. Erinevalt ID-kaardist ei ole mobiil-ID puhul vaja ei kaardilugejat ega spetsiaalse tarkvaraga arvutit: piisab mobiiltelefonist ja sobivast kõnekaardist/telefonilepingust.  Show More Button
+- Mobiil-IDTänaseks on mobiil-ID tugi olemas pea kõikidel suurematel e-teenustel, mis pakuvad ID-kaardiga sisenemise võimalust, ning mobiil-ID töötab nii arvutis, tahvelarvutis kui mobiiltelefonis. E-teenuste kasutamiseks ei ole sul vaja eraldi kaardilugejat ega spetsiaalset tarkvara: piisab, kui mäletad oma mobiil-ID PIN-koode! (/mobiil-id/)
+Mobiil-ID
+Tänaseks on mobiil-ID tugi olemas pea kõikidel suurematel e-teenustel, mis pakuvad ID-kaardiga sisenemise võimalust, ning mobiil-ID töötab nii arvutis, tahvelarvutis kui mobiiltelefonis. E-teenuste kasutamiseks ei ole sul vaja eraldi kaardilugejat ega spetsiaalset tarkvara: piisab, kui mäletad oma mobiil-ID PIN-koode!
+- Mobiil-ID taotlemine ja aktiveerimineMobiil-ID taotlemine eeldab, et sõlmid mobiil-ID toega SIM-kaardi saamiseks oma mobiilsideoperaatoriga mobiil-ID lepingu. (/artikkel/mobiil-id-taotlemine-ja-aktiveerimine/)
+Mobiil-ID taotlemine ja aktiveerimine
+Mobiil-ID taotlemine eeldab, et sõlmid mobiil-ID toega SIM-kaardi saamiseks oma mobiilsideoperaatoriga mobiil-ID lepingu.
+- Soovid alustada mobiil-ID kasutamistMobiil-ID on moodne, mugav, turvaline ja riiklikult tunnustatud digitaalne isikutunnistus, mille abil saad kiirelt ja lihtsalt näiteks internetipanka kasutada, e-valimistel osaleda eesti.ee teenuseid hallata jne. Erinevalt ID-kaardist ei ole mobiil-ID puhul vaja ei kaardilugejat ega spetsiaalse tarkvaraga arvutit: piisab mobiiltelefonist ja sobivast kõnekaardist/telefonilepingust. (/artikkel/soovid-alustada-mobiil-id-kasutamist/)
+Soovid alustada mobiil-ID kasutamist
+Mobiil-ID on moodne, mugav, turvaline ja riiklikult tunnustatud digitaalne isikutunnistus, mille abil saad kiirelt ja lihtsalt näiteks internetipanka kasutada, e-valimistel osaleda eesti.ee teenuseid hallata jne. Erinevalt ID-kaardist ei ole mobiil-ID puhul vaja ei kaardilugejat ega spetsiaalse tarkvaraga arvutit: piisab mobiiltelefonist ja sobivast kõnekaardist/telefonilepingust.
+ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.  Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!  Show More Button
+- ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt. (/id-kaart/)
+ID-kaart
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.
+- Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel! (/artikkel/miks-on-vaja-uuendada-digidoc4-tarkvara/)
+Miks on vaja uuendada ID-tarkvara?
+Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!
+Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.  Show More Button
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis. (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+RIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.
+Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.  Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!  Show More Button
+- Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4. (/artikkel/soovid-arvutis-digiallkirja-anda/)
+Soovid DigiDoc4 rakenduses digiallkirja anda
+Digiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub! (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!
+Smart-IDSmart-ID abil saad oma interneti- või mobiilipanka ja teistesse e-teenustesse siseneda turvaliselt ja mugavalt just selle nutiseadme abil, mida eelistad. Vaja on sul vaid internetiühendust, sest Smart-ID kasutamine ei ole seotud SIM-kaartide ega mobiilioperaatoriga.  Smart-ID klienditugiKõikide küsimuste ja probleemide tekkides leiad lahenduse Smart-ID kodulehelt www.smart-id.com  Soovin Smart-ID kasutajaks hakataSmart-ID tasuta nutirakendusega saad e-teenustesse sisse logida, tehinguid ja pangaülekandeid kinnitada ning dokumente allkirjastada: võimalused on peaaegu sama avarad kui ID-kaardi või mobiil-ID puhul.  Show More Button
+- Smart-IDSmart-ID abil saad oma interneti- või mobiilipanka ja teistesse e-teenustesse siseneda turvaliselt ja mugavalt just selle nutiseadme abil, mida eelistad. Vaja on sul vaid internetiühendust, sest Smart-ID kasutamine ei ole seotud SIM-kaartide ega mobiilioperaatoriga. (/smart-id/)
+Smart-ID
+Smart-ID abil saad oma interneti- või mobiilipanka ja teistesse e-teenustesse siseneda turvaliselt ja mugavalt just selle nutiseadme abil, mida eelistad. Vaja on sul vaid internetiühendust, sest Smart-ID kasutamine ei ole seotud SIM-kaartide ega mobiilioperaatoriga.
+- Smart-ID klienditugiKõikide küsimuste ja probleemide tekkides leiad lahenduse Smart-ID kodulehelt www.smart-id.com (/artikkel/smart-id-klienditugi/)
+Smart-ID klienditugi
+Kõikide küsimuste ja probleemide tekkides leiad lahenduse Smart-ID kodulehelt www.smart-id.com
+- Soovin Smart-ID kasutajaks hakataSmart-ID tasuta nutirakendusega saad e-teenustesse sisse logida, tehinguid ja pangaülekandeid kinnitada ning dokumente allkirjastada: võimalused on peaaegu sama avarad kui ID-kaardi või mobiil-ID puhul. (/artikkel/soovin-smart-id-kasutajaks-hakata/)
+Soovin Smart-ID kasutajaks hakata
+Smart-ID tasuta nutirakendusega saad e-teenustesse sisse logida, tehinguid ja pangaülekandeid kinnitada ning dokumente allkirjastada: võimalused on peaaegu sama avarad kui ID-kaardi või mobiil-ID puhul.
+Veebilehitsejate seadistamine ID-kaardi kasutamiseksSelleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist.  ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestubKas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse!  Show More Button
+- Veebilehitsejate seadistamine ID-kaardi kasutamiseksSelleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist. (/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/)
+Veebilehitsejate seadistamine ID-kaardi kasutamiseks
+Selleks, et saaksid ID-kaarti veebilehitsejates kasutada – näiteks internetipanka, Eesti.ee keskkonda ja muudesse e-teenustesse sisenemiseks, tegevuste ja tehingute kinnitamiseks, digiallkirjastamiseks jne. – on vajalik, et veebilehitseja lubaks ID-kaardi sertifikaatide kasutamist.
+- ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestubKas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse! (/artikkel/id-kaardiga-sisenemine-voi-allkirjastamine-e-teenustes-ebaonnestub/)
+ID-kaardiga sisenemine või allkirjastamine e-teenustes ebaõnnestub
+Kas sul ebaõnnetus ID-kaardi abil e-teenustesse sisenemine või allkirjastamine? Põhjuseid selleks võib olla mitmeid: käime need koos läbi ning kindlasti leiame lahenduse!
+ID-kaartID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.  Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?  ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.  Show More Button
+- ID-kaartID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel. (/id-kaart/)
+ID-kaart
+ID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel.
+- Windows: ID-tarkvara paigaldus lõppes tõrkegaKas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet? (/artikkel/windows-id-tarkvara-paigaldus-loppes-torkega/)
+Windows: ID-tarkvara paigaldus lõppes tõrkega
+Kas olid paigaldamas ID-tarkvara ning sulle kuvati mõnda sellist või sarnast veateadet?
+- ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt. (/id-kaart/)
+ID-kaart
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.
+PIN-kood on blokeeritud ehk lukku läinudJuhul, kui sina – või keegi teine – on ID-kaardi PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel.  ID-kaardi PIN- ja PUK-koodide muutmineSoovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust.  Mobiil-IDMobiil-ID PIN-koodid väljastatakse sulle koos mobiil-ID SIM-kaardiga. Leiad need SIM-kaardi ümbriselt kraabitava pinna alt. Koos mobiil-ID toega SIM-kaardiga saad kaasa kolm koodi:  Show More Button
+- PIN-kood on blokeeritud ehk lukku läinudJuhul, kui sina – või keegi teine – on ID-kaardi PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel. (/artikkel/pin-kood-on-blokeeritud-ehk-lukku-lainud/)
+PIN-kood on blokeeritud ehk lukku läinud
+Juhul, kui sina – või keegi teine – on ID-kaardi PIN-koodi kolm korda järjest valesti sisestanud, blokeeritakse see turvalisuse kaalutlustel.
+- ID-kaardi PIN- ja PUK-koodide muutmineSoovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust. (/artikkel/id-kaardi-pin-ja-puk-koodide-muutmine/)
+ID-kaardi PIN- ja PUK-koodide muutmine
+Soovitame koos ID-kaardiga automaatselt väljastatud PIN- ja PUK koodid kohe ära vahetada: ise valitud koodid püsivad paremini meeles. Samuti tasub aeg-ajalt PIN- ja PUK-koode värskendada juhuks, kui mõni kõrvaltvaataja on näinud sind PIN-koode sisestamas. Kui Te pole PUK-koodi ise muutnud, leiab selle ID-kaardiga kaasa tulnud koodiümbrikust.
+- Mobiil-IDMobiil-ID PIN-koodid väljastatakse sulle koos mobiil-ID SIM-kaardiga. Leiad need SIM-kaardi ümbriselt kraabitava pinna alt. Koos mobiil-ID toega SIM-kaardiga saad kaasa kolm koodi: (/mobiil-id/)
+Mobiil-ID
+Mobiil-ID PIN-koodid väljastatakse sulle koos mobiil-ID SIM-kaardiga. Leiad need SIM-kaardi ümbriselt kraabitava pinna alt. Koos mobiil-ID toega SIM-kaardiga saad kaasa kolm koodi:
+Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.  Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!  DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidelKõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe.  Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust.  Show More Button  Vaata rohkem artikleid (1)
+- Soovid DigiDoc4 rakenduses digiallkirja andaDigiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4. (/artikkel/soovid-arvutis-digiallkirja-anda/)
+Soovid DigiDoc4 rakenduses digiallkirja anda
+Digiallkirja andmine on imelihtne! Kõigepealt on sul vaja otsustada, millise vahendiga sa allkirja anda soovid: kas ID-kaardi, mobiil-ID või Smart-IDga. Kui kasutad ID-kaarti, sisesta see kaardilugejasse, ühenda kaardilugeja arvutiga ja ava arvutis DigiDoc4. Kui kasutad mobiil-IDd või Smart-IDd, tee lihtsalt arvutis lahti DigiDoc4.
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesDokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub! (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!
+- DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidelKõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe. (/artikkel/asutustele-kus-allkirjastatakse-digidoc4-kliendi-kaudu-suuremates-kogustes-dokumente/)
+DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse kasutamine ärilistel eesmärkidel
+Kõigile ID-kaardi või/ja mobiil-ID, Smart-ID omanikele on alates DigiDoc tarkvara loomisest saati olnud ette nähtud isiklikuks tarbeks teatud hulk tasuta digiallkirju kuus. DigiDoc rakendustes antavate tasuta allkirjade arv lähtub mõistliku kasutamise printsiibist ning oli pikka aega kümme allkirja kuus. Seoses inimeste muutunud käitumisharjumustega on seda limiiti mitmekordistatud. Uus tasuta allkirjade arv on kooskõlas reaalse kasutusega ning tavakasutuseks piisav. Piirangu alla lähevad vaid DigiDoc4 rakenduse ja RIA DigiDoc mobiilirakenduse abil antavad digiallkirjad ehk siis dokumentidele antud allkirjad. E-teenustes (internetipangad, eesti.ee jms) antavad allkirjad piirangu alla ei lähe.
+- Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust. (/artikkel/kas-juriidiliselt-kehtivat-digitaalallkirja-on-voimalik-anda-ka-teiste-programmide-abil-3/)
+Kas juriidiliselt kehtivat digitaalallkirja on võimalik anda ka teiste programmide abil?
+Mitmed programmid (Microsoft Word, Open Office, Adobe Acrobat, Thunderbird) pakuvad digitaalallkirjastamise/signeerimise võimalust. Paraku ei pruugi need allkirjad olla Eesti mõistes käsitsi kirjutatud allkirjaga võrdsed, kui nende allkirjastamiseks ei ole kasutatud ajatempliteenust.
+Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusegaDokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Dokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest.  Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpigaFailide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Failide krüpteerimine aitab kaitsta nende sisu võõraste pilkude eest.  Show More Button
+- Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusegaDokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Dokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest. (/artikkel/dokumentide-krupteerimine-ja-dekrupteerimine/)
+Failide krüpteerimine ja dekrüpteerimine DigiDoc4 rakendusega
+Dokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud dokumente (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb dokumendi sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Dokumentide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest.
+- Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpigaFailide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Failide krüpteerimine aitab kaitsta nende sisu võõraste pilkude eest. (/artikkel/failide-krupteerimine-ja-dekrupteerimine-ria-digidoc-apiga/)
+Failide krüpteerimine ja dekrüpteerimine RIA DigiDoc äpiga
+Failide krüpteerimine aitab kaitsta failide sisu võõraste pilkude eest: krüpteeritud failid (laiendiga .cdoc) saavad oma ID-kaardiga avada ainult need, kellele selleks luba antud on. Kõigi teiste jaoks jääb faili sisu kaitstuks. Näiteks on krüpteerimine vajalik juhul, kui edastad e-posti teel konfidentsiaalset infot ja soovid, et failide sisu võõrastesse kätesse sattudes salajasena püsiks. Failide krüpteerimine aitab kaitsta nende sisu võõraste pilkude eest.
+ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.  Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!  Kasulik info kiipkaardi lugejate kohtaErinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest. Teiste kaardilugejate töötamine ei ole testitud ja nende töökindlus DigiDoc4 ning RIA DigiDoc rakendustes ei ole meile teada. Juhul kui kasutusel on USB adapter (USB HUB/-jagaja, OTG, vms), siis tuleb veenduda, et tegemist on andmeedastuseks mõeldud seadmega.  Show More Button
+- ID-kaartID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt. (/id-kaart/)
+ID-kaart
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.
+- Miks on vaja uuendada ID-tarkvara?Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel! (/artikkel/miks-on-vaja-uuendada-digidoc4-tarkvara/)
+Miks on vaja uuendada ID-tarkvara?
+Iga tarkvara vajab vahel uuendamist: pole vahet, kas tegu on nutitelefoni või arvutiga, tööks vajaliku programmiga või millegagi, mis aitab sul lihtsalt aega veeta. Juhul, kui sinu arvuti soovitab sul ID-tarkvara või selle komponente (näiteks DigiDoc4 rakendust) uuendada, võta seda tõsiselt ja uuenda tarkvara esimesel võimalusel!
+- Kasulik info kiipkaardi lugejate kohtaErinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest. Teiste kaardilugejate töötamine ei ole testitud ja nende töökindlus DigiDoc4 ning RIA DigiDoc rakendustes ei ole meile teada. Juhul kui kasutusel on USB adapter (USB HUB/-jagaja, OTG, vms), siis tuleb veenduda, et tegemist on andmeedastuseks mõeldud seadmega. (/artikkel/kasulik-info-kiipkaardi-lugejate-kohta/)
+Kasulik info kiipkaardi lugejate kohta
+Erinevate operatsioonisüsteemidega arvutites võivad kiipkaardid natuke erinevalt reageerida. Siin lehel olemegi ära toonud operatsioonisüsteemide ehk opsüsteemide baasvajadused ning nimekirja testitud kaardilugejatest. Teiste kaardilugejate töötamine ei ole testitud ja nende töökindlus DigiDoc4 ning RIA DigiDoc rakendustes ei ole meile teada. Juhul kui kasutusel on USB adapter (USB HUB/-jagaja, OTG, vms), siis tuleb veenduda, et tegemist on andmeedastuseks mõeldud seadmega.
+Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.  Show More Button
+- Digiallkirjastamine RIA DigiDoc mobiilirakendusesRIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis. (/artikkel/digiallkirjastamine-ria-digidoc-mobiilirakenduses/)
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses
+RIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID ja ID-kaardi kasutamiseks nutitelefonis.
+ArendajaleSiin saad kontrollida oma ID-kaardi toimimist.  Show More Button
+- ArendajaleSiin saad kontrollida oma ID-kaardi toimimist. (/arendajale/)
+Arendajale
+Siin saad kontrollida oma ID-kaardi toimimist.
+ID-kaart ja selle kasutusvõimalusedID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet.  Kuhu saab ID-kaardiga reisida?Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse.  Show More Button
+- ID-kaart ja selle kasutusvõimalusedID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet. (/artikkel/id-kaart-ja-selle-kasutusvoimalused/)
+ID-kaart ja selle kasutusvõimalused
+ID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik isikut tõendav dokument. ID-kaart kehtib 5 aastat ning seda väljastab Politsei- ja Piirivalveamet.
+- Kuhu saab ID-kaardiga reisida?Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse. (/artikkel/kuhu-saab-id-kaardiga-reisida/)
+Kuhu saab ID-kaardiga reisida?
+Eesti kodanikud võivad ID-kaardi alusel ja ilma passita reisida Euroopa Liidus ehk siseneda teistesse Euroopa Liidu (EL) ja Euroopa Majanduspiirkonna (EMP) liikmesriikidesse.
+Tagasi
+Edasi pöördumist kirjutama
+Tagasi
+Kinnituskiri saadetakse koos küsimuse koopiaga sinu meilile.
+Vastame esimesel võimalusel, kuid mitte hijem kui kolme tööpäeva jooksul. Kasutajatugi töötab tööpäeviti 8:30-17:00
+Tagasi avalehele
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

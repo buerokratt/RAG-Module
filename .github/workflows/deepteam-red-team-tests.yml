@@ -54,10 +54,6 @@ jobs:
             MISSING_SECRETS+=("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
           fi
           
-          # Check other LLM API keys
-          if [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
-            MISSING_SECRETS+=("ANTHROPIC_API_KEY")
-          fi
           
           if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
             MISSING_SECRETS+=("OPENAI_API_KEY")
@@ -100,7 +96,6 @@ jobs:
             - \`AZURE_OPENAI_EMBEDDING_DEPLOYMENT\` - Embedding model deployment name (e.g., \`text-embedding-3-large\`)
             
             **Additional LLM APIs:**
-            - \`ANTHROPIC_API_KEY\` - Anthropic API key (for guardrails)
             - \`OPENAI_API_KEY\` - OpenAI API key (optional fallback)
             
             3. Re-run the workflow after adding the secrets
@@ -174,7 +169,6 @@ jobs:
         continue-on-error: true
         env:
           # LLM API Keys
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           # Azure OpenAI - Chat Model
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}

@@ -1,0 +1,64 @@
+Mobiil-ID sertifikaadid kehtivad 5 aastat. Sertifikaatide kehtivust saab kontrollida mobiilioperaatori iseteeninduses:
+Telia mobiil-IDteenuse tutvustus ja info  Elisa mobiil-IDteenuse tutvustus ja info  Tele2 mobiil-IDteenuse tutvustus ja info
+- Telia mobiil-ID (https://www.telia.ee/era/lisateenused/mobiil-id/) teenuse tutvustus ja info
+- Elisa mobiil-ID (https://www.elisa.ee/et/eraklient/apid-ja-lisateenused/lisateenused/mobiil-id) teenuse tutvustus ja info
+- Tele2 mobiil-ID (https://tele2.ee/teenused/mugavusteenused/mobiil-id) teenuse tutvustus ja info
+Mobiil-ID sertifikaate ei saa uuendada:
+Sertifikaatide aegumisel tuleb pöörduda oma mobiilsideoperaatori poole ning mobiil-ID SIM-kaart välja vahetada.
+Kasutajal saab olla mitu mobiil-ID korraga:
+Ühel SIM kaardil (numbril) saab olla aktiveeritud ainult ühe mobiil-ID seotud sertifikaadipaar. Uue SIM-kaardi väljastamisel tunnistatakse eelmise SIM-kaardiga seotud sertifikaadid kehtetuks. Täpsem info oma mobiilioperaatori käest.
+Isikut tõendava dokumendi sõltuvus mobiil-ID lepingustEnne Mobiil-ID taotlemist tuleb meeles pidada järgmist:Mobiil-ID lepingu sõlmimisel võidakse nõuda isikut tõendava dokumendi esitamist. Isegi kui teie isikut tõendav dokument aegub, saate teenust jätkata kuni selle kehtivusaja lõpuni, kui teil on juba kehtiv Mobiil-ID leping olemas.  Sertifikaadid: mobiil-ID sertifikaatide kehtivuse kontrollimineMobiil-ID sertifikaatide kehtivust saab kontrollida riigiportaalis eesti.ee:Logi sisse riigiportaalieesti.ee(www.eesti.ee).Vali alajaotusest „E-teenused“ valdkond „Mina ja minu pere“.Avaneval leheküljel vali alumise pealkirja „Isikut tõendavad dokumendid ja nende sertifikaadid“ alt „Minu eID vahendid“ või vajuta selle teksti kõrval olevale lingile „Esitan päringu“.Avanevad isikut tõendavate dokumentide (sh Mobiil-ID) kehtivusajad ning iga eID vahendi puhul saab esitada ka täpsema päringu selle sertifikaatide kohta.  MyID portaalPortaal MyID pakub teavet Mobiil-ID, ID-kaardi, Digi-ID ja Smart-ID kontode, sertifikaatide ning tehingute kohta, mis on väljastatudSK ID Solutions ASehk SK poolt. Lisateavet MyID portaali ja selle kasutamise kohta leiate portaalitingimustestkui kaKKK. Pidage meeles, et MyID portaal on praegu beetaversioonis, mis tähendab, et esitatud teave võib olla ebatäpne ja/ või puudulik. Kui vajate MyID portaalist teavet ametlikuks kasutamiseks, pöörduge palun aadressileinfo@skidsolutions.eu. Tere tulemast MyID portaali.
+- Isikut tõendava dokumendi sõltuvus mobiil-ID lepingust  Enne Mobiil-ID taotlemist tuleb meeles pidada järgmist:Mobiil-ID lepingu sõlmimisel võidakse nõuda isikut tõendava dokumendi esitamist. Isegi kui teie isikut tõendav dokument aegub, saate teenust jätkata kuni selle kehtivusaja lõpuni, kui teil on juba kehtiv Mobiil-ID leping olemas.
+Isikut tõendava dokumendi sõltuvus mobiil-ID lepingust  (#isikut-tendava-dokumendi_1)
+
+
+
+
+
+Enne Mobiil-ID taotlemist tuleb meeles pidada järgmist:
+Mobiil-ID lepingu sõlmimisel võidakse nõuda isikut tõendava dokumendi esitamist.  Isegi kui teie isikut tõendav dokument aegub, saate teenust jätkata kuni selle kehtivusaja lõpuni, kui teil on juba kehtiv Mobiil-ID leping olemas.
+- Mobiil-ID lepingu sõlmimisel võidakse nõuda isikut tõendava dokumendi esitamist.
+- Isegi kui teie isikut tõendav dokument aegub, saate teenust jätkata kuni selle kehtivusaja lõpuni, kui teil on juba kehtiv Mobiil-ID leping olemas.
+
+
+
+- Sertifikaadid: mobiil-ID sertifikaatide kehtivuse kontrollimine  Mobiil-ID sertifikaatide kehtivust saab kontrollida riigiportaalis eesti.ee:Logi sisse riigiportaalieesti.ee(www.eesti.ee).Vali alajaotusest „E-teenused“ valdkond „Mina ja minu pere“.Avaneval leheküljel vali alumise pealkirja „Isikut tõendavad dokumendid ja nende sertifikaadid“ alt „Minu eID vahendid“ või vajuta selle teksti kõrval olevale lingile „Esitan päringu“.Avanevad isikut tõendavate dokumentide (sh Mobiil-ID) kehtivusajad ning iga eID vahendi puhul saab esitada ka täpsema päringu selle sertifikaatide kohta.
+Sertifikaadid: mobiil-ID sertifikaatide kehtivuse kontrollimine  (#sertifikaadid-mobiil-id-sertifikaatide_2)
+
+
+
+
+
+Mobiil-ID sertifikaatide kehtivust saab kontrollida riigiportaalis eesti.ee:
+Logi sisse riigiportaalieesti.ee(www.eesti.ee).  Vali alajaotusest „E-teenused“ valdkond „Mina ja minu pere“.  Avaneval leheküljel vali alumise pealkirja „Isikut tõendavad dokumendid ja nende sertifikaadid“ alt „Minu eID vahendid“ või vajuta selle teksti kõrval olevale lingile „Esitan päringu“.  Avanevad isikut tõendavate dokumentide (sh Mobiil-ID) kehtivusajad ning iga eID vahendi puhul saab esitada ka täpsema päringu selle sertifikaatide kohta.
+- Logi sisse riigiportaali eesti.ee (https://www.eesti.ee/et) (www.eesti.ee).
+- Vali alajaotusest „ E-teenused “ valdkond „ Mina ja minu pere “.
+- Avaneval leheküljel vali alumise pealkirja „ Isikut tõendavad dokumendid ja nende sertifikaadid “ alt „ Minu eID vahendid “ või vajuta selle teksti kõrval olevale lingile „ Esitan päringu “.
+- Avanevad isikut tõendavate dokumentide (sh Mobiil-ID) kehtivusajad ning iga eID vahendi puhul saab esitada ka täpsema päringu selle sertifikaatide kohta.
+
+
+
+- MyID portaal  Portaal MyID pakub teavet Mobiil-ID, ID-kaardi, Digi-ID ja Smart-ID kontode, sertifikaatide ning tehingute kohta, mis on väljastatudSK ID Solutions ASehk SK poolt. Lisateavet MyID portaali ja selle kasutamise kohta leiate portaalitingimustestkui kaKKK. Pidage meeles, et MyID portaal on praegu beetaversioonis, mis tähendab, et esitatud teave võib olla ebatäpne ja/ või puudulik. Kui vajate MyID portaalist teavet ametlikuks kasutamiseks, pöörduge palun aadressileinfo@skidsolutions.eu. Tere tulemast MyID portaali.
+MyID portaal  (#myid-portaal_3)
+
+
+
+
+
+Portaal MyID pakub teavet Mobiil-ID, ID-kaardi, Digi-ID ja Smart-ID kontode, sertifikaatide ning tehingute kohta, mis on väljastatud SK ID Solutions AS (https://www.skidsolutions.eu/) ehk SK poolt.
+Lisateavet MyID portaali ja selle kasutamise kohta leiate portaali tingimustest (https://www.skidsolutions.eu/upload/files/MYID_T%26C_ET_CURRENT.pdf) kui ka KKK (https://myid.skidsolutions.eu/ee/faq) .
+Pidage meeles, et MyID portaal on praegu beetaversioonis, mis tähendab, et esitatud teave võib olla ebatäpne ja/ või puudulik. Kui vajate MyID portaalist teavet ametlikuks kasutamiseks, pöörduge palun aadressile info@skidsolutions.eu (mailto:info@skidsolutions.eu) .
+Tere tulemast MyID portaali. (https://myid.skidsolutions.eu/ee)
+
+
+Mobiil-ID sertifikaate saab peatada, ent mitte uuendada: aegunud või peatatud sertifikaatidega mobiil-ID kasutamise jätkamiseks tuleb SIM-kaart välja vahetada.
+Aitäh tagasiside eest!
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

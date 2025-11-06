@@ -1,0 +1,87 @@
+ID-tarkvara koosneb mitmetest erinevatest komponentidest, mille paigaldamine käib lihtsalt ja kiirelt.
+Juhul, kui oled esimest korda iseseisvalt ID-tarkvara paigaldamas või alles alustad ID-kaardi elektroonilist kasutamist, soovitame pigem lugeda pikemate juhistega artiklit „Mida teha, kui soovin alustada ID-kaardi kasutamist (/artikkel/soovid-alustada-id-kaardi-elektroonilist-kasutamist/) “.
+Laadi alla ID-tarkvara komponendidAva oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:ID-kaardiga veebis autentimise komponendidningChrome ja Firefox allkirjastamise komponendidVersioon: 25.5, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaSafaris allkirjastamise komponentVersioon: 2.7.0.660, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaDigiDoc4DigiDoc4 versioon: 4.8.2.4487, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaLaadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+- Laadi alla ID-tarkvara komponendid  Ava oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:ID-kaardiga veebis autentimise komponendidningChrome ja Firefox allkirjastamise komponendidVersioon: 25.5, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaSafaris allkirjastamise komponentVersioon: 2.7.0.660, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaDigiDoc4DigiDoc4 versioon: 4.8.2.4487, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaLaadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+Laadi alla ID-tarkvara komponendid  (#laadi-alla-id-tarkvara_1)
+
+
+
+
+
+Ava oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:
+ID-kaardiga veebis autentimise komponendid ning  Chrome ja Firefox allkirjastamise komponendid
+
+
+Safaris allkirjastamise komponent
+
+DigiDoc4
+
+Laadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+
+
+Juhised macOS arvutisse ID-tarkvara paigaldamiseksPane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda. DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne. Samm 1 :Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid. Samm 2 :Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!Samm 3 :VajutadesCustomisesaab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card supporton ID-kaardi tööksvajalik komponent. Samm 4 :Avaneb uus aken MacApp Storekus saab paigaldadaWeb eID toe SafarileningDigiDoc4 rakenduse. Paigalda need vajadusel. Vajalik on Apple konto omamine. Samm 5 :Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.  Veebilehitsejate seadistamine ID-kaardi kasutamiseks. Kui sul on tekkinud tõrkeid ID-kaardi kasutamisel veebis, kontrolli üle oma lehitseja seaded. Meie samm-sammuliste juhiste abil käib veebilehitsejate seadistamine kiirelt ja lihtsalt!  Juhised: macOS arvutites ID-tarkvara eemaldamiseksID kaardi tarkvara eemaldamiseks:Laadige allaID-kaardi tarkvaraAvageallalaetud fail, lisaks avage rakendusTerminalLohistageuninstall.shTerminal'i aknasseVajutageEnterjaySisestage oma paroolNüüd on ID-tarkvara eemaldatud.
+- Juhised macOS arvutisse ID-tarkvara paigaldamiseks  Pane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda. DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne. Samm 1 :Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid. Samm 2 :Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!Samm 3 :VajutadesCustomisesaab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card supporton ID-kaardi tööksvajalik komponent. Samm 4 :Avaneb uus aken MacApp Storekus saab paigaldadaWeb eID toe SafarileningDigiDoc4 rakenduse. Paigalda need vajadusel. Vajalik on Apple konto omamine. Samm 5 :Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.
+Juhised macOS arvutisse ID-tarkvara paigaldamiseks  (#juhised-macos-arvutisse_1)
+
+
+
+
+
+Pane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:
+ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda.  DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne.
+- ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda.
+- DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne.
+Samm 1 : Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid.
+Samm 2 : Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!
+Samm 3 : Vajutades Customise saab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card support on ID-kaardi tööks vajalik komponent.
+Samm 4 : Avaneb uus aken Mac App Store kus saab paigaldada Web eID toe Safarile ning DigiDoc4 rakenduse .
+Paigalda need vajadusel. Vajalik on Apple konto omamine.
+Samm 5 : Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.
+* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.
+
+
+- Veebilehitsejate seadistamine ID-kaardi kasutamiseks.  Kui sul on tekkinud tõrkeid ID-kaardi kasutamisel veebis, kontrolli üle oma lehitseja seaded. Meie samm-sammuliste juhiste abil käib veebilehitsejate seadistamine kiirelt ja lihtsalt!
+Veebilehitsejate seadistamine ID-kaardi kasutamiseks.  (#veebilehitsejate-seadistamine-id-kaardi_2)
+
+
+
+
+
+wp:paragraph
+Kui sul on tekkinud tõrkeid ID-kaardi kasutamisel veebis, kontrolli üle oma lehitseja seaded.
+Meie samm-sammuliste juhiste abil käib veebilehitsejate seadistamine kiirelt ja lihtsalt! (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/)
+/wp:paragraph
+
+
+- Juhised: macOS arvutites ID-tarkvara eemaldamiseks  ID kaardi tarkvara eemaldamiseks:Laadige allaID-kaardi tarkvaraAvageallalaetud fail, lisaks avage rakendusTerminalLohistageuninstall.shTerminal'i aknasseVajutageEnterjaySisestage oma paroolNüüd on ID-tarkvara eemaldatud.
+Juhised: macOS arvutites ID-tarkvara eemaldamiseks  (#juhised-macos-arvutites_3)
+
+
+
+
+
+ID kaardi tarkvara eemaldamiseks:
+Laadige allaID-kaardi tarkvara
+- Laadige alla ID-kaardi tarkvara
+Avageallalaetud fail, lisaks avage rakendusTerminal  Lohistageuninstall.shTerminal'i aknasse
+- Avage allalaetud fail , lisaks avage rakendus Terminal
+- Lohistage uninstall.sh Terminal'i aknasse
+VajutageEnterjay  Sisestage oma parool
+- Vajutage Enter ja y
+- Sisestage oma parool
+Nüüd on ID-tarkvara eemaldatud.
+
+
+ID-tarkvara paigaldamine macOS arvutisse: tarkvara allalaadimise lingid DigiDoc4 ja veebikomponentide jaoks.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

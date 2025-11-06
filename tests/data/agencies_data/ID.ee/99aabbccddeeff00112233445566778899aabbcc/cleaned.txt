@@ -1,0 +1,28 @@
+DigiDoc4 abil on sul võimalik salvestada ja välja printida e-allkirja kinnitusleht, kus kuvatakse andmed allkirjastatud failide ja allkirja andjate kohta.
+NB! Kinnitusleht on informatiivne dokument, mis sobib näiteks tegevuste/protsesside ajaloolise logi pidamiseks, ent millel puudub iseseisev tõendusväärtus. Kinnituslehes olev teave kinnitab vaid seda, et infokoguga ehk räsiga fail eksisteerib. Seda, millist infot sisaldab allkirjastatud fail, saab kontrollida ainult allkirjastatud failist endast – ja seega ei saa e-allkirja kinnituslehte kasutada tõendamaks poolte tahteavaldusi.
+Vaikimisi on DigiDoc4 kinnituslehe väljatrükk välja lülitatud. Kinnituslehe väljatrüki võimaluse aktiveerimine on lihtne:
+Samm 1: ava DigiDoc4 seaded  (#samm-1)
+
+Ava DigiDoc4 ja selle ülemisest paremast nurgast „Seaded“. Seal märgi ära valik „Näita kinnituslehte“.
+Samm 2: kinnituslehe välja trükkimine  (#samm-2)
+
+Dokumentide digiallkirjastamisel käitu nagu tavaliselt: lisa allkirjaümbrikusse ehk konteinerisse allkirjatatavad failid ja lisa neile oma digiallkiri, või siis ava DigiDoc4’s juba varem allkirjastatud dokumendikonteiner. Näed ekraani alaservas allkirjastamise võimaluse kõrval nuppu „Trüki kinnitusleht“. Klõpsa sellel.
+Samm 3: kinnituslehe printimine või salvestamine  (#samm-3)
+
+Pärast „Trüki kinnitusleht“ nupul klikkamist avatakse sulle kinnituslehe printimise eelvaade. Trükkimiseks klõpsa nupul „Trükkimine“.
+Windows: Kinnituslehe salvestamiseks PDF-dokumendina vali printeriks "Microsoft Print to PDF“, ning siis klõpsa nuppul "Prindi".
+macOS: Kinnituslehe salvestamiseks PDF-dokumendina klõpsata nupul "PDF" ja vali "Save as PDF“.
+Ubuntu: Kinnituslehe salvestamiseks PDF-dokumendina vali "Trükkimine faili (PDF)".
+DigiDoc4 rakenduse abil on sul võimalik salvestada ja välja printida e-allkirja kinnitusleht, kus kuvatakse andmed allkirjastatud failide ja allkirjastajate kohta.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

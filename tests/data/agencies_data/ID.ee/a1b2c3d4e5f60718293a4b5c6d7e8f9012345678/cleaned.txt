@@ -1,0 +1,189 @@
+Digitaalsed dokumendid on need dokumendid, mille abil saab teostada isikutuvastust, kinnitada tehinguid ning anda allkirju elektroonilistes kanalites. Eestis on kasutusel mitmeid erinevaid digitaalseid dokumente – neist kõige tuntum on muidugi Eesti kodanike jaoks kohustuslik ID-kaart . ID-kaardile lisaks on olemas aga ka digi-ID, elamisloakaart, e-residendi digi-ID ja diplomaadikaart.
+Teada tasub, et kõik need kaardid toimivad elektroonilises mõttes ühtemoodi:
+Kaardi lugemiseks on vajaID-kaardi lugejat.  Kaardi kasutamiseks tuleb arvutissepaigaldada ID-tarkvara.  ID-kaardi juhised ja nõuanded kehtivad kõikidele digitaalsetele dokumentidele.
+- Kaardi lugemiseks on vaja ID-kaardi lugejat (/artikkel/kasulik-info-kiipkaardi-lugejate-kohta/) .
+- Kaardi kasutamiseks tuleb arvutisse paigaldada ID-tarkvara (/artikkel/paigalda-id-tarkvara) .
+- ID-kaardi juhised ja nõuanded kehtivad kõikidele digitaalsetele dokumentidele.
+Mis vahe on erinevatel digitaalsetel dokumentidel?
+Digitaalseid dokumente eristab peamiselt see, kellele ja millistel põhimõtetel neid väljastatakse. Heaks vihjeks on üldiselt kaardi nimi: digi-ID on digitaalseks isikutuvastuseks (ja sobib kasutamiseks ka ID-kaardi kõrval paralleelselt); elamisloakaart on mõeldud Eestis alaliselt elavatele mittekodanikele; e-residendi digi-ID võimaldab Eestis mitte elavatel välismaalastel kasutada Eesti e-teenuseid, näiteks logida sisse pangaarvetele, registreerida ning hallata ettevõtteid jne.
+Reisidokumendiks sobib ainult ID-kaart! Täpsemat infot erinevate kaartide ja nende väljastamisvõimaluste kohta loe Politsei- ja Piirivalveameti veebist.
+Elektrooniliseks isikutuvastuseks on olemas ka kaks mobiilset vahendit :
+SIM-kaardil põhinev mobiil-ID.  Smart-ID nutirakendus.
+- SIM-kaardil põhinev mobiil-ID (/artikkel/mobiil-id-digitaalne-isikutunnistus-nutitelefonis) .
+- Smart-ID nutirakendus (/artikkel/smart-id) .
+Muuda oma elektrooniline elu turvalisemaks!
+Tänapäeval toimub lõviosa suhtlusest riigi ja ametiasutustega interneti vahendusel. Enamik meist ei suuda hästi ettegi kujutada, kuidas korraldada oma elu juhul, kui peaks kaduma võimalus oma pangaarvele sisse logida, arveid internetis maksta, teenuseid hallata vms.
+Seetõttu tulekski seista hea selle eest, et sul oleks olemas vähemalt kaks erinevat digitaalse isikutuvastuse vahendit. Nii saad ühe vahendi kadumise, varguse või katki minemise korral kasutada teist, et vajadusel kontosid sulgeda, uusi dokumente taotleda või muid eluks tarvilikke toiminguid ette võtta.
+Kui kasutad ID-kaarti igapäevaselt võid liituda ka mobiil-IDga ja/või paigaldada oma nutiseadmesse (kasvõi tahvelarvutisse!) Smart-ID.
+Loe lähemalt :
+Digitaalsed dokumendid: ID-kaart ja selle kasutusvõimalusedID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaokskohustuslikisikut tõendav dokument. ID-kaart kehtib kuni 5 aastat ning seda väljastabPolitsei- ja Piirivalveamet. Mida saab ID-kaardiga teha?Kasutada füüsilise isikut tõendava dokumendina. Sooritata digitaalset isikutuvastust. Kasutada e-teenuseid (näiteks internetipank, e-maksuamet, e-arved).Kasutada mitmel pool kliendikaardina. Digitaalselt allkirjastadadokumente. Krüpteerida dokumente. E-hääletada. Kasutada Eesti Vabariigi poolt antud @eesti.ee meiliaadressi. Kasutada Euroopa Liidu ja Euroopa Majandusregiooni piires reisidokumendina.  Digitaalsed dokumendid: digi-ID ja selle kasutusvõimalusedNB! Digi-ID kaartide väljastamine lõpetatakse 01.05.2025!Rohkem informatsiooni leiabsiit. Digi-ID on digitaalne dokument, mida saab kasutada paralleelselt ID-kaardiga. Kuna sellel puudub foto, siis saab digi-IDd kasutada vaid elektrooniliselt. Digi-ID kaart on riiklik dokument, selle kehtivusaeg on 5 aastat ning selle saad endale taotledaPolitsei-ja Piirivalveametis. Sarnasused ID-kaardiga:Digitaalne isikutuvastusDigitaalne allkirjastamineDokumentide krüpteerimineE-teenuste kasutamineE-hääletamineSama ID-tarkvaraLigipääs @eesti.ee meiliaadressileDigi-ID ja ID-kaardi erinevused:Digi-IDd ei saa kasutada füüsiliseks isikutuvastamiseks. Digi-IDd ei saa kasutada reisidokumendina. Hea soovitus:Kõigil, kes kasutavad ID-kaarti igapäevaselt, soovitame lisaks tellida ka digi-ID. Nii saab e-teenuseid kasutada digi-ID abil, oma ID-kaardi aga turvalisse kohta hoiule panna.  Digitaalsed dokumendid: elamisloakaart ja selle kasutusvõimalusedElamisloakaart on (väliskodanikele) kohustuslik riigisisene isikut tõendav dokument. See väljastatakse välismaalastele, kes taotlevad või juba omavad Eestis elamisluba või elamisõigust ja kesei oleEuroopa Liidu kodanikud. Kaart sisaldab kasutaja isikuandmeid, elamisloa andmeid, fotot ning sõrmejäljekujutisi. Elamisloakaart kehtib kuni 5 aastat, kuid mitte kauem kui kasutajale välja antud elamisluba või elamisõigus. Sarnasused ID-kaardiga:E-teenuste kasutamineDigitaalne isikutuvastusDigitaalne allkirjastamineElamisloakaardi ja ID-kaardi erinevused:Elamisloakaarti ei saa kasutada reisidokumendina väljaspool Eestit. Elamisloakaart sisaldab kontaktivaba kiipi, kuhu on salvestatud kasutaja sõrmejäljekujutised ja näokujutis. ID-kaardil kontaktivaba kiip puudub. Hea soovitus:Elamisloakaardi elektroonilisel kasutamisel on abiks täpselt samad juhised, mis on mõeldud ID-kaardi jaoks.  Digitaalsed dokumendid: E-residendi kaart ja selle kasutusvõimalusedE-residendi digi-ID (ehk e-residendi kaart) on väliskodanikele väljastatav digitaalne dokument, mida saab kasutada vaid elektrooniliselt. Kaardi kehtivusaeg on 5 aastat. Eesti e-residendiks võib saada välismaalane, kes soovib võimalust kasutada Eesti e-teenuseid – näiteks avada Eestis pangakonto või Eestisse registreerida oma ettevõte (ning tagada ligipääsu e-maksuametile, pangakontole, äriregistrile jne).E-residentsus ei anna selle kasutajale mitte mingeid muid õiguseid peale võimaluse kasutada digitaalseid teenuseid. Sellega ei kaasne Eesti kodakondsust või maksuresidentsust, see ei anna välismaalasele Eesti elamisluba ega Euroopa Liitu sisenemise luba, samuti ei anna varasem e-residentsuse omamine eeliseid Eesti kodakondsuse või elamisloa taotlemisel. Sarnasused ID-kaardiga:Digitaalne allkirjastamine. Eesti riigi e-teenuste kasutamine (ligipääs äriregistrile, internetipanka, maksuametile jne).E-residendi digi-ID ja ID-kaardi peamised erinevused:E-residendi digi-ID ei ole füüsiline isikut tõendav dokument. E-residendi digi-IDd ei saa kasutada reisidokumendina. E-residendi õigus siseneda Eestisse/Euroopa Liitu sõltub tema päritoluriigist: e-residendi kaart seda õigust ei anna ega kinnita. Hea soovitus:E-residendi digi-ID annab välismaalasele võimaluse registreerida ning opereerida äriettevõtteid Eestis ja seega Euroopa Liidus ilma, et see nõuaks neilt oma asukohariigist väljumist. Eesti on oma e-võimaluste poolest maailmas unikaalne. Vähe sellest, et pea kõiki toiminguid on võimalik teostada elektrooniliselt, on oluline osa (äri)infost ka kõikidele huvilistele avalikult kättesaadav. See tagab mugava, läbipaistva ning usaldusväärse ärikeskkonna ning toetab startup- ja väikeettevõtlust.
+- Digitaalsed dokumendid: ID-kaart ja selle kasutusvõimalused  ID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaokskohustuslikisikut tõendav dokument. ID-kaart kehtib kuni 5 aastat ning seda väljastabPolitsei- ja Piirivalveamet. Mida saab ID-kaardiga teha?Kasutada füüsilise isikut tõendava dokumendina. Sooritata digitaalset isikutuvastust. Kasutada e-teenuseid (näiteks internetipank, e-maksuamet, e-arved).Kasutada mitmel pool kliendikaardina. Digitaalselt allkirjastadadokumente. Krüpteerida dokumente. E-hääletada. Kasutada Eesti Vabariigi poolt antud @eesti.ee meiliaadressi. Kasutada Euroopa Liidu ja Euroopa Majandusregiooni piires reisidokumendina.
+Digitaalsed dokumendid: ID-kaart ja selle kasutusvõimalused  (#digitaalsed-dokumendid-id-kaart_1)
+
+
+
+
+
+ID-kaart on Eesti kodaniku ja Eestis püsivalt elava Euroopa Liidu kodaniku jaoks kohustuslik  isikut tõendav dokument . ID-kaart kehtib kuni 5 aastat ning seda väljastab Politsei- ja Piirivalveamet (https://www.politsei.ee/et/juhend/id-kaardi-taotlemine-taeiskasvanule) .
+Mida saab ID-kaardiga teha?
+Kasutada füüsilise isikut tõendava dokumendina.  Sooritata digitaalset isikutuvastust.  Kasutada e-teenuseid (näiteks internetipank, e-maksuamet, e-arved).  Kasutada mitmel pool kliendikaardina.  Digitaalselt allkirjastadadokumente.  Krüpteerida dokumente.  E-hääletada.  Kasutada Eesti Vabariigi poolt antud @eesti.ee meiliaadressi.  Kasutada Euroopa Liidu ja Euroopa Majandusregiooni piires reisidokumendina.
+- Kasutada füüsilise isikut tõendava dokumendina.
+- Sooritata digitaalset isikutuvastust.
+- Kasutada e-teenuseid (näiteks internetipank, e-maksuamet, e-arved).
+- Kasutada mitmel pool kliendikaardina.
+- Digitaalselt allkirjastada (/artikkel/soovid-arvutis-digiallkirja-anda) dokumente.
+- Krüpteerida dokumente (/artikkel/dokumentide-krupteerimine-ja-dekrupteerimine) .
+- E-hääletada.
+- Kasutada Eesti Vabariigi poolt antud @eesti.ee meiliaadressi.
+- Kasutada Euroopa Liidu ja Euroopa Majandusregiooni piires reisidokumendina.
+
+
+- Digitaalsed dokumendid: digi-ID ja selle kasutusvõimalused  NB! Digi-ID kaartide väljastamine lõpetatakse 01.05.2025!Rohkem informatsiooni leiabsiit. Digi-ID on digitaalne dokument, mida saab kasutada paralleelselt ID-kaardiga. Kuna sellel puudub foto, siis saab digi-IDd kasutada vaid elektrooniliselt. Digi-ID kaart on riiklik dokument, selle kehtivusaeg on 5 aastat ning selle saad endale taotledaPolitsei-ja Piirivalveametis. Sarnasused ID-kaardiga:Digitaalne isikutuvastusDigitaalne allkirjastamineDokumentide krüpteerimineE-teenuste kasutamineE-hääletamineSama ID-tarkvaraLigipääs @eesti.ee meiliaadressileDigi-ID ja ID-kaardi erinevused:Digi-IDd ei saa kasutada füüsiliseks isikutuvastamiseks. Digi-IDd ei saa kasutada reisidokumendina. Hea soovitus:Kõigil, kes kasutavad ID-kaarti igapäevaselt, soovitame lisaks tellida ka digi-ID. Nii saab e-teenuseid kasutada digi-ID abil, oma ID-kaardi aga turvalisse kohta hoiule panna.
+Digitaalsed dokumendid: digi-ID ja selle kasutusvõimalused  (#digitaalsed-dokumendid-digi-id_2)
+
+
+
+
+
+NB! Digi-ID kaartide väljastamine lõpetatakse 01.05.2025 ! Rohkem informatsiooni leiabsiit.
+Digi-ID on digitaalne dokument, mida saab kasutada paralleelselt ID-kaardiga. Kuna sellel puudub foto, siis saab digi-IDd kasutada vaid elektrooniliselt.
+Digi-ID kaart on riiklik dokument, selle kehtivusaeg on 5 aastat ning selle saad endale taotleda Politsei-ja Piirivalveametis (https://www.politsei.ee/et/juhend/digi-id-taotlemine) .
+Sarnasused ID-kaardiga:
+Digitaalne isikutuvastus  Digitaalne allkirjastamine  Dokumentide krüpteerimine  E-teenuste kasutamine  E-hääletamine  Sama ID-tarkvara  Ligipääs @eesti.ee meiliaadressile
+- Digitaalne isikutuvastus
+- Digitaalne allkirjastamine
+- Dokumentide krüpteerimine
+- E-teenuste kasutamine
+- E-hääletamine
+- Sama ID-tarkvara
+- Ligipääs @eesti.ee meiliaadressile
+Digi-ID ja ID-kaardi erinevused:
+Digi-IDd ei saa kasutada füüsiliseks isikutuvastamiseks.  Digi-IDd ei saa kasutada reisidokumendina.
+- Digi-IDd ei saa kasutada füüsiliseks isikutuvastamiseks.
+- Digi-IDd ei saa kasutada reisidokumendina.
+Hea soovitus:
+Kõigil, kes kasutavad ID-kaarti igapäevaselt, soovitame lisaks tellida ka digi-ID. Nii saab e-teenuseid kasutada digi-ID abil, oma ID-kaardi aga turvalisse kohta hoiule panna.
+
+
+- Digitaalsed dokumendid: elamisloakaart ja selle kasutusvõimalused  Elamisloakaart on (väliskodanikele) kohustuslik riigisisene isikut tõendav dokument. See väljastatakse välismaalastele, kes taotlevad või juba omavad Eestis elamisluba või elamisõigust ja kesei oleEuroopa Liidu kodanikud. Kaart sisaldab kasutaja isikuandmeid, elamisloa andmeid, fotot ning sõrmejäljekujutisi. Elamisloakaart kehtib kuni 5 aastat, kuid mitte kauem kui kasutajale välja antud elamisluba või elamisõigus. Sarnasused ID-kaardiga:E-teenuste kasutamineDigitaalne isikutuvastusDigitaalne allkirjastamineElamisloakaardi ja ID-kaardi erinevused:Elamisloakaarti ei saa kasutada reisidokumendina väljaspool Eestit. Elamisloakaart sisaldab kontaktivaba kiipi, kuhu on salvestatud kasutaja sõrmejäljekujutised ja näokujutis. ID-kaardil kontaktivaba kiip puudub. Hea soovitus:Elamisloakaardi elektroonilisel kasutamisel on abiks täpselt samad juhised, mis on mõeldud ID-kaardi jaoks.
+Digitaalsed dokumendid: elamisloakaart ja selle kasutusvõimalused  (#digitaalsed-dokumendid-elamisloakaart_3)
+
+
+
+
+
+Elamisloakaart on (väliskodanikele) kohustuslik riigisisene isikut tõendav dokument. See väljastatakse välismaalastele, kes taotlevad või juba omavad Eestis elamisluba või elamisõigust ja kes ei ole Euroopa Liidu kodanikud. Kaart sisaldab kasutaja isikuandmeid, elamisloa andmeid, fotot ning sõrmejäljekujutisi.
+Elamisloakaart kehtib kuni 5 aastat, kuid mitte kauem kui kasutajale välja antud elamisluba või elamisõigus.
+Sarnasused ID-kaardiga:
+E-teenuste kasutamine  Digitaalne isikutuvastus  Digitaalne allkirjastamine
+- E-teenuste kasutamine
+- Digitaalne isikutuvastus
+- Digitaalne allkirjastamine
+Elamisloakaardi ja ID-kaardi erinevused:
+Elamisloakaarti ei saa kasutada reisidokumendina väljaspool Eestit.  Elamisloakaart sisaldab kontaktivaba kiipi, kuhu on salvestatud kasutaja sõrmejäljekujutised ja näokujutis. ID-kaardil kontaktivaba kiip puudub.
+- Elamisloakaarti ei saa kasutada reisidokumendina väljaspool Eestit.
+- Elamisloakaart sisaldab kontaktivaba kiipi, kuhu on salvestatud kasutaja sõrmejäljekujutised ja näokujutis. ID-kaardil kontaktivaba kiip puudub.
+Hea soovitus:
+Elamisloakaardi elektroonilisel kasutamisel on abiks täpselt samad juhised, mis on mõeldud ID-kaardi jaoks.
+
+
+- Digitaalsed dokumendid: E-residendi kaart ja selle kasutusvõimalused  E-residendi digi-ID (ehk e-residendi kaart) on väliskodanikele väljastatav digitaalne dokument, mida saab kasutada vaid elektrooniliselt. Kaardi kehtivusaeg on 5 aastat. Eesti e-residendiks võib saada välismaalane, kes soovib võimalust kasutada Eesti e-teenuseid – näiteks avada Eestis pangakonto või Eestisse registreerida oma ettevõte (ning tagada ligipääsu e-maksuametile, pangakontole, äriregistrile jne).E-residentsus ei anna selle kasutajale mitte mingeid muid õiguseid peale võimaluse kasutada digitaalseid teenuseid. Sellega ei kaasne Eesti kodakondsust või maksuresidentsust, see ei anna välismaalasele Eesti elamisluba ega Euroopa Liitu sisenemise luba, samuti ei anna varasem e-residentsuse omamine eeliseid Eesti kodakondsuse või elamisloa taotlemisel. Sarnasused ID-kaardiga:Digitaalne allkirjastamine. Eesti riigi e-teenuste kasutamine (ligipääs äriregistrile, internetipanka, maksuametile jne).E-residendi digi-ID ja ID-kaardi peamised erinevused:E-residendi digi-ID ei ole füüsiline isikut tõendav dokument. E-residendi digi-IDd ei saa kasutada reisidokumendina. E-residendi õigus siseneda Eestisse/Euroopa Liitu sõltub tema päritoluriigist: e-residendi kaart seda õigust ei anna ega kinnita. Hea soovitus:E-residendi digi-ID annab välismaalasele võimaluse registreerida ning opereerida äriettevõtteid Eestis ja seega Euroopa Liidus ilma, et see nõuaks neilt oma asukohariigist väljumist. Eesti on oma e-võimaluste poolest maailmas unikaalne. Vähe sellest, et pea kõiki toiminguid on võimalik teostada elektrooniliselt, on oluline osa (äri)infost ka kõikidele huvilistele avalikult kättesaadav. See tagab mugava, läbipaistva ning usaldusväärse ärikeskkonna ning toetab startup- ja väikeettevõtlust.
+Digitaalsed dokumendid: E-residendi kaart ja selle kasutusvõimalused  (#digitaalsed-dokumendid-e-residendi_4)
+
+
+
+
+
+E-residendi digi-ID (ehk e-residendi kaart) on väliskodanikele väljastatav digitaalne dokument, mida saab kasutada vaid elektrooniliselt. Kaardi kehtivusaeg on 5 aastat.
+Eesti e-residendiks võib saada välismaalane, kes soovib võimalust kasutada Eesti e-teenuseid – näiteks avada Eestis pangakonto või Eestisse registreerida oma ettevõte (ning tagada ligipääsu e-maksuametile, pangakontole, äriregistrile jne).
+E-residentsus ei anna selle kasutajale mitte mingeid muid õiguseid peale võimaluse kasutada digitaalseid teenuseid. Sellega ei kaasne Eesti kodakondsust või maksuresidentsust, see ei anna välismaalasele Eesti elamisluba ega Euroopa Liitu sisenemise luba, samuti ei anna varasem e-residentsuse omamine eeliseid Eesti kodakondsuse või elamisloa taotlemisel.
+Sarnasused ID-kaardiga:
+Digitaalne allkirjastamine.  Eesti riigi e-teenuste kasutamine (ligipääs äriregistrile, internetipanka, maksuametile jne).
+- Digitaalne allkirjastamine.
+- Eesti riigi e-teenuste kasutamine (ligipääs äriregistrile, internetipanka, maksuametile jne).
+E-residendi digi-ID ja ID-kaardi peamised erinevused:
+E-residendi digi-ID ei ole füüsiline isikut tõendav dokument.  E-residendi digi-IDd ei saa kasutada reisidokumendina.  E-residendi õigus siseneda Eestisse/Euroopa Liitu sõltub tema päritoluriigist: e-residendi kaart seda õigust ei anna ega kinnita.
+- E-residendi digi-ID ei ole füüsiline isikut tõendav dokument.
+- E-residendi digi-IDd ei saa kasutada reisidokumendina.
+- E-residendi õigus siseneda Eestisse/Euroopa Liitu sõltub tema päritoluriigist: e-residendi kaart seda õigust ei anna ega kinnita.
+Hea soovitus:
+E-residendi digi-ID annab välismaalasele võimaluse registreerida ning opereerida äriettevõtteid Eestis ja seega Euroopa Liidus ilma, et see nõuaks neilt oma asukohariigist väljumist. Eesti on oma e-võimaluste poolest maailmas unikaalne. Vähe sellest, et pea kõiki toiminguid on võimalik teostada elektrooniliselt, on oluline osa (äri)infost ka kõikidele huvilistele avalikult kättesaadav. See tagab mugava, läbipaistva ning usaldusväärse ärikeskkonna ning toetab startup- ja väikeettevõtlust.
+
+
+Taotlemine: ​ID-kaardi ja muude digitaalsete dokumentide taotlemine​​Digitaalseid dokumente (sh. ID-kaarte, digi-IDd,elamisloakaarte ning e-residentide digi-IDsid)väljastabPolitsei- ja Piirivalveamet. Taotluse saab esitada niiteenindusteskuiiseteeninduses. Alates jaanuarist 2023a. on võimalik uusi ID-kaarte kätte saada lisaks Politsei- ja Piirivalveametile ka kauplustest. Täpsem info Politsei- ja Piirivalveametikodulehel. E-residendi digi-IDkaarti saab lisaks PPAle taotleda mugavalt ka läbie-residendi veebilehe. Kõikidele digitaalsetele isikutunnistustele kehtivadriigilõivudehk väljastustasud. Välismaal viibidessaad dokumente taotleda ning kätte saada kaEesti Vabariigi välisesindustest. Kindlasti tuleks meeles pidada, et dokumentidetaotluseidvõtavad vastu ainult Eesti saatkonnad, tellitud dokumentide kättesaamiseks võib aga kasutada ka Eesti aukonsulaate.  PIN- ja PUK-koodid: üldine infoDigitaalsete dokumentide kasutamiseksvajalikud PIN- ja PUK-koodidväljastatakse koos kaardiga. Juhul, kui oled:... unustanud oma PIN-koodi, saabPUK-koodi abil luua uue PIN-koodi.... kaotanud nii PIN- kui ka PUK-koodid, tulebtaotleda uus koodiümbrik. Uue ID-kaardi või koodiümbriku saamisel tasub kindlasti koheselt PIN-koodid ära vahetada. Samuti tuleks muuta oma PIN-koode, kui tekib kahtlus, et need võivad olla kellelegi teisele kättesaadavaks muutunud või selgub, et koodide meelde jäämisega tekib raskusi. Kindlasti tutvugePIN-koodide turvalisuse soovitustega!PIN-koode on sul vaja iga kord, kui soovid oma ID-kaarti elektrooniliselt kasutada: need aitavad sind identiteedivarguste eest kaitsta. PUK-koodi ülesanne on tagada, et PIN-koodidega tekkinud probleemide korral oleks võimalus uued PIN-koodid luua. Seega tuleb PUK-koodi hoolikalt alles hoida!NB! Loe, mida teha, kuisinu ID-kaart on kadunud või varastatud!  Sertifikaadid: ID-kaardi sertifikaatide peatamineJuhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud. ID-kaartide ja muudedigitaalsete dokumentidesertifikaate saad peatada telefoni teel:helistades numbril+372 6773377. NB! Sinu käest küsitakse nime ning isikukoodi!Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardigaPolitsei- ja Piirivalveameti teenindussepöörduda: telefoni teel sertifikaate aktiveerida ei saa. Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadidkehtetukstunnistada lasta. Kas teadsid aga, et varguse korral tuleks peatada ka sinumobiilse nutivahendiga seotud sertifikaadid?  Sertifikaadid: mis need on ja miks neid vaja on?Sertifikaat tähendab elektroonilist tõendit, mis seob inimese (näiteks tema ID-kaardi abil) õigusega teostada juriidiliselt kehtivaid toiminguid (näiteks pangaülekanne, lepingu allkirjastamine vms). Teisisõnu on sertifikaate vaja selleks, et saaksime olla kindlad, kas tegevuse, tehingu, allkirjastamise jne teostas ikka õige inimene. See, kelle ID-kaart on lugejasse sisestatud, tehakse kindlaks kohe, kui püüate algatada mõnda isikutuvastamist eeldavat tegevust. Näiteks logite sisse oma pangakontole või käivitate oma arvutis ID-tarkvara. Ent kaardi omamisest ligipääsu saamiseks veel ei piisa: iga tegevus, millel võivad olla teie jaoks juriidilised tagajärjed, seotakse turvalisuse huvides sertifikaatidega. Sertifikaadid ja nende turvalisuse kohta saate rohkem lugedasiit. Sertifikaatide kasutustingimused leiatesiit.Üleliigsetest sertifikaatidest vabanemise juhend on leitavsiit.
+- Taotlemine: ​ID-kaardi ja muude digitaalsete dokumentide taotlemine​  ​Digitaalseid dokumente (sh. ID-kaarte, digi-IDd,elamisloakaarte ning e-residentide digi-IDsid)väljastabPolitsei- ja Piirivalveamet. Taotluse saab esitada niiteenindusteskuiiseteeninduses. Alates jaanuarist 2023a. on võimalik uusi ID-kaarte kätte saada lisaks Politsei- ja Piirivalveametile ka kauplustest. Täpsem info Politsei- ja Piirivalveametikodulehel. E-residendi digi-IDkaarti saab lisaks PPAle taotleda mugavalt ka läbie-residendi veebilehe. Kõikidele digitaalsetele isikutunnistustele kehtivadriigilõivudehk väljastustasud. Välismaal viibidessaad dokumente taotleda ning kätte saada kaEesti Vabariigi välisesindustest. Kindlasti tuleks meeles pidada, et dokumentidetaotluseidvõtavad vastu ainult Eesti saatkonnad, tellitud dokumentide kättesaamiseks võib aga kasutada ka Eesti aukonsulaate.
+Taotlemine: ​ID-kaardi ja muude digitaalsete dokumentide taotlemine​  (#taotlemine-id-kaardi-ja_1)
+
+
+
+
+
+​Digitaalseid dokumente (sh. ID-kaarte, digi-IDd, elamisloakaarte ning e-residentide digi-IDsid)  väljastab Politsei- ja Piirivalveamet (https://www.politsei.ee/et/juhend/id-kaardi-taotlemine-taeiskasvanule) . Taotluse saab esitada nii teenindustes (https://www.politsei.ee/et/juhend/id-kaardi-taotlemine-taeiskasvanule/taotlemine-teeninduses) kui iseteeninduses (https://www.politsei.ee/et/juhend/id-kaardi-taotlemine-taeiskasvanule/taotlemine-iseteeninduses) .
+Alates jaanuarist 2023a. on võimalik uusi ID-kaarte kätte saada lisaks Politsei- ja Piirivalveametile ka kauplustest. Täpsem info Politsei- ja Piirivalveameti kodulehel (https://www.politsei.ee/et/juhend/id-kaardi-taotlemine-taeiskasvanule/kattesaamine) .
+E-residendi digi-ID kaarti saab lisaks PPAle taotleda mugavalt ka läbi e-residendi veebilehe (https://e-resident.gov.ee/become-an-e-resident/) .
+Kõikidele digitaalsetele isikutunnistustele kehtivad riigilõivud (https://www.politsei.ee/et/juhend/riigiloivude-maeaerad) ehk väljastustasud.
+Välismaal viibides saad dokumente taotleda ning kätte saada ka Eesti Vabariigi välisesindustest (https://vm.ee/konsulaar-viisa-ja-reisiinfo/eesti-vabariigi-valisesindused) . Kindlasti tuleks meeles pidada, et dokumentide taotluseid võtavad vastu ainult Eesti saatkonnad, tellitud dokumentide kättesaamiseks võib aga kasutada ka Eesti aukonsulaate.
+
+
+- PIN- ja PUK-koodid: üldine info  Digitaalsete dokumentide kasutamiseksvajalikud PIN- ja PUK-koodidväljastatakse koos kaardiga. Juhul, kui oled:... unustanud oma PIN-koodi, saabPUK-koodi abil luua uue PIN-koodi.... kaotanud nii PIN- kui ka PUK-koodid, tulebtaotleda uus koodiümbrik. Uue ID-kaardi või koodiümbriku saamisel tasub kindlasti koheselt PIN-koodid ära vahetada. Samuti tuleks muuta oma PIN-koode, kui tekib kahtlus, et need võivad olla kellelegi teisele kättesaadavaks muutunud või selgub, et koodide meelde jäämisega tekib raskusi. Kindlasti tutvugePIN-koodide turvalisuse soovitustega!PIN-koode on sul vaja iga kord, kui soovid oma ID-kaarti elektrooniliselt kasutada: need aitavad sind identiteedivarguste eest kaitsta. PUK-koodi ülesanne on tagada, et PIN-koodidega tekkinud probleemide korral oleks võimalus uued PIN-koodid luua. Seega tuleb PUK-koodi hoolikalt alles hoida!NB! Loe, mida teha, kuisinu ID-kaart on kadunud või varastatud!
+PIN- ja PUK-koodid: üldine info  (#pin-ja-puk-koodid_2)
+
+
+
+
+
+Digitaalsete dokumentide kasutamiseks vajalikud PIN- ja PUK-koodid väljastatakse koos kaardiga.
+Juhul, kui oled:
+... unustanud oma PIN-koodi, saabPUK-koodi abil luua uue PIN-koodi.  ... kaotanud nii PIN- kui ka PUK-koodid, tulebtaotleda uus koodiümbrik.
+- ... unustanud oma PIN-koodi, saab PUK-koodi abil luua uue PIN-koodi (/artikkel/id-kaardi-pin-ja-puk-koodide-muutmine/) .
+- ... kaotanud nii PIN- kui ka PUK-koodid, tuleb taotleda uus koodiümbrik (/artikkel/pin-ja-puk-koodidega-koodiumbrik) .
+Uue ID-kaardi või koodiümbriku saamisel tasub kindlasti koheselt PIN-koodid ära vahetada. Samuti tuleks muuta oma PIN-koode, kui tekib kahtlus, et need võivad olla kellelegi teisele kättesaadavaks muutunud või selgub, et koodide meelde jäämisega tekib raskusi. Kindlasti tutvuge PIN-koodide turvalisuse soovitustega (/artikkel/pin-ja-puk-koodid-soovitused-turvalisuse-tagamiseks/) !
+PIN-koode on sul vaja iga kord, kui soovid oma ID-kaarti elektrooniliselt kasutada: need aitavad sind identiteedivarguste eest kaitsta. PUK-koodi ülesanne on tagada, et PIN-koodidega tekkinud probleemide korral oleks võimalus uued PIN-koodid luua. Seega tuleb PUK-koodi hoolikalt alles hoida!
+NB! Loe, mida teha, kuisinu ID-kaart on kadunud või varastatud!
+
+
+- Sertifikaadid: ID-kaardi sertifikaatide peatamine  Juhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud. ID-kaartide ja muudedigitaalsete dokumentidesertifikaate saad peatada telefoni teel:helistades numbril+372 6773377. NB! Sinu käest küsitakse nime ning isikukoodi!Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardigaPolitsei- ja Piirivalveameti teenindussepöörduda: telefoni teel sertifikaate aktiveerida ei saa. Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadidkehtetukstunnistada lasta. Kas teadsid aga, et varguse korral tuleks peatada ka sinumobiilse nutivahendiga seotud sertifikaadid?
+Sertifikaadid: ID-kaardi sertifikaatide peatamine  (#sertifikaadid-id-kaardi-sertifikaatide_3)
+
+
+
+
+
+Juhul, kui sinu ID-kaart, mobiil-ID vms on kadunud või varastatud, tuleks koheselt peatada sellega seotud sertifikaadid: nii oled identiteedivarguste eest kaitstud.
+ID-kaartide ja muude digitaalsete dokumentide (/artikkel/digitaalsed-dokumendid-id-kaart-digi-id-elamisloakaart-ja-e-residendi-digi-id) sertifikaate saad peatada telefoni teel:
+helistades numbril+372 6773377.
+- helistades numbril +372 6773377 .
+NB! Sinu käest küsitakse nime ning isikukoodi!
+Peatatud sertifikaatide taasavamiseks tuleb sul oma ID-kaardiga Politsei- ja Piirivalveameti teenindusse (https://www.politsei.ee/et/asukohad/teenindused) pöörduda: telefoni teel sertifikaate aktiveerida ei saa.
+Kui oled kindel, et sinu ID-kaart on tõepoolest varastatud, tuleks sul sellest politseid teavitada ning ID-kaart ja sellega seotud sertifikaadid kehtetuks tunnistada lasta.
+Kas teadsid aga, et varguse korral tuleks peatada ka sinu mobiilse nutivahendiga seotud sertifikaadid (/artikkel/mobiil-id-sertifikaatide-peatamine) ?
+
+
+- Sertifikaadid: mis need on ja miks neid vaja on?  Sertifikaat tähendab elektroonilist tõendit, mis seob inimese (näiteks tema ID-kaardi abil) õigusega teostada juriidiliselt kehtivaid toiminguid (näiteks pangaülekanne, lepingu allkirjastamine vms). Teisisõnu on sertifikaate vaja selleks, et saaksime olla kindlad, kas tegevuse, tehingu, allkirjastamise jne teostas ikka õige inimene. See, kelle ID-kaart on lugejasse sisestatud, tehakse kindlaks kohe, kui püüate algatada mõnda isikutuvastamist eeldavat tegevust. Näiteks logite sisse oma pangakontole või käivitate oma arvutis ID-tarkvara. Ent kaardi omamisest ligipääsu saamiseks veel ei piisa: iga tegevus, millel võivad olla teie jaoks juriidilised tagajärjed, seotakse turvalisuse huvides sertifikaatidega. Sertifikaadid ja nende turvalisuse kohta saate rohkem lugedasiit. Sertifikaatide kasutustingimused leiatesiit.Üleliigsetest sertifikaatidest vabanemise juhend on leitavsiit.
+Sertifikaadid: mis need on ja miks neid vaja on?  (#sertifikaadid-mis-need_4)
+
+
+
+
+
+Sertifikaat tähendab elektroonilist tõendit, mis seob inimese (näiteks tema ID-kaardi abil) õigusega teostada juriidiliselt kehtivaid toiminguid (näiteks pangaülekanne, lepingu allkirjastamine vms). Teisisõnu on sertifikaate vaja selleks, et saaksime olla kindlad, kas tegevuse, tehingu, allkirjastamise jne teostas ikka õige inimene.
+See, kelle ID-kaart on lugejasse sisestatud, tehakse kindlaks kohe, kui püüate algatada mõnda isikutuvastamist eeldavat tegevust. Näiteks logite sisse oma pangakontole või käivitate oma arvutis ID-tarkvara. Ent kaardi omamisest ligipääsu saamiseks veel ei piisa: iga tegevus, millel võivad olla teie jaoks juriidilised tagajärjed, seotakse turvalisuse huvides sertifikaatidega.
+Sertifikaadid ja nende turvalisuse kohta saate rohkem lugedasiit.  Sertifikaatide kasutustingimused leiatesiit.  Üleliigsetest sertifikaatidest vabanemise juhend on leitavsiit.
+- Sertifikaadid ja nende turvalisuse kohta saate rohkem lugeda siit (https://www.id.ee/artikkel/sertifikaadid-ja-nende-turvalisus/) .
+- Sertifikaatide kasutustingimused leiate siit (https://www.id.ee/artikkel/kogu-info-sertifikaatide-kasutustingimuste-kohta/) .
+- Üleliigsetest sertifikaatidest vabanemise juhend on leitav siit (https://www.id.ee/artikkel/id-kaardiga-sisenemine-voi-allkirjastamine-e-teenustes-ebaonnestub/#samm-6) .
+
+
+Digitaalsed dokumendid (ID-kaart, digi-ID, e-residendi digi-ID jne) võimaldavad tuvastada kasutaja isikut elektroonilistes kanalites.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

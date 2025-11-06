@@ -1,0 +1,229 @@
+Juhul, kui sul tekkis probleeme ID-kaardi lugejaga või annab DigiDoc4 rakendus sulle mõne kaardilugejaga seotud veateate, leiad loodetavasti abi järgnevatest teemadest:
+Veateade: DigiDoc4 rakendus ütleb, et „Lugejas ei ole kaarti“Veateate „Lugejas ei ole kaarti“ saad juhul, kui sinu ID-kaardi lugeja ei suuda mingil põhjusel kaardiga ühendust luua ja sealt andmeid välja lugeda. Enamasti ongi põhjuseks ebakorrektselt/lohakalt sisestatud kaart: võta ID-kaart lugejast välja ja sisesta uuesti. Vajadusel loe,kuidas ID-kaart lugejasse sisestada. Vahel võib aga põhjuseks olla kas katkine ID-kaardi lugeja või on kahjustada saanud ID-kaart (või selle kiip). Kui kaart on korrektselt lugejas, aga ikka kuvatakse „Lugejas ei ole kaarti“ veateadet, tuleks kontrollida ID-kaardi korrasolekut kas teise kaardilugejaga või, kui võimalik, lausa mõnes teises arvutis mõne teise teadaolevalt töötava kaardilugejaga. Juhul, kui ID-kaart teiste kaardilugejatega töötab, on asi sinu kaardilugejas: vaheta see välja!Kui „Lugejas ei ole kaarti“ veateadet näed sõltumata sellest, millises arvutis ja millise kaardilugejaga oma ID-kaarti kasutada proovid, pöördu lähimassePolitsei- ja Piirivalveameti teenindusse: ilmselt on viga saanud sinu ID-kaart ja see tuleks kiiremas korras välja vahetada!Selleks, et sinu ID-kaart kestaks kaua ega saaks igapäevaelu käigus kogemata viga, soovitame sul endaletellida ka digi-ID. Digi-ID pakub elektrooniliseks kasutamiseks samu võimalusi mis ID-kaartki, ent ei sobi füüsiliseks isikut tõendavaks dokumendiks (näiteks ei saa sellega reisida, pangakontoris isikut tõendada vms). Küll aga saad digi-IDd kasutada elektroonilisteks toiminguteks nagu digiallkirjastamine, e-teenuste kasutamine, pangaülekannete kinnitamine jne. Hea idee on seegi, kui kasutad lisaks füüsilisele kaardile ka mõnda mobiilset vahendit, näiteksSIM-kaardi põhist mobiil-IDdvõi tasutaSmart-ID mobiiliäppi. Nii võid olla kindel, et tõrgete tekkides, kaardi kadudes vms ei kaota sa ligipääsu e-teenustele!  Veateade: DigiDoc4 rakendus ütleb, et „Ühtegi kiipkaardi lugejat pole ühendatud“Veateate „Ühtegi kiipkaardi lugejat pole ühendatud“ saad DigiDoc4 rakenduses juhul, kui arvutil on kadunud ühendus sinu ID-kaardi lugejaga või on kaardilugeja eemaldatud DigiDoc4 töötamise ajal.Ära muretse: ühenda kaardilugeja uuesti arvutiga ja veateade peaks kaduma. Kui veateadet kuvatakse hoolimata sellest, et kaardilugeja on arvutiga korrektselt ühendatud, on ilmselt probleemi põhjus üks järgmistest. Kaardilugeja ja selle draiverite paigaldus ei õnnestunud. Juhul, kui oled värskelt uuendanud oma arvuti tarkvara, võtnud kasutusele uue kaardilugeja või oled selle arvutiga alles esimest korda ID-kaarti kasutamas, on ilmselt põhjuseks:Kaardilugeja ja selle draiverite paigaldus ei õnnestunudUuri oma kaardilugeja karbilt lugeja mark ja mudel ning sisesta need Google’sse vajalike draiverite leidmiseks. ID-kaardi draiver ei ole paigaldatudKui oled esimest korda selle arvutiga ID-kaarti kasutamas, kontrolli, kas oled paigaldanud kõik vajalikud tarkvarapaketidID-tarkvara paigaldamiselehelt. Kaardilugeja on viganeVahel juhtub, et viga on hoopis sinu ID-kaardi lugejas – näiteks on see ära väsinud või on viga saanud kaardilugeja juhe või USB-otsik. Abiks võib olla, kui kaardilugeja mõnda teise USB-pesasse sisestad. Vajadusel loe,kuidas ID-kaardi lugejat kasutada.  Kiipkaardilugejad: milliste kiipkaardilugejatega ID-kaarti kasutada saab?ID-kaardi kasutamiseks sobib enamik tunnustatud kaubamärkide kiipkaardilugejaid ja Eesti kaubandusvõrgus on ID-kaardi lugejad vabalt saadaval nii arvutipoodides, suuremate kaupluste tehnikaosakondades kui isegi tanklates. Pisut ettevaatlikum tasuks aga olla omale kaardilugejat internetist tellides: eelista odavmüügikeskkondadele alati tootja enda veebilehti ning usaldusväärse mainega e-kaupluseid. Kaardilugeja nimetus ja mudelon kirjas lugeja peal oleval infosildil (enamasti tagaküljel). Toote ID on leitavDigiDoc4 diagnostikas. Windowsi puhul töötab lugeja üldjuhul kõikide draiveritega (tootja, Microsofti universaalsed draiverid).Linuxi ja macOS puhul on testitud vaikimisi paigaldatav draiver (USB CCID).Pealestandbyjahibernatefunktsioonide kasutamist, kui sel ajal oli ID-kaart lugejas ning mõni ID-tarkvara komponent avatud, võib esineda probleeme kaardilt andmete väljalugemisega.  Enamasti aitab kaardi lugejast eemaldamine ja uuesti sisestamine. Mõningatel juhtudel on vaja ka ID-tarkvara komponendi uuesti käivitamist või ka arvuti taaskäivitamist. PinPad (sõrmistikuga) lugejate puhul võib esineda tõrkeid Windows terminal lahendustes. Terminalsüsteemid ei ole ID-tarkvara poolt ametlikult toetatud keskkond. Lisaks võib olla vajadus piirata PinPad režiim (HP ja Dell klaviatuur/ kaardilugejad). Selleks tuleb lisada Windows registrisse võti, mille väärtused leiabsiit. ID-tarkvaraga testitud kaardilugejad on:ACR39U-UF (Type-C kaabliga)ACS ACR 38 (USB)Axagon CRE-SMP1A / Alcor Micro EMV AU9540Trust 23890 / Alcor Micro AU9540Gemalto CT30 (USB)Lenovo sisemine kaardilugeja Alcor Micro (tootjadraiveriga)Omnikey CardMan 3121 (USB)Pluss ID v3 (USB)SCM SCR 3310 (USB)Lindy 42764 (USB, type C)Vajadusel kontrolli üle, millised onID-tarkvara poolt toetatud operatsioonisüsteemidja nende versioonid. NB! Kui sinu teadmised on erinevad artiklis kajastatud kiipkaardi lugejate kohta, siis ole hea ja jaga neid meiega.  PinPad kaardilugeja draiverite kasutamineID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad üht nimetatud PinPad (sõrmistikuga) kaardilugejatest:OmniKey CardMan 3821Selleks, et Windows operatsioonisüsteemis saaks PinPad kaardilugejat kasutada, peab olema paigaldatud vastava kaardilugeja draiver. Vaikimisi paigaldab Windows universaalse (WUDF) draiveri, küll aga see ei toeta PinPad kaardilugejat. Tõrgete lahendamiseks on soovitus jälgida järgmiseid lahendusi. OmniKey CardMan 3821Laadi alla OmniKey CardMan 3821 draiversiit. Käivita rakendus. Salvestafailid oma arvutis mõnda kausta. Ava seadmehaldur ja määra draiveritarkvara otsimise asukohaks kaust kuhu eelnevalt draiveri failid salvestasid. Täpsema juhendi leiadsiit. Pärast paigaldust peaks kaardilugeja töötama ootuspäraselt. Probleemide jätkudesvõta ühendust ID-tarkvara kasutajatoega!  Kaardilugeja tootjapoolsete draiverite vahetamine Windows’i op. süsteemi standardsete draiverite vastuID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad nt üht nimetatud (klaviatuur)kaardilugejatest:JSP-CR900Cherry RS 6700 Smart Board XX44Cherry RS 6600 Smart Board XX44Lenovo USB Smartcard KeyboardFujitsu keyboard KB SCRDell RT7D60 USB Smartcard KeyboardDell KB813 USB Smartcard Keyboard...jmsAeg on näidanud, et tõrked peituvad selliste lugejate puhul enamasti tootjapoolsetes draiverites. Tõrgete lahendamiseks on soovitus asendada need Microsoft'iWUDF tähisegadraiverite vastu. Selleks tee läbi järgmised sammud:Samm 1: ava start-menüüAvaStartmenüü (windowsi märk/akna kujutis) ja kirjuta otsingusseSeadmehaldur(Device Manager):Leia nimekirjast alajaotusKiipkaardilugejad(Smart card readers),kus  tee hiire paremklõps kaardilugejal ja valiDraiveritarkvara värskendamine(Update driver software):NB!Juhul, kui "Seadmehalduris" kiipkaardilugejad peal hiire paremklõps ei paku draiveri värksendamist, tuleks "Seadmehaldur" käivitada administraatori õigustes. AvaStartmenüü ja kirjuta otsingusse"devmgmt.msc"(Device Manager). Otsinguga leitaval rakendusel vali"Käivita administraatorina".Ekraanile kuvatakse"Kasutajakonto kontroll"aken, kuhu tuleb sisestada administraatori õigustes konto kasutajanimi ja parool. Vajuta Jah /OK nupule. Jätka kaardilugeja draiveri vahetust (Samm 2: leia vajalik draiveritarkvaraSamm 2: leia vajalik draiveritarkvaraAvanenud aknas tee klõps valikulSirvi arvuti sisu, et leida draiveritarkvara(Browse my computer for driver software):Nüüd tee klõps valikulLuba mul valida arvutist seadmedraiverite loetelust(Let me pick from a list of device drivers on my computer):Samm 3: draiverite uuendamineLeia nimekirjastMicrosoft Usbccid Smartcard Reader (WUDF),tee see aktiivseks ja vajutaEdasi(Next):Sellele järgneb draiveritarkvara värskendus. Kui see on edukas, siis vajuta nupuleSulge(Close)ning proovi uuesti ID-kaarti kasutada. Probleemide jätkudesvõta ühendust ID-tarkvara kasutajatoega!
+- Veateade: DigiDoc4 rakendus ütleb, et „Lugejas ei ole kaarti“  Veateate „Lugejas ei ole kaarti“ saad juhul, kui sinu ID-kaardi lugeja ei suuda mingil põhjusel kaardiga ühendust luua ja sealt andmeid välja lugeda. Enamasti ongi põhjuseks ebakorrektselt/lohakalt sisestatud kaart: võta ID-kaart lugejast välja ja sisesta uuesti. Vajadusel loe,kuidas ID-kaart lugejasse sisestada. Vahel võib aga põhjuseks olla kas katkine ID-kaardi lugeja või on kahjustada saanud ID-kaart (või selle kiip). Kui kaart on korrektselt lugejas, aga ikka kuvatakse „Lugejas ei ole kaarti“ veateadet, tuleks kontrollida ID-kaardi korrasolekut kas teise kaardilugejaga või, kui võimalik, lausa mõnes teises arvutis mõne teise teadaolevalt töötava kaardilugejaga. Juhul, kui ID-kaart teiste kaardilugejatega töötab, on asi sinu kaardilugejas: vaheta see välja!Kui „Lugejas ei ole kaarti“ veateadet näed sõltumata sellest, millises arvutis ja millise kaardilugejaga oma ID-kaarti kasutada proovid, pöördu lähimassePolitsei- ja Piirivalveameti teenindusse: ilmselt on viga saanud sinu ID-kaart ja see tuleks kiiremas korras välja vahetada!Selleks, et sinu ID-kaart kestaks kaua ega saaks igapäevaelu käigus kogemata viga, soovitame sul endaletellida ka digi-ID. Digi-ID pakub elektrooniliseks kasutamiseks samu võimalusi mis ID-kaartki, ent ei sobi füüsiliseks isikut tõendavaks dokumendiks (näiteks ei saa sellega reisida, pangakontoris isikut tõendada vms). Küll aga saad digi-IDd kasutada elektroonilisteks toiminguteks nagu digiallkirjastamine, e-teenuste kasutamine, pangaülekannete kinnitamine jne. Hea idee on seegi, kui kasutad lisaks füüsilisele kaardile ka mõnda mobiilset vahendit, näiteksSIM-kaardi põhist mobiil-IDdvõi tasutaSmart-ID mobiiliäppi. Nii võid olla kindel, et tõrgete tekkides, kaardi kadudes vms ei kaota sa ligipääsu e-teenustele!
+Veateade: DigiDoc4 rakendus ütleb, et „Lugejas ei ole kaarti“  (#veateade-digidoc4-rakendus_1)
+
+
+
+
+
+Veateate „Lugejas ei ole kaarti“ saad juhul, kui sinu ID-kaardi lugeja ei suuda mingil põhjusel kaardiga ühendust luua ja sealt andmeid välja lugeda.
+Enamasti ongi põhjuseks ebakorrektselt/lohakalt sisestatud kaart: võta ID-kaart lugejast välja ja sisesta uuesti. Vajadusel loe, kuidas ID-kaart lugejasse sisestada. (/artikkel/kuidas-kontrollida-id-kaardi-ja-lugeja-tookorras-olekut/)
+Vahel võib aga põhjuseks olla kas katkine ID-kaardi lugeja või on kahjustada saanud ID-kaart (või selle kiip). Kui kaart on korrektselt lugejas, aga ikka kuvatakse „Lugejas ei ole kaarti“ veateadet, tuleks kontrollida ID-kaardi korrasolekut kas teise kaardilugejaga või, kui võimalik, lausa mõnes teises arvutis mõne teise teadaolevalt töötava kaardilugejaga.
+Juhul, kui ID-kaart teiste kaardilugejatega töötab, on asi sinu kaardilugejas: vaheta see välja!
+Kui „Lugejas ei ole kaarti“ veateadet näed sõltumata sellest, millises arvutis ja millise kaardilugejaga oma ID-kaarti kasutada proovid, pöördu lähimasse Politsei- ja Piirivalveameti teenindusse (https://www.politsei.ee/et/asukohad/teenindused) : ilmselt on viga saanud sinu ID-kaart ja see tuleks kiiremas korras välja vahetada!
+Selleks, et sinu ID-kaart kestaks kaua ega saaks igapäevaelu käigus kogemata viga, soovitame sul endale tellida ka digi-ID (/artikkel/digitaalsed-dokumendid-id-kaart-digi-id-elamisloakaart-ja-e-residendi-digi-id/) . Digi-ID pakub elektrooniliseks kasutamiseks samu võimalusi mis ID-kaartki, ent ei sobi füüsiliseks isikut tõendavaks dokumendiks (näiteks ei saa sellega reisida, pangakontoris isikut tõendada vms). Küll aga saad digi-IDd kasutada elektroonilisteks toiminguteks nagu digiallkirjastamine, e-teenuste kasutamine, pangaülekannete kinnitamine jne.
+Hea idee on seegi, kui kasutad lisaks füüsilisele kaardile ka mõnda mobiilset vahendit, näiteks SIM-kaardi põhist mobiil-IDd (/artikkel/mobiil-id-digitaalne-isikututunnistus-nutitelefonis) või tasuta Smart-ID mobiiliäppi (http://www.smart-id.com/) . Nii võid olla kindel, et tõrgete tekkides, kaardi kadudes vms ei kaota sa ligipääsu e-teenustele!
+
+
+- Veateade: DigiDoc4 rakendus ütleb, et „Ühtegi kiipkaardi lugejat pole ühendatud“  Veateate „Ühtegi kiipkaardi lugejat pole ühendatud“ saad DigiDoc4 rakenduses juhul, kui arvutil on kadunud ühendus sinu ID-kaardi lugejaga või on kaardilugeja eemaldatud DigiDoc4 töötamise ajal.Ära muretse: ühenda kaardilugeja uuesti arvutiga ja veateade peaks kaduma. Kui veateadet kuvatakse hoolimata sellest, et kaardilugeja on arvutiga korrektselt ühendatud, on ilmselt probleemi põhjus üks järgmistest. Kaardilugeja ja selle draiverite paigaldus ei õnnestunud. Juhul, kui oled värskelt uuendanud oma arvuti tarkvara, võtnud kasutusele uue kaardilugeja või oled selle arvutiga alles esimest korda ID-kaarti kasutamas, on ilmselt põhjuseks:Kaardilugeja ja selle draiverite paigaldus ei õnnestunudUuri oma kaardilugeja karbilt lugeja mark ja mudel ning sisesta need Google’sse vajalike draiverite leidmiseks. ID-kaardi draiver ei ole paigaldatudKui oled esimest korda selle arvutiga ID-kaarti kasutamas, kontrolli, kas oled paigaldanud kõik vajalikud tarkvarapaketidID-tarkvara paigaldamiselehelt. Kaardilugeja on viganeVahel juhtub, et viga on hoopis sinu ID-kaardi lugejas – näiteks on see ära väsinud või on viga saanud kaardilugeja juhe või USB-otsik. Abiks võib olla, kui kaardilugeja mõnda teise USB-pesasse sisestad. Vajadusel loe,kuidas ID-kaardi lugejat kasutada.
+Veateade: DigiDoc4 rakendus ütleb, et „Ühtegi kiipkaardi lugejat pole ühendatud“  (#veateade-digidoc4-rakendus_2)
+
+
+
+
+
+Veateate „Ühtegi kiipkaardi lugejat pole ühendatud“ saad DigiDoc4 rakenduses juhul, kui arvutil on kadunud ühendus sinu ID-kaardi lugejaga või on kaardilugeja eemaldatud DigiDoc4 töötamise ajal.
+Ära muretse: ühenda kaardilugeja uuesti arvutiga ja veateade peaks kaduma. Kui veateadet kuvatakse hoolimata sellest, et kaardilugeja on arvutiga korrektselt ühendatud, on ilmselt probleemi põhjus üks järgmistest.
+Kaardilugeja ja selle draiverite paigaldus ei õnnestunud.
+Juhul, kui oled värskelt uuendanud oma arvuti tarkvara, võtnud kasutusele uue kaardilugeja või oled selle arvutiga alles esimest korda ID-kaarti kasutamas, on ilmselt põhjuseks:
+Kaardilugeja ja selle draiverite paigaldus ei õnnestunudUuri oma kaardilugeja karbilt lugeja mark ja mudel ning sisesta need Google’sse vajalike draiverite leidmiseks.  ID-kaardi draiver ei ole paigaldatudKui oled esimest korda selle arvutiga ID-kaarti kasutamas, kontrolli, kas oled paigaldanud kõik vajalikud tarkvarapaketidID-tarkvara paigaldamiselehelt.
+- Kaardilugeja ja selle draiverite paigaldus ei õnnestunud  Uuri oma kaardilugeja karbilt lugeja mark ja mudel ning sisesta need Google’sse vajalike draiverite leidmiseks.
+
+- ID-kaardi draiver ei ole paigaldatud  Kui oled esimest korda selle arvutiga ID-kaarti kasutamas, kontrolli, kas oled paigaldanud kõik vajalikud tarkvarapaketid ID-tarkvara paigaldamise (/artikkel/paigalda-id-tarkvara) lehelt.
+
+Kaardilugeja on vigane
+Vahel juhtub, et viga on hoopis sinu ID-kaardi lugejas – näiteks on see ära väsinud või on viga saanud kaardilugeja juhe või USB-otsik. Abiks võib olla, kui kaardilugeja mõnda teise USB-pesasse sisestad. Vajadusel loe, kuidas ID-kaardi lugejat kasutada. (/artikkel/kuidas-kontrollida-id-kaardi-ja-lugeja-tookorras-olekut/)
+
+
+- Kiipkaardilugejad: milliste kiipkaardilugejatega ID-kaarti kasutada saab?  ID-kaardi kasutamiseks sobib enamik tunnustatud kaubamärkide kiipkaardilugejaid ja Eesti kaubandusvõrgus on ID-kaardi lugejad vabalt saadaval nii arvutipoodides, suuremate kaupluste tehnikaosakondades kui isegi tanklates. Pisut ettevaatlikum tasuks aga olla omale kaardilugejat internetist tellides: eelista odavmüügikeskkondadele alati tootja enda veebilehti ning usaldusväärse mainega e-kaupluseid. Kaardilugeja nimetus ja mudelon kirjas lugeja peal oleval infosildil (enamasti tagaküljel). Toote ID on leitavDigiDoc4 diagnostikas. Windowsi puhul töötab lugeja üldjuhul kõikide draiveritega (tootja, Microsofti universaalsed draiverid).Linuxi ja macOS puhul on testitud vaikimisi paigaldatav draiver (USB CCID).Pealestandbyjahibernatefunktsioonide kasutamist, kui sel ajal oli ID-kaart lugejas ning mõni ID-tarkvara komponent avatud, võib esineda probleeme kaardilt andmete väljalugemisega.  Enamasti aitab kaardi lugejast eemaldamine ja uuesti sisestamine. Mõningatel juhtudel on vaja ka ID-tarkvara komponendi uuesti käivitamist või ka arvuti taaskäivitamist. PinPad (sõrmistikuga) lugejate puhul võib esineda tõrkeid Windows terminal lahendustes. Terminalsüsteemid ei ole ID-tarkvara poolt ametlikult toetatud keskkond. Lisaks võib olla vajadus piirata PinPad režiim (HP ja Dell klaviatuur/ kaardilugejad). Selleks tuleb lisada Windows registrisse võti, mille väärtused leiabsiit. ID-tarkvaraga testitud kaardilugejad on:ACR39U-UF (Type-C kaabliga)ACS ACR 38 (USB)Axagon CRE-SMP1A / Alcor Micro EMV AU9540Trust 23890 / Alcor Micro AU9540Gemalto CT30 (USB)Lenovo sisemine kaardilugeja Alcor Micro (tootjadraiveriga)Omnikey CardMan 3121 (USB)Pluss ID v3 (USB)SCM SCR 3310 (USB)Lindy 42764 (USB, type C)Vajadusel kontrolli üle, millised onID-tarkvara poolt toetatud operatsioonisüsteemidja nende versioonid. NB! Kui sinu teadmised on erinevad artiklis kajastatud kiipkaardi lugejate kohta, siis ole hea ja jaga neid meiega.
+Kiipkaardilugejad: milliste kiipkaardilugejatega ID-kaarti kasutada saab?  (#kiipkaardilugejad-milliste-kiipkaardilugejatega_3)
+
+
+
+
+
+ID-kaardi kasutamiseks sobib enamik tunnustatud kaubamärkide kiipkaardilugejaid ja Eesti kaubandusvõrgus on ID-kaardi lugejad vabalt saadaval nii arvutipoodides, suuremate kaupluste tehnikaosakondades kui isegi tanklates.
+Pisut ettevaatlikum tasuks aga olla omale kaardilugejat internetist tellides: eelista odavmüügikeskkondadele alati tootja enda veebilehti ning usaldusväärse mainega e-kaupluseid.
+Kaardilugeja nimetus ja mudel on kirjas lugeja peal oleval infosildil (enamasti tagaküljel). Toote ID on leitav DigiDoc4 diagnostikas (/include/automaatse-diagnostika-faili-ning-logifaili-genereerimine-digidoc4-rakenduse-abil/) .
+Windowsi puhul töötab lugeja üldjuhul kõikide draiveritega (tootja, Microsofti universaalsed draiverid).  Linuxi ja macOS puhul on testitud vaikimisi paigaldatav draiver (USB CCID).  Pealestandbyjahibernatefunktsioonide kasutamist, kui sel ajal oli ID-kaart lugejas ning mõni ID-tarkvara komponent avatud, võib esineda probleeme kaardilt andmete väljalugemisega.  Enamasti aitab kaardi lugejast eemaldamine ja uuesti sisestamine. Mõningatel juhtudel on vaja ka ID-tarkvara komponendi uuesti käivitamist või ka arvuti taaskäivitamist.  PinPad (sõrmistikuga) lugejate puhul võib esineda tõrkeid Windows terminal lahendustes. Terminalsüsteemid ei ole ID-tarkvara poolt ametlikult toetatud keskkond.  Lisaks võib olla vajadus piirata PinPad režiim (HP ja Dell klaviatuur/ kaardilugejad). Selleks tuleb lisada Windows registrisse võti, mille väärtused leiabsiit.
+- Windowsi puhul töötab lugeja üldjuhul kõikide draiveritega (tootja, Microsofti universaalsed draiverid).
+- Linuxi ja macOS puhul on testitud vaikimisi paigaldatav draiver (USB CCID).
+- Peale standby ja hibernate funktsioonide kasutamist, kui sel ajal oli ID-kaart lugejas ning mõni ID-tarkvara komponent avatud, võib esineda probleeme kaardilt andmete väljalugemisega.  Enamasti aitab kaardi lugejast eemaldamine ja uuesti sisestamine. Mõningatel juhtudel on vaja ka ID-tarkvara komponendi uuesti käivitamist või ka arvuti taaskäivitamist.
+- PinPad (sõrmistikuga) lugejate puhul võib esineda tõrkeid Windows terminal lahendustes. Terminalsüsteemid ei ole ID-tarkvara poolt ametlikult toetatud keskkond.
+- Lisaks võib olla vajadus piirata PinPad režiim (HP ja Dell klaviatuur/ kaardilugejad). Selleks tuleb lisada Windows registrisse võti, mille väärtused leiab siit (https://github.com/open-eid/minidriver/wiki#supported-features) .
+ID-tarkvaraga testitud kaardilugejad on:
+ACR39U-UF (Type-C kaabliga)  ACS ACR 38 (USB)  Axagon CRE-SMP1A / Alcor Micro EMV AU9540  Trust 23890 / Alcor Micro AU9540  Gemalto CT30 (USB)  Lenovo sisemine kaardilugeja Alcor Micro (tootjadraiveriga)  Omnikey CardMan 3121 (USB)  Pluss ID v3 (USB)  SCM SCR 3310 (USB)  Lindy 42764 (USB, type C)
+- ACR39U-UF (Type-C kaabliga)
+- ACS ACR 38 (USB)
+- Axagon CRE-SMP1A / Alcor Micro EMV AU9540
+- Trust 23890 / Alcor Micro AU9540
+- Gemalto CT30 (USB)
+- Lenovo sisemine kaardilugeja Alcor Micro ( tootjadraiveriga (https://www.id.ee/artikkel/probleemid-id-kaardi-lugejaga/#pinpad-kaardilugeja-draiverite_4) )
+- Omnikey CardMan 3121 (USB)
+- Pluss ID v3 (USB)
+- SCM SCR 3310 (USB)
+- Lindy 42764 (USB, type C)
+Vajadusel kontrolli üle, millised on ID-tarkvara poolt toetatud operatsioonisüsteemid (/artikkel/id-tarkvara-toetatud-operatsioonisusteemid/) ja nende versioonid.
+NB! Kui sinu teadmised on erinevad artiklis kajastatud kiipkaardi lugejate kohta, siis ole hea ja jaga neid meiega.
+
+
+- PinPad kaardilugeja draiverite kasutamine  ID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad üht nimetatud PinPad (sõrmistikuga) kaardilugejatest:OmniKey CardMan 3821Selleks, et Windows operatsioonisüsteemis saaks PinPad kaardilugejat kasutada, peab olema paigaldatud vastava kaardilugeja draiver. Vaikimisi paigaldab Windows universaalse (WUDF) draiveri, küll aga see ei toeta PinPad kaardilugejat. Tõrgete lahendamiseks on soovitus jälgida järgmiseid lahendusi. OmniKey CardMan 3821Laadi alla OmniKey CardMan 3821 draiversiit. Käivita rakendus. Salvestafailid oma arvutis mõnda kausta. Ava seadmehaldur ja määra draiveritarkvara otsimise asukohaks kaust kuhu eelnevalt draiveri failid salvestasid. Täpsema juhendi leiadsiit. Pärast paigaldust peaks kaardilugeja töötama ootuspäraselt. Probleemide jätkudesvõta ühendust ID-tarkvara kasutajatoega!
+PinPad kaardilugeja draiverite kasutamine  (#pinpad-kaardilugeja-draiverite_4)
+
+
+
+
+
+ID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad üht nimetatud PinPad (sõrmistikuga) kaardilugejatest:
+OmniKey CardMan 3821
+- OmniKey CardMan 3821
+Selleks, et Windows operatsioonisüsteemis saaks PinPad kaardilugejat kasutada, peab olema paigaldatud vastava kaardilugeja draiver. Vaikimisi paigaldab Windows universaalse (WUDF) draiveri, küll aga see ei toeta PinPad kaardilugejat.
+Tõrgete lahendamiseks on soovitus jälgida järgmiseid lahendusi.
+OmniKey CardMan 3821
+Laadi alla OmniKey CardMan 3821 draiversiit.  Käivita rakendus.  Salvestafailid oma arvutis mõnda kausta.  Ava seadmehaldur ja määra draiveritarkvara otsimise asukohaks kaust kuhu eelnevalt draiveri failid salvestasid. Täpsema juhendi leiadsiit.  Pärast paigaldust peaks kaardilugeja töötama ootuspäraselt.
+- Laadi alla OmniKey CardMan 3821 draiver siit (https://www.hidglobal.com/drivers/24574) .
+- Käivita rakendus.
+- Salvestafailid oma arvutis mõnda kausta.
+- Ava seadmehaldur ja määra draiveritarkvara otsimise asukohaks kaust kuhu eelnevalt draiveri failid salvestasid. Täpsema juhendi leiad siit (https://www.id.ee/artikkel/probleemid-id-kaardi-lugejaga/#kaardilugeja-tootjapoolsete-draiverite_5) .
+- Pärast paigaldust peaks kaardilugeja töötama ootuspäraselt.
+Probleemide jätkudes võta ühendust ID-tarkvara kasutajatoega (https://www.id.ee/artikkel/teavita-meid-probleemist) !
+
+
+- Kaardilugeja tootjapoolsete draiverite vahetamine Windows’i op. süsteemi standardsete draiverite vastu  ID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad nt üht nimetatud (klaviatuur)kaardilugejatest:JSP-CR900Cherry RS 6700 Smart Board XX44Cherry RS 6600 Smart Board XX44Lenovo USB Smartcard KeyboardFujitsu keyboard KB SCRDell RT7D60 USB Smartcard KeyboardDell KB813 USB Smartcard Keyboard...jmsAeg on näidanud, et tõrked peituvad selliste lugejate puhul enamasti tootjapoolsetes draiverites. Tõrgete lahendamiseks on soovitus asendada need Microsoft'iWUDF tähisegadraiverite vastu. Selleks tee läbi järgmised sammud:Samm 1: ava start-menüüAvaStartmenüü (windowsi märk/akna kujutis) ja kirjuta otsingusseSeadmehaldur(Device Manager):Leia nimekirjast alajaotusKiipkaardilugejad(Smart card readers),kus  tee hiire paremklõps kaardilugejal ja valiDraiveritarkvara värskendamine(Update driver software):NB!Juhul, kui "Seadmehalduris" kiipkaardilugejad peal hiire paremklõps ei paku draiveri värksendamist, tuleks "Seadmehaldur" käivitada administraatori õigustes. AvaStartmenüü ja kirjuta otsingusse"devmgmt.msc"(Device Manager). Otsinguga leitaval rakendusel vali"Käivita administraatorina".Ekraanile kuvatakse"Kasutajakonto kontroll"aken, kuhu tuleb sisestada administraatori õigustes konto kasutajanimi ja parool. Vajuta Jah /OK nupule. Jätka kaardilugeja draiveri vahetust (Samm 2: leia vajalik draiveritarkvaraSamm 2: leia vajalik draiveritarkvaraAvanenud aknas tee klõps valikulSirvi arvuti sisu, et leida draiveritarkvara(Browse my computer for driver software):Nüüd tee klõps valikulLuba mul valida arvutist seadmedraiverite loetelust(Let me pick from a list of device drivers on my computer):Samm 3: draiverite uuendamineLeia nimekirjastMicrosoft Usbccid Smartcard Reader (WUDF),tee see aktiivseks ja vajutaEdasi(Next):Sellele järgneb draiveritarkvara värskendus. Kui see on edukas, siis vajuta nupuleSulge(Close)ning proovi uuesti ID-kaarti kasutada. Probleemide jätkudesvõta ühendust ID-tarkvara kasutajatoega!
+Kaardilugeja tootjapoolsete draiverite vahetamine Windows’i op. süsteemi standardsete draiverite vastu  (#kaardilugeja-tootjapoolsete-draiverite_5)
+
+
+
+
+
+ID-kaardi elektrooniline kasutamine ei pruugi alati õnnestuda, kui kasutad nt üht nimetatud (klaviatuur)kaardilugejatest:
+JSP-CR900  Cherry RS 6700 Smart Board XX44  Cherry RS 6600 Smart Board XX44  Lenovo USB Smartcard Keyboard  Fujitsu keyboard KB SCR  Dell RT7D60 USB Smartcard Keyboard  Dell KB813 USB Smartcard Keyboard  ...jms
+- JSP-CR900
+- Cherry RS 6700 Smart Board XX44
+- Cherry RS 6600 Smart Board XX44
+- Lenovo USB Smartcard Keyboard
+- Fujitsu keyboard KB SCR
+- Dell RT7D60 USB Smartcard Keyboard
+- Dell KB813 USB Smartcard Keyboard
+- ...jms
+Aeg on näidanud, et tõrked peituvad selliste lugejate puhul enamasti tootjapoolsetes draiverites. Tõrgete lahendamiseks on soovitus asendada need Microsoft'i WUDF tähisega draiverite vastu. Selleks tee läbi järgmised sammud:
+Samm 1: ava start-menüü
+Ava Start menüü (windowsi märk/akna kujutis) ja kirjuta otsingusse Seadmehaldur ( Device Manager ):
+Leia nimekirjast alajaotus Kiipkaardilugejad ( Smart card readers ) , kus  tee hiire paremklõps kaardilugejal ja vali Draiveritarkvara värskendamine ( Update driver software ):
+NB! Juhul, kui "Seadmehalduris" kiipkaardilugejad peal hiire paremklõps ei paku draiveri värksendamist, tuleks "Seadmehaldur" käivitada administraatori õigustes.
+AvaStartmenüü ja kirjuta otsingusse"devmgmt.msc"(Device Manager). Otsinguga leitaval rakendusel vali"Käivita administraatorina".
+- Ava Start menüü ja kirjuta otsingusse "devmgmt.msc" ( Device Manager ). Otsinguga leitaval rakendusel vali "Käivita administraatorina" .
+Ekraanile kuvatakse"Kasutajakonto kontroll"aken, kuhu tuleb sisestada administraatori õigustes konto kasutajanimi ja parool. Vajuta Jah /OK nupule.
+- Ekraanile kuvatakse "Kasutajakonto kontroll" aken, kuhu tuleb sisestada administraatori õigustes konto kasutajanimi ja parool. Vajuta Jah /OK nupule.
+Jätka kaardilugeja draiveri vahetust ( Samm 2: leia vajalik draiveritarkvara
+Samm 2: leia vajalik draiveritarkvara
+Avanenud aknas tee klõps valikul Sirvi arvuti sisu, et leida draiveritarkvara ( Browse my computer for driver software ):
+Nüüd tee klõps valikul Luba mul valida arvutist seadmedraiverite loetelust ( Let me pick from a list of device drivers on my computer ):
+Samm 3: draiverite uuendamine
+Leia nimekirjast Microsoft Usbccid Smartcard Reader (WUDF), tee see aktiivseks ja vajuta Edasi ( Next ):
+Sellele järgneb draiveritarkvara värskendus. Kui see on edukas, siis vajuta nupule Sulge (Close) ning proovi uuesti ID-kaarti kasutada.
+Probleemide jätkudes võta ühendust ID-tarkvara kasutajatoega (/artikkel/teavita-meid-probleemist) !
+
+
+DigiDoc4 rakenduse veateade: ID-kaardi kasutamiseks vajalik PCSC teenus ei töötaID-kaardi kasutamise jaoks vajalik PCSC teenus käivitatakse arvutis automaatselt kui ühendatakse kaardilugeja. Juhul, kui DigiDoc4 annab veateate „ID-kaardi kasutamiseks vajalik PCSC teenus ei tööta“ ka pärast kaardilugeja ühendamist, tuleb sul teenus käsitsi käivitada. Juhised sõltuvad sinu poolt kasutatavast operatsioonisüsteemist. Windows 10 ja 11Kõigepealt ava 'Start menüü' ja kirjuta otsingusseservices.mscSeejärel leia avanenud aknast (Services) "Kiipkaart/Smart Card".Veendu, et seaded on korrektsed:teenuseStatuson "Started" või "Running"teenuseStartup Typeon "Automatic".Kui ei ole, siis teeSmart Card/Kiipkaartpeal topeltklõps ja viia sisse vastavad muudatused. Windows puhul näeb korrektselt seadistatudSmart Card/Kiipkaartteenuse aken välja selline:NB!Juhul, kui sa kasutad ID-tarkvara üleremote deskoplahenduse, tuleks sul veenduda, et Smart Card service töötab arvutis, mille abil ekraani teisest arvutist üle võtad!Kui teenuste hulgas ei ole “Kiipkaart/Smart Card” valikutSüsteemifailide kontrollija kasutamine Windowsis(Windows 10/11 jaoks):Süsteemifailide kontrollija on Windowsi utiliit, mis kontrollib teie arvutis olevate failidega seotud probleeme. Selle käivitamiseks tehke järgmist:Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklistWindowsi värskendamine. Tippige tegumiriba otsinguväljalekäsuviipja paremklõpsake või vajutage pikalt tulemite loendistvalikut Käsuviip (töölauarakendus). ValigeKäivita administraatorinaja seejärel valigeJah. TippigeDISM.exe /Online /Cleanup-image /Restorehealth(pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahviEnter. (Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippigesfc/scannow("sfc" ja "/") vahel on tühik ja vajutagesisestusklahvi (Enter).Kui kuvatakse teade "Kontrollimine 100% valmis", tippigeexitja vajutagesisestusklahvi (Enter).Kui süsteemifailide kontrollija kasutamine ei anna tulemust, registreerige palun mõned dll-failid uuesti:Võime kasutada käsku "regsvr32" järgmiste dll-failide uuesti registreerimiseks. Klõpsake nuppu Start ja tippige järgmised käsk otsinguribale (ühe kaupa).Näiteks,regsvr32 scarddlg.dllregsvr32 scarddlg.dll
+regsvr32 sccbase.dll 
+regsvr32 sccsccp.dll
+regsvr32 scredir.dll
+regsvr32 slbcsp.dll
+regsvr32 slbiop.dll
+regsvr32 slbrccsp.dllKui ülaltoodud toimingud ei aita teie probleemiga hästi toime tulla, jätkake järgmiste juhistega:Sulgege kõik avatud aknad. Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi. Tippige Y ja klõpsake uuesti Enter. Taaskäivitage arvuti. LinuxLinuxi  puhul proovi esmalt kaardilugejat uuesti arvutiga ühendada. Kui viga säilib, siis tegutse järgnevalt:käivitaterminalkirjuta terminali käsk:sudo -iSinu käest küsitakse administraatori parooli – sisesta see. Ära lase end segada faktist, et parooli sisestamisel hiirekursor ei liigu ning parooli ekraanil ei näidata! Kui oled kindel, et sisestasid parooli õigesti, vajutaENTER. Sisesta nüüd:systemctl enable pcscd.socketsudo systemctl start pcscd.socketKui SmartCard teenuse käivitamine õnnestub, ava uuesti DigiDoc4 ja kontrolli, kas ID-kaardilt loetakse nüüd andmed sisse korrektselt. Kui kõik toimib, peaks ID-kaardi kasutamine taas lubatud olema.
+- DigiDoc4 rakenduse veateade: ID-kaardi kasutamiseks vajalik PCSC teenus ei tööta  ID-kaardi kasutamise jaoks vajalik PCSC teenus käivitatakse arvutis automaatselt kui ühendatakse kaardilugeja. Juhul, kui DigiDoc4 annab veateate „ID-kaardi kasutamiseks vajalik PCSC teenus ei tööta“ ka pärast kaardilugeja ühendamist, tuleb sul teenus käsitsi käivitada. Juhised sõltuvad sinu poolt kasutatavast operatsioonisüsteemist. Windows 10 ja 11Kõigepealt ava 'Start menüü' ja kirjuta otsingusseservices.mscSeejärel leia avanenud aknast (Services) "Kiipkaart/Smart Card".Veendu, et seaded on korrektsed:teenuseStatuson "Started" või "Running"teenuseStartup Typeon "Automatic".Kui ei ole, siis teeSmart Card/Kiipkaartpeal topeltklõps ja viia sisse vastavad muudatused. Windows puhul näeb korrektselt seadistatudSmart Card/Kiipkaartteenuse aken välja selline:NB!Juhul, kui sa kasutad ID-tarkvara üleremote deskoplahenduse, tuleks sul veenduda, et Smart Card service töötab arvutis, mille abil ekraani teisest arvutist üle võtad!Kui teenuste hulgas ei ole “Kiipkaart/Smart Card” valikutSüsteemifailide kontrollija kasutamine Windowsis(Windows 10/11 jaoks):Süsteemifailide kontrollija on Windowsi utiliit, mis kontrollib teie arvutis olevate failidega seotud probleeme. Selle käivitamiseks tehke järgmist:Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklistWindowsi värskendamine. Tippige tegumiriba otsinguväljalekäsuviipja paremklõpsake või vajutage pikalt tulemite loendistvalikut Käsuviip (töölauarakendus). ValigeKäivita administraatorinaja seejärel valigeJah. TippigeDISM.exe /Online /Cleanup-image /Restorehealth(pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahviEnter. (Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippigesfc/scannow("sfc" ja "/") vahel on tühik ja vajutagesisestusklahvi (Enter).Kui kuvatakse teade "Kontrollimine 100% valmis", tippigeexitja vajutagesisestusklahvi (Enter).Kui süsteemifailide kontrollija kasutamine ei anna tulemust, registreerige palun mõned dll-failid uuesti:Võime kasutada käsku "regsvr32" järgmiste dll-failide uuesti registreerimiseks. Klõpsake nuppu Start ja tippige järgmised käsk otsinguribale (ühe kaupa).Näiteks,regsvr32 scarddlg.dllregsvr32 scarddlg.dll
+regsvr32 sccbase.dll 
+regsvr32 sccsccp.dll
+regsvr32 scredir.dll
+regsvr32 slbcsp.dll
+regsvr32 slbiop.dll
+regsvr32 slbrccsp.dllKui ülaltoodud toimingud ei aita teie probleemiga hästi toime tulla, jätkake järgmiste juhistega:Sulgege kõik avatud aknad. Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi. Tippige Y ja klõpsake uuesti Enter. Taaskäivitage arvuti. LinuxLinuxi  puhul proovi esmalt kaardilugejat uuesti arvutiga ühendada. Kui viga säilib, siis tegutse järgnevalt:käivitaterminalkirjuta terminali käsk:sudo -iSinu käest küsitakse administraatori parooli – sisesta see. Ära lase end segada faktist, et parooli sisestamisel hiirekursor ei liigu ning parooli ekraanil ei näidata! Kui oled kindel, et sisestasid parooli õigesti, vajutaENTER. Sisesta nüüd:systemctl enable pcscd.socketsudo systemctl start pcscd.socketKui SmartCard teenuse käivitamine õnnestub, ava uuesti DigiDoc4 ja kontrolli, kas ID-kaardilt loetakse nüüd andmed sisse korrektselt. Kui kõik toimib, peaks ID-kaardi kasutamine taas lubatud olema.
+DigiDoc4 rakenduse veateade: ID-kaardi kasutamiseks vajalik PCSC teenus ei tööta  (#digidoc4-rakenduse-veateade_1)
+
+
+
+
+
+ID-kaardi kasutamise jaoks vajalik PCSC teenus käivitatakse arvutis automaatselt kui ühendatakse kaardilugeja. Juhul, kui DigiDoc4 annab veateate „ID-kaardi kasutamiseks vajalik PCSC teenus ei tööta“ ka pärast kaardilugeja ühendamist, tuleb sul teenus käsitsi käivitada. Juhised sõltuvad sinu poolt kasutatavast operatsioonisüsteemist.
+Windows 10 ja 11  (#windows-10)
+
+Kõigepealt ava 'Start menüü' ja kirjuta otsingusseservices.msc  Seejärel leia avanenud aknast (Services) "Kiipkaart/Smart Card".
+- Kõigepealt ava ' Start menüü ' ja kirjuta otsingusse services.msc
+- Seejärel leia avanenud aknast (Services) " Kiipkaart / Smart Card ".
+Veendu, et seaded on korrektsed:teenuseStatuson "Started" või "Running"teenuseStartup Typeon "Automatic".
+- Veendu, et seaded on korrektsed: teenuseStatuson "Started" või "Running"teenuseStartup Typeon "Automatic".
+teenuseStatuson "Started" või "Running"  teenuseStartup Typeon "Automatic".
+- teenuse Status on " Started " või " Running "
+- teenuse Startup Type on " Automatic ".
+Kui ei ole, siis tee Smart Card / Kiipkaart peal topeltklõps ja viia sisse vastavad muudatused.
+Windows puhul näeb korrektselt seadistatud Smart Card / Kiipkaart teenuse aken välja selline:
+NB! Juhul, kui sa kasutad ID-tarkvara üle remote deskop lahenduse, tuleks sul veenduda, et Smart Card service töötab arvutis, mille abil ekraani teisest arvutist üle võtad!
+Kui teenuste hulgas ei ole “Kiipkaart/Smart Card” valikutSüsteemifailide kontrollija kasutamine Windowsis(Windows 10/11 jaoks):Süsteemifailide kontrollija on Windowsi utiliit, mis kontrollib teie arvutis olevate failidega seotud probleeme. Selle käivitamiseks tehke järgmist:Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklistWindowsi värskendamine. Tippige tegumiriba otsinguväljalekäsuviipja paremklõpsake või vajutage pikalt tulemite loendistvalikut Käsuviip (töölauarakendus). ValigeKäivita administraatorinaja seejärel valigeJah. TippigeDISM.exe /Online /Cleanup-image /Restorehealth(pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahviEnter. (Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippigesfc/scannow("sfc" ja "/") vahel on tühik ja vajutagesisestusklahvi (Enter).Kui kuvatakse teade "Kontrollimine 100% valmis", tippigeexitja vajutagesisestusklahvi (Enter).Kui süsteemifailide kontrollija kasutamine ei anna tulemust, registreerige palun mõned dll-failid uuesti:Võime kasutada käsku "regsvr32" järgmiste dll-failide uuesti registreerimiseks. Klõpsake nuppu Start ja tippige järgmised käsk otsinguribale (ühe kaupa).Näiteks,regsvr32 scarddlg.dllregsvr32 scarddlg.dll
+regsvr32 sccbase.dll 
+regsvr32 sccsccp.dll
+regsvr32 scredir.dll
+regsvr32 slbcsp.dll
+regsvr32 slbiop.dll
+regsvr32 slbrccsp.dllKui ülaltoodud toimingud ei aita teie probleemiga hästi toime tulla, jätkake järgmiste juhistega:Sulgege kõik avatud aknad. Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi. Tippige Y ja klõpsake uuesti Enter. Taaskäivitage arvuti.
+- Kui teenuste hulgas ei ole “Kiipkaart/Smart Card” valikut  Süsteemifailide kontrollija kasutamine Windowsis(Windows 10/11 jaoks):Süsteemifailide kontrollija on Windowsi utiliit, mis kontrollib teie arvutis olevate failidega seotud probleeme. Selle käivitamiseks tehke järgmist:Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklistWindowsi värskendamine. Tippige tegumiriba otsinguväljalekäsuviipja paremklõpsake või vajutage pikalt tulemite loendistvalikut Käsuviip (töölauarakendus). ValigeKäivita administraatorinaja seejärel valigeJah. TippigeDISM.exe /Online /Cleanup-image /Restorehealth(pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahviEnter. (Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippigesfc/scannow("sfc" ja "/") vahel on tühik ja vajutagesisestusklahvi (Enter).Kui kuvatakse teade "Kontrollimine 100% valmis", tippigeexitja vajutagesisestusklahvi (Enter).Kui süsteemifailide kontrollija kasutamine ei anna tulemust, registreerige palun mõned dll-failid uuesti:Võime kasutada käsku "regsvr32" järgmiste dll-failide uuesti registreerimiseks. Klõpsake nuppu Start ja tippige järgmised käsk otsinguribale (ühe kaupa).Näiteks,regsvr32 scarddlg.dllregsvr32 scarddlg.dll
+regsvr32 sccbase.dll 
+regsvr32 sccsccp.dll
+regsvr32 scredir.dll
+regsvr32 slbcsp.dll
+regsvr32 slbiop.dll
+regsvr32 slbrccsp.dllKui ülaltoodud toimingud ei aita teie probleemiga hästi toime tulla, jätkake järgmiste juhistega:Sulgege kõik avatud aknad. Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi. Tippige Y ja klõpsake uuesti Enter. Taaskäivitage arvuti.
+Kui teenuste hulgas ei ole “Kiipkaart/Smart Card” valikut  (#kui-teenuste-hulgas_1)
+
+
+
+
+
+Süsteemifailide kontrollija kasutamine Windowsis (Windows 10/11 jaoks):
+Süsteemifailide kontrollija on Windowsi utiliit, mis kontrollib teie arvutis olevate failidega seotud probleeme. Selle käivitamiseks tehke järgmist:
+Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklistWindowsi värskendamine.  Tippige tegumiriba otsinguväljalekäsuviipja paremklõpsake või vajutage pikalt tulemite loendistvalikut Käsuviip (töölauarakendus). ValigeKäivita administraatorinaja seejärel valigeJah.  TippigeDISM.exe /Online /Cleanup-image /Restorehealth(pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahviEnter. (Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)  Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippigesfc/scannow("sfc" ja "/") vahel on tühik ja vajutagesisestusklahvi (Enter).  Kui kuvatakse teade "Kontrollimine 100% valmis", tippigeexitja vajutagesisestusklahvi (Enter).
+- Veenduge, et olete installinud Windowsi uusimad värskendused, ja taaskäivitage arvuti. Lisateavet leiate artiklist Windowsi värskendamine (https://support.microsoft.com/et-ee/windows/windowsi-v%C3%A4rskendamine-3c5ae7fc-9fb6-9af1-1984-b5e0412c556a) .
+- Tippige tegumiriba otsinguväljale käsuviip ja paremklõpsake või vajutage pikalt tulemite loendist valikut Käsuviip (töölauarakendus ). Valige Käivita administraatorina ja seejärel valige Jah .
+- Tippige DISM.exe /Online /Cleanup-image /Restorehealth (pange tähele tühikut iga „/” ees) ja seejärel vajutage sisestusklahvi Enter . ( Märkus. Selle toimingu alustamiseks ja lõpuleviimiseks võib kuluda mõni minut.)
+- Kui kuvatakse teade "Toiming on edukalt lõpule viidud", tippige sfc /scannow ("sfc" ja "/") vahel on tühik ja vajutage sisestusklahvi (Enter).
+- Kui kuvatakse teade "Kontrollimine 100% valmis", tippige exit ja vajutage sisestusklahvi (Enter).
+Kui süsteemifailide kontrollija kasutamine ei anna tulemust, registreerige palun mõned dll-failid uuesti:
+Võime kasutada käsku "regsvr32" järgmiste dll-failide uuesti registreerimiseks. Klõpsake nuppu Start ja tippige järgmised käsk otsinguribale (ühe kaupa).
+Kui ülaltoodud toimingud ei aita teie probleemiga hästi toime tulla, jätkake järgmiste juhistega:
+Sulgege kõik avatud aknad.  Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").  Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").  Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi.  Tippige Y ja klõpsake uuesti Enter.  Taaskäivitage arvuti.
+- Sulgege kõik avatud aknad.
+- Klõpsake nuppu Start, klõpsake "Kõik programmid" ("All programs") ja klõpsake "Aksessuaarid" ("Accessories").
+- Paremklõpsake "Käsurida" ("Command Prompt") ja klõpsake "Käivita administraatorina" ("Run as administrator").
+- Tippige aknasse "Administraator: Käsurida" ("Administrator: Command Prompt") käsk "chkdsk /r" (ilma jutumärkideta) ja vajutage sisestusklahvi.
+- Tippige Y ja klõpsake uuesti Enter.
+- Taaskäivitage arvuti.
+
+
+Linux  (#linux)
+
+Linuxi  puhul proovi esmalt kaardilugejat uuesti arvutiga ühendada. Kui viga säilib, siis tegutse järgnevalt:
+käivitaterminal  kirjuta terminali käsk:sudo -i  Sinu käest küsitakse administraatori parooli – sisesta see. Ära lase end segada faktist, et parooli sisestamisel hiirekursor ei liigu ning parooli ekraanil ei näidata! Kui oled kindel, et sisestasid parooli õigesti, vajutaENTER.  Sisesta nüüd:systemctl enable pcscd.socketsudo systemctl start pcscd.socket
+- käivita terminal
+- kirjuta terminali käsk:  sudo -i
+
+- Sinu käest küsitakse administraatori parooli – sisesta see. Ära lase end segada faktist, et parooli sisestamisel hiirekursor ei liigu ning parooli ekraanil ei näidata! Kui oled kindel, et sisestasid parooli õigesti, vajuta ENTER .
+- Sisesta nüüd:  systemctl enable pcscd.socketsudo systemctl start pcscd.socket
+
+
+Kui SmartCard teenuse käivitamine õnnestub, ava uuesti DigiDoc4 ja kontrolli, kas ID-kaardilt loetakse nüüd andmed sisse korrektselt. Kui kõik toimib, peaks ID-kaardi kasutamine taas lubatud olema.
+
+
+Mida teha, kui sul tekkis ID-kaardi kasutamisel probleeme ID-kaardi lugejaga?
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

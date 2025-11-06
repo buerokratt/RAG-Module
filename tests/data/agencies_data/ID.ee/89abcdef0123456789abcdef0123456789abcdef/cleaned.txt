@@ -1,0 +1,120 @@
+ID-tarkvara on võimalik paigaldada ja uuendada Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel. ID-tarkvara ei toeta vanu operatsioonisüsteeme (alates 2020. aastast Windows 7 ja 2022. aasta kevadest Windows 8.1, Windows Server 2012 R2 ja Windows 32-bitiseid operatsioonisüsteeme jne), sest tootja ei paku neile enam uuendusi ja nendele ei arendata ka hädavajalikke tarkvarakomponente, mis mõjutavad ID-tarkvara toimimist nendes süsteemides. See tähendab, et isegi kui ID-tarkvara saaks nendel operatsioonisüsteemidel uuendada, siis RIA-st sõltumatutel põhjustel ID-kaart nendes operatsioonisüsteemides ikkagi ei töötaks. Lisaks kätkeb operatsioonisüsteemide, millele tootja enam hädavajalikke uuendusi ei paku, kasutamine suurt turvariski.
+Soovitame ID-tarkvara kasutamiseks uuendada arvuti operatsioonisüsteemi. ID-tarkvara poolt toetatud operatsioonisüsteemide nimekiri on leitav allpoolt.
+Kui operatsioonisüsteemi uuendamine pole kohe võimalik, saab digiallkirjastamiseks kasutada mobiili-ID (https://www.id.ee/artikkel/mobiil-id-taotlemine-ja-aktiveerimine/) või nutiseadmetele loodud rakendust nimega RIA DigiDoc (https://www.id.ee/artikkel/ria-digidoc-mobiilirakendus/) .
+Kõige värskema tarkvaraversiooni saab alati alla laadida id.ee (https://www.id.ee/artikkel/paigalda-id-tarkvara/) veebilehelt, ehkki ID-tarkvaral on ka muid ametlikke levikanaleid.
+ID-tarkvara Windows operatsioonisüsteemileID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara. Siit lehelt leiad alati värskeima tarkvaraversiooni alla laadimise. Salvesta tarkvarafail oma arvutisse ja käivita installeerimine, tehes faili nimel hiirega topeltklõpsu. ID-tarkvara Windows operatsioonisüsteemileID-tarkvara versioon: 25.8, DigiDoc4 versioon: 4.8.2.5375, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: Windows 10 (64-bit), Windows 11, Windows Server 2019, Windows Server 2022,  Windows Server 2025Laadi allaTeada tasub, et DigiDoc4 saad kasutada ka mobiil-IDga ja Smart-IDga digiallkirjade andmiseks.
+- ID-tarkvara Windows operatsioonisüsteemile  ID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara. Siit lehelt leiad alati värskeima tarkvaraversiooni alla laadimise. Salvesta tarkvarafail oma arvutisse ja käivita installeerimine, tehes faili nimel hiirega topeltklõpsu. ID-tarkvara Windows operatsioonisüsteemileID-tarkvara versioon: 25.8, DigiDoc4 versioon: 4.8.2.5375, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: Windows 10 (64-bit), Windows 11, Windows Server 2019, Windows Server 2022,  Windows Server 2025Laadi allaTeada tasub, et DigiDoc4 saad kasutada ka mobiil-IDga ja Smart-IDga digiallkirjade andmiseks.
+ID-tarkvara Windows operatsioonisüsteemile  (#id-tarkvara-windows-operatsioonissteemile_1)
+
+
+
+
+
+ID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara. Siit lehelt leiad alati värskeima tarkvaraversiooni alla laadimise. Salvesta tarkvarafail oma arvutisse ja käivita installeerimine, tehes faili nimel hiirega topeltklõpsu.
+
+Teada tasub, et DigiDoc4 saad kasutada ka mobiil-IDga ja Smart-IDga digiallkirjade andmiseks.
+
+
+ID-tarkvara macOS operatsioonisüsteemileAva oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:ID-kaardiga veebis autentimise komponendidningChrome ja Firefox allkirjastamise komponendidVersioon: 25.5, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaSafaris allkirjastamise komponentVersioon: 2.7.0.660, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaDigiDoc4DigiDoc4 versioon: 4.8.2.4487, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaLaadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+- ID-tarkvara macOS operatsioonisüsteemile  Ava oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:ID-kaardiga veebis autentimise komponendidningChrome ja Firefox allkirjastamise komponendidVersioon: 25.5, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaSafaris allkirjastamise komponentVersioon: 2.7.0.660, avalikustatud 20.06.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaDigiDoc4DigiDoc4 versioon: 4.8.2.4487, avalikustatud 20.08.2025ID-tarkvara toetatud operatsioonisüsteemid: macOS Ventura (13), macOS Sonoma (14), macOS Sequoia (15)Laadi allaLaadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+ID-tarkvara macOS operatsioonisüsteemile  (#id-tarkvara-macos-operatsioonissteemile_1)
+
+
+
+
+
+Ava oma arvutis App Store (leiad selle Launchpad’i kaudu, enamasti on vajalik ikoon ka kohe arvuti stardiribal olemas – selleks on sinine ringikujuline ikoon valge A-tähega keskel  ja sisesta otsingusse DigiDoc4 või kasuta seda otselinki:
+ID-kaardiga veebis autentimise komponendid ning  Chrome ja Firefox allkirjastamise komponendid
+
+
+Safaris allkirjastamise komponent
+
+DigiDoc4
+
+Laadi alla ja paigalda see oma arvutisse, järgides ekraanil kuvatavaid juhiseid – see võib võtta paar minutit.
+
+
+ID-tarkvara Ubuntu operatsioonisüsteemileID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara:ID-tarkvara toetatud operatsioonisüsteemid: Ubuntu 22.04 (LTS), Ubuntu 24.04 (LTS), Ubuntu 24.10, Ubuntu 25.04ID-tarkvara versioon: 25.5.0.1953, DigiDoc4 versioon: 4.8.2.5377, avalikustatud 20.08.2025Automaatne paigaldusskriptLaadi allaID-tarkvara toetatud operatsioonisüsteemid: Ubuntu 22.04 (LTS), Ubuntu 24.04 (LTS), Ubuntu 24.10, Ubuntu 25.04ID-tarkvara versioon: 25.5.0.1953, DigiDoc4 versioon: 4.8.2.5377, avalikustatud 20.08.2025Käsitsi paigalduse repositooriumLaadi allaUbuntu juhised ID-tarkvara lisamiseks, uuendamiseks ja selle eemaldamiseks automaatse paigaldusskripti abilAutomaatne paigaldusskriptKäsitsi paigalduse repositooriumKogukonna poolt tehtud Linux pakid
+- ID-tarkvara Ubuntu operatsioonisüsteemile  ID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara:ID-tarkvara toetatud operatsioonisüsteemid: Ubuntu 22.04 (LTS), Ubuntu 24.04 (LTS), Ubuntu 24.10, Ubuntu 25.04ID-tarkvara versioon: 25.5.0.1953, DigiDoc4 versioon: 4.8.2.5377, avalikustatud 20.08.2025Automaatne paigaldusskriptLaadi allaID-tarkvara toetatud operatsioonisüsteemid: Ubuntu 22.04 (LTS), Ubuntu 24.04 (LTS), Ubuntu 24.10, Ubuntu 25.04ID-tarkvara versioon: 25.5.0.1953, DigiDoc4 versioon: 4.8.2.5377, avalikustatud 20.08.2025Käsitsi paigalduse repositooriumLaadi allaUbuntu juhised ID-tarkvara lisamiseks, uuendamiseks ja selle eemaldamiseks automaatse paigaldusskripti abilAutomaatne paigaldusskriptKäsitsi paigalduse repositooriumKogukonna poolt tehtud Linux pakid
+ID-tarkvara Ubuntu operatsioonisüsteemile  (#id-tarkvara-ubuntu-operatsioonissteemile_1)
+
+
+
+
+
+ID-kaardi kasutamiseks oma arvutis vajad ID-tarkvara:
+
+
+Ubuntu juhised ID-tarkvara lisamiseks, uuendamiseks ja selle eemaldamiseks automaatse paigaldusskripti abil  Automaatne paigaldusskript  Käsitsi paigalduse repositoorium  Kogukonna poolt tehtud Linux pakid
+- Ubuntu juhised ID-tarkvara lisamiseks , uuendamiseks ja selle eemaldamiseks automaatse paigaldusskripti abil
+- Automaatne paigaldusskript (https://installer.id.ee/media/install-scripts/install-open-eid.sh)
+- Käsitsi paigalduse repositoorium (https://installer.id.ee/media/ubuntu)
+- Kogukonna poolt tehtud Linux pakid (https://github.com/open-eid/linux-installer/wiki/Linux-Packages)
+
+
+Mobiilirakendus Android ja iOS operatsioonisüsteemileRIA DigiDoc mobiilirakenduse ehk äpi saad paigaldada oma nutiseadmetesse täiesti tasuta laadides rakenduse alla App Store'i või Google Play poest. Allpool lehe paremas servasolevadApp Store'ijaGoogle Play ikoonidviivad sind tarkvara vahendavatele veebilehtedele.iOS nutiseadmedVersioon 2.8.1 (avalikustatud 20.08.2025)Toetatud opsüsteemid: iOS 15 ja uuemadLae alla App StorestAndroid nutiseadmedVersioon 3.0.0 (avalikustatud 22.09.2025)Toetatud opsüsteemid: Android 13 ja uuemadLae alla Google PlaystLisainfo:Kindlasti tasub mobiilirakendus pidevalt värskendatuna hoida – luba oma nutiseadmes äpi automaatne uuendamine! Huvi korral võid tutvuda kaRIA DigiDoc versiooniuuenduste infoga. NB!Selleks, et saaksidRIA DigiDoc rakenduses ID-kaarti kasutada, on sul vaja nutiseadmega ühilduvat kaardilugejat. Mobiiltelefonis ei toimi ID-kaart veebisirvikus. Toetatud kaardilugejad Androidis:Toetatud kaardilugejad iOS's:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderFEITIAN iR301U
+- Mobiilirakendus Android ja iOS operatsioonisüsteemile  RIA DigiDoc mobiilirakenduse ehk äpi saad paigaldada oma nutiseadmetesse täiesti tasuta laadides rakenduse alla App Store'i või Google Play poest. Allpool lehe paremas servasolevadApp Store'ijaGoogle Play ikoonidviivad sind tarkvara vahendavatele veebilehtedele.iOS nutiseadmedVersioon 2.8.1 (avalikustatud 20.08.2025)Toetatud opsüsteemid: iOS 15 ja uuemadLae alla App StorestAndroid nutiseadmedVersioon 3.0.0 (avalikustatud 22.09.2025)Toetatud opsüsteemid: Android 13 ja uuemadLae alla Google PlaystLisainfo:Kindlasti tasub mobiilirakendus pidevalt värskendatuna hoida – luba oma nutiseadmes äpi automaatne uuendamine! Huvi korral võid tutvuda kaRIA DigiDoc versiooniuuenduste infoga. NB!Selleks, et saaksidRIA DigiDoc rakenduses ID-kaarti kasutada, on sul vaja nutiseadmega ühilduvat kaardilugejat. Mobiiltelefonis ei toimi ID-kaart veebisirvikus. Toetatud kaardilugejad Androidis:Toetatud kaardilugejad iOS's:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderFEITIAN iR301U
+Mobiilirakendus Android ja iOS operatsioonisüsteemile  (#mobiilirakendus-android-ja_1)
+
+
+
+
+
+RIA DigiDoc mobiilirakenduse ehk äpi saad paigaldada oma nutiseadmetesse täiesti tasuta laadides rakenduse alla App Store'i või Google Play poest. Allpool lehe paremas servas olevad App Store'i ja Google Play ikoonid viivad sind tarkvara vahendavatele veebilehtedele.
+
+Lae alla App Storest
+
+Lae alla Google Playst
+Lisainfo:
+Kindlasti tasub mobiilirakendus pidevalt värskendatuna hoida – luba oma nutiseadmes äpi automaatne uuendamine! Huvi korral võid tutvuda ka RIA DigiDoc versiooniuuenduste infoga (/artikkel/ria-digidoc-rakenduse-versioonide-info-release-notes/) .
+NB! Selleks, et saaksid RIA DigiDoc rakenduses ID-kaarti kasutada , on sul vaja nutiseadmega ühilduvat kaardilugejat. Mobiiltelefonis ei toimi ID-kaart veebisirvikus.
+
+
+
+
+
+Tarkvara paigaldamine: ID-tarkvara ametlikud levikanalidID.ee veebis olev ID-tarkvara paigaldamise leht:MeieID-tarkvara paigaldamiselehe allalaadimise lingid on alati värskendatud ning pakuvad automaatselt selle tarkvarapaketi, millise operatsioonisüsteemiga arvutiga antud lehele minnakse. Microsoft Windows Store:Microsoft Storekaudu saad alla laadidaID-tarkvara Windowsjaoks, näiteks:DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis. Apple'i App Store:Apple’i App Storekaudu saad alla laadidaID-tarkvara macOSjaoks, näiteks:DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis. Web eID komponent, mis on mõeldud ID-kaardi kasutamiseks veebibrauserites. RIA DigiDoc mobiilirakendus iOS nutiseadmetele. Windows Update:Windows Update kaudu paigaldatakse arvutisse automaatselt ID-tarkvara osaks olev minidraiveri komponent, mis võimaldab ID-kaardiga elektroonilisi toiminguid teha. Rakendus mobiilsetele platvormidele (RIA DigiDoc):Digiallkirjastatud failide avamiseks ja digiallkirjastamiseks olemas tarkvara ka Android ja iOS seadmetele:Android:Google Play'stiOS:App Store'st
+- Tarkvara paigaldamine: ID-tarkvara ametlikud levikanalid  ID.ee veebis olev ID-tarkvara paigaldamise leht:MeieID-tarkvara paigaldamiselehe allalaadimise lingid on alati värskendatud ning pakuvad automaatselt selle tarkvarapaketi, millise operatsioonisüsteemiga arvutiga antud lehele minnakse. Microsoft Windows Store:Microsoft Storekaudu saad alla laadidaID-tarkvara Windowsjaoks, näiteks:DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis. Apple'i App Store:Apple’i App Storekaudu saad alla laadidaID-tarkvara macOSjaoks, näiteks:DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis. Web eID komponent, mis on mõeldud ID-kaardi kasutamiseks veebibrauserites. RIA DigiDoc mobiilirakendus iOS nutiseadmetele. Windows Update:Windows Update kaudu paigaldatakse arvutisse automaatselt ID-tarkvara osaks olev minidraiveri komponent, mis võimaldab ID-kaardiga elektroonilisi toiminguid teha. Rakendus mobiilsetele platvormidele (RIA DigiDoc):Digiallkirjastatud failide avamiseks ja digiallkirjastamiseks olemas tarkvara ka Android ja iOS seadmetele:Android:Google Play'stiOS:App Store'st
+Tarkvara paigaldamine: ID-tarkvara ametlikud levikanalid  (#tarkvara-paigaldamine-id-tarkvara_1)
+
+
+
+
+
+ID.ee veebis olev ID-tarkvara paigaldamise leht:
+Meie ID-tarkvara paigaldamise (/artikkel/paigalda-id-tarkvara/) lehe allalaadimise lingid on alati värskendatud ning pakuvad automaatselt selle tarkvarapaketi, millise operatsioonisüsteemiga arvutiga antud lehele minnakse.
+Microsoft Windows Store:
+Microsoft Store (https://www.microsoft.com/et-ee/store/apps/windows) kaudu saad alla laadida ID-tarkvara Windows (https://www.microsoft.com/et-ee/p/digidoc4-klient/9pfpfk4dj1s6) jaoks, näiteks:
+DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis.
+- DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis.
+Apple'i App Store:
+Apple’i App Store (https://apps.apple.com/) kaudu saad alla laadida ID-tarkvara macOS (https://apps.apple.com/us/developer/ria/id556524921) jaoks, näiteks:
+DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis.  Web eID komponent, mis on mõeldud ID-kaardi kasutamiseks veebibrauserites.  RIA DigiDoc mobiilirakendus iOS nutiseadmetele.
+- DigiDoc4, mis on mõeldud ID-kaardi kasutamiseks arvutis.
+- Web eID komponent, mis on mõeldud ID-kaardi kasutamiseks veebibrauserites.
+- RIA DigiDoc mobiilirakendus iOS nutiseadmetele.
+Windows Update:
+Windows Update kaudu paigaldatakse arvutisse automaatselt ID-tarkvara osaks olev minidraiveri komponent, mis võimaldab ID-kaardiga elektroonilisi toiminguid teha.
+Rakendus mobiilsetele platvormidele (RIA DigiDoc):
+Digiallkirjastatud failide avamiseks ja digiallkirjastamiseks olemas tarkvara ka Android ja iOS seadmetele:
+Android:Google Play'st  iOS:App Store'st
+- Android: Google Play'st (https://play.google.com/store/apps/details?id=ee.ria. DigiDoc)
+- iOS: App Store'st (https://itunes.apple.com/ee/app/ria-digidoc/id1216104448?mt=8)
+
+
+Lisainfo saamiseks loe ka:
+ID-tarkvara versioonide toeperioodi pikkus ehk elutsükkel
+- ID-tarkvara versioonide toeperioodi pikkus ehk elutsükkel
+ID-kaardi tarkvara töötab Windowsi, macOS ja Linuxi keskkonnas. Igas ID-tarkvara versioonis on toetatud alati kindlad operatsioonisüsteemide versioonid.
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

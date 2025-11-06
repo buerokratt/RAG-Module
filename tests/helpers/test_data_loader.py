@@ -1,5 +1,6 @@
 """Helper module to load test data into Qdrant before running tests."""
-
+import os 
+import json
 import requests
 import uuid
 from typing import List, Dict, Any
@@ -214,200 +215,30 @@ def get_test_documents() -> List[Dict[str, Any]]:
     - context: Brief contextual description (simulating Anthropic methodology)
     - contextual_content: context + original_content (what gets embedded)
     """
-    return [
-        {
-            "chunk_id": "test_doc_001_chunk_000",
-            "document_hash": "test_doc_001",
-            "chunk_index": 0,
-            "original_content": "In 2021, the pension will become more flexible. People will be able to choose the most suitable time for their retirement, partially withdraw their pension or stop payment of their pension if they wish, in effect creating their own personal pension plan.",
-            "context": "This chunk discusses pension flexibility reforms in Estonia.",
-            "contextual_content": "This chunk discusses pension flexibility reforms in Estonia.\n\nIn 2021, the pension will become more flexible. People will be able to choose the most suitable time for their retirement, partially withdraw their pension or stop payment of their pension if they wish, in effect creating their own personal pension plan.",
-            "metadata": {
-                "category": "pension_information",
-                "language": "en",
-                "source": "gov_policy_2021",
-            },
-        },
-        {
-            "chunk_id": "test_doc_002_chunk_000",
-            "document_hash": "test_doc_002",
-            "chunk_index": 0,
-            "original_content": "Starting in 2027, retirement age calculations will be based on the life expectancy of 65-year-olds. The pension system will thus be in line with demographic developments.",
-            "context": "This chunk explains future pension age calculation changes.",
-            "contextual_content": "This chunk explains future pension age calculation changes.\n\nStarting in 2027, retirement age calculations will be based on the life expectancy of 65-year-olds. The pension system will thus be in line with demographic developments.",
-            "metadata": {
-                "category": "pension_information",
-                "language": "en",
-                "source": "pension_reform_2027",
-            },
-        },
-        {
-            "chunk_id": "test_doc_003_chunk_000",
-            "document_hash": "test_doc_003",
-            "chunk_index": 0,
-            "original_content": "From 2021, the formula for the state old-age pension will be upgraded - starting in 2021, we will start collecting the so-called joint part.",
-            "context": "This chunk describes pension formula updates.",
-            "contextual_content": "This chunk describes pension formula updates.\n\nFrom 2021, the formula for the state old-age pension will be upgraded - starting in 2021, we will start collecting the so-called joint part.",
-            "metadata": {
-                "category": "pension_information",
-                "language": "en",
-                "source": "pension_formula_update",
-            },
-        },
-        {
-            "chunk_id": "test_doc_004_chunk_000",
-            "document_hash": "test_doc_004",
-            "chunk_index": 0,
-            "original_content": "In 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; Approximately 280 million euros for parental benefit.",
-            "context": "This chunk provides family benefit payment statistics.",
-            "contextual_content": "This chunk provides family benefit payment statistics.\n\nIn 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; Approximately 280 million euros for parental benefit.",
-            "metadata": {
-                "category": "family_benefits",
-                "language": "en",
-                "source": "benefits_report_2021",
-            },
-        },
-        {
-            "chunk_id": "test_doc_005_chunk_000",
-            "document_hash": "test_doc_005",
-            "chunk_index": 0,
-            "original_content": "The Estonian parental benefit system is one of the most generous in the world, both in terms of the length of the period covered by the benefit and the amount of the benefit.",
-            "context": "This chunk describes Estonia's parental benefit system.",
-            "contextual_content": "This chunk describes Estonia's parental benefit system.\n\nThe Estonian parental benefit system is one of the most generous in the world, both in terms of the length of the period covered by the benefit and the amount of the benefit.",
-            "metadata": {
-                "category": "family_benefits",
-                "language": "en",
-                "source": "parental_benefits_overview",
-            },
-        },
-        {
-            "chunk_id": "test_doc_006_chunk_000",
-            "document_hash": "test_doc_006",
-            "chunk_index": 0,
-            "original_content": "23,687 families and 78,296 children receive support for families with many children, including 117 families with seven or more children.",
-            "context": "This chunk provides statistics on multi-child family support.",
-            "contextual_content": "This chunk provides statistics on multi-child family support.\n\n23,687 families and 78,296 children receive support for families with many children, including 117 families with seven or more children.",
-            "metadata": {
-                "category": "family_benefits",
-                "language": "en",
-                "source": "family_support_stats",
-            },
-        },
-        {
-            "chunk_id": "test_doc_007_chunk_000",
-            "document_hash": "test_doc_007",
-            "chunk_index": 0,
-            "original_content": "8,804 parents and 10,222 children receive single parent support.",
-            "context": "This chunk provides single parent support statistics.",
-            "contextual_content": "This chunk provides single parent support statistics.\n\n8,804 parents and 10,222 children receive single parent support.",
-            "metadata": {
-                "category": "single_parent_support",
-                "language": "en",
-                "source": "single_parent_stats",
-            },
-        },
-        {
-            "chunk_id": "test_doc_008_chunk_000",
-            "document_hash": "test_doc_008",
-            "chunk_index": 0,
-            "original_content": "Single-parent (mostly mother) families are at the highest risk of poverty, of whom 5.3% live in absolute poverty and 27.3% in relative poverty.",
-            "context": "This chunk discusses poverty risks for single-parent families.",
-            "contextual_content": "This chunk discusses poverty risks for single-parent families.\n\nSingle-parent (mostly mother) families are at the highest risk of poverty, of whom 5.3% live in absolute poverty and 27.3% in relative poverty.",
-            "metadata": {
-                "category": "single_parent_support",
-                "language": "en",
-                "source": "poverty_statistics",
-            },
-        },
-        {
-            "chunk_id": "test_doc_009_chunk_000",
-            "document_hash": "test_doc_009",
-            "chunk_index": 0,
-            "original_content": "Since January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families.",
-            "context": "This chunk describes ministry initiatives for single parents.",
-            "contextual_content": "This chunk describes ministry initiatives for single parents.\n\nSince January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families.",
-            "metadata": {
-                "category": "single_parent_support",
-                "language": "en",
-                "source": "ministry_initiatives_2022",
-            },
-        },
-        {
-            "chunk_id": "test_doc_010_chunk_000",
-            "document_hash": "test_doc_010",
-            "chunk_index": 0,
-            "original_content": "Ticket refund is only possible if at least 60 minutes remain until the departure of the trip.",
-            "context": "This chunk explains train ticket refund timing policy.",
-            "contextual_content": "This chunk explains train ticket refund timing policy.\n\nTicket refund is only possible if at least 60 minutes remain until the departure of the trip.",
-            "metadata": {
-                "category": "train_services",
-                "language": "en",
-                "source": "elron_refund_policy",
-            },
-        },
-        {
-            "chunk_id": "test_doc_011_chunk_000",
-            "document_hash": "test_doc_011",
-            "chunk_index": 0,
-            "original_content": "The ticket cost is refunded to the Elron travel card without service charge only if the refund request is submitted through the Elron homepage refund form.",
-            "context": "This chunk describes fee-free refund process.",
-            "contextual_content": "This chunk describes fee-free refund process.\n\nThe ticket cost is refunded to the Elron travel card without service charge only if the refund request is submitted through the Elron homepage refund form.",
-            "metadata": {
-                "category": "train_services",
-                "language": "en",
-                "source": "elron_refund_process",
-            },
-        },
-        {
-            "chunk_id": "test_doc_012_chunk_000",
-            "document_hash": "test_doc_012",
-            "chunk_index": 0,
-            "original_content": "If ticket refund is requested to a bank account, a service fee of 1 euro is deducted from the refundable amount.",
-            "context": "This chunk explains bank refund fees.",
-            "contextual_content": "This chunk explains bank refund fees.\n\nIf ticket refund is requested to a bank account, a service fee of 1 euro is deducted from the refundable amount.",
-            "metadata": {
-                "category": "train_services",
-                "language": "en",
-                "source": "elron_bank_refund",
-            },
-        },
-        {
-            "chunk_id": "test_doc_013_chunk_000",
-            "document_hash": "test_doc_013",
-            "chunk_index": 0,
-            "original_content": "Europe must act more jointly and in a more coordinated way to stop the spread of health-related misinformation, said Estonia's Minister of Social Affairs, Karmen Joller.",
-            "context": "This chunk contains a minister's statement on health misinformation.",
-            "contextual_content": "This chunk contains a minister's statement on health misinformation.\n\nEurope must act more jointly and in a more coordinated way to stop the spread of health-related misinformation, said Estonia's Minister of Social Affairs, Karmen Joller.",
-            "metadata": {
-                "category": "health_cooperation",
-                "language": "en",
-                "source": "minister_statement_eu",
-            },
-        },
-        {
-            "chunk_id": "test_doc_014_chunk_000",
-            "document_hash": "test_doc_014",
-            "chunk_index": 0,
-            "original_content": "Estonian Minister of Social Affairs Karmen Joller and Ukrainian Minister of Health Viktor Liashko today signed the next stage of a health cooperation agreement.",
-            "context": "This chunk announces a health cooperation agreement signing.",
-            "contextual_content": "This chunk announces a health cooperation agreement signing.\n\nEstonian Minister of Social Affairs Karmen Joller and Ukrainian Minister of Health Viktor Liashko today signed the next stage of a health cooperation agreement.",
-            "metadata": {
-                "category": "health_cooperation",
-                "language": "en",
-                "source": "ukraine_agreement",
-            },
-        },
-        {
-            "chunk_id": "test_doc_015_chunk_000",
-            "document_hash": "test_doc_015",
-            "chunk_index": 0,
-            "original_content": "The aim of the agreement is to reinforce health collaboration, support Ukraine's healthcare system recovery.",
-            "context": "This chunk describes health agreement objectives.",
-            "contextual_content": "This chunk describes health agreement objectives.\n\nThe aim of the agreement is to reinforce health collaboration, support Ukraine's healthcare system recovery.",
-            "metadata": {
-                "category": "health_cooperation",
-                "language": "en",
-                "source": "agreement_objectives",
-            },
-        },
-    ]
+
+    contexts: List[dict[str, Any]] = []
+    i = 0
+    for i, agency in enumerate(os.listdir("data/agencies_data")):
+        for _, topic in enumerate(os.listdir(f"data/agencies_data/{agency}")):
+            with open(f"data/agencies_data/{agency}/{topic}/cleaned.txt", "r") as f:
+                context_temp = f.read().strip().split("\n\n\n")
+            current_contexts = [context.replace("\n\n", "\n") for context in context_temp]
+            with open(f"data/agencies_data/{agency}/{topic}/cleaned.meta.json", "r") as f:
+                metadata = json.load(f)
+            for k, context in enumerate(current_contexts):
+                context = {
+                    "chunk_id": f"test_doc_{i:03d}_chunk_{k:03d}",
+                    "document_hash": f"test_doc_{i:03d}",
+                    "chunk_index": k,
+                    "original_content": context,
+                    "context": context, 
+                    "contextual_content": context,
+                    "metadata": {
+                        "category": metadata.get(agency, "general"),
+                        "language": "et",
+                        "source": metadata.get("source_url", "unknown"),
+                    }}
+                contexts.append(context)
+                i  += 1
+
+    return contexts

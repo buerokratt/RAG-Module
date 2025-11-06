@@ -1,0 +1,163 @@
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne. Allkirjastamise protsess toimib ühtmoodi nii ID-kaardi / ID-kaardi NFC, mobiil-ID kui Smart-ID kasutajate jaoks – järgi ekraanil olevaid juhiseid ja kõik sujub!
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses (Android seadmes)Samm 1: Ava rakendus ja vali allkirjastatavad failidAva oma nutiseadmesRIA DigiDocrakendus ning vali menüüst"Failid"või"Allkiri". Avaneval uuel menüül vali"Lisa fail"ning vali seadmest milliseid dokumente allkirjastada soovid.Ümbrikusse failide lisamiseks klõpsa nupul„Lisa veel faile". Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid. Samm 2: AllkirjastamineRIA DigiDoc"Ümbriku allkirjastamine"vaates on näha kõik need dokumendid mida selle allkirjaümbrikuga allkirjastatakse. Kui kõik dokumendid on lisatud vajuta nupule"Allkirjasta".„Ümbriku allkirjad“all näed kõikide allkirjastajate nimesid. Kui sina algatasid allkirjastamist, on seal vaid sinu nimi. Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot. Peale"Allkirjasta"nupule vajutust tekib ekraanile uus aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid:ID-kaart NFCabilValides allkirjastamise meetodiks „ID-kaart NFC abil“ tuleb allkirjastamiseks kasutada ID-kaarti. NFC abil, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardiga NFC abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest ID-kaardiligipääsu numbrit(CAN) ja ID-kaardiPIN2-koodi. CAN number on 6-kohaline kood, mis asub ID-kaardil sinu pildi all. Sisesta CAN ja PIN2 kood ning vajuta "Allkirjasta". Ole tähelepanelik: CAN numbri korduval valesti sisestamisel (kokku 10 korda) võib kaardi NFC osa lukustuda. Kui CAN number ja PIN2 on sisestatud ilmub uus vaade "Hoia ID-kaarti telefoni lähedal".CAN numbri asukoht ID-kaardil, elamisloakaardil ja Digi-ID kaardil:Selle järel hoia ID-kaartitelefoni vastas, kuni toimub kaardi lugemine. Reeglina asub telefoni NFC lugeja telefoni ülaosas kaamera(te) juures, kuid mõnelAndroidmudelil võib NFC lugemine olla telefonikeskosakohal. NB! Kui telefonil on ümber kate, siis võib see takistada ID-kaardiga kontaktivaba ühenduse loomist. Kui sinu telefon suudab ID-kaardiga ühenduse luua ilmuvad järjestikkused vaated: ID-kaardiga kontaktivaba ühenduse loomine -> Sertifikaadi lugemine -> Ümbriku allkirjastamine -> Allkiri lisatud. ID-kaart kaardilugeja abilValides allkirjastamise meetodiks „ID-kaart laardilugeja abil“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat. RIA DigiDocrakendusega ühilduvad ID-kaardilugejad on:Toetatud kaardilugejad Androidis:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderID-kaardi ja ID-kaardilugejagaRIA DigiDocrakenduses allkirjastamisel on ekraanil näha sinu andmed ja palutakse sisestada ID-kaardi PIN2-kood. Juhul, kui sinu ID-kaart ei ole korrektselt lugejasse ühendatud või rakendus ei suuda sinu ID-kaardi andmeid korrektselt sisse lugeda, näed ekraanil sellekohast veateadet. Proovi ID-kaart uuesti lugejasse sisestada ning lugeja oma telefoniga ühendada. Peale edukat PIN2 sisestamist ja "Allkirjasta" vajutust suunatake automaatselt tagasi "Ümbriku sisu" vaatesse.mobiil-IDValides allkirjastamise meetodiks „mobiil-ID“ küsitakse sinu käest telefoninumbrit ja isikukoodi. Sisesta oma telefoninumber ja isikukood ning vajuta "Allkirjasta" nupul. Sinu nutiseadme ekraanile ilmub seejärel kontrollkood ja sinu käest küsitakse, kas soovid dokumendid allkirjastada:"Allkirjastan ?"Kui kontrollkoodid ühtivad, vajuta"OK"(Nõustu).Seejärel tuleb sul sisestada mobiil-ID PIN2-kood. Peale edukat allkirjastamist suunatake automaatselt tagasi "Ümbriku sisu" vaatesse. Smart-IDValides allkirjastamise meetodiks „Smart-ID“ veendu, et oled valinud õige riigi ning sisesta oma isikukood. Seejärel vajuta„Allkirjasta“nupul. Nutiseadme ekraanile ilmub kontrollkood. Järgnevalt tuleb sul Smart-ID rakenduses valida õige kontrollkood ning sisestada Smart-ID PIN2-kood. NB!Ria DigiDoc esmasel märguande saatmisel küsib luba. Vajutada "Luba" valikule, et Smart-ID kontrollkood saaks Smart-ID rakenduses ekraanile kuvadaPeale edukat allkirjastamist suunatake automaatselt tagasi "Ümbriku sisu" vaatesse. Samm 3: Salvesta või jaga allkirjastatud dokumendiümbrikJagamiseks klõpsa ekraani alaservas olevat"Jaga"nupul. Sulle avatakse loetelu erinevatest jagamismeetoditest: vali neist sobivaim. Salvestamiseks klõpsa ümbriku valiku paremal üleval kolmele punktile ning vali"Salvesta ümbrik". Sulle avatakse seadme loetelu erinevatest asukohtadest: vali neist sobivam asukoht. Samm 4: Valmis!Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras. RIA DigiDocrakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseksedasi saatmiseks krüpteerida.  Digiallkirjastamine RIA DigiDoc mobiilirakenduses (iOS seadmes)Samm 1: Ava rakendus ja vali allkirjastatavad failidAva oma nutiseadmesRIA DigiDocrakendus ja sealt ekraani alumises servas asuvast menüüst„Allkiri“. Sulle avaneb allkirjastamise vaade, kus saad valida, milliseid dokumente allkirjastada soovid. Faili lisamiseks klõpsa„VALI FAIL“nupul.Ümbrikusse failide lisamiseks klõpsa nupul„+ LISA VEEL FAILE“. Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid. Samm 2: Kontrolli ja allkirjastaRIA DigiDocpõhivaates„Ümbriku valideerimine“valiku juures„Ümbriku sisu“on näha kõiki need dokumendid, mida selle allkirjaümbrikuga allkirjastatakse.„Ümbriku allkirjad“all näed kõikide allkirjastajate nimesid. Kui sina algatad allkirjastamist, on seal vaid sinu nimi. Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot. Veendu, et kõik oleks õige ja klõpsa„ALLKIRJASTA“nupul. Ekraanile ilmub väike aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid: ID-kaart, mobiil-ID, Smart-IDID-kaart (kaardilugeja)Valides „ID-kaart“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat, vaildes „NFC“, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardi ja ID-kaardilugejaga allkirjastamineRIA DigiDocrakendusega ühilduvad ID-kaardilugejad on:Toetatud kaardilugejad Androidis:Toetatud kaardilugejad iOS's:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderFEITIAN iR301UID-kaardi ja ID-kaardilugejagaRIA DigiDocrakenduses allkirjastamisel on ekraanil näha sinu andmed ja palutakse sisestada ID-kaardi PIN2-kood. Juhul, kui sinu ID-kaart ei ole korrektselt lugejasse ühendatud või rakendus ei suuda sinu ID-kaardi andmeid korrektselt sisse lugeda, näed ekraanil sellekohast veateadet. Proovi ID-kaart uuesti lugejasse sisestada ning lugeja oma telefoniga ühendada. ID-kaart (NFC)Valides „ID-kaart“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat, valides „NFC“, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardiga NFC abil allkirjastamineID-kaardiga NFC abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest ID-kaardiligipääsu numbrit(CAN) ja ID-kaardiPIN2-koodi. CAN number on 6-kohaline kood, mis asub ID-kaardil sinu pildi all. Sisesta CAN ja PIN2 kood ning vajuta "ALLKIRJASTA". Ole tähelepanelik: CAN numbri korduval valesti sisestamisel (kokku 10 korda) võib kaardi NFC osa lukustuda. Kui CAN number ja PIN2 on sisestatud ilmub uus vaade "Hoia ID-kaarti telefoni lähedal".CAN numbri asukoht ID-kaardil, elamisloakaardil ja Digi-ID kaardil:Selle järel hoia ID-kaartitelefoni vastas, kuni toimub kaardi lugemine. Reeglina asub telefoni NFC lugeja telefoni ülaosas kaamera(te) juures, kuid mõnelAndroidmudelil võib NFC lugemine olla telefonikeskosakohal. NB! Kui telefonil on ümber kate, siis võib see takistada ID-kaardiga kontaktivaba ühenduse loomist. Kui sinu telefon suudab ID-kaardiga ühenduse luua ilmuvad järjestikkused vaated: ID-kaardiga kontaktivaba ühenduse loomine -> Sertifikaadi lugemine -> Ümbriku allkirjastamine -> Allkiri lisatud. Mobiil-IDMobiil-ID abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest telefoninumbrit ja isikukoodi. Sisesta oma telefoninumber ja isikukood ning vajuta "Allkirjasta" nupul. Sinu nutiseadme ekraanile ilmub seejärel kontrollkood ja sinu käest küsitakse, kas soovid dokumendid allkirjastada. Kui kontrollkoodid ühtivad, vajuta"Accept"(Nõustu).Seejärel tuleb sul sisestada mobiil-ID PIN2-kood. Smart-IDSmart-ID abilRIA DigiDocrakenduses allkirjastamisel veendu, et oled valinud õige riigi ning sisesta oma isikukood. Seejärel vajuta„ALLKIRJASTA“nupul ning nutiseadme ekraanile ilmub kontrollkood. Järgnevalt tuleb sul Smart-ID rakenduses valida õige kontrollkood ning sisestada Smart-ID PIN2-kood. Samm 3: Salvesta allkirjastatud dokumendiümbrikNB! Selleks, etallkirjastatud dokumendiümbrik salvestada, tuleb klõpsata valikul "Jaga"!Klõpsa „JAGA“ nupul ning vali, kuhu soovid vastloodud digiallkirjadega ümbriku salvestada või edastada. Samm 4: Valmis!Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras. RIA DigiDocrakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseksedasi saatmiseks krüpteerida.
+- Digiallkirjastamine RIA DigiDoc mobiilirakenduses (Android seadmes)  Samm 1: Ava rakendus ja vali allkirjastatavad failidAva oma nutiseadmesRIA DigiDocrakendus ning vali menüüst"Failid"või"Allkiri". Avaneval uuel menüül vali"Lisa fail"ning vali seadmest milliseid dokumente allkirjastada soovid.Ümbrikusse failide lisamiseks klõpsa nupul„Lisa veel faile". Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid. Samm 2: AllkirjastamineRIA DigiDoc"Ümbriku allkirjastamine"vaates on näha kõik need dokumendid mida selle allkirjaümbrikuga allkirjastatakse. Kui kõik dokumendid on lisatud vajuta nupule"Allkirjasta".„Ümbriku allkirjad“all näed kõikide allkirjastajate nimesid. Kui sina algatasid allkirjastamist, on seal vaid sinu nimi. Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot. Peale"Allkirjasta"nupule vajutust tekib ekraanile uus aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid:ID-kaart NFCabilValides allkirjastamise meetodiks „ID-kaart NFC abil“ tuleb allkirjastamiseks kasutada ID-kaarti. NFC abil, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardiga NFC abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest ID-kaardiligipääsu numbrit(CAN) ja ID-kaardiPIN2-koodi. CAN number on 6-kohaline kood, mis asub ID-kaardil sinu pildi all. Sisesta CAN ja PIN2 kood ning vajuta "Allkirjasta". Ole tähelepanelik: CAN numbri korduval valesti sisestamisel (kokku 10 korda) võib kaardi NFC osa lukustuda. Kui CAN number ja PIN2 on sisestatud ilmub uus vaade "Hoia ID-kaarti telefoni lähedal".CAN numbri asukoht ID-kaardil, elamisloakaardil ja Digi-ID kaardil:Selle järel hoia ID-kaartitelefoni vastas, kuni toimub kaardi lugemine. Reeglina asub telefoni NFC lugeja telefoni ülaosas kaamera(te) juures, kuid mõnelAndroidmudelil võib NFC lugemine olla telefonikeskosakohal. NB! Kui telefonil on ümber kate, siis võib see takistada ID-kaardiga kontaktivaba ühenduse loomist. Kui sinu telefon suudab ID-kaardiga ühenduse luua ilmuvad järjestikkused vaated: ID-kaardiga kontaktivaba ühenduse loomine -> Sertifikaadi lugemine -> Ümbriku allkirjastamine -> Allkiri lisatud. ID-kaart kaardilugeja abilValides allkirjastamise meetodiks „ID-kaart laardilugeja abil“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat. RIA DigiDocrakendusega ühilduvad ID-kaardilugejad on:Toetatud kaardilugejad Androidis:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderID-kaardi ja ID-kaardilugejagaRIA DigiDocrakenduses allkirjastamisel on ekraanil näha sinu andmed ja palutakse sisestada ID-kaardi PIN2-kood. Juhul, kui sinu ID-kaart ei ole korrektselt lugejasse ühendatud või rakendus ei suuda sinu ID-kaardi andmeid korrektselt sisse lugeda, näed ekraanil sellekohast veateadet. Proovi ID-kaart uuesti lugejasse sisestada ning lugeja oma telefoniga ühendada. Peale edukat PIN2 sisestamist ja "Allkirjasta" vajutust suunatake automaatselt tagasi "Ümbriku sisu" vaatesse.mobiil-IDValides allkirjastamise meetodiks „mobiil-ID“ küsitakse sinu käest telefoninumbrit ja isikukoodi. Sisesta oma telefoninumber ja isikukood ning vajuta "Allkirjasta" nupul. Sinu nutiseadme ekraanile ilmub seejärel kontrollkood ja sinu käest küsitakse, kas soovid dokumendid allkirjastada:"Allkirjastan ?"Kui kontrollkoodid ühtivad, vajuta"OK"(Nõustu).Seejärel tuleb sul sisestada mobiil-ID PIN2-kood. Peale edukat allkirjastamist suunatake automaatselt tagasi "Ümbriku sisu" vaatesse. Smart-IDValides allkirjastamise meetodiks „Smart-ID“ veendu, et oled valinud õige riigi ning sisesta oma isikukood. Seejärel vajuta„Allkirjasta“nupul. Nutiseadme ekraanile ilmub kontrollkood. Järgnevalt tuleb sul Smart-ID rakenduses valida õige kontrollkood ning sisestada Smart-ID PIN2-kood. NB!Ria DigiDoc esmasel märguande saatmisel küsib luba. Vajutada "Luba" valikule, et Smart-ID kontrollkood saaks Smart-ID rakenduses ekraanile kuvadaPeale edukat allkirjastamist suunatake automaatselt tagasi "Ümbriku sisu" vaatesse. Samm 3: Salvesta või jaga allkirjastatud dokumendiümbrikJagamiseks klõpsa ekraani alaservas olevat"Jaga"nupul. Sulle avatakse loetelu erinevatest jagamismeetoditest: vali neist sobivaim. Salvestamiseks klõpsa ümbriku valiku paremal üleval kolmele punktile ning vali"Salvesta ümbrik". Sulle avatakse seadme loetelu erinevatest asukohtadest: vali neist sobivam asukoht. Samm 4: Valmis!Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras. RIA DigiDocrakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseksedasi saatmiseks krüpteerida.
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses (Android seadmes)  (#digiallkirjastamine-ria-digidoc_1)
+
+
+
+
+
+Samm 1: Ava rakendus ja vali allkirjastatavad failid
+Ava oma nutiseadmes RIA DigiDoc rakendus ning vali menüüst "Failid" või "Allkiri" . Avaneval uuel menüül vali "Lisa fail" ning vali seadmest milliseid dokumente allkirjastada soovid.
+Ümbrikusse failide lisamiseks klõpsa nupul „Lisa veel faile" . Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid.
+Samm 2: Allkirjastamine
+RIA DigiDoc  "Ümbriku allkirjastamine" vaates on näha kõik need dokumendid mida selle allkirjaümbrikuga allkirjastatakse. Kui kõik dokumendid on lisatud vajuta nupule "Allkirjasta" .
+„Ümbriku allkirjad“ all näed kõikide allkirjastajate nimesid. Kui sina algatasid allkirjastamist, on seal vaid sinu nimi. Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot.
+Peale "Allkirjasta" nupule vajutust tekib ekraanile uus aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Samm 3: Salvesta või jaga allkirjastatud dokumendiümbrik
+Jagamiseks klõpsa ekraani alaservas olevat"Jaga"nupul. Sulle avatakse loetelu erinevatest jagamismeetoditest: vali neist sobivaim.  Salvestamiseks klõpsa ümbriku valiku paremal üleval kolmele punktile ning vali"Salvesta ümbrik". Sulle avatakse seadme loetelu erinevatest asukohtadest: vali neist sobivam asukoht.
+- Jagamiseks klõpsa ekraani alaservas olevat "Jaga" nupul. Sulle avatakse loetelu erinevatest jagamismeetoditest: vali neist sobivaim.
+- Salvestamiseks klõpsa ümbriku valiku paremal üleval kolmele punktile ning vali "Salvesta ümbrik" . Sulle avatakse seadme loetelu erinevatest asukohtadest: vali neist sobivam asukoht.
+Samm 4: Valmis!
+Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras.
+RIA DigiDoc rakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseks edasi saatmiseks krüpteerida. (https://www.id.ee/artikkel/failide-krupteerimine-ja-dekrupteerimine-ria-digidoc-apiga/)
+
+
+- Digiallkirjastamine RIA DigiDoc mobiilirakenduses (iOS seadmes)  Samm 1: Ava rakendus ja vali allkirjastatavad failidAva oma nutiseadmesRIA DigiDocrakendus ja sealt ekraani alumises servas asuvast menüüst„Allkiri“. Sulle avaneb allkirjastamise vaade, kus saad valida, milliseid dokumente allkirjastada soovid. Faili lisamiseks klõpsa„VALI FAIL“nupul.Ümbrikusse failide lisamiseks klõpsa nupul„+ LISA VEEL FAILE“. Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid. Samm 2: Kontrolli ja allkirjastaRIA DigiDocpõhivaates„Ümbriku valideerimine“valiku juures„Ümbriku sisu“on näha kõiki need dokumendid, mida selle allkirjaümbrikuga allkirjastatakse.„Ümbriku allkirjad“all näed kõikide allkirjastajate nimesid. Kui sina algatad allkirjastamist, on seal vaid sinu nimi. Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot. Veendu, et kõik oleks õige ja klõpsa„ALLKIRJASTA“nupul. Ekraanile ilmub väike aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid: ID-kaart, mobiil-ID, Smart-IDID-kaart (kaardilugeja)Valides „ID-kaart“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat, vaildes „NFC“, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardi ja ID-kaardilugejaga allkirjastamineRIA DigiDocrakendusega ühilduvad ID-kaardilugejad on:Toetatud kaardilugejad Androidis:Toetatud kaardilugejad iOS's:ACR38U PocketMate Smart Card ReaderACR39U PocketMate II Smart Card ReaderSCR3500 B Smart Card ReaderSCR3500 C Smart Card ReaderFEITIAN iR301UID-kaardi ja ID-kaardilugejagaRIA DigiDocrakenduses allkirjastamisel on ekraanil näha sinu andmed ja palutakse sisestada ID-kaardi PIN2-kood. Juhul, kui sinu ID-kaart ei ole korrektselt lugejasse ühendatud või rakendus ei suuda sinu ID-kaardi andmeid korrektselt sisse lugeda, näed ekraanil sellekohast veateadet. Proovi ID-kaart uuesti lugejasse sisestada ning lugeja oma telefoniga ühendada. ID-kaart (NFC)Valides „ID-kaart“ tuleb allkirjastamiseks kasutada ID-kaarti ja nutiseadmega ühendatudID-kaardi lugejat, valides „NFC“, saad ID-kaardiga allkirjastadakontaktivabaltehkilmaID-kaardi lugejata. NFC lahenduse kohta loe lähemaltsiit. ID-kaardiga NFC abil allkirjastamineID-kaardiga NFC abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest ID-kaardiligipääsu numbrit(CAN) ja ID-kaardiPIN2-koodi. CAN number on 6-kohaline kood, mis asub ID-kaardil sinu pildi all. Sisesta CAN ja PIN2 kood ning vajuta "ALLKIRJASTA". Ole tähelepanelik: CAN numbri korduval valesti sisestamisel (kokku 10 korda) võib kaardi NFC osa lukustuda. Kui CAN number ja PIN2 on sisestatud ilmub uus vaade "Hoia ID-kaarti telefoni lähedal".CAN numbri asukoht ID-kaardil, elamisloakaardil ja Digi-ID kaardil:Selle järel hoia ID-kaartitelefoni vastas, kuni toimub kaardi lugemine. Reeglina asub telefoni NFC lugeja telefoni ülaosas kaamera(te) juures, kuid mõnelAndroidmudelil võib NFC lugemine olla telefonikeskosakohal. NB! Kui telefonil on ümber kate, siis võib see takistada ID-kaardiga kontaktivaba ühenduse loomist. Kui sinu telefon suudab ID-kaardiga ühenduse luua ilmuvad järjestikkused vaated: ID-kaardiga kontaktivaba ühenduse loomine -> Sertifikaadi lugemine -> Ümbriku allkirjastamine -> Allkiri lisatud. Mobiil-IDMobiil-ID abilRIA DigiDocrakenduses allkirjastamisel küsitakse sinu käest telefoninumbrit ja isikukoodi. Sisesta oma telefoninumber ja isikukood ning vajuta "Allkirjasta" nupul. Sinu nutiseadme ekraanile ilmub seejärel kontrollkood ja sinu käest küsitakse, kas soovid dokumendid allkirjastada. Kui kontrollkoodid ühtivad, vajuta"Accept"(Nõustu).Seejärel tuleb sul sisestada mobiil-ID PIN2-kood. Smart-IDSmart-ID abilRIA DigiDocrakenduses allkirjastamisel veendu, et oled valinud õige riigi ning sisesta oma isikukood. Seejärel vajuta„ALLKIRJASTA“nupul ning nutiseadme ekraanile ilmub kontrollkood. Järgnevalt tuleb sul Smart-ID rakenduses valida õige kontrollkood ning sisestada Smart-ID PIN2-kood. Samm 3: Salvesta allkirjastatud dokumendiümbrikNB! Selleks, etallkirjastatud dokumendiümbrik salvestada, tuleb klõpsata valikul "Jaga"!Klõpsa „JAGA“ nupul ning vali, kuhu soovid vastloodud digiallkirjadega ümbriku salvestada või edastada. Samm 4: Valmis!Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras. RIA DigiDocrakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseksedasi saatmiseks krüpteerida.
+Digiallkirjastamine RIA DigiDoc mobiilirakenduses (iOS seadmes)  (#digiallkirjastamine-ria-digidoc_2)
+
+
+
+
+
+Samm 1: Ava rakendus ja vali allkirjastatavad failid
+Ava oma nutiseadmes RIA DigiDoc rakendus ja sealt ekraani alumises servas asuvast menüüst „Allkiri“ . Sulle avaneb allkirjastamise vaade, kus saad valida, milliseid dokumente allkirjastada soovid. Faili lisamiseks klõpsa „VALI FAIL“ nupul.
+Ümbrikusse failide lisamiseks klõpsa nupul „+ LISA VEEL FAILE“ . Kõik lisatud failid allkirjastatakse korraga ja need saab hiljem edasi saata ühtse allkirjastatud ümbrikuna. Lisada saab täpselt nii palju faile, kui ise soovid.
+Samm 2: Kontrolli ja allkirjasta
+RIA DigiDoc põhivaates „Ümbriku valideerimine“ valiku juures „Ümbriku sisu“ on näha kõiki need dokumendid, mida selle allkirjaümbrikuga allkirjastatakse.
+„Ümbriku allkirjad“ all näed kõikide allkirjastajate nimesid.
+Kui sina algatad allkirjastamist, on seal vaid sinu nimi.
+Kui soovisid oma allkirja anda juba teiste poolt digiallkirjastatud dokumendiümbrikule, näed siin ka teiste allkirja andnute infot.
+Veendu, et kõik oleks õige ja klõpsa „ALLKIRJASTA“ nupul.
+Ekraanile ilmub väike aken, kus sa saad valida, millise vahendiga digiallkirja anda soovid: ID-kaart, mobiil-ID, Smart-ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Samm 3: Salvesta allkirjastatud dokumendiümbrik
+NB ! Selleks, et allkirjastatud dokumendiümbrik salvestada , tuleb klõpsata valikul "Jaga"!
+Klõpsa „ JAGA “ nupul ning vali, kuhu soovid vastloodud digiallkirjadega ümbriku salvestada või edastada.
+Samm 4: Valmis!
+Nii lihtne see oligi! Pärast seda, kui oled dokumendiümbriku allkirjastanud ja seejärel salvestanud või jaganud, ongi kõik korras.
+RIA DigiDoc rakenduse abil saad sa digiallkirjastatud dokumente ka avada või näiteks turvaliseks edasi saatmiseks krüpteerida. (https://www.id.ee/artikkel/failide-krupteerimine-ja-dekrupteerimine-ria-digidoc-apiga/)
+
+
+Dokumentide digiallkirjastamine RIA DigiDoc mobiilirakendusega on väga lihtne nii mobiil-ID kui ka ID-kaardi kasutajate jaoks. Samm-sammult juhis!
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

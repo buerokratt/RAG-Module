@@ -1,0 +1,64 @@
+ID-tarkvara (/artikkel/paigalda-id-tarkvara/) paigaldamisel lisatakse Google Chrome ja Microsoft Edge veebilehitsejasse isikutuvastamise ja allkirjastamise moodul ( Web eID ), mis automaatselt aktiveeritakse. Sellega seoses kuvab Google Chrome ja Microsoft Edge veebilehitseja seadete all teavitust „Haldab teie organisatsioon" ( Managed by your organisation ).
+Teade tuleneb sellest, et isikutuvastamise ja allkirjastamise moodul aktiveeritakse eraldi reeglitega automaatselt ja kasutaja ei pea moodulit pärast iga uuendust uuesti käsitsi lubama hakkama.
+Windows – veebilehitseja teate „Haldab teie organisatsioon“ eemaldamineSamm 1: Eemalda ID-tarkvaraEsmalt tuleb ID-tarkvara eemaldada. Selleks mine Juhtpaneel → Programmid ja funktsioonid → eID software → Muuda → Eemalda kõikSamm 2: Käivita ja sulge Google Chrome / Microsoft Edge veebilehitsejaKäivita Chrome / Edge ning sulge see taas: selle näiliselt „tühja“ liigutusega eemaldab Chrome / Edge antud laienduse oma seadistustest. Kui Chrome / Edge pärast ID-tarkvara eemaldamist jätta avamata ja taas sulgemata, jääb laiendus ikkagi endiselt aktiveerituks. Samm 3: Paigalda uuesti ID-tarkvara. Laadi alla ja paigalda arvutisse uuesti kõige värskem versioonID-tarkvarast. Installeerimisel ava kohe esimese „Tere tulemast!“ sammu juures „Valikud“.Samm 4: Eemalda isikutuvastamise ja allkirjastamise toe automaatne aktiveerimineGoogle Chrome kasutajad- Valikute alt eemalda linnuke „Chrome laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates. Microsoft Edge kasutajad- Valikute alt eemalda linnuke „Edge laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates. Samm 5: Kustuta Windowsi registrist järgmised võtmedSisesta tegumiriba otsinguväljalekäsuviip(cmd) ja paremklõpsa või vajuta pikalt tulemite loendist valikutKäsuviipvõicmd(töölauarakendus). ValiKäivita administraatorina(Run as administrator) ja seejärel valiJah. Sisesta või kleebi kõik needvajalikudkäsud ükshaaval Terminali ja vajuta sisestusklahviEnter, oota, kuni iga käsk on lõpule viidud, enne järgmise käsu käivitamist. Kui saad mõne käsu kohta veateate, ignoreeri seda ja jätka järgmise käsuga. Google Chromekasutajad:Windows 10 (64-bit) ja Windows 11:reg delete "HKLM\Software\Policies\Google\Chrome\ExstensionInstallBlocklist" /v 56791
+reg delete "HKLM\Software\Policies\Google\Chrome" /fMicrosoft Edge kasutajad:Windows 11:reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\Policies" /fMicrosoft Edge kasutajad:Windows 10 (64-bit):reg delete "HKLM\Software\Microsoft\WindowsSelfHost" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\Policies" /f
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /fSamm 6: Veebilehitseja seadistamine pärast ID-tarkvara paigaldamisTaaskäivita veebilehitseja, sulgedes ja uuesti avades. Seejärel taaskäivita arvuti. Kui ID-tarkvara on edukalt paigaldatud ja kõik toimingud on lõpule viidud, seadistaGoogle Chrome ID-kaardi kasutamiseks/Microsoft Edge ID-kaardi kasutamiseks.
+- Windows – veebilehitseja teate „Haldab teie organisatsioon“ eemaldamine  Samm 1: Eemalda ID-tarkvaraEsmalt tuleb ID-tarkvara eemaldada. Selleks mine Juhtpaneel → Programmid ja funktsioonid → eID software → Muuda → Eemalda kõikSamm 2: Käivita ja sulge Google Chrome / Microsoft Edge veebilehitsejaKäivita Chrome / Edge ning sulge see taas: selle näiliselt „tühja“ liigutusega eemaldab Chrome / Edge antud laienduse oma seadistustest. Kui Chrome / Edge pärast ID-tarkvara eemaldamist jätta avamata ja taas sulgemata, jääb laiendus ikkagi endiselt aktiveerituks. Samm 3: Paigalda uuesti ID-tarkvara. Laadi alla ja paigalda arvutisse uuesti kõige värskem versioonID-tarkvarast. Installeerimisel ava kohe esimese „Tere tulemast!“ sammu juures „Valikud“.Samm 4: Eemalda isikutuvastamise ja allkirjastamise toe automaatne aktiveerimineGoogle Chrome kasutajad- Valikute alt eemalda linnuke „Chrome laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates. Microsoft Edge kasutajad- Valikute alt eemalda linnuke „Edge laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates. Samm 5: Kustuta Windowsi registrist järgmised võtmedSisesta tegumiriba otsinguväljalekäsuviip(cmd) ja paremklõpsa või vajuta pikalt tulemite loendist valikutKäsuviipvõicmd(töölauarakendus). ValiKäivita administraatorina(Run as administrator) ja seejärel valiJah. Sisesta või kleebi kõik needvajalikudkäsud ükshaaval Terminali ja vajuta sisestusklahviEnter, oota, kuni iga käsk on lõpule viidud, enne järgmise käsu käivitamist. Kui saad mõne käsu kohta veateate, ignoreeri seda ja jätka järgmise käsuga. Google Chromekasutajad:Windows 10 (64-bit) ja Windows 11:reg delete "HKLM\Software\Policies\Google\Chrome\ExstensionInstallBlocklist" /v 56791
+reg delete "HKLM\Software\Policies\Google\Chrome" /fMicrosoft Edge kasutajad:Windows 11:reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\Policies" /fMicrosoft Edge kasutajad:Windows 10 (64-bit):reg delete "HKLM\Software\Microsoft\WindowsSelfHost" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\Policies" /f
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /fSamm 6: Veebilehitseja seadistamine pärast ID-tarkvara paigaldamisTaaskäivita veebilehitseja, sulgedes ja uuesti avades. Seejärel taaskäivita arvuti. Kui ID-tarkvara on edukalt paigaldatud ja kõik toimingud on lõpule viidud, seadistaGoogle Chrome ID-kaardi kasutamiseks/Microsoft Edge ID-kaardi kasutamiseks.
+Windows – veebilehitseja teate „Haldab teie organisatsioon“ eemaldamine  (#windows-8211-veebilehitseja_1)
+
+
+
+
+
+Samm 1: Eemalda ID-tarkvara
+Esmalt tuleb ID-tarkvara eemaldada. Selleks mine Juhtpaneel → Programmid ja funktsioonid → eID software → Muuda → Eemalda kõik
+Samm 2: Käivita ja sulge Google Chrome / Microsoft Edge veebilehitseja
+Käivita Chrome / Edge ning sulge see taas: selle näiliselt „tühja“ liigutusega eemaldab Chrome / Edge antud laienduse oma seadistustest. Kui Chrome / Edge pärast ID-tarkvara eemaldamist jätta avamata ja taas sulgemata, jääb laiendus ikkagi endiselt aktiveerituks.
+Samm 3: Paigalda uuesti ID-tarkvara.
+Laadi alla ja paigalda arvutisse uuesti kõige värskem versioon ID-tarkvarast (/artikkel/paigalda-id-tarkvara/) . Installeerimisel ava kohe esimese „Tere tulemast!“ sammu juures „ Valikud “.
+Samm 4: Eemalda isikutuvastamise ja allkirjastamise toe automaatne aktiveerimine
+Google Chrome kasutajad- Valikute alt eemalda linnuke „Chrome laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates.  Microsoft Edge kasutajad- Valikute alt eemalda linnuke „Edge laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „OK“ klõpsates ja siis jätka installeerimist „Edasi“ nupul klikates.
+- Google Chrome kasutajad - Valikute alt eemalda linnuke „Chrome laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „ OK “ klõpsates ja siis jätka installeerimist „ Edasi “ nupul klikates.
+- Microsoft Edge kasutajad - Valikute alt eemalda linnuke „Edge laiendus aktiveeritakse automaatselt“ eest, salvesta eelistus esmalt nupul „ OK “ klõpsates ja siis jätka installeerimist „ Edasi “ nupul klikates.
+
+Samm 5: Kustuta Windowsi registrist järgmised võtmed
+Sisesta tegumiriba otsinguväljale käsuviip ( cmd ) ja paremklõpsa või vajuta pikalt tulemite loendist valikut Käsuviip või cmd ( töölauarakendus ). Vali Käivita administraatorina ( Run as administrator ) ja seejärel vali Jah.
+Sisesta või kleebi kõik need vajalikud käsud ükshaaval Terminali ja vajuta sisestusklahvi Enter , oota, kuni iga käsk on lõpule viidud, enne järgmise käsu käivitamist. Kui saad mõne käsu kohta veateate, ignoreeri seda ja jätka järgmise käsuga.
+Google Chromekasutajad:Windows 10 (64-bit) ja Windows 11:
+- Google Chromekasutajad:  Windows 10 (64-bit) ja Windows 11:
+Windows 10 (64-bit) ja Windows 11:
+- Windows 10 (64-bit) ja Windows 11:
+Microsoft Edge kasutajad:Windows 11:
+- Microsoft Edge kasutajad:  Windows 11:
+Windows 11:
+- Windows 11:
+Microsoft Edge kasutajad:Windows 10 (64-bit):
+- Microsoft Edge kasutajad:  Windows 10 (64-bit):
+Windows 10 (64-bit):
+- Windows 10 (64-bit):
+Samm 6: Veebilehitseja seadistamine pärast ID-tarkvara paigaldamis
+Taaskäivita veebilehitseja, sulgedes ja uuesti avades. Seejärel taaskäivita arvuti.
+Kui ID-tarkvara on edukalt paigaldatud ja kõik toimingud on lõpule viidud, seadista Google Chrome ID-kaardi kasutamiseks (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/#veebilehitseja-seadistamine-google_1) / Microsoft Edge ID-kaardi kasutamiseks (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/#veebilehitseja-seadistamine-microsoft_2) .
+
+
+ID-tarkvara paigaldamisel lisatakse Google Chrome ja Microsoft Edge veebilehitsejasse isikutuvastamise ja allkirjastamise moodul (Web eID), mis automaatselt aktiveeritakse. Sellega seoses kuvab Google Chrome ja Microsoft Edge veebilehitseja seadete all teavitust „Haldab teie organisatsioon” (Managed by your organisation).
+Aitäh tagasiside eest!
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others

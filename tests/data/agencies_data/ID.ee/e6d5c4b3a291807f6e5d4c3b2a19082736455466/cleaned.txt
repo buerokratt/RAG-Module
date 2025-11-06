@@ -1,0 +1,232 @@
+ID-tarkvara paigaldamine ja uuendamine on väga lihtne! Meie veebileht pakub automaatselt sinu arvuti operatsioonisüsteemiga sobiva kõige värskema tarkvara. Klõpsa lihtsalt allpool olevatel Laadi alla nuppudele ja järgi ekraanil olevaid juhiseid. Juhul kui jääd ID-tarkvara uuendamise või paigaldamisega hätta, siis leiad täpsemad juhised altpoolt.
+ID-tarkvara on võimalik paigaldada ja uuendada ainult Windowsi, macOS ja Ubuntu ID-tarkvara poolt toetatud operatsioonisüsteemidel. Loe rohkem siit (https://www.id.ee/artikkel/id-tarkvara-toetatud-operatsioonisusteemid/) .
+Laadi Windows arvuti jaoks ID-tarkvara
+Laadi macOS arvuti jaoks ID-tarkvara
+Laadi Linux arvuti jaoks ID-tarkvara
+
+ID-kaardiga veebis autentimise komponendid ning  Chrome ja Firefox allkirjastamise komponendid
+
+
+Safaris allkirjastamise komponent
+
+DigiDoc4
+
+
+
+Peale tarkvara paigaldamist tuleb ka brauseris laiendus aktiveerida. Juhend on leitav siit (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/) .
+Kõik tarkvarapaketid ja neis toetatud operatsioonisüsteemid  ID-tarkvara teadaolevad puudused  ID-tarkvara versioonide info (release notes)
+- Kõik tarkvarapaketid ja neis toetatud operatsioonisüsteemid (/artikkel/id-tarkvara-toetatud-operatsioonisusteemid/)
+
+- ID-tarkvara teadaolevad puudused (/artikkel/id-tarkvara-teadaolevad-puudused/)
+
+- ID-tarkvara versioonide info (release notes) (/artikkel/id-tarkvara-versioonide-info-release-notes/)
+
+Juhised Windows arvutisse ID-tarkvara paigaldamiseks ja uuendamiseksTarkvara paigaldamineWindowsi puhul tuleb pärast tarkvara alla laadimist see ka arvutisse paigaldada (ehk installeerida).Samm 1: Kõigepealt soovitame sulgeda kõik veebilehitsejaaknad. Seejärel ava oma arvutis kaust, kuhu ID-tarkvara faili salvestasid (näiteks "Allalaaditud failid"või "Downloads“) ning tee failinimel topeltklõps: paigaldamine käivitub automaatselt.Ära muretse – kõik vajalikud juhised kuvatakse sulle ekraanile ja kogu protsess toimub justkui iseenesest. Kui kaua see aega võtab, sõltub sinu arvuti kiirusest, aga üldiselt peaks kogu protsess võtma vaid mõne minuti. Installimise alustamiseks klõpsake tervitusaknas nuppu"Edasi".Windows võib küsida kasutajakonto kontrolli. Vajuta nupule"Jah".NB!ID-tarkvara võib paigaldamisel kuvada veebilehitseja sulgemise teate. Teade kuvatakse juhul, kui arvutisse on paigaldatud vanem ID-tarkvara versioon, kui 2022.01. Teate kuvamisel tuleb veebilehitseja sulgeda ja jätkata ID-tarkvara paigaldamist vajutades nupule"Proovi uuesti" / "Retry".Samm 2: Kui tarkvara on arvutisse paigaldatud ja kasutamiseks valmis, näed ekraanil vastavat teadet. Vajuta nupule "Sulge".Veebilehitsejate seadistamine ID-kaardi kasutamiseks juhised leiabsiit. Tarkvara uuendamineID-tarkvara värskendamiseks on kaks võimalust:Laadi ID-tarkvara installer koduleheltwww.id.eealla, käivita see ja järgi samu juhiseid, mis programmi esmasel paigaldamisel. Alusta saadaolevate värskenduste otsimist rakenduse enda seadetest:Samm 1 :Kõigepealt soovitame sulgeda kõik veebilehitseja aknad. Seejärel ava DigiDoc4 rakendus ja vajuta paremas ülanurgas nuppu"Seaded".Samm 2 :DigiDoc4 allosas vajuta nuppu"KONTROLLI VÄRSKENDUSI".Pärast seda peaks ilmuma kinnitusteade ja avanema uuendamise dialoogiaken. Vajuta nuppu "Sulge".Samm 3 :Kui näed dialoogiakna ülaosas teadet"ID-tarkvara uuendusi ei ole saadaval", tähendab see, et ID-tarkvarale pole hetkel värskendusi ja on installitud uusim ID-tarkvara versioon. Vastasel juhul teavitab dialoogiaken saadaolevast värskenduse versioonist. Vajutades nupul"Alusta paigaldust", alustatakse ID-tarkvara värskenduse allalaadimist. Pärast värskenduse allalaadimist teatab uus dialoogiaken, et saad värskendusprotsessi alustada. Selle käivitamiseks vajuta nuppu"Käivita".NB!Pane tähele, et dialoogiakende keel sõltub arvuti operatsioonisüsteemi liidese keelest, mitte DigiDoc4 liidese keelest. Pärast seda järgi installija ekraanil kuvatavaid juhiseid. Installimisprotsessi lõpus ID-tarkvara värskendatakse.  Juhised macOS arvutisse ID-tarkvara paigaldamiseks ja uuendamiseksPane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda. DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne. Samm 1 :Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid. Samm 2 :Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!Samm 3 :VajutadesCustomisesaab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card supporton ID-kaardi tööksvajalik komponent. Samm 4 :Avaneb uus aken MacApp Storekus saab paigaldadaWeb eID toe SafarileningDigiDoc4 rakenduse. Paigalda need vajadusel. Vajalik on Apple konto omamine. Samm 5 :Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.  Juhised Linux arvutisse ID-tarkvara paigaldamiseks ja uuendamiseksLinuxi puhul toimub tarkvara paigaldamine automaatskripti abil käsurea kaudu. Vajadusel on sulle abiks detailsemadUbuntu ID-tarkvara paigaldamise, värskendamise ja eemaldamise juhised. Ubuntu automaatne paigaldusskriptKäsitsi paigaldamise repositooriumSamm 1:Laadi arvutisse installi skript. Leiad selle siit:https://installer.id.ee/media/install-scripts/install-open-eid.shSamm 2:Ava terminal ning leia skripti kataloog. Ava terminal ning navigeeri käsklusega  “cd Kausta nimi”  kataloogi, kuhu salvestasid paigaldusskripti.Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:cd /home/kasutajanimi/DownloadsSamm 3:Käivita automaatskript. Skripti käivitamiseks sisesta Terminali käsklus:sh install-open-eid.shja vajutaEnter. Samm 4:Sisesta kasutaja parool. Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajutaEnter. Samm 5: Näed terminalis küsimust “Do you want to continue? [Y/n]”.Nõustu jätkamisega, sisesta klaviatuurilYja vajutadesEnter. Samm6:Eduka DigiDoc4 rakenduse/ID-tarkvara paigaldamise korral kuvatakse terminalis "Thank you for using Estonian ID card!" teadet. Terminali akna võib sulgeda.
+- Juhised Windows arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks  Tarkvara paigaldamineWindowsi puhul tuleb pärast tarkvara alla laadimist see ka arvutisse paigaldada (ehk installeerida).Samm 1: Kõigepealt soovitame sulgeda kõik veebilehitsejaaknad. Seejärel ava oma arvutis kaust, kuhu ID-tarkvara faili salvestasid (näiteks "Allalaaditud failid"või "Downloads“) ning tee failinimel topeltklõps: paigaldamine käivitub automaatselt.Ära muretse – kõik vajalikud juhised kuvatakse sulle ekraanile ja kogu protsess toimub justkui iseenesest. Kui kaua see aega võtab, sõltub sinu arvuti kiirusest, aga üldiselt peaks kogu protsess võtma vaid mõne minuti. Installimise alustamiseks klõpsake tervitusaknas nuppu"Edasi".Windows võib küsida kasutajakonto kontrolli. Vajuta nupule"Jah".NB!ID-tarkvara võib paigaldamisel kuvada veebilehitseja sulgemise teate. Teade kuvatakse juhul, kui arvutisse on paigaldatud vanem ID-tarkvara versioon, kui 2022.01. Teate kuvamisel tuleb veebilehitseja sulgeda ja jätkata ID-tarkvara paigaldamist vajutades nupule"Proovi uuesti" / "Retry".Samm 2: Kui tarkvara on arvutisse paigaldatud ja kasutamiseks valmis, näed ekraanil vastavat teadet. Vajuta nupule "Sulge".Veebilehitsejate seadistamine ID-kaardi kasutamiseks juhised leiabsiit. Tarkvara uuendamineID-tarkvara värskendamiseks on kaks võimalust:Laadi ID-tarkvara installer koduleheltwww.id.eealla, käivita see ja järgi samu juhiseid, mis programmi esmasel paigaldamisel. Alusta saadaolevate värskenduste otsimist rakenduse enda seadetest:Samm 1 :Kõigepealt soovitame sulgeda kõik veebilehitseja aknad. Seejärel ava DigiDoc4 rakendus ja vajuta paremas ülanurgas nuppu"Seaded".Samm 2 :DigiDoc4 allosas vajuta nuppu"KONTROLLI VÄRSKENDUSI".Pärast seda peaks ilmuma kinnitusteade ja avanema uuendamise dialoogiaken. Vajuta nuppu "Sulge".Samm 3 :Kui näed dialoogiakna ülaosas teadet"ID-tarkvara uuendusi ei ole saadaval", tähendab see, et ID-tarkvarale pole hetkel värskendusi ja on installitud uusim ID-tarkvara versioon. Vastasel juhul teavitab dialoogiaken saadaolevast värskenduse versioonist. Vajutades nupul"Alusta paigaldust", alustatakse ID-tarkvara värskenduse allalaadimist. Pärast värskenduse allalaadimist teatab uus dialoogiaken, et saad värskendusprotsessi alustada. Selle käivitamiseks vajuta nuppu"Käivita".NB!Pane tähele, et dialoogiakende keel sõltub arvuti operatsioonisüsteemi liidese keelest, mitte DigiDoc4 liidese keelest. Pärast seda järgi installija ekraanil kuvatavaid juhiseid. Installimisprotsessi lõpus ID-tarkvara värskendatakse.
+Juhised Windows arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks
+
+
+
+
+Tarkvara paigaldamine
+Windowsi puhul tuleb pärast tarkvara alla laadimist see ka arvutisse paigaldada (ehk installeerida).
+Samm 1 : Kõigepealt soovitame sulgeda kõik veebilehitsejaaknad. Seejärel ava oma arvutis kaust, kuhu ID-tarkvara faili salvestasid (näiteks "Allalaaditud failid"või " Downloads “) ning tee failinimel topeltklõps: paigaldamine käivitub automaatselt.
+Ära muretse – kõik vajalikud juhised kuvatakse sulle ekraanile ja kogu protsess toimub justkui iseenesest. Kui kaua see aega võtab, sõltub sinu arvuti kiirusest, aga üldiselt peaks kogu protsess võtma vaid mõne minuti.
+Installimise alustamiseks klõpsake tervitusaknas nuppu "Edasi" .
+Windows võib küsida kasutajakonto kontrolli. Vajuta nupule "Jah" .
+NB! ID-tarkvara võib paigaldamisel kuvada veebilehitseja sulgemise teate. Teade kuvatakse juhul, kui arvutisse on paigaldatud vanem ID-tarkvara versioon, kui 2022.01. Teate kuvamisel tuleb veebilehitseja sulgeda ja jätkata ID-tarkvara paigaldamist vajutades nupule "Proovi uuesti" / "Retry" .
+Samm 2 : Kui tarkvara on arvutisse paigaldatud ja kasutamiseks valmis, näed ekraanil vastavat teadet. Vajuta nupule "Sulge".
+Veebilehitsejate seadistamine ID-kaardi kasutamiseks juhised leiabsiit.
+- Veebilehitsejate seadistamine ID-kaardi kasutamiseks juhised leiab siit (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/) .
+Tarkvara uuendamine
+ID-tarkvara värskendamiseks on kaks võimalust:
+Laadi ID-tarkvara installer koduleheltwww.id.eealla, käivita see ja järgi samu juhiseid, mis programmi esmasel paigaldamisel.  Alusta saadaolevate värskenduste otsimist rakenduse enda seadetest:
+- Laadi ID-tarkvara installer kodulehelt www.id.ee (https://www.id.ee/artikkel/paigalda-id-tarkvara/) alla, käivita see ja järgi samu juhiseid, mis programmi esmasel paigaldamisel.
+- Alusta saadaolevate värskenduste otsimist rakenduse enda seadetest:
+Samm 1 : Kõigepealt soovitame sulgeda kõik veebilehitseja aknad. Seejärel ava DigiDoc4 rakendus ja vajuta paremas ülanurgas nuppu "Seaded" .
+Samm 2 : DigiDoc4 allosas vajuta nuppu "KONTROLLI VÄRSKENDUSI" .
+Pärast seda peaks ilmuma kinnitusteade ja avanema uuendamise dialoogiaken. Vajuta nuppu "Sulge".
+Samm 3 : Kui näed dialoogiakna ülaosas teadet "ID-tarkvara uuendusi ei ole saadaval" , tähendab see, et ID-tarkvarale pole hetkel värskendusi ja on installitud uusim ID-tarkvara versioon.
+Vastasel juhul teavitab dialoogiaken saadaolevast värskenduse versioonist. Vajutades nupul "Alusta paigaldust" , alustatakse ID-tarkvara värskenduse allalaadimist. Pärast värskenduse allalaadimist teatab uus dialoogiaken, et saad värskendusprotsessi alustada. Selle käivitamiseks vajuta nuppu "Käivita" .
+
+
+
+
+NB! Pane tähele, et dialoogiakende keel sõltub arvuti operatsioonisüsteemi liidese keelest, mitte DigiDoc4 liidese keelest.
+Pärast seda järgi installija ekraanil kuvatavaid juhiseid. Installimisprotsessi lõpus ID-tarkvara värskendatakse.
+
+
+- Juhised macOS arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks  Pane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda. DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne. Samm 1 :Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid. Samm 2 :Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!Samm 3 :VajutadesCustomisesaab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card supporton ID-kaardi tööksvajalik komponent. Samm 4 :Avaneb uus aken MacApp Storekus saab paigaldadaWeb eID toe SafarileningDigiDoc4 rakenduse. Paigalda need vajadusel. Vajalik on Apple konto omamine. Samm 5 :Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.
+Juhised macOS arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks
+
+
+
+
+Pane tähele, et macOS operatsioonisüsteemi puhul tuleb sul oma arvutisse salvestada ja installeerida kolm eraldi tarkvarakomplekti:
+ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda.  DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne.
+- ID-kaardiga veebis autentimise komponendid Chrome ja Firefox allkirjastamise komponendid*: neid on sul vaja selleks, et saaksid internetibrauserist e-teenustesse, näiteks internetipanka ja Eesti.ee lehele siseneda, seal tehinguid teha ja allkirju anda.
+- DigiDoc4 rakendus: seda vajad oma arvutis digiallkirjastamiseks, ID-kaardi kasutamiseks jne.
+Samm 1 : Salvesta tarkvarapakett oma arvutisse ja tee installeerimiseks topeltklõps failinimel. Lisaks soovitame sulgeda kõik internetibrauseri aknad. Kõigepealt paigalda veebikomponendid.
+Samm 2 : Tarkvara paigaldamine käib imelihtsalt – kõik vajalikud juhised ilmuvad sulle ekraanile. Enne järgmise sammu juurde liikumist loe läbi ekraanil olev info!
+Samm 3 : Vajutades Customise saab eemaldada Firefoxi- ning Chrome autentimise ja allkirjastamise toele. Estonian ID-card support on ID-kaardi tööks vajalik komponent.
+Samm 4 : Avaneb uus aken Mac App Store kus saab paigaldada Web eID toe Safarile ning DigiDoc4 rakenduse .
+Paigalda need vajadusel. Vajalik on Apple konto omamine.
+Samm 5 : Paigaldus lõppeb nõuandega, et lubaksid käivitada laienduste käivitamine.
+* Veebis autentimise ja allkirjastamise komponentide paigaldamine ei ole kohustuslik: vajad neid ainult juhul, kui soovid ID-kaardi abil internetiteenustesse siseneda.
+
+
+- Juhised Linux arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks  Linuxi puhul toimub tarkvara paigaldamine automaatskripti abil käsurea kaudu. Vajadusel on sulle abiks detailsemadUbuntu ID-tarkvara paigaldamise, värskendamise ja eemaldamise juhised. Ubuntu automaatne paigaldusskriptKäsitsi paigaldamise repositooriumSamm 1:Laadi arvutisse installi skript. Leiad selle siit:https://installer.id.ee/media/install-scripts/install-open-eid.shSamm 2:Ava terminal ning leia skripti kataloog. Ava terminal ning navigeeri käsklusega  “cd Kausta nimi”  kataloogi, kuhu salvestasid paigaldusskripti.Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline:cd /home/kasutajanimi/DownloadsSamm 3:Käivita automaatskript. Skripti käivitamiseks sisesta Terminali käsklus:sh install-open-eid.shja vajutaEnter. Samm 4:Sisesta kasutaja parool. Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajutaEnter. Samm 5: Näed terminalis küsimust “Do you want to continue? [Y/n]”.Nõustu jätkamisega, sisesta klaviatuurilYja vajutadesEnter. Samm6:Eduka DigiDoc4 rakenduse/ID-tarkvara paigaldamise korral kuvatakse terminalis "Thank you for using Estonian ID card!" teadet. Terminali akna võib sulgeda.
+Juhised Linux arvutisse ID-tarkvara paigaldamiseks ja uuendamiseks
+
+
+
+
+Linuxi puhul toimub tarkvara paigaldamine automaatskripti abil käsurea kaudu. Vajadusel on sulle abiks detailsemad Ubuntu ID-tarkvara paigaldamise, värskendamise ja eemaldamise juhised. (/artikkel/ubuntu-id-tarkvara-paigaldamine-uuendamine-ja-eemaldamine/)
+Ubuntu automaatne paigaldusskript  Käsitsi paigaldamise repositoorium
+- Ubuntu automaatne paigaldusskript (https://installer.id.ee/media/install-scripts/install-open-eid.sh)
+- Käsitsi paigaldamise repositoorium (https://installer.id.ee/media/ubuntu/)
+Samm 1: Laadi arvutisse installi skript.  Leiad selle siit: https://installer.id.ee/media/install-scripts/install-open-eid.sh (https://installer.id.ee/media/install-scripts/install-open-eid.sh)
+
+Samm 2: Ava terminal ning leia skripti kataloog.  Ava terminal ning navigeeri käsklusega  “ cd Kausta nimi ”  kataloogi, kuhu salvestasid paigaldusskripti.  Ära lisa jutumärke! Näiteks võib navigeerimiskäsklus välja näha selline: cd /home/kasutajanimi/Downloads
+
+
+
+Samm 3: Käivita automaatskript.  Skripti käivitamiseks sisesta Terminali käsklus: sh install-open-eid.sh ja vajuta Enter .
+
+
+Samm 4: Sisesta kasutaja parool.  Parooli kirjutades justkui ei toimu midagi – ära lase ennast sellest segada 🙂 Kui oled parooli õigel kujul sisestanud, vajuta Enter .
+
+
+Samm 5 : Näed terminalis küsimust “ Do you want to continue? [Y/n] ”.  Nõustu jätkamisega, sisesta klaviatuuril Y ja vajutades Enter .
+
+Samm  6: Eduka DigiDoc4 rakenduse/ID-tarkvara paigaldamise korral kuvatakse terminalis " Thank you for using Estonian ID card! " teadet.  Terminali akna võib sulgeda.
+
+
+
+RIA DigiDoc rakendus
+RIA DigiDoc on tasuta mobiilirakendus, mis mõeldud mobiil-ID, Smart-ID  ja ID-kaardi kasutamiseks nutitelefonis. RIA DigiDoc abil saad kiiresti, lihtsalt ja mugavalt dokumente digiallkirjastada ja digiallkirjade kehtivust kontrollida, faile krüpteerida ja dekrüpteerida; faile avada, salvestada ja jagada.
+Loe lähemalt RIA DigiDoc kohta (/?post_type=articles&p=79577)
+
+Lae alla App Storest
+
+Lae alla Google Playst
+
+
+Veebilehitsejate seadistamine ID-kaardi kasutamiseks
+Samm 1: Luba laiendus veebilehitsejas
+Peale ID-tarkvara paigaldamist ilmub Google Chrome veebilehitsejas paremale ülemisse nurka Web eID laienduse teavitus. E-teenustes ID-kaardiga allkirjastamiseks vajuta aknas " Luba laiendus " ja kõik peaks töötama.
+Juhul, kui vastavat teadet sinu veebilehitsejas ei ilmunud, jätka Samm 2.
+Samm 2: Ava veebilehitsejas laiendused
+Sõltuvalt veebilehitseja versioonist võivad need seaded asuda kahes erinevas kohas:
+Vajuta Google Chrome paremas servaskolme punktigaikoonile ning vali "Rohkem tööriistu→Laiendused" (More tools→Extensions)  Vajuta Google Chrome paremas servaskolme punktigaikoonile ning vali "Laiendused→Laienduste haldamine" (Extensions→Manage Extensions)
+- Vajuta Google Chrome paremas servas kolme punktiga ikoonile ning vali " Rohkem tööriistu → Laiendused " ( More tools  → Extensions )
+- Vajuta Google Chrome paremas servas kolme punktiga ikoonile ning vali " Laiendused → Laienduste haldamine " ( Extensions → Manage Extensions )
+Samm 3: Luba „Web eID“ laienduse kasutus
+Avaneb uus vaheleht laiendustega, leia siit Web eID nimeline laiendus veendu, et selle kasutamine on "Lubatud " (Enabled) olekus. Juhul, kui ei ole, siis luba see.
+Sinine indikaator paremal nurgas viitab laienduse aktiveeritud olekut
+Kui kogemata eemaldasite veebilaienduse "Web eID" , võite selle Chrome'i veebipoest (https://chrome.google.com/webstore/detail/web-eid/ncibgoaomkmdpilpocfeponihegamlic) käsitsi tagasi installida.
+NB!  Juhul, kui laienduste valikus on “Token signing” laiendus, tuleb see eemaldada. Juhised eemaldamiseks leiad siit (/include/token-signing-laienduse-eemaldamine-veebilehitsejatest/) .
+Samm 4: Kontrolli ID-kaardi töötamist veebilehitsejas
+Pärast seda, kui oled lubanud Web eID laienduse kasutamise (samm 3), tee oma veebilehitsejale taaskäivitus: kõik peaks töötama!
+Turvatarkvara
+Vahel segab ID-tarkvara tööd, seal hulgas ID-kaardi kasutamist mõne kolmandate osapoolte loodud tarkvara – näiteks viirusetõrje, reklaamivara vms. Juhised turvatarkvarade korrektseks seadistamiseks leiab siit (https://www.id.ee/rubriik/turvatarkvara/) .
+Samm 1: Ava veebilehitsejas laiendused
+Vajuta Firefox veebilehtsejas paremas servas kolme kriipsuga ikoonile ning vali " Lisad ja teemad " ( Add-ons and themes ).
+Samm 2:Vali halduris laiendused
+Lisade halduri vasakpoolses menüüs on puzzle-tüki ikooniga valik „ Laiendused “ ( Extensions ). Klõpsa sellel ning näete avanenud vaates ID-ikooniga laiendusi:
+" Web eID " Windows ja macOS operatsioonisüsteemidele
+" Web eID " ja "PKCS11 loader" Ubuntu operatsioonisüsteemile
+NB!  Juhul, kui laienduste valikus on “Token signing” laiendus, tuleb see eemaldada. Juhised eemaldamiseks leiad siit (/include/token-signing-laienduse-eemaldamine-veebilehitsejatest/) .
+Samm 3:Luba "Web eID" ja "PKCS11" loader laienduste kasutamine
+Avaneb uus vaheleht laiendustega. Leia Web eID nimeline laiendus ning veendu, et selle kasutamine on ‘ Lubatud ‘ (Enabled) olekus. Juhul, kui ei ole, siis luba see.
+Ubuntu operatsioonisüsteemil peab olema paigaldatud " Web eID " ja " PKCS11 loader " laiendused. Windows ja macOS operatsioonisüsteemidel peab olema ainult " Web eID " laiendus.
+Sinine indikaator paremal ääres viitab aktiveeritud olekut.
+Kui kogemata eemaldasite veebilaienduse "Web eID" või "PKCS11 loaderi" , võite selle Mozilla Firefox veebipoest käsitsi tagasi installida.  Web eID - https://addons.mozilla.org/en-US/firefox/addon/web-eid-webextension/ (https://addons.mozilla.org/en-US/firefox/addon/web-eid-webextension/)  PKCS11 loader - https://addons.mozilla.org/en-US/firefox/addon/pkcs11-module-loader/ (https://addons.mozilla.org/en-US/firefox/addon/pkcs11-module-loader/)
+
+
+Ubuntu – kui ei õnnestu “PKCS11 loader”-laienduse paigaldamine Mozilla Firefox veebilehitsejasseKui laienduse paigaldamine ei ole mingil põhjusel võimalik, toimige järgmiselt:Alates Ubuntu 21.10 versioonist on vaikimisi paigaldatud Firefox SNAP-na, milles ei saa ID-kaarti kasutada veebis autentimiseks ja allkirjastamiseks. Olukorra lahendamiseks Firefoxi veebilehitsejas ID-kaardiga veebis autentimiseks ja allkirjastamiseks tuleks paigaldada Firefoxi tavaversioon. (Firefoxi SNAP-i eemaldamine eemaldab KÕIGI kasutajate Firefox profiilid. Soovitame enne Firefox SNAP eemaldamist Mozilla Firefox profiilid varundada). Selleks leiate juhisedsiit. Kontrollige Mozilla Firefoxi värskendusi. Kui neid on, paigaldage need ning taaskäivitage veebilehitseja kaks korda. Kui teil on viirusetõrjetarkvara olemas,konfigureerige see vastavaltvõi eemaldage see ajutiselt.
+- Ubuntu – kui ei õnnestu “PKCS11 loader”-laienduse paigaldamine Mozilla Firefox veebilehitsejasse  Kui laienduse paigaldamine ei ole mingil põhjusel võimalik, toimige järgmiselt:Alates Ubuntu 21.10 versioonist on vaikimisi paigaldatud Firefox SNAP-na, milles ei saa ID-kaarti kasutada veebis autentimiseks ja allkirjastamiseks. Olukorra lahendamiseks Firefoxi veebilehitsejas ID-kaardiga veebis autentimiseks ja allkirjastamiseks tuleks paigaldada Firefoxi tavaversioon. (Firefoxi SNAP-i eemaldamine eemaldab KÕIGI kasutajate Firefox profiilid. Soovitame enne Firefox SNAP eemaldamist Mozilla Firefox profiilid varundada). Selleks leiate juhisedsiit. Kontrollige Mozilla Firefoxi värskendusi. Kui neid on, paigaldage need ning taaskäivitage veebilehitseja kaks korda. Kui teil on viirusetõrjetarkvara olemas,konfigureerige see vastavaltvõi eemaldage see ajutiselt.
+Ubuntu – kui ei õnnestu “PKCS11 loader”-laienduse paigaldamine Mozilla Firefox veebilehitsejasse  (#ubuntu-8211-kui_1)
+
+
+
+
+
+Kui laienduse paigaldamine ei ole mingil põhjusel võimalik, toimige järgmiselt:
+Alates Ubuntu 21.10 versioonist on vaikimisi paigaldatud Firefox SNAP-na, milles ei saa ID-kaarti kasutada veebis autentimiseks ja allkirjastamiseks. Olukorra lahendamiseks Firefoxi veebilehitsejas ID-kaardiga veebis autentimiseks ja allkirjastamiseks tuleks paigaldada Firefoxi tavaversioon. (Firefoxi SNAP-i eemaldamine eemaldab KÕIGI kasutajate Firefox profiilid. Soovitame enne Firefox SNAP eemaldamist Mozilla Firefox profiilid varundada). Selleks leiate juhisedsiit.  Kontrollige Mozilla Firefoxi värskendusi. Kui neid on, paigaldage need ning taaskäivitage veebilehitseja kaks korda.  Kui teil on viirusetõrjetarkvara olemas,konfigureerige see vastavaltvõi eemaldage see ajutiselt.
+- Alates Ubuntu 21.10 versioonist on vaikimisi paigaldatud Firefox SNAP-na, milles ei saa ID-kaarti kasutada veebis autentimiseks ja allkirjastamiseks. Olukorra lahendamiseks Firefoxi veebilehitsejas ID-kaardiga veebis autentimiseks ja allkirjastamiseks tuleks paigaldada Firefoxi tavaversioon. (Firefoxi SNAP-i eemaldamine eemaldab KÕIGI kasutajate Firefox profiilid. Soovitame enne Firefox SNAP eemaldamist Mozilla Firefox profiilid varundada). Selleks leiate juhised siit (/artikkel/ubuntu-id-tarkvara-paigaldamine-uuendamine-ja-eemaldamine/#mozilla-firefox-snap) .
+- Kontrollige Mozilla Firefoxi värskendusi. Kui neid on, paigaldage need ning taaskäivitage veebilehitseja kaks korda.
+- Kui teil on viirusetõrjetarkvara olemas, konfigureerige see vastavalt (https://www.id.ee/rubriik/turvatarkvara/) või eemaldage see ajutiselt.
+
+
+Samm 4: Kontrolli ID-kaardi töötamist veebilehitsejas
+Pärast seda, kui oled lubanud Web eID ja PKCS11 loader laienduste kasutamise (samm 3), tee oma veebilehitsejale taaskäivitus: kõik peaks töötama!
+Turvatarkvara
+Vahel segab ID-tarkvara tööd, seal hulgas ID-kaardi kasutamist mõne kolmandate osapoolte loodud tarkvara – näiteks viirusetõrje, reklaamivara vms. Juhised turvatarkvarade korrektseks seadistamiseks leiab siit (https://www.id.ee/rubriik/turvatarkvara/) .
+Selleks, et saaksid Safari veebilehitsejas ID-kaardiga e-teenuseid kasutada, on sul vaja hoida värskena nii ID-tarkvara (https://www.id.ee/artikkel/paigalda-id-tarkvara/) kui ka Safari veebilehitseja. Lisaks tuleb sul veebilehitsejas lubada “ Web eID” laienduse kasutamine.
+Tõrgete tekkides – näiteks ei õnnestu sul e-teenustes digiallkirja anda, tegevusi kinnitada vms. – on kõige levinumaks põhjuseks aktiveerimata Web eID laiendus.
+Meie samm-sammult juhiste abil saad lihtsalt ja mugavalt kontrollida, et sinu veebilehitseja oleks ID-kaardi kasutamiseks töövalmis!
+Samm 1: Ava Safari sätted (Settings)
+Ava Safari menüü „Safari“ ja vali sealt „ Settings... “:
+Samm 2: Ava Extensions tab
+Sulle avatakse laienduste aken – otsi sealt horisontaalsest ülemisest menüüst puzzle-ikooniga menüülink „ Extensions “ ning klõpsa sellel. Seejärel kontrolli, et vasakmenüüs oleks linnuke valiku „ Web eID “ (ID-ikooniga link) ees. Nüüd luba laienduse kasutamine kõikidel veebilehtedel. Vajuta nupule " Always Allow on Every Website... " ning luba vajutades " Always Allow on Every Website ":
+NB!  Juhul, kui laienduste valikus on “Token signing” laiendus, tuleb see eemaldada. Juhised eemaldamiseks leiad siit (/include/token-signing-laienduse-eemaldamine-veebilehitsejatest/) .
+Samm 3: Kontrolli, kas kõik töötab
+Pärast seda, kui oled Web eID laienduse kasutuse lubanud, peaks ID-kaardi kasutamine Safaris töötama. Vajadusel tee oma arvutile taaskäivitus ja proovi uuesti.
+Kui ID-kaart aga endiselt tööle ei hakka, kontrolli oma kaarti DigiDoc4 rakendusega. Vaata, kas loetakse sinu ID-kaardi andmeid korrektselt, ehk on asi kaardis või kaardilugejas. Samuti võid alati kasutada mõnda teist veebilehitsejat (näiteks Mozilla Firefox (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/#veebilehitseja-seadistamine-mozilla_4) , Google Chrome (https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/#veebilehitseja-seadistamine-google_1) ) või võtta ühendust ID-abiga (/artikkel/teavita-meid-probleemist/) .
+Turvatarkvara
+Vahel segab ID-tarkvara tööd, seal hulgas ID-kaardi kasutamist mõne kolmandate osapoolte loodud tarkvara – näiteks viirusetõrje, reklaamivara vms. Juhised turvatarkvarade korrektseks seadistamiseks leiab siit (https://www.id.ee/rubriik/turvatarkvara/) .
+Samm 1: Luba laiendus veebilehitsejas
+Peale ID-tarkvara paigaldamist ilmub Microsoft Edge veebilehitseja paremale ülemisse nurka Web eID laienduse teavitus. E-teenustes ID-kaardiga allkirjastamiseks vajuta aknas “ Lülita laiendus sisse ” ja kõik peaks töötama.
+Juhul, kui vastavat teadet sinu veebilehitsejas ei ilmunud, jätka Samm 2.
+Samm 2: Ava veebilehitsejas laiendused
+Vajuta Microsoft Edge paremas servas kolme punktiga ikoonile ning vali ‘ Laiendused ‘ ( Extensions ).
+Seejärel vajuta avanenud aknas „Halda laiendusi“ (Manage extensions) .
+Samm 3: Luba „Web eID“ laienduse kasutus
+Avaneb uus aken laiendustega, leia siit Web eID nimeline laiendus ning veendu, et selle kasutamine on "Lubatud" (Enabled) olekus.
+Sinine indikaator paremal ääres viitab aktiveeritud olekut.
+Juhul, kui ei ole, siis luba see. Lubamisel võib veebilehitseja küsida ka täiendavat kinnitust. Kinnituse andmiseks vajuta aknas „Turn on extension“ .
+Kui kogemata eemaldasite veebilaienduse "Web eID" , võite selle Microsoft Edge veebipoest (https://microsoftedge.microsoft.com/addons/detail/web-eid/gnmckgbandlkacikdndelhfghdejfido) käsitsi tagasi installida.
+NB!Juhul, kui laienduste valikus on “Token signing” laiendus, tuleb see eemaldada. Juhised eemaldamiseks leiad siit (/include/token-signing-laienduse-eemaldamine-veebilehitsejatest/) .
+Samm 4: Kontrolli ID-kaardi töötamist veebilehitsejas
+Pärast seda, kui oled lubanud Web eID laienduse kasutamise (samm 3), tee oma veebilehitsejale taaskäivitus: kõik peaks töötama!
+Turvatarkvara
+Vahel segab ID-tarkvara tööd, seal hulgas ID-kaardi kasutamist mõne kolmandate osapoolte loodud tarkvara – näiteks viirusetõrje, reklaamivara vms. Juhised turvatarkvarade korrektseks seadistamiseks leiab siit (https://www.id.ee/rubriik/turvatarkvara/) .
+ID-kaardi lugeja
+ID-kaardi (digi-ID jms) kasutamiseks arvutis on sul vaja kas eraldi ID-kaardi lugejat või kaardilugejaga arvutit. Kaardilugejaid müüvad pea kõik tehnika- ja arvutipoed, isegi paljud tanklad – küsi julgesti!
+Kontrolli, kas ID-kaardi lugeja töötab  Nimekiri toetatud kaardilugejatest
+- Kontrolli, kas ID-kaardi lugeja töötab (/artikkel/kuidas-kontrollida-id-kaardi-ja-lugeja-tookorras-olekut/)
+
+Kontrolli, kas ID-kaardi lugeja töötab
+- Nimekiri toetatud kaardilugejatest (/artikkel/kasulik-info-kiipkaardi-lugejate-kohta/)
+
+Nimekiri toetatud kaardilugejatest
+PIN-koodid
+ID-kaardi (digi-ID jms) elektrooniliseks kasutamiseks on sul vaja PIN-koode: PIN1-koodi kasutatakse sinu isiku tuvastamiseks ja sisse logimiseks, PIN2-koodi aga tehingute kinnitamiseks ehk digiallkirjastamiseks.
+PIN- ja PUK-koodide muutmine  Uue PIN-koodiümbriku tellimine
+- PIN- ja PUK-koodide muutmine (/artikkel/pin-koodide-ja-puk-koodi-muutmine/)
+
+PIN- ja PUK-koodide muutmine
+- Uue PIN-koodiümbriku tellimine (/artikkel/pin-koodid-uue-koodiumbriku-tellimine/)
+
+Uue PIN-koodiümbriku tellimine
+Sertifikaadid
+Sertifikaat on elektrooniline tõend, mis seob inimese õigusega teostada juriidiliselt kehtivaid toiminguid. ID-kaardi või muu digitaalse dokumendi kaotamise või varguse korral tuleks kindlasti peatada selle kaardiga seotud sertifikaadid: nii oled kaitstud identiteedivarguste eest!
+Sertifikaadid ja nende turvalisus  Mida teha, kui ID-kaart on varastatud/kadunud?
+- Sertifikaadid ja nende turvalisus (/artikkel/sertifikaadid-ja-nende-turvalisus/)
+
+Sertifikaadid ja nende turvalisus
+- Mida teha, kui ID-kaart on varastatud/kadunud? (/artikkel/mida-teha-kui-id-kaart-voi-muu-digitaalne-dokument-on-kadunud-voi-varastatud-3/)
+
+Mida teha, kui ID-kaart on varastatud/kadunud?
+Kirjuta ID-abile
+Kirjuta ID-abile
+
+Manage consent
+Close
+Always Enabled
+Functional
+Performance
+Analytics
+Advertisement
+Others
