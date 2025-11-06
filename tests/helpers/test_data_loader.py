@@ -33,7 +33,7 @@ def load_test_data_into_qdrant(
                 "connection_id": "evalconnection-1",  # ← MUST match Vault
                 "batch_size": 50,
             },
-            timeout=120,
+            timeout=600,
         )
 
         # Debug logging
@@ -262,7 +262,7 @@ def get_test_documents() -> List[Dict[str, Any]]:
                 
                 # Limit chunk size (rough estimate: 1 token ≈ 4 chars)
                 # Max 8000 tokens = ~32000 chars, but be conservative
-                MAX_CHUNK_SIZE = 20000
+                MAX_CHUNK_SIZE = 10000
                 if len(chunk_text) > MAX_CHUNK_SIZE:
                     logger.warning(f"Chunk too long ({len(chunk_text)} chars), truncating")
                     chunk_text = chunk_text[:MAX_CHUNK_SIZE]
