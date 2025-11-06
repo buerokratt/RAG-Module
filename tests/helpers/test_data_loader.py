@@ -1,12 +1,13 @@
 """Helper module to load test data into Qdrant before running tests."""
-import os 
+
+import os
 import json
 import requests
 import uuid
 from typing import List, Dict, Any
 from loguru import logger
 from datetime import datetime
-
+from pathlib import Path
 
 def load_test_data_into_qdrant(
     orchestration_url: str,
@@ -209,36 +210,54 @@ def _determine_collection_from_model(model_name: str) -> str:
 def get_test_documents() -> List[Dict[str, Any]]:
     """
     Get test documents in contextual retrieval format.
-
-    Each document includes:
-    - original_content: The raw chunk text
-    - context: Brief contextual description (simulating Anthropic methodology)
-    - contextual_content: context + original_content (what gets embedded)
     """
-
     contexts: List[dict[str, Any]] = []
+    
+    # Get absolute path to data directory
+    current_file = Path(__file__)  # tests/helpers/test_data_loader.py
+    project_root = current_file.parent.parent.parent  # Go up to project root
+    data_dir = project_root / "data" / "agencies_data"
+    
+    # Check if directory exists
+    if not data_dir.exists():
+        logger.error(f"Data directory not found: {data_dir}")
+        raise FileNotFoundError(f"Data directory not found: {data_dir}")
+    
     i = 0
-    for i, agency in enumerate(os.listdir("../data/agencies_data")):
-        for _, topic in enumerate(os.listdir(f"../data/agencies_data/{agency}")):
-            with open(f"../data/agencies_data/{agency}/{topic}/cleaned.txt", "r") as f:
+    for i, agency in enumerate(os.listdir(data_dir)):
+        agency_dir = data_dir / agency
+        for _, topic in enumerate(os.listdir(agency_dir)):
+            topic_dir = agency_dir / topic
+            
+            # Read cleaned text
+            cleaned_file = topic_dir / "cleaned.txt"
+            with open(cleaned_file, "r") as f:
                 context_temp = f.read().strip().split("\n\n\n")
-            current_contexts = [context.replace("\n\n", "\n") for context in context_temp]
-            with open(f"../data/agencies_data/{agency}/{topic}/cleaned.meta.json", "r") as f:
+            
+            current_contexts = [
+                context.replace("\n\n", "\n") for context in context_temp
+            ]
+            
+            # Read metadata
+            meta_file = topic_dir / "cleaned.meta.json"
+            with open(meta_file, "r") as f:
                 metadata = json.load(f)
+            
             for k, context in enumerate(current_contexts):
-                context = {
+                context_dict = {
                     "chunk_id": f"test_doc_{i:03d}_chunk_{k:03d}",
                     "document_hash": f"test_doc_{i:03d}",
                     "chunk_index": k,
                     "original_content": context,
-                    "context": context, 
+                    "context": context,
                     "contextual_content": context,
                     "metadata": {
                         "category": metadata.get(agency, "general"),
                         "language": "et",
                         "source": metadata.get("source_url", "unknown"),
-                    }}
-                contexts.append(context)
-                i  += 1
+                    },
+                }
+                contexts.append(context_dict)
+                i += 1
 
     return contexts
