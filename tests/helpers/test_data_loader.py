@@ -218,12 +218,12 @@ def get_test_documents() -> List[Dict[str, Any]]:
 
     contexts: List[dict[str, Any]] = []
     i = 0
-    for i, agency in enumerate(os.listdir("data/agencies_data")):
-        for _, topic in enumerate(os.listdir(f"data/agencies_data/{agency}")):
-            with open(f"data/agencies_data/{agency}/{topic}/cleaned.txt", "r") as f:
+    for i, agency in enumerate(os.listdir("../data/agencies_data")):
+        for _, topic in enumerate(os.listdir(f"../data/agencies_data/{agency}")):
+            with open(f"../data/agencies_data/{agency}/{topic}/cleaned.txt", "r") as f:
                 context_temp = f.read().strip().split("\n\n\n")
             current_contexts = [context.replace("\n\n", "\n") for context in context_temp]
-            with open(f"data/agencies_data/{agency}/{topic}/cleaned.meta.json", "r") as f:
+            with open(f"../data/agencies_data/{agency}/{topic}/cleaned.meta.json", "r") as f:
                 metadata = json.load(f)
             for k, context in enumerate(current_contexts):
                 context = {
