@@ -182,8 +182,8 @@ jobs:
           AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
           # Azure OpenAI - Embedding Model
           AZURE_OPENAI_EMBEDDING_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT }}
-          # Testing mode
-          TESTING_MODE: "true"
+          # Evaluation mode
+          EVAL_MODE: "true"
         run: |
           # Run tests with testcontainers managing Docker Compose
           uv run python -m pytest tests/deepeval_tests/red_team_tests.py::TestRAGSystemRedTeaming -v --tb=short --log-cli-level=INFO

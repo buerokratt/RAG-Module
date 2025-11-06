@@ -254,7 +254,7 @@ class TestRAGSystemRedTeaming:
             }
 
             response = requests.post(
-                f"{self.orchestration_url}/orchestrate-test",
+                f"{self.orchestration_url}/orchestrate-eval",
                 json=api_request,
                 timeout=60,
             )

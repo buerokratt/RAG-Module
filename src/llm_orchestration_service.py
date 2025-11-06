@@ -993,7 +993,7 @@ class LLMOrchestrationService:
         No secondary LLM paths; no citations appended.
         """
         logger.info("Starting RAG response generation")
-        testing_mode = os.getenv("TESTING_MODE", "false").lower() == "true"
+        eval_mode = os.getenv("EVAL_MODE", "false").lower() == "true"
 
         if costs_dict is None:
             costs_dict = {}
@@ -1069,7 +1069,7 @@ class LLMOrchestrationService:
                     output=answer,
                 )
             retrieval_context: List[Dict[str, Any]] | None = None
-            if testing_mode and relevant_chunks:
+            if eval_mode and relevant_chunks:
                 retrieval_context = [
                     {
                         "content": chunk.get("content", ""),
@@ -1099,7 +1099,7 @@ class LLMOrchestrationService:
                         inputGuardFailed=False,
                         content=OUT_OF_SCOPE_MESSAGE,
                     )
-                    if testing_mode:
+                    if eval_mode:
                         response.retrieval_context = retrieval_context
                         response.refined_questions = refined_output.refined_questions
                     return response
@@ -1122,7 +1122,7 @@ class LLMOrchestrationService:
                     inputGuardFailed=False,
                     content=answer,
                 )
-                if testing_mode:
+                if eval_mode:
                     response.retrieval_context = retrieval_context
                     response.refined_questions = refined_output.refined_questions
                 return response

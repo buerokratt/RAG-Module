@@ -302,15 +302,15 @@ async def get_available_embedding_models(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/orchestrate-test")
-def orchestrate_llm_request_test(
+@app.post("/orchestrate-eval")
+def orchestrate_llm_request_eval(
     http_request: Request,
     request: OrchestrationRequest,
 ) -> DeepEvalTestOrchestrationResponse:
     """
     Process LLM orchestration request with additional testing data.
 
-    This endpoint is only available when TESTING_MODE=true and returns
+    This endpoint is only available when EVAL_MODE=true and returns
     retrieval context and refined questions for DeepEval metrics evaluation.
 
     Args:
@@ -323,16 +323,16 @@ def orchestrate_llm_request_test(
     Raises:
         HTTPException: For processing errors or if not in testing mode
     """
-    # Check if testing mode is enabled
-    testing_mode = os.getenv("TESTING_MODE", "false").lower() == "true"
-    if not testing_mode:
+    # Check if eval mode is enabled
+    eval_mode = os.getenv("EVAL_MODE", "false").lower() == "true"
+    if not eval_mode:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Testing endpoint not available in production mode",
+            detail="Eval endpoint not available in production mode",
         )
 
     try:
-        logger.info(f"Received TEST orchestration request for chatId: {request.chatId}")
+        logger.info(f"Received EVAL orchestration request for chatId: {request.chatId}")
 
         if not hasattr(http_request.app.state, "orchestration_service"):
             logger.error("Orchestration service not found in app state")
@@ -349,7 +349,7 @@ def orchestrate_llm_request_test(
                 detail="Service not initialized",
             )
 
-        # Process the request (will include test data due to TESTING_MODE env var)
+        # Process the request (will include test data due to EVAL_MODE env var)
         response = orchestration_service.process_orchestration_request(request)
 
         # Convert to test response with additional fields

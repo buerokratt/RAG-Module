@@ -53,7 +53,7 @@ class OrchestrationResponse(BaseModel):
         ..., description="Whether input guard validation failed"
     )
     content: str = Field(..., description="Response content with citations")
-    # Testing-only fields (populated when TESTING_MODE=true)
+    # Testing-only fields (populated when EVAL_MODE=true)
     retrieval_context: Optional[List[Dict[str, Any]]] = Field(
         default=None, exclude=True
     )

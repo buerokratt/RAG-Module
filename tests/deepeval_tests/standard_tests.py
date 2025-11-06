@@ -148,7 +148,7 @@ class TestRAGSystem:
         # Call the testing endpoint
         try:
             response = requests.post(
-                f"{orchestration_url}/orchestrate-test", json=api_request, timeout=60
+                f"{orchestration_url}/orchestrate-eval", json=api_request, timeout=60
             )
             response.raise_for_status()
             result = response.json()

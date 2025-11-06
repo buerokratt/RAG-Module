@@ -256,7 +256,7 @@ services:
       - VAULT_ADDR=http://vault:8200
       - VAULT_TOKEN_FILE=/agent/out/token
       - QDRANT_URL=http://qdrant:6333
-      - TESTING_MODE=true
+      - EVAL_MODE=true
     volumes:
       - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
       - ./test-vault/agent-out:/agent/out:ro

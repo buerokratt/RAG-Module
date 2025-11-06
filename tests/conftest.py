@@ -93,7 +93,7 @@ class RAGStackTestContainers:
     def start(self) -> None:
         """Start all test containers and bootstrap Vault"""
         logger.info("Starting RAG Stack testcontainers...")
-        os.environ['TESTING_MODE'] = 'true'
+        os.environ['EVAL_MODE'] = 'true'
         # Prepare Vault Agent directories
         agent_in = self.project_root / "test-vault" / "agents" / "llm"
         agent_out = self.project_root / "test-vault" / "agent-out"
