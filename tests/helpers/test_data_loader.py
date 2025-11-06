@@ -216,7 +216,7 @@ def get_test_documents() -> List[Dict[str, Any]]:
     # Get absolute path to data directory
     current_file = Path(__file__)  # tests/helpers/test_data_loader.py
     project_root = current_file.parent.parent.parent  # Go up to project root
-    data_dir = project_root / "data" / "agencies_data"
+    data_dir = project_root / "tests" / "data" / "agencies_data"
     
     # Check if directory exists
     if not data_dir.exists():
