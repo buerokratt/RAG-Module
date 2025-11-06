@@ -299,11 +299,11 @@ path "auth/token/renew-self" { capabilities = ["update"] }
 
         client.secrets.kv.v2.create_or_update_secret(
             mount_point="secret",
-            path="llm/connections/azure_openai/test/evalconnection-1",
+            path="llm/connections/azure_openai/development/evalconnection-1",
             secret=llm_secret,
         )
         logger.info(
-            "LLM connection secret written to llm/connections/azure_openai/test/evalconnection-1"
+            "LLM connection secret written to llm/connections/azure_openai/development/evalconnection-1"
         )
 
         # ============================================================
@@ -329,17 +329,17 @@ path "auth/token/renew-self" { capabilities = ["update"] }
         logger.info(f"  → model: {embedding_secret['model']}")
         logger.info(f"  → connection_id: {embedding_secret['connection_id']}")
         logger.info(
-            "  → Vault path: embeddings/connections/azure_openai/test/evalconnection-1"
+            "  → Vault path: embeddings/connections/azure_openai/development/evalconnection-1"
         )
 
         # Write to embeddings path with connection_id in the path
         client.secrets.kv.v2.create_or_update_secret(
             mount_point="secret",
-            path="embeddings/connections/azure_openai/test/evalconnection-1",
+            path="embeddings/connections/azure_openai/development/evalconnection-1",
             secret=embedding_secret,
         )
         logger.info(
-            "Embedding secret written to embeddings/connections/azure_openai/test/evalconnection-1"
+            "Embedding secret written to embeddings/connections/azure_openai/development/evalconnection-1"
         )
 
         # ============================================================
@@ -350,7 +350,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
         try:
             # Verify LLM path
             verify_llm = client.secrets.kv.v2.read_secret_version(
-                path="llm/connections/azure_openai/test/evalconnection-1",
+                path="llm/connections/azure_openai/development/evalconnection-1",
                 mount_point="secret",
             )
             llm_data = verify_llm["data"]["data"]
@@ -359,7 +359,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
 
             # Verify embeddings path
             verify_embedding = client.secrets.kv.v2.read_secret_version(
-                path="embeddings/connections/azure_openai/test/evalconnection-1",
+                path="embeddings/connections/azure_openai/development/evalconnection-1",
                 mount_point="secret",
             )
             embedding_data = verify_embedding["data"]["data"]
@@ -552,7 +552,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
         """Verify the token has correct permissions to read secrets"""
         try:
             client.secrets.kv.v2.read_secret_version(
-                path="llm/connections/azure_openai/test/evalconnection-1",
+                path="llm/connections/azure_openai/development/evalconnection-1",
                 mount_point="secret",
             )
             logger.info("Token has correct permissions to read secrets")
