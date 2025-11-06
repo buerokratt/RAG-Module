@@ -93,7 +93,7 @@ class RAGStackTestContainers:
     def start(self) -> None:
         """Start all test containers and bootstrap Vault"""
         logger.info("Starting RAG Stack testcontainers...")
-
+        os.environ['TESTING_MODE'] = 'true'
         # Prepare Vault Agent directories
         agent_in = self.project_root / "test-vault" / "agents" / "llm"
         agent_out = self.project_root / "test-vault" / "agent-out"
@@ -286,7 +286,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
             "endpoint": azure_endpoint,
             "api_key": azure_api_key,
             "deployment_name": azure_deployment or "gpt-4o-mini",
-            "environment": "test",
+            "environment": "development",
             "model": "gpt-4o-mini",
             "model_type": "chat",
             "api_version": "2024-02-15-preview",
@@ -317,7 +317,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
             "endpoint": azure_endpoint,
             "api_key": azure_api_key,
             "deployment_name": azure_embedding_deployment,  # This is the embedding deployment
-            "environment": "test",
+            "environment": "development",
             "model": "text-embedding-3-large",
             "model_type": "embedding",
             "api_version": "2024-02-15-preview",
@@ -416,7 +416,7 @@ path "auth/token/renew-self" { capabilities = ["update"] }
             "connection_id": "guardrails-test-1",
             "api_key": os.getenv("ANTHROPIC_API_KEY", "TEST_ANTHROPIC_KEY"),
             "model": "claude-3-5-sonnet-20241022",
-            "environment": "test",
+            "environment": "development",
             "tags": "anthropic,guardrails,test",
         }
         client.secrets.kv.v2.create_or_update_secret(
