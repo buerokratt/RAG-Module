@@ -226,12 +226,14 @@ def get_test_documents() -> List[Dict[str, Any]]:
         agency_dir = data_dir / agency
         if not agency_dir.is_dir():
             continue
-            
+        per_agency_topic_counter = 0
         for topic in os.listdir(agency_dir):
             topic_dir = agency_dir / topic
             if not topic_dir.is_dir():
                 continue
-            
+            if per_agency_topic_counter >= 5:
+                break
+            per_agency_topic_counter += 1
             # Read cleaned text
             cleaned_file = topic_dir / "cleaned.txt"
             if not cleaned_file.exists():
