@@ -1,5 +1,5 @@
 """Helper module to load test data into Qdrant before running tests."""
-
+import os
 import json
 import requests
 import uuid

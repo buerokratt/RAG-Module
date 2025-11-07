@@ -35,6 +35,8 @@ dependencies = [
     "nemoguardrails>=0.16.0",
     "tiktoken>=0.11.0",
     "langfuse>=3.8.1",
+    "httpx>=0.28.1",
+    "pytest-asyncio>=1.2.0",
 ]
 
 [tool.pyright]

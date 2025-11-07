@@ -13,6 +13,9 @@ from deepeval.metrics import (
     ContextualRelevancyMetric,
     FaithfulnessMetric,
 )
+import asyncio
+import httpx
+
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -205,25 +208,50 @@ class TestRAGSystem:
             )
         ],
     )
-    def test_all_metrics(self, test_item: Dict[str, Any], orchestration_client):
-        """Test all metrics for each test case and collect results."""
+    @pytest.mark.asyncio
+    async def test_all_metrics(self, test_item: Dict[str, Any], orchestration_client):
+        """Async version of DeepEval test with parallel metric execution."""
 
-        # Get orchestration service URL from fixture
         orchestration_url = orchestration_client.base_url
-
-        # Create test case by calling API
-        test_case = self.create_test_case(test_item, orchestration_url)
-
-        # Get test case index for consistent numbering
         test_case_num = self.test_data.index(test_item) + 1
-
         print(f"\nTesting case {test_case_num}: {test_item['input'][:50]}...")
 
-        # Initialize metrics results
-        metrics_results = {}
-        failed_assertions = []
+        # --- Fetch orchestration result asynchronously ---
+        async with httpx.AsyncClient(timeout=60) as client:
+            try:
+                response = await client.post(
+                    f"{orchestration_url}/orchestrate-eval",
+                    json={
+                        "chatId": f"test-{test_item.get('id', 'unknown')}",
+                        "message": test_item["input"],
+                        "authorId": "deepeval-tester",
+                        "conversationHistory": [],
+                        "url": "https://test.example.com",
+                        "environment": "development",
+                        "connection_id": "evalconnection-1",
+                    },
+                )
+                response.raise_for_status()
+                result = response.json()
+            except httpx.RequestError as e:
+                result = {"content": f"API Error: {str(e)}", "retrieval_context": []}
+            except Exception as e:
+                result = {"content": f"Unexpected error: {str(e)}", "retrieval_context": []}
 
-        # Define all metrics to test
+        retrieval_context = result.get("retrieval_context") or []
+        retrieval_context = [
+            c.get("content", "") if isinstance(c, dict) else str(c)
+            for c in retrieval_context
+        ]
+
+        llm_test_case = LLMTestCase(
+            input=test_item["input"],
+            actual_output=result.get("content", ""),
+            expected_output=test_item["expected_output"],
+            retrieval_context=retrieval_context,
+        )
+
+        # --- Run metrics concurrently ---
         metrics = [
             ("contextual_precision", self.contextual_precision),
             ("contextual_recall", self.contextual_recall),
@@ -232,38 +260,29 @@ class TestRAGSystem:
             ("faithfulness", self.faithfulness),
         ]
 
-        # Test each metric and collect results
-        for metric_name, metric in metrics:
+        async def run_metric(metric_name, metric):
             try:
-                metric.measure(test_case)
+                # run metric.measure() in a thread pool to avoid blocking
+                await asyncio.to_thread(metric.measure, llm_test_case)
                 score = metric.score
-                passed = score >= 0.7
-                reason = metric.reason
-
-                metrics_results[metric_name] = {
+                return metric_name, {
                     "score": score,
-                    "passed": passed,
-                    "reason": reason,
+                    "passed": score >= 0.7,
+                    "reason": metric.reason,
                 }
-
-                print(f"  {metric_name}: {score:.3f} ({'PASS' if passed else 'FAIL'})")
-
-                # Collect failed assertions but don't raise immediately
-                if not passed:
-                    failed_assertions.append(
-                        f"{metric_name} failed for query: '{test_item['input']}'. "
-                        f"Score: {score}, Reason: {reason}"
-                    )
-
             except Exception as e:
-                metrics_results[metric_name] = {
+                return metric_name, {
                     "score": 0.0,
                     "passed": False,
                     "reason": f"Error: {str(e)}",
                 }
-                failed_assertions.append(f"{metric_name} error: {str(e)}")
 
-        # Always add results to collector, regardless of pass/fail
+        metric_results_list = await asyncio.gather(
+            *(run_metric(name, metric) for name, metric in metrics)
+        )
+        metrics_results = dict(metric_results_list)
+
+        # --- Collect results ---
         try:
             standard_results_collector.add_test_result(
                 test_case_num=test_case_num,
@@ -275,7 +294,7 @@ class TestRAGSystem:
         except Exception as e:
             print(f"Error adding test result: {e}")
 
-        # Now raise assertion if any metrics failed (for pytest reporting)
-        if failed_assertions:
-            # Just raise the first failure to keep pytest output clean
-            raise AssertionError(failed_assertions[0])
+        # --- Assert ---
+        failed = [name for name, res in metrics_results.items() if not res["passed"]]
+        if failed:
+            pytest.fail(f"Metrics failed: {', '.join(failed)} for input: {test_item['input'][:50]}")
