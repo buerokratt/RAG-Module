@@ -3,7 +3,8 @@
         "input": "Millal saab piletit tagastada?",
         "expected_output": "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit.",
         "retrieval_context": [
-            "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
+            "Tagastada saab ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit.",
+            "Piletiraha tagastatakse ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
         ],
         "category": "train_services",
         "language": "et"
@@ -12,7 +13,8 @@
         "input": "За сколько минут до отправления можно вернуть билет на поезд?",
         "expected_output": "Возврат билета возможен только в том случае, если до отправления поездки остается не менее 60 минут.",
         "retrieval_context": [
-            "Pileti tagastamine on võimalik ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
+            "Tagastada saab ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit.",
+            "Piletiraha tagastatakse ainult juhul, kui reisi väljumiseni on jäänud vähemalt 60 minutit."
         ],
         "category": "train_services",
         "language": "ru"
@@ -21,7 +23,7 @@
         "input": "Where is ticket refunded without charge?",
         "expected_output": "The ticket cost is refunded to the Elron travel card without service charge only if the refund request is submitted through the Elron homepage refund form.",
         "retrieval_context": [
-            "Pileti maksumus tagastatakse Elroni sõidukaardile teenustasuta ainult juhul, kui tagastussoov esitatakse Elroni kodulehe tagastusvormi kaudu."
+            "Pileti maksumus tagastatakse kogu summa ulatuses teenustasuta üksnes Elroni sõidukaardile, kui tagastussoov on edastatud Elroni kodulehe tagastusvormi vahendusel."
         ],
         "category": "train_services",
         "language": "en"
@@ -36,17 +38,8 @@
         "language": "et"
     },
     {
-        "input": "Какая была новая инновационная программа стоимостью 12 миллионов евро?",
-        "expected_output": "На Фестивале социальных технологий была представлена новая инновационная программа стоимостью 12 миллионов евро, направленная на поддержку самостоятельной жизни пожилых людей и людей с ограниченными возможностями с помощью технологических решений.",
-        "retrieval_context": [
-            "New €12 million innovation programme unveiled at Welfare Technology Festival aimed at supporting independent living for older adults and people with disabilities through technology-driven solutions."
-        ],
-        "category": "health_cooperation",
-        "language": "ru"
-    },
-    {
         "input": "Kuidas saan telefonis dokumente allkirjastada ID-kaardiga ilma kaardilugejata?",
-        "expected_output": "Saad telefonis dokumente allkirjastada ID-kaardiga ilma kaardilugejata NFC abil. Selleks vajad RIA DigiDoc mobiilirakendust ja ID-kaarti, mis toetab NFC funktsionaalsust.",
+        "expected_output": "Saad telefonis dokumente allkirjastada ID-kaardiga ilma kaardilugejata NFC abil. Selleks vajad RIA DigiDoc mobiilirakendust ja ID-kaarti.",
         "retrieval_context": [
             "Kas teadsid, et ID-kaardiga on telefonis võimalik dokumente allkirjastada ka ilma kaardilugejata ehk NFC abil? Allkirjastamiseks vajad vaid RIA DigiDoc mobiilirakendust ja ID-kaarti."
         ],
@@ -54,90 +47,102 @@
         "language": "et"
     },
     {
-        "input": "What is the difference between Mobile-ID and Smart-ID?",
-        "expected_output": "Mobile-ID is SIM card-based and works on devices where the SIM card is located, requiring a special SIM card from mobile operators with a monthly fee (typically 1 euro). Smart-ID is a mobile app that works independently of SIM cards, is free to use, and can be installed on any smart device with internet connection.",
+        "input": "Mida teha, kui minu telefon Mobiil-ID-ga varastatakse?",
+        "expected_output": "Kui telefon Mobiil-ID-ga varastatakse, tuleks koheselt teavitada oma mobiilsideoperaatorit, kes saab Mobiil-ID sertifikaadid peatada.",
         "retrieval_context": [
-            "Mobile-ID is SIM card-based and works on devices where the SIM card is located and can be transferred from one device to another. Smart-ID is a mobile app and works independently of SIM cards on the device where it is installed.",
-            "Mobile-ID monthly fee is usually 1 euro. Smart-ID application download and use is free for everyone."
+            "Juhul, kui sinu mobiil-ID SIM-kaardiga nutiseade on kadunud või varastatud, teavita sellest koheselt oma mobiilsideoperaatorit, kes saab mobiil-ID sertifikaadid peatada!"
         ],
-        "category": "digital_identity",
-        "language": "en"
-    },
-    {
-        "input": "Kui kaua kehtivad Mobiil-ID sertifikaadid?",
-        "expected_output": "Mobiil-ID sertifikaadid kehtivad 5 aastat ja need väljastatakse koos Mobiil-ID SIM-kaardiga. Sertifikaate ei saa uuendada - nende aegumisel tuleb pöörduda mobiilioperaatori poole ning Mobiil-ID SIM-kaart välja vahetada ja Mobiil-ID uuesti aktiveerida.",
-        "retrieval_context": [
-            "Mobiil-ID sertifikaadid kehtivad 5 aastat ja need väljastatakse koos mobiil-ID SIM-kaardiga.",
-            "Mobiil-ID sertifikaate ei saa uuendada. Sertifikaatide aegumisel tuleb pöörduda oma mobiilsideoperaatori poole ning mobiil-ID SIM-kaart välja vahetada ja mobiil-ID uuesti aktiveerida."
-        ],
-        "category": "digital_identity",
+        "category": "digital_identity_security",
         "language": "et"
     },
     {
-        "input": "What should I do if my phone with Smart-ID is stolen?",
-        "expected_output": "If your phone with Smart-ID is stolen, you should immediately log into the Smart-ID self-service portal and delete your account. To access the portal, you need to use your ID-card or Mobile-ID for authentication.",
+        "input": "Millised mobiilioperaatorid pakuvad Mobiil-ID-d Eestis?",
+        "expected_output": "Mobiil-ID SIM-kaarte Eestis väljustavad kolm mobiilioperaatorit: Telia, Elisa ja Tele2. Kõik operaatorid peavad järgima samu riiklikke nõudeid, tagades Mobiil-ID ohutuse ja ühesuguse toimimise sõltumata kasutatavast operaatorist.",
         "retrieval_context": [
-            "If your phone is stolen, the first thing you should do is log into the Smart-ID self-service portal and delete your account. You need to use ID-card or Mobile-ID to access the portal."
-        ],
-        "category": "digital_identity_security",
-        "language": "en"
-    },
-    {
-        "input": "Which mobile operators provide Mobile-ID in Estonia?",
-        "expected_output": "Mobile-ID SIM cards in Estonia are issued by three mobile operators: Telia, Elisa, and Tele2. All operators must follow the same national requirements, ensuring Mobile-ID is a safe solution that works the same way regardless of which operator you use.",
-        "retrieval_context": [
-            "Mobile-ID SIM cards are issued by mobile operators Telia, Elisa and Tele2 at their service points.",
-            "However, all mobile operators must follow the same national requirements, so mobile-ID is a safe solution and works the same way irrespective of which operator you are using."
+            "Mobiil-ID SIM-kaarte väljastavad mobiilsideoperaatorid: Telia, Elisa ja Tele2 oma esindustes.",
+            "Küll aga kehtivad kõikidele mobiilioperaatoritele samasugused riiklikud nõuded ja nii on mobiil-ID sinu jaoks ühtviisi turvaline ning sama moodi toimiv lahendus sõltumata sellest, millise operaatori klient oled."
         ],
         "category": "digital_identity",
-        "language": "en"
+        "language": "et"
     },
     {
         "input": "Какие мобильные операторы предоставляют Mobiil-ID в Эстонии?",
         "expected_output": "SIM-карты Mobiil-ID в Эстонии выдают три мобильных оператора: Telia, Elisa и Tele2. Все операторы должны следовать одним и тем же национальным требованиям, обеспечивая безопасность Mobiil-ID и его одинаковую работу независимо от используемого оператора.",
         "retrieval_context": [
-            "Mobile-ID SIM cards are issued by mobile operators Telia, Elisa and Tele2 at their service points.",
-            "However, all mobile operators must follow the same national requirements, so mobile-ID is a safe solution and works the same way irrespective of which operator you are using."
+            "Mobiil-ID SIM-kaarte väljastavad mobiilsideoperaatorid: Telia, Elisa ja Tele2 oma esindustes.",
+            "Küll aga kehtivad kõikidele mobiilioperaatoritele samasugused riiklikud nõuded ja nii on mobiil-ID sinu jaoks ühtviisi turvaline ning sama moodi toimiv lahendus sõltumata sellest, millise operaatori klient oled."
         ],
         "category": "digital_identity",
         "language": "ru"
     },
     {
-        "input": "Kui vana peab olema, et Mobiil-ID-ga liituda?",
-        "expected_output": "Mobiil-ID-ga liitumiseks peab olema vähemalt 15-aastane. Täpsemad tingimused saab oma mobiilioperaatorilt.",
+        "input": "Kuidas taotleda uut ID-kaardi koodiümbrikku?",
+        "expected_output": "Uue koodiümbriku taotlemiseks tuleb pöörduda Politsei- ja Piirivalveameti teenindusse või Eesti Vabariigi välisesindusse. Kaasa tuleb võtta isikut tõendav dokument. Võimalusel valida mobiilne pilet enne teeninduse külastamist.",
         "retrieval_context": [
-            "Mobiil-ID-ga liitumiseks pead olema vähemalt 15-aastane. Täpsemad tingimused saate oma mobiilioperaatorilt."
+            "Uue koodiümbriku taotlemiseks tuleb sul pöörduda Politsei- ja Piirivalveameti teenindusse või Eesti Vabariigi välisesindusse. Kindlasti ära unusta, et kaasa tuleks võtta ka isikut tõendav dokument! Võimalusel valida mobiilne pilet enne teeninduse külastamist."
+        ],
+        "category": "id_card_usage",
+        "language": "et"
+    },
+    {
+        "input": "Kuidas muuta ID-kaardi PIN-koode DigiDoc4 abil?",
+        "expected_output": "PIN-koodide muutmiseks sisesta ID-kaart kaardilugejasse, ava DigiDoc4 ja vali 'Minu eID'. Seejärel vali 'MUUDA PIN1', 'MUUDA PIN2' või 'MUUDA PUK' ning sisesta kehtiv kood ja kaks korda uus kood. PIN1 peab olema 4-12 numbrit, PIN2 5-12 numbrit ja PUK 8-12 numbrit pikk.",
+        "retrieval_context": [
+            "PIN-koodide muutmine on väga lihtne: sisesta oma ID-kaart kaardilugejasse ja ava arvutis ID-tarkvara DigiDoc4,Oota, kuni DigiDoc4 on sinu ID-kaardi andmed sisse lugenud ja vali siis menüüst „Minu eID".","PIN1 koodi vahetamiseks klõpsa „MUUDA PIN1" nupul Sul tuleb sisestada kehtiv PIN1-kood ning seejärel kaks korda järjest uus valitud PIN1-kood.","Sulle automaatselt väljastatud PIN1-kood on 4-kohaline. Uue PIN1-koodi võid aga valida 4-12 kohalise",
+            "PIN2 koodi vahetamiseks klõpsa MUUDA PIN2 nupul Sul tuleb sisestada kehtiv PIN2-kood ning seejärel kaks korda järjest uus valitud PIN2-kood.","Sulle automaatselt väljastatud PIN2-kood on 5-kohaline. Uue PIN2-koodi võid aga valida 5-12 kohalise",
+            "PUK koodi vahetamiseks klõpsa MUUDA PUK nupul Sul tuleb sisestada kehtiv PUK-kood ning seejärel kaks korda järjest uus valitud PUK-kood.","Sulle automaatselt väljastatud PUK-kood on 8-kohaline. Uue PUK-koodi võid aga valida 8-12 kohalise"
+        ],
+        "category": "id_card_usage",
+        "language": "et"
+    },
+    {
+        "input": "Mis on eIDAS määrus?",
+        "expected_output": "eIDAS on Euroopa Liidus kehtiv e-identimise ja e-tehingute määrus, mis võeti vastu 23. juulil 2014. aastal. Määruse eesmärk on lihtsustada rahvusvahelist digiteenuste kasutamist, tagades usaldusteenuste võrreldavuse ühtse nõuete ja põhimõtete kaudu.",
+        "retrieval_context": [
+            "eIDAS (inglise keeles electronic IDentification, Authentication and trust Services) on Euroopa Liidus kehtiv e-identimise ja e-tehingute määrus, mis võeti vastu 23. juulil 2014. aastal Euroopa Liidu Nõukogu ja Euroopa Parlamendi poolt.",
+            "eIDAS määruse eesmärk on lihtsustada rahvusvahelist digiteenuste kasutamist: kui kõikidele teenusepakkujatele ning avalikele asutustele kehtivad ühesugused nõuded, toimimisalused ja põhimõtted, on võimalik tagada usaldusteenuste võrreldavus."
         ],
         "category": "digital_identity",
         "language": "et"
     },
     {
-        "input": "What happens if I enter my Smart-ID PIN code incorrectly three times?",
-        "expected_output": "If you enter your Smart-ID PIN code incorrectly three times, your account will be blocked for three hours. If this happens multiple times, the second time your account will be locked for 24 hours, and the third time it will be locked permanently. PIN codes cannot be changed or restored for security reasons.",
+        "input": "Kus saab ID-kaarti isikut tõendava dokumendina kasutada?",
+        "expected_output": "Eestis saab ID-kaardi abil tõendada oma isikut kõikjal, kus selleks on tarvidus. Seaduse järgi on kõik Eesti ametiasutused kohustatud ID-kaarti aktsepteerima. ID-kaart kehtib ka Euroopa Liidu piires reisidokumendina.",
         "retrieval_context": [
-            "If you have entered your PIN codes incorrectly three times, your account will be blocked for three hours.",
-            "If this happens multiple times, the second time your account will be locked for 24 hours and the third time permanently. PIN codes cannot be changed or restored for security reasons."
+            "Eestis saab ID-kaardi abil tõendada oma isikut kõikjal, kus selleks on tarvidus. Seaduse järgi on kõik Eesti ametiasutused kohustatud ID-kaarti aktsepteerima ja selle asemel ei tohi isiku tõendamiseks nõuda ühtegi muud dokumenti.",
+            "Samuti kehtib ID-kaart Euroopa Liidu piires reisidokumendina."
         ],
-        "category": "digital_identity_security",
-        "language": "en"
+        "category": "id_card_usage",
+        "language": "et"
     },
     {
-        "input": "Kas Smart-ID kasutamisel on vanusepiirangud?",
-        "expected_output": "Smart-ID kasutamisel puuduvad vanusepiirangud. Kuid alla 18-aastasele konto loomiseks on vajalik lapsevanema autoriseerimine. Konto registreerimiseks peavad nii alaelisel kui lapsevanemal olema Eesti isikukood.",
+        "input": "Kuidas aktiveerida Mobiil-ID?",
+        "expected_output": "Mobiil-ID aktiveerimine toimub operaatorite iseteeninduses (Telia, Elisa, Tele2).",
         "retrieval_context": [
-            "Smart-ID kasutamisel puuduvad vanusepiirangud. Alla 18-aastasele konto loomiseks on vajalik lapsevanema autoriseerimine.",
-            "Konto registreerimiseks peavad nii alaelisel kui lapsevanemal olema Eesti isikukood."
+            "Mobiil-ID aktiveerimine toimub operaatorite iseteeninduses (Telia, Elisa, Tele2)."
         ],
         "category": "digital_identity",
         "language": "et"
     },
     {
-        "input": "How many Smart-ID users are there currently?",
-        "expected_output": "Currently there are over 2,500,000 Smart-ID users.",
+        "input": "Kuidas genereerida diagnostikafaili DigiDoc4-s?",
+        "expected_output": "Diagnostikafaili genereerimiseks ava DigiDoc4 ja vali 'Seaded'. Vali avanevast aknast 'Diagnostika'. See käivitab infokogumise protsessi. Salvesta diagnostika raport, kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil 'Salvesta diagnostika'.",
         "retrieval_context": [
-            "Currently there are over 2,500,000 users."
+            "Ava DigiDoc4 rakendus ja vali sealt seadmed. Leiad seadete hammasrattaga ikooni DigiDoc4 paremast ülemisest nurgast. Vali avanevast aknast Diagnostika. See käivitab infokogumise protsessi.",
+            "Salvesta diagnostika raport. Saad seda teha kahel lihtsal moel – kopeerides raporti sisu käsitsi või klõpsates diagnostikaakna alaservas oleval lingil Salvesta diagnostika."
         ],
-        "category": "digital_identity",
-        "language": "en"
+        "category": "id_card_usage",
+        "language": "et"
+    },
+    {
+        "input": "Mis on .asice ja .bdoc failide vahe?",
+        "expected_output": "Mõlemad on BDOC digiallkirjaformaadi alamformaadid. .asice (ASiC-E LT) on BDOC allkiri ajatempliga ja on parima rahvusvahelise ühilduvusega. DigiDoc4 kasutab kõikide uute dokumentide allkirjastamisel automaatselt .asice vormingut. .bdoc formaati kasutati varem, kuid uued allkirjad luuakse .asice formaadis.",
+        "retrieval_context": [
+            "BDOC-TS ehk ASiC-E LT ehk AdES LT allkiri (konteineriformaat .asice) on BDOC allkiri ajatempliga.",
+            "ASiC-E LT allkiri on parima rahvusvahelise ühilduvusega. DigiDoc4 kasutab kõikide uute dokumentide allkirjastamisel automaatselt .asice vormingut.",
+            "BDOC digiallkirjaformaadist on olemas kaks alamformaati, mis on tehniliselt pisut erinevad. Selleks, et tavakasutaja suudaks neid paremini eristada, kasutatakse nende puhul erinevaid faililaiendeid: .bdoc ja .asice."
+        ],
+        "category": "digital_signature",
+        "language": "et"
     }
 ]
