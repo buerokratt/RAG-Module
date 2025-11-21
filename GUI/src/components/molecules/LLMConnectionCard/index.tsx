@@ -85,13 +85,13 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
     if (deploymentEnvironment === "testing") {
       return (
         <Label type="info">
-          testing
+          {t('dataModels.environments.testing')}
         </Label>
       );
     } else if (deploymentEnvironment === "production") {
       return (
         <Label type="success">
-         production
+          {t('dataModels.environments.production')}
         </Label>
       );
     }
@@ -101,19 +101,19 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
     if (status === "within_budget") {
       return (
         <Label type="success">
-          {'Within Budget'}
+          {t('dataModels.budgetStatus.withinBudget')}
         </Label>
       );
     } else if (status === "over_budget") {
       return (
         <Label type="error">
-          {'Over Budget'}
+          {t('dataModels.budgetStatus.overBudget')}
         </Label>
       );
     } else if (status === "close_to_exceed") {
       return (
         <Label type="warning">
-          {'Close to Exceed Budget'}
+          {t('dataModels.budgetStatus.closeToExceed')}
         </Label>
       );
     }
@@ -135,13 +135,13 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
         <div className="flex" style={{ flexWrap: 'wrap', gap: '5px' }}>
           <div className="label-row">
             <span className="label-title">
-              {'Platform'}:
+              {t('dataModels.filters.platform')}:
             </span>
             <span className="label-value">{platform ?? 'N/A'}</span>
           </div>
           <div className="label-row">
             <span className="label-title">
-              {'Model'}:
+              {t('dataModels.filters.model')}:
             </span>
             <span className="label-value">{model ?? 'N/A'}</span>
           </div>
@@ -156,7 +156,7 @@ const LLMConnectionCard: FC<PropsWithChildren<LLMConnectionCardProps>> = ({
             size="s"
             onClick={() => navigate(`/view-llm-connection?id=${llmConnectionId}`)}
           >
-            {t('datasets.datasetCard.settings') ?? ''}
+            {t('dataModels.settings') ?? ''}
           </Button>
         </div>
       </div>

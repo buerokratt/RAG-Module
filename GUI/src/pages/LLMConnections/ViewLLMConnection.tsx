@@ -36,8 +36,8 @@ const ViewLLMConnection = () => {
       });
 
       openDialog({
-        title: 'Connection Update Succeeded',
-        content: <p>LLM configuration updated successfully!</p>,
+        title: t('llmConnectionForm.viewConnection.updateSuccessTitle') || 'Connection Update Succeeded',
+        content: <p>{t('llmConnectionForm.viewConnection.updateSuccessMessage') || 'LLM configuration updated successfully!'}</p>,
         footer: (
           <Button
             appearance={ButtonAppearanceTypes.PRIMARY}
@@ -46,7 +46,7 @@ const ViewLLMConnection = () => {
               navigate('/llm-connections');
             }}
           >
-            View LLM Connections
+            {t('llmConnectionForm.viewConnection.viewConnectionsButton') || 'View LLM Connections'}
           </Button>
         ),
       });
@@ -54,14 +54,14 @@ const ViewLLMConnection = () => {
     onError: (error: any) => {
       console.error('Error updating LLM connection:', error);
       openDialog({
-        title: 'Connection Update Failed',
-        content: <p>{ 'Failed to update LLM connection. Please try again.'}</p>,
+        title: t('llmConnectionForm.viewConnection.updateErrorTitle') || 'Connection Update Failed',
+        content: <p>{t('llmConnectionForm.viewConnection.updateErrorMessage') || 'Failed to update LLM connection. Please try again.'}</p>,
         footer: (
           <Button
             appearance={ButtonAppearanceTypes.PRIMARY}
             onClick={closeDialog}
           >
-            Go Back
+            {t('llmConnectionForm.viewConnection.goBackButton') || 'Go Back'}
           </Button>
         ),
       });
@@ -79,8 +79,8 @@ const ViewLLMConnection = () => {
       navigate('/llm-connections');
 
       openDialog({
-        title: 'Connection Deletion Succeeded',
-        content: <p>LLM connection deleted successfully!</p>,
+        title: t('llmConnectionForm.viewConnection.deleteSuccessTitle') || 'Connection Deletion Succeeded',
+        content: <p>{t('llmConnectionForm.viewConnection.deleteSuccessMessage') || 'LLM connection deleted successfully!'}</p>,
         footer: (
           <Button
             appearance={ButtonAppearanceTypes.PRIMARY}
@@ -89,7 +89,7 @@ const ViewLLMConnection = () => {
               navigate('/llm-connections');
             }}
           >
-            View LLM Connections
+            {t('llmConnectionForm.viewConnection.viewConnectionsButton') || 'View LLM Connections'}
           </Button>
         ),
       });
@@ -97,14 +97,14 @@ const ViewLLMConnection = () => {
     onError: (error: any) => {
       console.error('Error deleting LLM connection:', error);
       openDialog({
-        title: 'Error',
-        content: <p>{error?.message || 'Failed to delete LLM connection. Please try again.'}</p>,
+        title: t('llmConnectionForm.viewConnection.deleteErrorTitle') || 'Error',
+        content: <p>{error?.message || t('llmConnectionForm.viewConnection.deleteErrorMessage') || 'Failed to delete LLM connection. Please try again.'}</p>,
         footer: (
           <Button
             appearance={ButtonAppearanceTypes.PRIMARY}
             onClick={closeDialog}
           >
-            Go Back
+            {t('llmConnectionForm.viewConnection.goBackButton') || 'Go Back'}
           </Button>
         ),
       });
@@ -117,11 +117,11 @@ const ViewLLMConnection = () => {
     
     if (isCurrentlyProduction && isChangingToTesting) {
       openDialog({
-        title: 'Confirm Production Environment Change',
+        title: t('llmConnectionForm.viewConnection.confirmEnvironmentChangeTitle') || 'Confirm Production Environment Change',
         content: (
           <div>
-            <p>You are about to change a <strong>production</strong> connection to <strong>testing</strong> environment.</p>
-            <p>This will affect the current production setup. Are you sure you want to proceed?</p>
+            <p>{t('llmConnectionForm.viewConnection.confirmEnvironmentChangeMessage') || 'You are about to change a production connection to testing environment.'}</p>
+            <p>{t('llmConnectionForm.viewConnection.confirmEnvironmentChangeWarning') || 'This will affect the current production setup. Are you sure you want to proceed?'}</p>
           </div>
         ),
         footer: (
@@ -130,7 +130,7 @@ const ViewLLMConnection = () => {
               appearance={ButtonAppearanceTypes.SECONDARY}
               onClick={closeDialog}
             >
-              Cancel
+              {t('llmConnectionForm.viewConnection.cancelButton') || 'Cancel'}
             </Button>
             <Button
               appearance={ButtonAppearanceTypes.PRIMARY}
@@ -140,7 +140,7 @@ const ViewLLMConnection = () => {
               }}
               showLoadingIcon={updateConnectionMutation.isLoading}
             >
-              Yes, Change Environment
+              {t('llmConnectionForm.viewConnection.confirmChangeButton') || 'Yes, Change Environment'}
             </Button>
           </div>
         ),
@@ -161,11 +161,11 @@ const ViewLLMConnection = () => {
     
     if (isProductionConnection) {
       openDialog({
-        title: 'Cannot Delete Production Connection',
+        title: t('llmConnectionForm.viewConnection.cannotDeleteProductionTitle') || 'Cannot Delete Production Connection',
         content: (
           <div>
-            <p>This LLM connection is currently set as the production connection and cannot be deleted.</p>
-            <p>To delete this connection, please ensure another connection is set as the production connection.</p>
+            <p>{t('llmConnectionForm.viewConnection.cannotDeleteProductionMessage') || 'This LLM connection is currently set as the production connection and cannot be deleted.'}</p>
+            <p>{t('llmConnectionForm.viewConnection.cannotDeleteProductionInstructions') || 'To delete this connection, please ensure another connection is set as the production connection.'}</p>
           </div>
         ),
         footer: (
@@ -173,21 +173,21 @@ const ViewLLMConnection = () => {
             appearance={ButtonAppearanceTypes.PRIMARY}
             onClick={closeDialog}
           >
-            OK
+            {t('llmConnectionForm.viewConnection.okButton') || 'OK'}
           </Button>
         ),
       });
     } else {
       openDialog({
-        title: 'Confirm Delete',
-        content: <p>Are you sure you want to delete this LLM connection? This action cannot be undone.</p>,
+        title: t('llmConnectionForm.viewConnection.confirmDeleteTitle') || 'Confirm Delete',
+        content: <p>{t('llmConnectionForm.viewConnection.confirmDeleteMessage') || 'Are you sure you want to delete this LLM connection? This action cannot be undone.'}</p>,
         footer: (
           <div className="button-wrapper">
             <Button
               appearance={ButtonAppearanceTypes.SECONDARY}
               onClick={closeDialog}
             >
-              Cancel
+              {t('llmConnectionForm.viewConnection.cancelButton') || 'Cancel'}
             </Button>
             <Button
               appearance={ButtonAppearanceTypes.ERROR}
@@ -196,7 +196,7 @@ const ViewLLMConnection = () => {
               }}
               showLoadingIcon={deleteConnectionMutation.isLoading}
             >
-              Delete
+              {t('llmConnectionForm.viewConnection.deleteButton') || 'Delete'}
             </Button>
           </div>
         ),
@@ -220,10 +220,10 @@ const ViewLLMConnection = () => {
             <Link to={'/llm-connections'}>
               <BackArrowButton />
             </Link>
-            <div className="title">Connection Not Found</div>
+            <div className="title">{t('llmConnectionForm.viewConnection.connectionNotFoundTitle') || 'Connection Not Found'}</div>
           </div>
         </div>
-        <p>The requested LLM connection could not be found.</p>
+        <p>{t('llmConnectionForm.viewConnection.connectionNotFoundMessage') || 'The requested LLM connection could not be found.'}</p>
       </div>
     );
   }

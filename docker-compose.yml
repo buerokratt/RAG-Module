@@ -184,11 +184,15 @@ services:
       - ./datasets:/app/datasets   # Direct access to datasets folder for diff identifier operations
       - ./grafana-configs/loki_logger.py:/app/src/vector_indexer/loki_logger.py
       - ./.env:/app/.env:ro
+      - vault-agent-token:/agent/out:ro  # Mount vault token for accessing vault secrets
     environment:
       - server.port=9010
       - PYTHONPATH=/app:/app/src/vector_indexer
+      - VAULT_ADDR=http://vault:8200
     ports:
       - 9010:8080
+    depends_on:
+      - vault-agent-llm
     networks:
       - bykstack
 
@@ -430,7 +434,6 @@ services:
   vault:
     image: hashicorp/vault:1.20.3
     container_name: vault
-    user: "0"
     cap_add:
       - IPC_LOCK
     command: ["vault", "server", "-config=/vault/config/vault.hcl"]
@@ -439,31 +442,53 @@ services:
       VAULT_SKIP_VERIFY_CONFIG_PERMISSIONS: "true"
     volumes:
       - vault-data:/vault/file
-      - ./vault/config:/vault/config          # contains vault.hcl
+      - ./vault/config:/vault/config:ro
       - ./vault/logs:/vault/logs
     expose:
-    - "8200"
+      - "8200"
     networks:
       - bykstack
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "vault", "status", "-format=json"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
+      test: ["CMD", "sh", "-c", "wget -q -O- http://127.0.0.1:8200/v1/sys/health || exit 0"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  vault-init:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-init
+    user: "0"
+    depends_on:
+      vault:
+        condition: service_healthy
+    environment:
+      VAULT_ADDR: http://vault:8200
+    volumes:
+      - vault-data:/vault/data
+      - vault-agent-creds:/agent/credentials
+      - vault-agent-token:/agent/out
+      - ./vault-init.sh:/vault-init.sh:ro
+    networks:
+      - bykstack
+    entrypoint: ["/bin/sh"]
+    command: ["-c", "apk add --no-cache curl jq && chmod -R 755 /agent/credentials && chmod -R 770 /agent/out && chown -R vault:vault /agent/credentials /agent/out && su vault -s /bin/sh /vault-init.sh"]
+    restart: "no"
 
   vault-agent-llm:
     image: hashicorp/vault:1.20.3
     container_name: vault-agent-llm
-    user: "0"
-    command: ["vault", "agent", "-config=/agent/in/agent.hcl", "-log-level=info"]
+    command: ["vault", "agent", "-config=/agent/config/agent.hcl", "-log-level=info"]
     depends_on:
-      - vault
+      vault-init:
+        condition: service_completed_successfully
     cap_add:
       - IPC_LOCK
     volumes:
-      - ./vault/agents/llm:/agent/in:ro       # agent.hcl, role_id, secret_id
-      - ./vault/agent-out:/agent/out            # token output
+      - ./vault/agents/llm/agent.hcl:/agent/config/agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-token:/agent/out
     networks:
       - bykstack
     restart: unless-stopped
@@ -484,11 +509,10 @@ services:
       - VAULT_ADDR=http://vault:8200
       - VAULT_TOKEN=/agent/out/token
     volumes:
-      # Mount configuration files
       - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
-      # Mount logs directory for persistence
+      - ./src/optimization/optimized_modules:/app/src/optimization/optimized_modules
       - llm_orchestration_logs:/app/logs
-      - ./vault/agent-out:/agent/out:ro
+      - vault-agent-token:/agent/out:ro
     networks:
       - bykstack
     depends_on:
@@ -520,12 +544,14 @@ volumes:
     name: minio_data
   vault-data:
     name: vault-data
-  vault-agent-out:
-    name: vault-agent-out
   shared-volume:
     name: shared-volume
   cron_data:
     name: cron_data
+  vault-agent-creds:
+    name: vault-agent-creds
+  vault-agent-token:
+    name: vault-agent-token
 
 networks:
   bykstack:

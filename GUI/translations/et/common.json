@@ -6,6 +6,7 @@
     "delete": "Kustuta",
     "cancel": "Tühista",
     "confirm": "Kinnita",
+    "continue": "Jätka",
     "modifiedAt": "Viimati muudetud",
     "addNew": "Lisa uus",
     "search": "Otsi",
@@ -50,20 +51,18 @@
     "sessionTimeOutDesc": "Pikendage oma sessiooni või logige rakendusest välja {{seconds}}",
     "close": "Sulge",
     "proceed": "Jätka",
-    "maxFileSize": "Faili suurus ei tohiks ületada 20 MB."
+    "maxFileSize": "Faili suurus ei tohiks ületada 20 MB.",
+    "select": "-Vali-",
+    "replace": "Asenda",
+    "clearFilters": "Puhasta Filtrid",
+    "showEntries": "Näita",
+    "entries": "kirjeid",
+    "deleteSelected": "Kustuta Valik"
   },
   "menu": {
     "userManagement": "Kasutajate haldus",
-    "agencies": "Integreeritud asutused",
-    "dataSets": "Andmekogumid",
-    "datasetGroups": "Andmekogude grupid",
-    "validationSessions": "Valideerimine",
-    "dataModels": "Andmemudelid",
-    "models": "Mudelid",
-    "trainingSessions": "Treenimine",
-    "testModel": "Testmudel",
-    "stopWords": "Stop-sõnad",
-    "correctedTexts": "Parandatud tekstid"
+    "testLLM": "Testi LLM",
+    "llmConnections": "LLM Ühendused"
   },
   "userManagement": {
     "title": "Kasutajate haldus",
@@ -102,386 +101,303 @@
     }
   },
 
-  "integratedAgencies":{
-  "title": "Integreeritud asutused",
-  "search":"Otsi asutust"
-},
-
-  "integration": {
-    "title": "Integratsioon",
-    "jira": "Jira",
-    "outlook": "Outlook",
-    "jiraDesc": "Atlassiani teemade jälgimise ja projektide juhtimise tarkvara",
-    "outlookDesc": "Isikliku teabehalduri ja e-posti rakendus, mille on välja töötanud Microsoft",
-    "connected": "Ühendatud",
-    "disconnected": "Ühendus katkestatud",
-    "integrationErrorTitle": "Integratsioon ebaõnnestus",
-    "integrationErrorDesc": "Ebaõnnestus ühenduse loomine {{channel}}-iga. Palun kontrollige oma seadistusi ja proovige uuesti. Kui probleem püsib, võtke ühendust toe saamiseks.",
-    "integrationSuccessTitle": "Integratsioon edukas",
-    "integrationSuccessDesc": "Olete edukalt ühendatud {{channel}}-iga! Teie integratsioon on nüüd lõppenud ja saate alustada {{channel}}-iga sujuvat töötamist.",
-    "confirmationModalTitle": "Oled kindel?",
-    "disconnectConfirmationModalDesc": "Kas oled kindel, et soovid katkestada {{channel}} integratsiooni? See tegevus on pöördumatu ja võib mõjutada teie töövoogu ja seotud teemasid.",
-    "connectConfirmationModalDesc": "Kas oled kindel, et soovid luua ühenduse {{channel}}-iga? See tegevus on pöördumatu ja võib mõjutada teie töövoogu ja seotud teemasid.",
-    "disconnectErrorTitle": "Katkestamine ebaõnnestus",
-    "disconnectErrorDesc": "Ebaõnnestus {{channel}} katkestamine. Palun kontrollige oma seadistusi ja proovige uuesti. Kui probleem püsib, võtke ühendust toe saamiseks.",
-    "addUserButton": " Lisa kasutaja",
-    "addUser": {
-      "name": "Ees- ja perekonnanimi",
-      "namePlaceholder": "Sisesta nimi",
-      "role": "Roll",
-      "rolePlaceholder": "-Vali-",
-      "personalId": "Isiklik ID",
-      "personalIdPlaceholder": "Sisesta isiklik ID",
-      "title": "Ametinimetus",
-      "titlePlaceholder": "Sisesta ametinimetus",
-      "email": "E-post",
-      "emailPlaceholder": "Sisesta e-post"
-    }
-  },
   "roles": {
     "ROLE_ADMINISTRATOR": "Administraator",
     "ROLE_MODEL_TRAINER": "Mudeli treener"
   },
   "toast": {
     "success": {
+      "title": "Edu",
       "updateSuccess": "Uuendamine õnnestus",
       "copied": "Kopeeritud",
       "userDeleted": "Kasutaja kustutatud",
       "newUserAdded": "Uus kasutaja lisatud",
       "userUpdated": "Kasutaja uuendatud"
+    },
+    "error": {
+      "title": "Viga"
     }
-  },
-  "datasetGroups": {
-    "title": "Andmestiku grupid",
-    "createDatasetGroupButton": "Loo andmestiku grupp",
-    "noDatasets": "Andmestike komplekte ei ole saadaval",
-    "sortOptions": {
-      "datasetAsc": "Andmestiku grupi nimi A-Z",
-      "datasetDesc": "Andmestiku grupi nimi Z-A",
-      "createdDateAsc": "Loomise kuupäev vanim enne",
-      "createdDateDesc": "Loomise kuupäev uusim enne",
-      "lastUpdatedDateAsc": "Viimati uuendatud kuupäev, vanim enne",
-      "lastUpdatedDateDesc": "Viimati uuendatud kuupäev, uusim enne"
-    },
-    "table": {
-      "group": "Andmestiku grupp",
-      "version": "Versioon",
-      "validationStatus": "Valideerimise staatus",
-      "sortBy": "Sorteeri",
-      "email": "E-post",
-      "actions": "Tegevused"
-    },
-    "datasetCard": {
-      "validationFail": "Kontroll ebaõnnestus",
-      "validationSuccess": "Kontroll õnnestus",
-      "validationInprogress": "Kontroll on käimas",
-      "notValidated": "Ei ole kontrollitud",
-      "settings": "Seaded",
-      "lastModelTrained": "Viimane mudel treenitud",
-      "lastUsedForTraining": "Viimane kasutatud treenimiseks",
-      "lastUpdate": "Viimane uuendus",
-      "latest": "Viimased"
-    },
-    "createDataset": {
-      "title": "Loo andmestiku grupp",
-      "datasetDetails": "Andmestiku üksikasjad",
-      "datasetName": "Andmestiku nimi",
-      "datasetInputPlaceholder": "Sisesta andmestiku nimi",
-      "validationCriteria": "Loo valideerimise kriteeriumid",
-      "fieldName": "Välja nimi",
-      "datasetType": "Andmestiku tüübid",
-      "dataClass": "Andmeklass",
-      "typeText": "Tekst",
-      "typeNumbers": "Numbrid",
-      "typeDateTime": "Kuupäev ja aeg",
-      "addClassButton": "Lisa klass",
-      "addNowButton": "Lisa nüüd",
-      "selectPlaceholder": "- Valige -"
-    },
-    "classHierarchy": {
-      "title": "Klassi hierarhia",
-      "addClassButton": "Lisa peamine klass",
-      "addSubClass": "Lisa alamklass",
-      "fieldHint": "Sisesta välja nimi",
-      "filedHintIfExists": "Klassi nimi juba olemas"
-    },
-    "modals": {
-      "deleteClassTitle": "Oled sa kindel?",
-      "deleteClaassDesc": "Kinnita, et soovid kustutada järgmise kirje",
-      "columnInsufficientHeader": "Andmestikus puuduvad veerud",
-      "columnInsufficientDescription": "Andmestikus peab olema vähemalt 2 veergu. Lisaks peab olema vähemalt üks veerg määratud andmeklassiks ja üks veerg, mis ei ole andmeklass. Palun kohanda oma andmestikku vastavalt.",
-      "classsesInsufficientHeader": "Andmestikus puuduvad klassid",
-      "classsesInsufficientDescription": "Andmestikus peab olema vähemalt 2 peamist klassi hierarhias",
-      "createDatasetSuccessTitle": "Andmestiku grupp loodud edukalt",
-      "createDatasetUnsuccessTitle": "Andmestiku grupi loomine ebaõnnestus",
-      "createDatasetSucceessDesc": "Oled edukalt loonud andmestiku grupi. Detailvaates saad nüüd andmestikku vaadata ja vajadusel redigeerida.",
-      "navigateDetailedViewButton": "Mine detailvaatesse",
-      "enableDatasetTitle": "Andmestiku grupi lülitamine ebaõnnestus",
-      "enableDatasetDesc": "Andmestiku gruppi ei saa aktiveerida, kuni andmed on lisatud. Palun lisa andmestikke sellesse gruppi ja proovi uuesti.",
-      "errorTitle": "Tegevus ebaõnnestus",
-      "errorDesc": "Midagi läks valesti. Palun proovi uuesti."
-    },
-    "detailedView": {
-      "connectedModels": "Ühendatud mudelid",
-      "noOfItems": "Arv",
-      "export": "Eksporti andmestik",
-      "import": "Impordi andmestik",
-      "unsavedChangesWarning": "Oled teinud muudatusi andmestikus, mis ei ole salvestatud. Palun salvesta muudatused, et neid rakendada",
-      "insufficientExamplesDesc": "Näidisandmed puuduvad - andmestiku grupi aktiveerimiseks on vajalik vähemalt 10 näidist",
-      "noData": "Andmeid ei ole saadaval",
-      "noCorrectedTexts": "Parandatud tekste ei ole saadaval",
-      "noDataDesc": "Oled loonud andmestiku grupi, kuid andmeid, mida siin kuvada, pole saadaval. Saad üles laadida andmestiku, et vaadata seda siin. Kui andmed on lisatud, saad neid vajadusel redigeerida või kustutada.",
-      "importExamples": "Impordi näidised",
-      "importNewData": "Impordi uued andmed",
-      "majorUpdateBanner": "Oled värskendanud andmestiku skeemi olulisi seadistusi, mis ei ole salvestatud. Palun salvesta, et rakendada muudatusi. Kõik imporditud failid või olemasolevates andmetes tehtud muudatused kõrvaldatakse pärast muudatuste rakendamist",
-      "minorUpdateBanner": "Oled importinud andmestikku uusi andmeid, palun salvesta muudatused, et neid rakendada. Kõik individuaalsetele andmeelementidele tehtud muudatused kõrvaldatakse pärast muudatuste rakendamist",
-      "patchUpdateBanner": "Oled redigeerinud andmestikus individuaalseid elemente, mis ei ole salvestatud. Palun salvesta muudatused, et neid rakendada",
-      "confirmMajorUpdatesTitle": "Kinnita oluline värskendus",
-      "confirmMajorUpdatesDesc": "Kõik imporditud failid või olemasolevates andmetes tehtud muudatused kõrvaldatakse pärast muudatuste rakendamist",
-      "confirmMinorUpdatesTitle": "Kinnita värskendus",
-      "confirmMinorUpdatesDesc": "Kõik individuaalsetele andmeelementidele tehtud muudatused (patch värskendus) kõrvaldatakse pärast muudatuste rakendamist",
-      "confirmPatchUpdatesTitle": "Kinnita Patch värskendus",
-      "confirmPatchUpdatesDesc": "Muutunud andmeread uuendatakse andmestikus",
-      "patchDataUnsuccessfulTitle": "Patch andmete uuendamine ebaõnnestus",
-      "patchDataUnsuccessfulDesc": "Midagi läks valesti. Palun proovi uuesti.",
-      "exportDataSuccessTitle": "Andmete eksportimine õnnestus",
-      "exportDataSuccessDesc": "Sinu andmed on edukalt eksporditud.",
-      "exportDataUnsucessTitle": "Andmete eksportimine ebaõnnestus",
-      "exportDataUnsucessDesc": "Midagi läks valesti. Palun proovi uuesti.",
-      "ImportDataUnsucessTitle": "Andmete import ebaõnnestus",
-      "importDataUnsucessDesc": "Midagi läks valesti. Palun proovi uuesti.",
-      "validationInitiatedTitle": "Andmestik laaditi üles ja alustati kontrolli",
-      "validationInitiatedDesc": "Andmestiku fail laaditi edukalt üles. Kontroll ja eeltöötlus on nüüd alanud",
-      "viewValidations": "Vaata valideerimise sessioone",
-      "fieldName": "Sisesta välja nimi",
-      "fieldNameError": "{{name}} ei saa kasutada välja nime",
-      "fieldNameExist": "{{name}} on juba olemas välja nimeena",
-      "selectDataType": "Vali andme tüüp",
-      "table": {
-        "id": "rowId",
-        "data": "Andmed",
-        "label": "Märgis",
-        "actions": "Tegevused"
-      },
-      "validationsTitle": "Andmestiku grupi kontrollid",
-      "classHierarchy": "Klassi hierarhiad",
-      "delete": "Kusta andmestik",
-      "modals": {
-        "import": {
-          "title": "Impordi uusi andmeid",
-          "fileFormatlabel": "Vali faili formaat",
-          "attachments": "Lisad",
-          "maxSize": "Maksimaalne faili suurus - 10 MB",
-          "browse": "Sirvi faili",
-          "import": "Impordi",
-          "cancel": "Tühista",
-          "uploadInProgress": "Üleslaadimine käib...",
-          "uploadDesc": "Andmestiku üleslaadimine. Palun oota, kuni laadimine lõpeb. Kui tühistad poole pealt, kaovad andmed.",
-          "invalidFile": "Kehtetu faili formaat",
-          "invalidFileDesc": "Laaditud fail ei ole õiges {{format}} formaadis. Palun laadi üles kehtiv {{format}} fail ja proovi uuesti."
-        },
-        "export": {
-          "export": "Ekspordi andmed",
-          "exportButton": "Ekspordi",
-          "fileFormatlabel": "Vali faili formaat",
-          "title": "Andmete eksportimine õnnestus",
-          "description": "Sinu andmed on edukalt eksporditud."
-        },
-        "delete": {
-          "title": "Oled sa kindel?",
-          "description": "Kui kustutad andmestiku, muutuvad kõik sellega ühendatud mudelid treenimisvõimetuks. Kas oled kindel, et soovid jätkata?",
-          "error": "Andmestiku grupi kustutamine ebaõnnestus",
-          "errorDesc": "Andmekogumi rühma kustutamisel ilmnes probleem. Palun proovige uuesti. Kui probleem püsib, võtke abi saamiseks ühendust toega."
-        },
-        "edit": {
-          "title": "Redigeeri",
-          "data": "Andmed",
-          "label": "Märgis",
-          "update": "Uuenda",
-          "error": "Andmestiku grupi uuendamine ebaõnnestus",
-          "errorDesc": "Andmekogumi rühma värskendamisel ilmnes probleem. Palun proovige uuesti. Kui probleem püsib, võtke abi saamiseks ühendust toega."
-        },
-        "upload": {
-          "title": "Andmete üleslaadimine õnnestus",
-          "desc": "Andmestiku fail laaditi edukalt üles. Palun salvesta muudatused, et alustada andmete kontrollimist ja eeltöötlust"
-        },
-        "datasetDelete": {
-          "confirmationTitle": "Oled sa kindel?",
-          "confirmationDesc": "Kinnita, et soovid kustutada andmestiku",
-          "successTitle": "Edu - andmestik kustutatud",
-          "successDesc": "Oled edukalt kustutanud andmestiku. Andmestik ei ole enam saadaval ja kõik seotud andmed on eemaldatud.",
-          "proceedToDashboard": "Jätkake andmekogumite gruppidega"
-        }
-      }
-    }
-  },
-  "stopWords": {
-    "title": "Stop-sõnad",
-    "import": "Impordi stop-sõnad",
-    "stopWordInputHint": "Sisesta stop-sõna",
-    "add": "Lisa",
-    "importModal": {
-      "title": "Impordi stop-sõnu",
-      "importButton": "Impordi",
-      "selectionLabel": "Vali järgmine valik",
-      "addOption": "Impordi, et lisada",
-      "updateOption": "Impordi, et uuendada",
-      "deleteOption": "Impordi, et kustutada",
-      "attachements": "Lisad (TXT, XLSX, YAML, JSON)",
-      "inprogressTitle": "Importimine käib",
-      "inprogressDesc": "Stop-sõnade importimine käib. Palun oota, kuni protsess lõpeb.",
-      "successTitle": "Andmete importimine õnnestus",
-      "successDesc": "Sinu andmed on edukalt imporditud.",
-      "unsuccessTitle": "Andmete importimine ebaõnnestus",
-      "unsuccessDesc": "Stop-sõnade importimine ebaõnnestus"
-    }
-  },
-  "validationSessions": {
-    "title": "Valideerimise sessioonid",
-    "inprogress": "Kontroll käib",
-    "fail": "Kontroll ebaõnnestus, kuna {{class}} klassi ei leitud {{column}} veerus hierarhias",
-    "noSessions": "Käimasolevaid valideerimissessioone pole saadaval"
-  },
-  "correctedTexts": {
-    "title": "Parandatud tekstid",
-    "export": "Ekspordi andmed",
-    "searchIncomingText": "Otsi sissetulevaid tekste",
-    "filterAsc": "Filtreeri kuupäeva järgi - kasvav",
-    "filterDesc": "Filtreeri kuupäeva järgi - kahanev",
-    "platform": "Platvorm",
-    "dateAndTime": "Kuupäev & aeg",
-    "inferenceTime": "Järeldamise aeg",
-    "text": "Tekst",
-    "predictedHierarchy": "Prognoositud klassihierarhia",
-    "predictedConfidenceProbability": "Prognoositud klasside keskmine usaldusväärsuse tõenäosus",
-    "correctedHierarchy": "Parandatud klassihierarhia",
-    "correctedConfidenceProbability": "Parandatud klasside keskmine usaldusväärsuse tõenäosus",
-    "labelNotFoundText": "Märgistus ei ole andmekogumis",
-    "exportSuccessTitle": "Andmete eksportimine õnnestus",
-    "exportSuccessDesc": "Sinu andmed on edukalt eksporditud.",
-    "exportDataUnsucessTitle": "Andmete eksportimine ebaõnnestus",
-    "exportDataUnsucessDesc": "Midagi läks valesti. Palun proovi uuesti."
   },
   "dataModels": {
-    "productionModels": "Toodangumudelid",
-    "dataModels": "Andmemudelid",
-    "createModel": "Loo mudel",
-    "noProdModels": "Toodangumudeleid pole saadaval",
-    "noModels": "Mudeleid pole saadaval",
+    "settings": "Seaded",
+    "dataModels": "LLM Ühendused",
+    "noModels": "LLM ühendusi ei leitud",
+    "createModel": "Loo LLM Ühendus",
+    "productionConnections": "Tootmise LLM Ühendus",
+    "otherConnections": "Muud LLM Ühendused",
     "sortOptions": {
-      "dataModelAsc": "Andmemudeli nimi A-Z",
-      "dataModelDesc": "Andmemudeli nimi Z-A",
-      "createdDateAsc": "Loomise kuupäev vanim enne",
-      "createdDateDesc": "Loomise kuupäev uusim enne"
+      "createdDateNewest": "Loomise Kuupäev (Uusim)",
+      "createdDateOldest": "Loomise Kuupäev (Vanim)",
+      "platformAZ": "Platvorm A-Z",
+      "platformZA": "Platvorm Z-A",
+      "modelAZ": "Mudel A-Z",
+      "modelZA": "Mudel Z-A",
+      "budgetHighToLow": "Eelarve (Kõrgest Madalani)",
+      "budgetLowToHigh": "Eelarve (Madalast Kõrgeni)"
     },
     "filters": {
-      "modelName": "Mudeli nimi",
-      "version": "Versioon",
       "platform": "Platvorm",
-      "datasetGroup": "Andmestiku grupp",
-      "trainingStatus": "Koolitusstaatus",
-      "maturity": "Valmidus",
-      "sort": "Sorteeri nime järgi (A - Z)"
+      "model": "Mudel",
+      "environment": "Keskkond",
+      "sortBy": "Sorteeri",
+      "allPlatforms": "Kõik Platvormid",
+      "allModels": "Kõik Mudelid",
+      "allEnvironments": "Kõik Keskkonnad"
     },
-    "trainingStatus": {
-      "retrainingNeeded": "Treening uuesti vajalik",
-      "trained": "Treenitud",
-      "trainingInProgress": "Treening käib",
-      "untrainable": "Ei saa treenida",
-      "notTrained": "Ei ole treenitud"
+    "platforms": {
+      "azure": "Azure OpenAI",
+      "aws": "AWS Bedrock"
     },
-    "maturity": {
-      "development": "Arenduses",
-      "production": "Toodangus",
-      "staging": "Staging",
-      "testing": "Testimine"
+    "models": {
+      "gpt4Mini": "GPT-4 Mini",
+      "gpt4o": "GPT-4o",
+      "claude35Sonnet": "Anthropic Claude 3.5 Sonnet",
+      "claude37Sonnet": "Anthropic Claude 3.7 Sonnet"
     },
-    "dataModelCard": {
-      "datasetGroup": "Andmestiku grupp",
-      "dgVersion": "Andmestiku grupi versioon",
-      "lastTrained": "Viimane treening"
+    "environments": {
+      "testing": "Testimine",
+      "production": "Tootmine"
     },
-    "trainingResults": {
-      "title": "Treeningu tulemused",
-      "bestPerformingModel": "Parim esitusmudel",
-      "classes": "Klassid",
-      "accuracy": "Täpsus",
-      "f1Score": "F1 skoor",
-      "noResults": "Treeningu tulemusi pole saadaval",
-      "viewResults": "Vaata tulemusi"
-    },
-    "createDataModel": {
-      "title": "Loo andmemudel",
-      "replaceTitle": "Hoiatus: asenda toodangumudel",
-      "replaceDesc": "Selle mudeli lisamine toodangusse asendab praeguse toodangumudeli. Kas oled kindel, et soovid jätkata?",
-      "successTitle": "Andmemudel loodud ja treeninguga alustatud",
-      "successDesc": "Oled edukalt loonud ja alustanud andmemudeli treenimist. Sa saad seda vaadata andmemudeli töölaualt.",
-      "viewAll": "Vaata kõiki andmemudeleid",
-      "errorTitle": "Viga andmemudeli loomisel",
-      "errorDesc": "Tekkis probleem andmemudeli loomise või koolitamise käigus. Palun proovi uuesti. Kui probleem püsib, võta ühendust toega.",
-      "replaceWarning": "{{platform}} integratsioon on hetkel keelatud, seega mudel ei saa mingeid sisendeid ega tee ennustusi"
-    },
-    "configureDataModel": {
-      "saveChangesTitile": "Muudatused on edukalt salvestatud",
-      "saveChangesDesc": "Oled edukalt salvestanud muudatused. Saad andmemudelit vaadata „Kõik Andmemudelid“ vaates.",
-      "updateErrorTitile": "Viga Andmemudeli Uuendamisel",
-      "updateErrorDesc": "Tekkis probleem andmemudeli uuendamise käigus. Palun proovi uuesti. Kui probleem püsib, võta ühendust toega.",
-      "deleteErrorTitle": "Mudelit ei saaks kustutada",
-      "deleteErrorDesc": "Mudelit ei saa kustutada, kuna see on praegu toodangus. Palun edasta teine mudel toodangusse enne, kui jätkad selle mudeli kustutamist.",
-      "deleteConfirmation": "Kas oled kindel?",
-      "deleteConfirmationDesc": "Kinnita, et soovid kustutada andmemudeli",
-      "deleteModalErrorTitle": "Viga andmemudeli kustutamisel",
-      "deleteModalErrorDesc": "Andmemudeli kustutamise käigus tekkis probleem. Palun proovi uuesti. Kui probleem püsib, võta ühendust toega.",
-      "retrainDataModalErrorTitle": "Viga andmemudeli uuesti treenimisel",
-      "retrainDataModalErrorDesc": "Andmemudeli uuesti koolitamise käigus tekkis probleem. Palun proovi uuesti. Kui probleem püsib, võta ühendust toega.",
-      "title": "Seadista andmemudel",
-      "retrainCard": "Mudel uuendatud. Palun alusta uuesti koolitamist, et jätkata uusimate täiustuste saamist.",
-      "retrain": "Treeni uuesti",
-      "deleteModal": "Kustuta mudel",
-      "confirmRetrain": "Kinnita mudeli treenimine",
-      "confirmRetrainDesc": "Kas oled kindel, et soovid seda mudelit uuesti treenida?",
-      "save": "Salvesta muudatused"
-    },
-    "dataModelForm": {
-      "modelVersion": "Mudeli versioon",
-      "datasetGroup": "Vali andmestiku grupp",
-      "baseModels": "Vali baasmudelid",
-      "deploymentPlatform": "Vali rakenduse platvorm",
-      "maturityLabel": "Vali valmiduse silt"
+    "budgetStatus": {
+      "withinBudget": "Eelarve Piires",
+      "overBudget": "Eelarve Ületatud",
+      "closeToExceed": "Lähedal Eelarve Ületamisele"
     }
   },
-  "trainingSessions": {
-    "title": "Treening-sessioonid",
-    "inprogress": "Treening käib",
-    "fail": "Treening ebaõnnestus, kuna {{class}} klass, mida leiti {{column}} veerust, ei eksisteeri hierarhias",
-    "noSessions": "Aktiivsed treeningsessioonid puuduvad",
-    "noSessionsDesc": "Praegu ei ole ühtegi aktiivset treeningsessiooni. Kui alustate treeningsessiooni, ilmub see siia. Seniks saate alustada uue treeningsessiooniga, et alustada oma mudelite täiustamist."
+  "llmConnectionForm": {
+    "createTitle": "Loo LLM Ühendus",
+    "editTitle": "Redigeeri LLM Ühendust",
+    "sections": {
+      "llmConfiguration": "LLM Konfiguratsioon",
+      "embeddingConfiguration": "Sisestamismudeli Konfiguratsioon",
+      "budgetDeployment": "Eelarve ja Kasutuselevõtt"
+    },
+    "fields": {
+      "connectionName": {
+        "label": "Ühenduse Nimi",
+        "description": "Unikaalne nimi selle LLM ühenduse tuvastamiseks",
+        "placeholder": "Sisesta ühenduse nimi (nt Azure GPT-4 Tootmine)"
+      },
+      "llmPlatform": {
+        "label": "LLM Platvorm",
+        "description": "Pilve/kohalik platvorm, kus teie mudel on majutatud",
+        "placeholder": "Vali LLM Platvorm"
+      },
+      "llmModel": {
+        "label": "LLM Mudel",
+        "description": "LLM mudel, mida soovite kasutada",
+        "placeholder": "Vali LLM Mudel"
+      },
+      "embeddingPlatform": {
+        "label": "Sisestamismudeli Platvorm",
+        "description": "See on pilve/kohalik platvorm, kus teie sisestamismudel on majutatud",
+        "placeholder": "Vali Sisestamisplatvorm"
+      },
+      "embeddingModel": {
+        "label": "Sisestamismudel",
+        "description": "Sisestamismudel, mida kasutatakse teie teadmistebaasi otsimiseks",
+        "placeholder": "Vali Sisestamismudel"
+      },
+      "monthlyBudget": {
+        "label": "Kuueelarve",
+        "description": "Kogu kuueelarve sisestamismudeli ja LLM mudeli jaoks. Kui LLM integratsiooni kasutamise kulu ületab alljärgneva eelarve, vastab LLM 'mitteaktiivse' olekuga",
+        "placeholder": "Sisesta kuueelarve"
+      },
+      "disconnectOnBudgetExceed": {
+        "label": "Katkesta LLM ühendus automaatselt, kui peatamise eelarve lävi on ületatud"
+      },
+      "warnBudget": {
+        "label": "Hoiatuse Eelarve Lävi",
+        "description": "Saate teatise, kui teie kasutus jõuab sellise protsendini teie eraldatud kuueelarvest.",
+        "placeholder": "Sisesta hoiatuse eelarve lävi"
+      },
+      "stopBudget": {
+        "label": "Katkestamise Eelarve Lävi",
+        "description": "Teie LLM ühendus katkestatakse automaatselt ja kõik edaspidised päringud peatatakse, kui teie kasutus jõuab sellise protsendini teie kuueelarvest.",
+        "placeholder": "Sisesta peatamise eelarve lävi"
+      },
+      "deploymentEnvironment": {
+        "label": "Kasutuselevõtu Keskkond"
+      }
+    },
+    "aws": {
+      "accessKey": {
+        "label": "Juurdepääsuvõti",
+        "description": "AWS juurdepääsuvõti Bedrock teenuse jaoks",
+        "placeholder": "Sisesta AWS juurdepääsuvõti"
+      },
+      "secretKey": {
+        "label": "Salavõti",
+        "description": "AWS salavõti Bedrock teenuse jaoks",
+        "placeholder": "Sisesta AWS salavõti"
+      },
+      "embeddingAccessKey": {
+        "label": "Sisestamise Juurdepääsuvõti",
+        "description": "AWS juurdepääsuvõti Bedrock sisestamise teenuse jaoks",
+        "placeholder": "Sisesta AWS juurdepääsuvõti sisestamiste jaoks"
+      },
+      "embeddingSecretKey": {
+        "label": "Sisestamise Salavõti",
+        "description": "AWS salavõti Bedrock sisestamise teenuse jaoks",
+        "placeholder": "Sisesta AWS salavõti sisestamiste jaoks"
+      }
+    },
+    "azure": {
+      "deploymentName": {
+        "label": "Kasutuselevõtu Nimi",
+        "description": "Azure OpenAI kasutuselevõtu nimi",
+        "placeholder": "Sisesta kasutuselevõtu nimi"
+      },
+      "targetUri": {
+        "label": "Lõpp-punkt / Siht URI",
+        "description": "Azure OpenAI teenuse lõpp-punkti URL",
+        "placeholder": "https://your-resource.openai.azure.com/"
+      },
+      "apiKey": {
+        "label": "API Võti",
+        "description": "Azure OpenAI API võti",
+        "placeholder": "Sisesta Azure OpenAI API võti"
+      },
+      "embeddingDeploymentName": {
+        "label": "Sisestamise Kasutuselevõtu Nimi",
+        "description": "Azure OpenAI sisestamise kasutuselevõtu nimi",
+        "placeholder": "Sisesta sisestamise kasutuselevõtu nimi"
+      },
+      "embeddingTargetUri": {
+        "label": "Sisestamise Lõpp-punkt / Siht URI",
+        "description": "Azure OpenAI sisestamise teenuse lõpp-punkti URL"
+      },
+      "embeddingApiKey": {
+        "label": "Sisestamise API Võti",
+        "description": "Azure OpenAI sisestamise API võti",
+        "placeholder": "Sisesta Azure OpenAI sisestamise API võti"
+      }
+    },
+    "generic": {
+      "llmApiKey": {
+        "label": "LLM API Võti",
+        "description": "LLM mudeli API võti",
+        "placeholder": "Sisesta oma LLM API võti"
+      },
+      "embeddingApiKey": {
+        "label": "Sisestamismudeli API Võti",
+        "description": "Teie sisestamismudeli API võti",
+        "placeholder": "Sisesta oma sisestamise API võti"
+      }
+    },
+    "placeholders": {
+      "loadingPlatforms": "Platvormide laadimine...",
+      "errorLoadingPlatforms": "Viga platvormide laadimisel",
+      "loadingModels": "Mudelite laadimine...",
+      "errorLoadingModels": "Viga mudelite laadimisel",
+      "selectPlatformFirst": "Vali esmalt platvorm"
+    },
+    "validationMessages": {
+      "connectionNameRequired": "Ühenduse nimi on kohustuslik",
+      "llmPlatformRequired": "LLM platvorm on kohustuslik",
+      "llmModelRequired": "LLM mudel on kohustuslik",
+      "embeddingPlatformRequired": "Sisestamismudeli platvorm on kohustuslik",
+      "embeddingModelRequired": "Sisestamismudel on kohustuslik",
+      "monthlyBudgetRequired": "Kuueelarve on kohustuslik",
+      "monthlyBudgetInvalid": "Palun sisesta kehtiv eelarve summa",
+      "monthlyBudgetPositive": "Kuueelarve peab olema positiivne arv",
+      "warnBudgetRequired": "Hoiatuse eelarve lävi on kohustuslik",
+      "warnBudgetRange": "Hoiatuse eelarve lävi peab olema vahemikus 1-100%",
+      "stopBudgetRequired": "Peatamise eelarve lävi on kohustuslik",
+      "stopBudgetRange": "Peatamise eelarve lävi peab olema vahemikus 1-200%",
+      "stopBudgetGreater": "Peatamise eelarve lävi peab olema suurem kui hoiatuse eelarve lävi",
+      "deploymentEnvironmentRequired": "Kasutuselevõtu keskkond on kohustuslik",
+      "numbersOnly": "Palun sisesta ainult numbrid",
+      "accessKeyRequiredAws": "Juurdepääsuvõti on AWS Bedrock jaoks kohustuslik",
+      "secretKeyRequiredAws": "Salavõti on AWS Bedrock jaoks kohustuslik",
+      "deploymentNameRequiredAzure": "Kasutuselevõtu nimi on Azure OpenAI jaoks kohustuslik",
+      "endpointRequiredAzure": "Lõpp-punkt on Azure OpenAI jaoks kohustuslik",
+      "apiKeyRequiredAzure": "API võti on Azure OpenAI jaoks kohustuslik",
+      "llmApiKeyRequired": "LLM API võti on kohustuslik",
+      "embeddingAccessKeyRequiredAws": "Sisestamise juurdepääsuvõti on AWS Bedrock jaoks kohustuslik",
+      "embeddingSecretKeyRequiredAws": "Sisestamise salavõti on AWS Bedrock jaoks kohustuslik",
+      "embeddingDeploymentNameRequiredAzure": "Sisestamise kasutuselevõtu nimi on Azure OpenAI jaoks kohustuslik",
+      "embeddingEndpointRequiredAzure": "Sisestamise lõpp-punkt on Azure OpenAI jaoks kohustuslik",
+      "embeddingApiKeyRequiredAzure": "Sisestamise API võti on Azure OpenAI jaoks kohustuslik",
+      "embeddingApiKeyRequired": "Sisestamise API võti on kohustuslik",
+      "invalidUrl": "Palun sisesta kehtiv URL, mis algab http:// või https://",
+      "failedToLoadPlatforms": "Platvormide laadimine ebaõnnestus",
+      "failedToLoadModels": "Mudelite laadimine ebaõnnestus"
+    },
+    "buttons": {
+      "deleteConnection": "Kustuta Ühendus",
+      "updateConnection": "Uuenda Ühendus",
+      "createConnection": "Loo Ühendus"
+    },
+    "environments": {
+      "testing": "Testimine",
+      "production": "Tootmine"
+    },
+    "createConnection": {
+      "title": "Loo LLM Ühendus",
+      "successDialogTitle": "Ühendus Õnnestus",
+      "successDialogMessage": "Esitatud LLM konfiguratsioon on edukalt konfigureeritud",
+      "viewConnectionsButton": "Vaata LLM Ühendusi",
+      "errorDialogTitle": "Ühendus Ebaõnnestus",
+      "errorDialogMessage": "Ühendust ei saanud luua kas vigaste API mandaatide või kasutuselevõtu platvormi valekonfiguratsiooni tõttu",
+      "goBackButton": "Mine Tagasi",
+      "replaceProductionDialogTitle": "Asenda Tootmisühendus",
+      "replaceProductionDialogMessage": "Tootmisühendus \"{connectionName}\" on juba olemas.",
+      "replaceProductionDialogWarning": "Selle uue tootmisühenduse loomine asendab praeguse. Kas oled kindel, et soovid jätkata?",
+      "cancelButton": "Tühista",
+      "confirmReplaceButton": "Jah, Asenda Tootmisühendus"
+    },
+    "viewConnection": {
+      "updateSuccessTitle": "Ühenduse Uuendamine Õnnestus",
+      "updateSuccessMessage": "LLM konfiguratsioon uuendati edukalt!",
+      "updateErrorTitle": "Ühenduse Uuendamine Ebaõnnestus",
+      "updateErrorMessage": "LLM ühenduse uuendamine ebaõnnestus. Palun proovi uuesti.",
+      "deleteSuccessTitle": "Ühenduse Kustutamine Õnnestus",
+      "deleteSuccessMessage": "LLM ühendus kustutati edukalt!",
+      "deleteErrorTitle": "Viga",
+      "deleteErrorMessage": "LLM ühenduse kustutamine ebaõnnestus. Palun proovi uuesti.",
+      "viewConnectionsButton": "Vaata LLM Ühendusi",
+      "goBackButton": "Mine Tagasi",
+      "confirmEnvironmentChangeTitle": "Kinnita Tootmiskeskkonna Muutus",
+      "confirmEnvironmentChangeMessage": "Oled tootmisühendust muutmas testimiskeskkonnaks.",
+      "confirmEnvironmentChangeWarning": "See mõjutab praegust tootmisseadistust. Kas oled kindel, et soovid jätkata?",
+      "cancelButton": "Tühista",
+      "confirmChangeButton": "Jah, Muuda Keskkonda",
+      "cannotDeleteProductionTitle": "Ei Saa Kustutada Tootmisühendust",
+      "cannotDeleteProductionMessage": "See LLM ühendus on praegu määratud tootmisühendusena ja seda ei saa kustutada.",
+      "cannotDeleteProductionInstructions": "Selle ühenduse kustutamiseks veendu, et mõni teine ühendus on määratud tootmisühendusena.",
+      "confirmDeleteTitle": "Kinnita Kustutamine",
+      "confirmDeleteMessage": "Kas oled kindel, et soovid selle LLM ühenduse kustutada? Seda tegevust ei saa tagasi võtta.",
+      "deleteButton": "Kustuta",
+      "okButton": "OK",
+      "connectionNotFoundTitle": "Ühendust Ei Leitud",
+      "connectionNotFoundMessage": "Soovitud LLM ühendust ei leitud."
+    }
   },
   "testModels": {
-    "title": "Testige mudelit",
-    "selectionLabel": "Mudel",
-    "placeholder": "Valige mudel",
-    "classifyTextLabel": "Sisestage tekst",
-    "classify": "Klassifitseeri",
-    "predictedHierarchy": "Prognoositud klassihierarhia: ",
-    "averageConfidence": "Keskmine kindlus: ",
-    "classProbabilities": "Klassi tõenäosused: "
+    "title": "Testi LLM",
+    "llmConnectionLabel": "LLM Ühendus",
+    "selectConnectionPlaceholder": "Vali LLM Ühendus",
+    "connectionNotExist": "Ühendus ei eksisteeri",
+    "classifyTextLabel": "Sisesta tekst testimiseks",
+    "sendButton": "Saada",
+    "sendingButton": "Saatmine...",
+    "responseLabel": "Vastus:",
+    "inferenceErrorTitle": "Järeldamise Viga",
+    "inferenceErrorMessage": "Järeldamise tulemuse saamine ebaõnnestus. Palun proovi uuesti.",
+    "classificationFailed": "Järeldamine ebaõnnestus. Palun proovi uuesti.",
+    "closeButton": "Sulge"
   },
-  "optionLists": {
-    "text": "Tekst",
-    "numbers": "Numbrid",
-    "dateTimes": "Kuupäev ja kellaaeg",
-    "email": "E-posti aadress",
-    "fileAttachements": "Faili lisad",
-    "importToAdd": "Impordi lisamiseks",
-    "importToDelete": "Impordi kustutamiseks",
-    "userManagement": "Kasutajate haldus",
-    "integration": "Integreerimine",
-    "dataset": "Andmekogum",
-    "dataModels": "Andmemudelid",
-    "classes": "Klassid",
-    "stopWords": "Stop-sõnad",
-    "incomingTexts": "Sissetulevad tekstid",
-    "testModel": "Testi mudelit"
+  "budgetBanner": {
+    "productionDisabled": "Tootmise LLM ühendus keelatud",
+    "budgetExceededDescription": "{{platform}} integratsioon on oma eelarve ületanud. Uuenda eelarvet LLM ühenduse taasaktiveerimiseks.",
+    "budgetUsageMessage": "{{percentage}}% ühenduse eelarvest on kasutatud.",
+    "budgetUsageDescription": "{{platform}} integratsioon on kasutanud {{percentage}}% oma eelarvest. Vaata üle ühenduse eelarve, et vältida katkestusi",
+    "reviewBudgetButton": "Vaata Eelarvet",
+    "updateBudgetButton": "Uuenda Eelarvet",
+    "platforms": {
+      "aws": "AWS Bedrock",
+      "azure": "Azure OpenAI"
+    }
   }
 }

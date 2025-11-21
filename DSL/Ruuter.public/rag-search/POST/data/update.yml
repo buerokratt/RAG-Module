@@ -23,11 +23,11 @@ extract_params:
     single_agency_id: ${get_agency_id_result.response.body[0].agencyId}
     agency_ids: 
       - ${single_agency_id}
-    agency_data_hash: ${get_agency_id_result.response.body[0].agencyDataHash}
+    current_data_hash: ${get_agency_id_result.response.body[0].agencyDataHash}
   next: logs_params
 
 logs_params:
-  log: "Agency ID: ${agency_ids}, Agency Data Hash: ${agency_data_hash}"
+  log: "Agency ID: ${agency_ids}, Current Data Hash: ${current_data_hash}"
   next: import_agency_data
 
 import_agency_data:
@@ -45,16 +45,45 @@ log_import_agency_data_response:
 
 assign_import_agency_data:
   assign:
-    client_data_hash: ${importResult.response.body.response[0].clientDataHash}
+    ckb_data_hash: ${importResult.response.body.response[0].clientDataHash}
     signed_s3_url: ${importResult.response.body.response[0].signedS3Url}
   next: check_has_match
   
 check_has_match:
   switch:
-    - condition: ${agency_data_hash === importResult.response.body.response[0].clientDataHash}
+    - condition: ${current_data_hash === importResult.response.body.response[0].clientDataHash}
       next: noAgencyData
     - condition: true
-      next: execute_cron_manager
+      next: sync_current_hash_with_ckb_latest_hash
+
+sync_current_hash_with_ckb_latest_hash:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-agency-hash"
+    body:
+      agencyId: ${single_agency_id}
+      newAgencyDataHash: ${ckb_data_hash}
+      dataUrl: ${signed_s3_url}
+  result: sync_agency_hash_result
+  next: log_sync_hash_result
+  on_error: handle_hash_update_error
+
+log_sync_hash_result:
+  log: "Current hash sync result: ${JSON.stringify(sync_agency_hash_result.response)}"
+  next: execute_cron_manager
+
+handle_hash_update_error:
+  log: "ERROR: Failed to update data hash - ${sync_agency_hash_result.error || 'Unknown error'}"
+  next: assign_hash_error_response
+
+assign_hash_error_response:
+  assign:
+    format_res: {
+      message: "Failed to update data hash. Data synchronization aborted.",
+      operationSuccessful: false,
+      error: "HASH_UPDATE_FAILED"
+    }
+  next: return_bad_request
 
 execute_cron_manager:
   call: http.post
@@ -62,26 +91,44 @@ execute_cron_manager:
     url: "[#RAG_SEARCH_CRON_MANAGER]/execute/initiate_vector_indexer/vector_indexer"
     query:
       signedUrl: ${signed_s3_url}
-      clientDataHash: ${client_data_hash}
+      clientDataHash: ${ckb_data_hash}
   result: res
-  next: log_new_data_present
+  next: assign_success_response
 
-log_new_data_present:
-  log: "New data present - synchronization required"
+assign_success_response:
+  assign:
+    format_res: {
+      message: "Data synchronization initiated successfully",
+      operationSuccessful: true,
+    }
+  next: return_ok
+
+assign_fail_response:
+  assign:
+    format_res: {
+      message: "Data synchronization failed",
+      operationSuccessful: false,
+    }
+  next: return_bad_request
+
+return_ok:
+  status: 200
+  return: ${format_res}
   next: end
 
-assignNoAgencyResponse:
-  assign:
-    no_agency_response:
-      success: false
-      message: "No agency data available for sync"
-  next: noAgencyData
+return_bad_request:
+  status: 400
+  return: ${format_res}
+  next: end
 
 noAgencyData:
   assign:
     response_data:
       success: true
       message: "No sync required - data is up to date"
+  next: return_no_sync_needed
+
+return_no_sync_needed:
   status: 200
   return: ${response_data}
   next: end

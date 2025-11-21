@@ -326,6 +326,46 @@ def _generate_metadata_comment(
 """
 
 
+def _ensure_required_config_structure(base_config: Dict[str, Any]) -> None:
+    """
+    Ensure the base config has the required rails and streaming structure.
+
+    This function ensures the configuration includes:
+    - Global streaming: True
+    - rails.input.flows with self check input
+    - rails.output.flows with self check output
+    - rails.output.streaming with proper settings
+    """
+    # Ensure global streaming is enabled
+    base_config["streaming"] = True
+
+    # Ensure rails root and nested structure using setdefault()
+    rails = base_config.setdefault("rails", {})
+
+    # Configure input rails
+    input_cfg = rails.setdefault("input", {})
+    input_flows = input_cfg.setdefault("flows", [])
+
+    if "self check input" not in input_flows:
+        input_flows.append("self check input")
+
+    # Configure output rails
+    output_cfg = rails.setdefault("output", {})
+    output_flows = output_cfg.setdefault("flows", [])
+    output_streaming = output_cfg.setdefault("streaming", {})
+
+    if "self check output" not in output_flows:
+        output_flows.append("self check output")
+
+    # Set required streaming parameters (override existing values to ensure consistency)
+    output_streaming["enabled"] = True
+    output_streaming["chunk_size"] = 200
+    output_streaming["context_size"] = 300
+    output_streaming["stream_first"] = False
+
+    logger.info("✓ Ensured required rails and streaming configuration structure")
+
+
 def _save_optimized_config(
     output_path: Path,
     metadata_comment: str,
@@ -341,7 +381,7 @@ def _save_optimized_config(
         f.write(metadata_comment)
         yaml.dump(base_config, f, default_flow_style=False, sort_keys=False)
 
-    logger.info(f"✓ Saved optimized config to: {output_path}")
+    logger.info(f"  Saved optimized config to: {output_path}")
     logger.info(f"  Config size: {output_path.stat().st_size} bytes")
     logger.info(f"  Few-shot examples: {len(optimized_prompts['demos'])}")
     logger.info(f"  Prompts updated: Input={updated_input}, Output={updated_output}")
@@ -388,6 +428,9 @@ def generate_optimized_nemo_config(
         updated_input, updated_output = _update_prompts_with_demos(
             base_config, demos_text
         )
+
+        # Ensure required rails and streaming configuration structure
+        _ensure_required_config_structure(base_config)
 
         # Generate metadata comment
         metadata_comment = _generate_metadata_comment(

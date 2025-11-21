@@ -5,10 +5,14 @@ from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator, Dict
 
 from fastapi import FastAPI, HTTPException, status, Request
+from fastapi.responses import StreamingResponse
 from loguru import logger
 import uvicorn
 
 from llm_orchestration_service import LLMOrchestrationService
+from src.llm_orchestrator_config.llm_cochestrator_constants import (
+    STREAMING_ALLOWED_ENVS,
+)
 from models.request_models import (
     OrchestrationRequest,
     OrchestrationResponse,
@@ -209,6 +213,110 @@ def test_orchestrate_llm_request(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal server error occurred",
+        )
+
+
+@app.post(
+    "/orchestrate/stream",
+    status_code=status.HTTP_200_OK,
+    summary="Stream LLM orchestration response with validation-first guardrails",
+    description="Streams LLM response with NeMo Guardrails validation-first approach",
+)
+async def stream_orchestrated_response(
+    http_request: Request,
+    request: OrchestrationRequest,
+):
+    """
+    Stream LLM orchestration response with validation-first guardrails.
+
+    Flow:
+    1. Validate input with guardrails (blocking)
+    2. Refine prompt (blocking)
+    3. Retrieve context chunks (blocking)
+    4. Check if question is in scope (blocking)
+    5. Stream through NeMo Guardrails (validation-first)
+       - Tokens buffered (chunk_size=200)
+       - Each buffer validated before streaming
+       - Only validated tokens reach client
+
+    Request Body:
+        Same as /orchestrate endpoint - OrchestrationRequest
+
+    Response:
+        Server-Sent Events (SSE) stream with format:
+        data: {"chatId": "...", "payload": {"content": "..."}, "timestamp": "...", "sentTo": []}
+
+    Content Types:
+        - Regular token: "Token1", "Token2", "Token3", ...
+        - Stream complete: "END"
+        - Input blocked: Fixed message from constants
+        - Out of scope: Fixed message from constants
+        - Guardrail failed: Fixed message from constants
+        - Technical error: Fixed message from constants
+
+    Notes:
+        - Available for configured environments (see STREAMING_ALLOWED_ENVS)
+        - Non-streaming environment requests will return 400 error
+        - Streaming uses validation-first approach (stream_first=False)
+        - All tokens are validated before being sent to client
+    """
+
+    try:
+        logger.info(
+            f"Streaming request received - "
+            f"chatId: {request.chatId}, "
+            f"environment: {request.environment}, "
+            f"message: {request.message[:100]}..."
+        )
+
+        # Streaming is only for allowed environments
+        if request.environment not in STREAMING_ALLOWED_ENVS:
+            logger.warning(
+                f"Streaming not supported for environment: {request.environment}. "
+                f"Allowed environments: {', '.join(STREAMING_ALLOWED_ENVS)}. "
+                "Use /orchestrate endpoint instead."
+            )
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Streaming is only available for environments: {', '.join(STREAMING_ALLOWED_ENVS)}. "
+                f"Current environment: {request.environment}. "
+                f"Please use /orchestrate endpoint for non-streaming environments.",
+            )
+
+        # Get the orchestration service from app state
+        if not hasattr(http_request.app.state, "orchestration_service"):
+            logger.error("Orchestration service not found in app state")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        orchestration_service = http_request.app.state.orchestration_service
+        if orchestration_service is None:
+            logger.error("Orchestration service is None")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        # Stream the response
+        return StreamingResponse(
+            orchestration_service.stream_orchestration_response(request),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Streaming endpoint error: {e}")
+        logger.exception("Full traceback:")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
         )
 
 

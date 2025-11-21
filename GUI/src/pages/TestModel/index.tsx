@@ -48,14 +48,14 @@ const TestLLM: FC = () => {
     onError: (error: any) => {
       console.error('Error getting inference result:', error);
       openDialog({
-        title: 'Inference Error',
-        content: <p>Failed to get inference result. Please try again.</p>,
+        title: t('testModels.inferenceErrorTitle') || 'Inference Error',
+        content: <p>{t('testModels.inferenceErrorMessage') || 'Failed to get inference result. Please try again.'}</p>,
         footer: (
           <Button
             appearance={ButtonAppearanceTypes.PRIMARY}
             onClick={closeDialog}
           >
-            Close
+            {t('testModels.closeButton') || 'Close'}
           </Button>
         ),
       });
@@ -85,28 +85,28 @@ const TestLLM: FC = () => {
       ) : (
         <div className="container">
           <div className="title_container">
-            <div className="title">{'Test LLM'}</div>
+            <div className="title">{t('testModels.title') || 'Test LLM'}</div>
           </div>
           <div className="llm-connection-section">
-            <p>{"LLM Connection"}</p>
+            <p>{t('testModels.llmConnectionLabel') || 'LLM Connection'}</p>
             <div className="llm-connection-controls">
 
               <FormSelect
                 label=""
                 name="connectionId"
                 options={connectionOptions}
-                placeholder={'-Select LLM Connection-'}
+                placeholder={t('testModels.selectConnectionPlaceholder') || 'Select LLM Connection'}
                 onSelectionChange={(selection) => {
                   handleChange('connectionId', selection?.value as string);
                 }}
-                value={testLLM?.connectionId === null ? 'Connection does not exist' : undefined} 
+                value={testLLM?.connectionId === null ? t('testModels.connectionNotExist') || 'Connection does not exist' : undefined} 
                 defaultValue={testLLM?.connectionId ?? undefined}
               />
             </div>
           </div>
 
           <div className="testModalFormTextArea">
-            <p>{t('testModels.classifyTextLabel')}</p>
+            <p>{t('testModels.classifyTextLabel') || 'Enter text to test'}</p>
             <FormTextarea
               label=""
               name=""
@@ -120,7 +120,7 @@ const TestLLM: FC = () => {
               onClick={handleSend}
               disabled={!testLLM.connectionId || !testLLM.text || inferenceMutation.isLoading}
             >
-              {inferenceMutation.isLoading ? 'Sending...' : 'Send'}
+              {inferenceMutation.isLoading ? t('testModels.sendingButton') || 'Sending...' : t('testModels.sendButton') || 'Send'}
             </Button>
           </div>
 
@@ -129,7 +129,7 @@ const TestLLM: FC = () => {
           {inferenceResult && (
             <div className="inference-results-container">
             <div className="result-item">
-              <strong>Response:</strong>
+              <strong>{t('testModels.responseLabel') || 'Response:'}</strong>
               <div className="response-content">
                 {inferenceResult.content}
               </div>

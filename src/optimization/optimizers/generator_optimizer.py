@@ -144,9 +144,7 @@ def optimize_generator(
         logger.info(f"Running bootstrap with {len(bootstrap_trainset)} examples...")
 
         try:
-            module_v1 = bootstrap.compile(
-                student=base_module, trainset=bootstrap_trainset
-            )
+            bootstrap.compile(student=base_module, trainset=bootstrap_trainset)
 
             bootstrap_time = (datetime.now() - bootstrap_start).total_seconds()
             phase_times["bootstrap"] = bootstrap_time
@@ -155,10 +153,8 @@ def optimize_generator(
 
         except Exception as e:
             logger.warning(f"Bootstrap failed: {e}, continuing with base module")
-            module_v1 = base_module
             phase_times["bootstrap"] = 0
     else:
-        module_v1 = base_module
         phase_times["bootstrap"] = 0
 
     # Phase 2: MIPROv2

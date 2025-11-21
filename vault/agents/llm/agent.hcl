@@ -8,8 +8,8 @@ auto_auth {
   method "approle" {
     mount_path = "auth/approle"
     config = {
-      role_id_file_path   = "/agent/in/role_id"
-      secret_id_file_path = "/agent/in/secret_id"
+      role_id_file_path   = "/agent/credentials/role_id"
+      secret_id_file_path = "/agent/credentials/secret_id"
       remove_secret_id_file_after_reading = false
     }
   }
@@ -30,13 +30,8 @@ listener "tcp" {
   tls_disable = true
 }
 
-template {
-  source      = "/dev/null"
-  destination = "/agent/out/dummy"
-}
-
 api_proxy {
   use_auto_auth_token = true
-  enforce_consistency = "always"  # Strict consistency
-  when_inconsistent = "forward"   # Forward to Vault if inconsistent
+  enforce_consistency = "always"
+  when_inconsistent = "forward"
 }

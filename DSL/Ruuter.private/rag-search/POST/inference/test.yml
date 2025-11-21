@@ -62,7 +62,7 @@ call_orchestrate_endpoint:
     body:
       connectionId: ${connectionId}
       message: ${message}
-      environment: "test"
+      environment: "testing"
     headers:
       Content-Type: "application/json"
   result: orchestrate_result

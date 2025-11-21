@@ -119,37 +119,37 @@ const LLMConnections: FC = () => {
 
   // Platform filter options
   const platformOptions = [
-    { label: 'All Platforms', value: 'all' },
-    { label: 'Azure OpenAI', value: 'azure' },
-    { label: 'AWS Bedrock', value: 'aws' },
+    { label: t('dataModels.filters.allPlatforms'), value: 'all' },
+    { label: t('dataModels.platforms.azure'), value: 'azure' },
+    { label: t('dataModels.platforms.aws'), value: 'aws' },
   ];
 
   // LLM Model filter options - these would ideally come from an API
   const llmModelOptions = [
-    { label: 'All Models', value: 'all' },
-    { label: 'GPT-4 Mini', value: 'gpt-4o-mini' },
-    { label: 'GPT-4o', value: 'gpt-4o' },
-    { label: 'Anthropic Claude 3.5 Sonnet', value: 'anthropic-claude-3.5-sonnet' },
-    { label: 'Anthropic Claude 3.7 Sonnet', value: 'anthropic-claude-3.7-sonnet' },
+    { label: t('dataModels.filters.allModels'), value: 'all' },
+    { label: t('dataModels.models.gpt4Mini'), value: 'gpt-4o-mini' },
+    { label: t('dataModels.models.gpt4o'), value: 'gpt-4o' },
+    { label: t('dataModels.models.claude35Sonnet'), value: 'anthropic-claude-3.5-sonnet' },
+    { label: t('dataModels.models.claude37Sonnet'), value: 'anthropic-claude-3.7-sonnet' },
   ];
 
   // Environment filter options
   const environmentOptions = [
-    { label: 'All Environments', value: 'all' },
-    { label: 'Testing', value: 'testing' },
-    { label: 'Production', value: 'production' },
+    { label: t('dataModels.filters.allEnvironments'), value: 'all' },
+    { label: t('dataModels.environments.testing'), value: 'testing' },
+    { label: t('dataModels.environments.production'), value: 'production' },
   ];
 
   // Sort options - using snake_case format for backend
   const sortOptions = [
-    { label: 'Created Date (Newest)', value: 'created_at desc' },
-    { label: 'Created Date (Oldest)', value: 'created_at asc' },
-    { label: 'Platform A-Z', value: 'llm_platform asc' },
-    { label: 'Platform Z-A', value: 'llm_platform desc' },
-    { label: 'Model A-Z', value: 'llm_model asc' },
-    { label: 'Model Z-A', value: 'llm_model desc' },
-    { label: 'Budget (High to Low)', value: 'monthly_budget desc' },
-    { label: 'Budget (Low to High)', value: 'monthly_budget asc' },
+    { label: t('dataModels.sortOptions.createdDateNewest'), value: 'created_at desc' },
+    { label: t('dataModels.sortOptions.createdDateOldest'), value: 'created_at asc' },
+    { label: t('dataModels.sortOptions.platformAZ'), value: 'llm_platform asc' },
+    { label: t('dataModels.sortOptions.platformZA'), value: 'llm_platform desc' },
+    { label: t('dataModels.sortOptions.modelAZ'), value: 'llm_model asc' },
+    { label: t('dataModels.sortOptions.modelZA'), value: 'llm_model desc' },
+    { label: t('dataModels.sortOptions.budgetHighToLow'), value: 'monthly_budget desc' },
+    { label: t('dataModels.sortOptions.budgetLowToHigh'), value: 'monthly_budget asc' },
   ];
 
   const currentSorting = `${filters.sortBy || 'created_at'} ${filters.sortOrder || 'desc'}`;
@@ -170,7 +170,7 @@ const LLMConnections: FC = () => {
                   size="m"
                   onClick={() => navigate('/create-llm-connection')}
                 >
-                  {'Create LLM Connection'}
+                  {t('dataModels.createModel')}
                 </Button>
               </div>
               <div className="search-panel">
@@ -178,7 +178,7 @@ const LLMConnections: FC = () => {
                   <FormSelect
                     label=""
                     name="llmPlatform"
-                    placeholder={'Platform'}
+                    placeholder={t('dataModels.filters.platform') ?? 'Platform'}
                     options={platformOptions}
                     onSelectionChange={(selection) =>
                       handleFilterChange('llmPlatform', selection?.value === 'all' ? '' : selection?.value)
@@ -188,7 +188,7 @@ const LLMConnections: FC = () => {
                   <FormSelect
                     label=""
                     name="llmModel"
-                    placeholder={'Model'}
+                    placeholder={t('dataModels.filters.model') ?? 'Model'}
                     options={llmModelOptions}
                     onSelectionChange={(selection) =>
                       handleFilterChange('llmModel', selection?.value === 'all' ? '' : selection?.value)
@@ -198,7 +198,7 @@ const LLMConnections: FC = () => {
                   <FormSelect
                     label=""
                     name="environment"
-                    placeholder={'Environment'}
+                    placeholder={t('dataModels.filters.environment') ?? 'Environment'}
                     options={environmentOptions}
                     onSelectionChange={(selection) =>
                       handleFilterChange('environment', selection?.value === 'all' ? '' : selection?.value)
@@ -209,7 +209,7 @@ const LLMConnections: FC = () => {
                   <FormSelect
                     label=""
                     name="sorting"
-                    placeholder={'Sort By'}
+                    placeholder={t('dataModels.filters.sortBy') ?? 'Sort By'}
                     options={sortOptions}
                     onSelectionChange={(selection) =>
                       handleFilterChange('sorting', selection?.value)
@@ -247,7 +247,7 @@ const LLMConnections: FC = () => {
 
               {productionConnection && filters?.environment !== "testing" && (
                 <div className="m-30-0">
-                  <p>Production LLM Connection</p>
+                  <p>{t('dataModels.productionConnections')}</p>
                   <div className="grid-container m-30-0">
                     <LLMConnectionCard
                       key={productionConnection.id}
@@ -265,7 +265,7 @@ const LLMConnections: FC = () => {
 
               {otherConnections?.length > 0 ? (
                 <div>
-                  <p>Other LLM Connections</p>
+                  <p>{t('dataModels.otherConnections')}</p>
                   <div className="grid-container m-30-0">
                     {otherConnections?.map((llmConnection: LLMConnection) => {
                       return (

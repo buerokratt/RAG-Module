@@ -19,19 +19,19 @@ const MainNavigation: FC = () => {
   const items = [
     {
       id: 'userManagement',
-      label: 'User Management',
+      label: t('menu.userManagement'),
       path: '/user-management',
       icon: <MdSupervisorAccount />,
     },
      {
       id: 'llmConnections',
-      label: 'LLM Connections',
+      label: t('menu.llmConnections'),
       path: '/llm-connections',
       icon: <MdOutlineDataset />,
     },
     {
       id: 'testLLM',
-      label: 'Test LLM',
+      label: t('menu.testLLM'),
       path: '/test-llm',
       icon: <MdSearch />
     },

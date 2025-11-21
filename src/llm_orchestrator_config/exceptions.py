@@ -29,3 +29,21 @@ class InvalidConfigurationError(LLMConfigError):
     """Raised when configuration validation fails."""
 
     pass
+
+
+class ContextualRetrievalError(LLMConfigError):
+    """Base exception for contextual retrieval errors."""
+
+    pass
+
+
+class ContextualRetrieverInitializationError(ContextualRetrievalError):
+    """Raised when contextual retriever fails to initialize."""
+
+    pass
+
+
+class ContextualRetrievalFailureError(ContextualRetrievalError):
+    """Raised when contextual chunk retrieval fails."""
+
+    pass

@@ -2,6 +2,7 @@ import BackArrowButton from "assets/BackArrowButton";
 import LLMConnectionForm, { LLMConnectionFormData } from "components/molecules/LLMConnectionForm";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useDialog } from 'hooks/useDialog';
 import { createLLMConnection, getProductionConnection } from 'services/llmConnections';
 import { llmConnectionsQueryKeys } from 'utils/queryKeys';
@@ -9,6 +10,7 @@ import { ButtonAppearanceTypes } from 'enums/commonEnums';
 import { Button } from 'components';
 
 const CreateLLMConnection = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { open: openDialog, close: closeDialog } = useDialog();
     const queryClient = useQueryClient();
@@ -27,8 +29,8 @@ const CreateLLMConnection = () => {
         });
         
         openDialog({
-          title: 'Connection Succeeded',
-          content: <p>The provide LLM configuration is successfully configured</p>,
+          title: t('llmConnectionForm.createConnection.successDialogTitle') || 'Connection Succeeded',
+          content: <p>{t('llmConnectionForm.createConnection.successDialogMessage') || 'The provided LLM configuration is successfully configured'}</p>,
           footer: (
             <Button
               appearance={ButtonAppearanceTypes.PRIMARY}
@@ -37,7 +39,7 @@ const CreateLLMConnection = () => {
                 navigate('/llm-connections');
               }}
             >
-              View LLM Connections
+              {t('llmConnectionForm.createConnection.viewConnectionsButton') || 'View LLM Connections'}
             </Button>
           ),
         });
@@ -45,14 +47,14 @@ const CreateLLMConnection = () => {
       onError: (error: any) => {
         console.error('Error creating LLM connection:', error);
         openDialog({
-          title: 'Connection Failed',
-          content: <p>{'The connection couldn’t be established either due to invalid API credentials or misconfiguration in the deployment platform'}</p>,
+          title: t('llmConnectionForm.createConnection.errorDialogTitle') || 'Connection Failed',
+          content: <p>{t('llmConnectionForm.createConnection.errorDialogMessage') || 'The connection couldn\'t be established either due to invalid API credentials or misconfiguration in the deployment platform'}</p>,
           footer: (
             <Button
               appearance={ButtonAppearanceTypes.PRIMARY}
               onClick={closeDialog}
             >
-              Go Back
+              {t('llmConnectionForm.createConnection.goBackButton') || 'Go Back'}
             </Button>
           ),
         });
@@ -65,11 +67,11 @@ const CreateLLMConnection = () => {
       
       if (isCreatingProductionConnection && hasExistingProductionConnection) {
         openDialog({
-          title: 'Replace Production Connection',
+          title: t('llmConnectionForm.createConnection.replaceProductionDialogTitle') || 'Replace Production Connection',
           content: (
             <div>
-              <p>A production connection <strong>"{existingProductionConnection.connectionName}"</strong> already exists.</p>
-              <p>Creating this new production connection will replace the current one. Are you sure you want to proceed?</p>
+              <p>{t('llmConnectionForm.createConnection.replaceProductionDialogMessage', { connectionName: existingProductionConnection.connectionName }) || `A production connection "${existingProductionConnection.connectionName}" already exists.`}</p>
+              <p>{t('llmConnectionForm.createConnection.replaceProductionDialogWarning') || 'Creating this new production connection will replace the current one. Are you sure you want to proceed?'}</p>
             </div>
           ),
           footer: (
@@ -78,7 +80,7 @@ const CreateLLMConnection = () => {
                 appearance={ButtonAppearanceTypes.SECONDARY}
                 onClick={closeDialog}
               >
-                Cancel
+                {t('llmConnectionForm.createConnection.cancelButton') || 'Cancel'}
               </Button>
               <Button
                 appearance={ButtonAppearanceTypes.PRIMARY}
@@ -87,7 +89,7 @@ const CreateLLMConnection = () => {
                 }}
                 showLoadingIcon={createConnectionMutation.isLoading}
               >
-                Yes, Replace Production Connection
+                {t('llmConnectionForm.createConnection.confirmReplaceButton') || 'Yes, Replace Production Connection'}
               </Button>
             </div>
           ),
@@ -108,7 +110,7 @@ const CreateLLMConnection = () => {
             <Link to={'/llm-connections'}>
               <BackArrowButton />
             </Link>
-            <div className="title">{'Create LLM Connection'}</div>
+            <div className="title">{t('llmConnectionForm.createConnection.title') || 'Create LLM Connection'}</div>
           </div>
         </div>
         <LLMConnectionForm
