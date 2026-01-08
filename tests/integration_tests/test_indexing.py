@@ -129,7 +129,7 @@ class TestIndexingPipeline:
                         break
             except requests.exceptions.RequestException:
                 logger.debug(
-                    f"LLM orchestration health check attempt {i+1}/{max_retries} failed"
+                    f"LLM orchestration health check attempt {i + 1}/{max_retries} failed"
                 )
             time.sleep(2)
         else:

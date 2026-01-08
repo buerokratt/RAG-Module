@@ -87,7 +87,9 @@ class VaultAgentClient:
         # Auto-detect proxy mode: if URL points to vault-agent, don't use token file
         if "vault-agent" in self.vault_url.lower():
             self.use_token_file = False
-            logger.info("Detected vault agent proxy in URL, token authentication will be handled by proxy")
+            logger.info(
+                "Detected vault agent proxy in URL, token authentication will be handled by proxy"
+            )
 
         # Initialize hvac client
         self.client = hvac.Client(
@@ -140,7 +142,9 @@ class VaultAgentClient:
         try:
             # If using proxy mode, skip token checks
             if not self.use_token_file:
-                logger.debug("Using vault agent proxy - skipping token authentication check")
+                logger.debug(
+                    "Using vault agent proxy - skipping token authentication check"
+                )
                 # Just verify vault is accessible
                 return self.is_vault_available()
 
@@ -190,9 +194,7 @@ class VaultAgentClient:
 
                 # Try to get additional details from response body if available
                 try:
-                    if hasattr(response, "json") and callable(
-                        response.json
-                    ):
+                    if hasattr(response, "json") and callable(response.json):
                         health_data = response.json()
                         logger.debug(f"Vault health details: {health_data}")
                 except Exception as e:
