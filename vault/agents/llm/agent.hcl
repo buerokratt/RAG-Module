@@ -1,32 +1,34 @@
 vault {
   address = "http://vault:8200"
+  retry {
+    num_retries = 5
+  }
 }
-
-pid_file = "/agent/out/pidfile"
 
 auto_auth {
   method "approle" {
     mount_path = "auth/approle"
     config = {
-      role_id_file_path   = "/agent/credentials/role_id"
-      secret_id_file_path = "/agent/credentials/secret_id"
+      role_id_file_path   = "/agent/credentials/llm_role_id"
+      secret_id_file_path = "/agent/credentials/llm_secret_id"
       remove_secret_id_file_after_reading = false
     }
   }
 
   sink "file" {
     config = {
-      path = "/agent/out/token"
+      path = "/agent/llm-token/token"
+      mode = 0640
     }
   }
 }
 
 cache {
-  default_lease_duration = "1h"
+  default_lease_duration = "1h"  # Longer TTL for LLM service
 }
 
 listener "tcp" {
-  address     = "127.0.0.1:8201"
+  address     = "0.0.0.0:8201"  # Listen on all interfaces
   tls_disable = true
 }
 

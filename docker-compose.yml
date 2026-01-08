@@ -174,7 +174,7 @@ services:
   cron-manager:
     container_name: cron-manager
     image: cron-manager-python:latest
-    user: "root"
+    user: "1000:1000"
     volumes:
       - ./DSL/CronManager/DSL:/DSL
       - ./DSL/CronManager/script:/app/scripts
@@ -184,15 +184,14 @@ services:
       - ./datasets:/app/datasets   # Direct access to datasets folder for diff identifier operations
       - ./grafana-configs/loki_logger.py:/app/src/vector_indexer/loki_logger.py
       - ./.env:/app/.env:ro
-      - vault-agent-token:/agent/out:ro  # Mount vault token for accessing vault secrets
     environment:
       - server.port=9010
       - PYTHONPATH=/app:/app/src/vector_indexer
-      - VAULT_ADDR=http://vault:8200
+      - VAULT_AGENT_URL=http://vault-agent-cron:8203
     ports:
       - 9010:8080
     depends_on:
-      - vault-agent-llm
+      - vault-agent-cron
     networks:
       - bykstack
 
@@ -444,10 +443,8 @@ services:
       - vault-data:/vault/file
       - ./vault/config:/vault/config:ro
       - ./vault/logs:/vault/logs
-    expose:
-      - "8200"
     networks:
-      - bykstack
+      - vault-network  # Only on vault-network for security
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "sh", "-c", "wget -q -O- http://127.0.0.1:8200/v1/sys/health || exit 0"]
@@ -468,13 +465,73 @@ services:
     volumes:
       - vault-data:/vault/data
       - vault-agent-creds:/agent/credentials
-      - vault-agent-token:/agent/out
+      - vault-agent-gui-token:/agent/gui-token
+      - vault-agent-cron-token:/agent/cron-token
+      - vault-agent-llm-token:/agent/llm-token
       - ./vault-init.sh:/vault-init.sh:ro
     networks:
-      - bykstack
+      - vault-network  # Access vault
+      - bykstack       # Access to write agent tokens
     entrypoint: ["/bin/sh"]
-    command: ["-c", "apk add --no-cache curl jq && chmod -R 755 /agent/credentials && chmod -R 770 /agent/out && chown -R vault:vault /agent/credentials /agent/out && su vault -s /bin/sh /vault-init.sh"]
+    command:
+      - -c
+      - |
+        apk add --no-cache curl jq uuidgen openssl
+        # Create and set permissions for all agent directories
+        mkdir -p /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        chown -R vault:vault /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        chmod 755 /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        # Run vault initialization as vault user
+        su vault -s /bin/sh /vault-init.sh
     restart: "no"
+
+  vault-agent-gui:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-gui
+    command: ["vault", "agent", "-config=/agent/config/gui-agent.hcl", "-log-level=info"]
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/gui/gui-agent.hcl:/agent/config/gui-agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-gui-token:/agent/gui-token
+    networks:
+      - vault-network  # Access vault
+      - bykstack       # Accessible by GUI service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/gui-token/token && test -s /agent/gui-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  vault-agent-cron:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-cron
+    command: ["vault", "agent", "-config=/agent/config/cron-agent.hcl", "-log-level=info"]
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/cron/cron-agent.hcl:/agent/config/cron-agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-cron-token:/agent/cron-token
+    networks:
+      - vault-network  # Access vault
+      - bykstack       # Accessible by CronManager service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/cron-token/token && test -s /agent/cron-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
 
   vault-agent-llm:
     image: hashicorp/vault:1.20.3
@@ -488,10 +545,17 @@ services:
     volumes:
       - ./vault/agents/llm/agent.hcl:/agent/config/agent.hcl:ro
       - vault-agent-creds:/agent/credentials:ro
-      - vault-agent-token:/agent/out
+      - vault-agent-llm-token:/agent/llm-token
     networks:
-      - bykstack
+      - vault-network  # Access vault
+      - bykstack       # Accessible by LLM service
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/llm-token/token && test -s /agent/llm-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
 
   # LLM Orchestration Service
   llm-orchestration-service:
@@ -506,17 +570,15 @@ services:
       - .env
     environment:
       - ENVIRONMENT=production
-      - VAULT_ADDR=http://vault:8200
-      - VAULT_TOKEN=/agent/out/token
+      - VAULT_ADDR=http://vault-agent-llm:8201
+      # VAULT_TOKEN not set - vault-agent-llm proxy handles authentication
     volumes:
       - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
       - ./src/optimization/optimized_modules:/app/src/optimization/optimized_modules
       - llm_orchestration_logs:/app/logs
-      - vault-agent-token:/agent/out:ro
     networks:
       - bykstack
     depends_on:
-      - vault
       - vault-agent-llm
     healthcheck:
       test: ["CMD", "curl", "-f", "http://llm-orchestration-service:8100/health"]
@@ -602,8 +664,12 @@ volumes:
     name: cron_data
   vault-agent-creds:
     name: vault-agent-creds
-  vault-agent-token:
-    name: vault-agent-token
+  vault-agent-gui-token:
+    name: vault-agent-gui-token
+  vault-agent-cron-token:
+    name: vault-agent-cron-token
+  vault-agent-llm-token:
+    name: vault-agent-llm-token
   opensearch-data:
     name: opensearch-data
 
@@ -611,3 +677,7 @@ networks:
   bykstack:
     name: bykstack
     driver: bridge
+  vault-network:
+    name: vault-network
+    driver: bridge
+    internal: true  # No external access - isolated network

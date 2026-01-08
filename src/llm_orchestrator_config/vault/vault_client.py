@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Optional, Dict, Any, cast
 from loguru import logger
 import hvac
+from hvac.exceptions import InvalidPath, Forbidden
 
 from llm_orchestrator_config.vault.exceptions import (
     VaultConnectionError,
@@ -20,9 +21,10 @@ _vault_client_lock = threading.Lock()
 
 def get_vault_client(
     vault_url: Optional[str] = None,
-    token_path: str = "/agent/out/token",
+    token_path: str = "/agent/llm-token/token",
     mount_point: str = "secret",
     timeout: int = 10,
+    use_token_file: bool = True,
 ) -> "VaultAgentClient":
     """Get or create singleton VaultAgentClient instance.
 
@@ -31,9 +33,10 @@ def get_vault_client(
 
     Args:
         vault_url: Vault server URL (defaults to VAULT_ADDR env var)
-        token_path: Path to Vault Agent token file
+        token_path: Path to Vault Agent token file (only used if use_token_file=True)
         mount_point: KV v2 mount point
         timeout: Request timeout in seconds
+        use_token_file: Whether to read token from file (False when using vault agent proxy)
 
     Returns:
         Singleton VaultAgentClient instance
@@ -48,6 +51,7 @@ def get_vault_client(
                     token_path=token_path,
                     mount_point=mount_point,
                     timeout=timeout,
+                    use_token_file=use_token_file,
                 )
                 logger.info("Created singleton VaultAgentClient instance")
 
@@ -60,22 +64,30 @@ class VaultAgentClient:
     def __init__(
         self,
         vault_url: Optional[str] = None,
-        token_path: str = "/agent/out/token",
+        token_path: str = "/agent/llm-token/token",
         mount_point: str = "secret",
         timeout: int = 10,
-    ):
+        use_token_file: bool = True,
+    ) -> None:
         """Initialize Vault Agent client.
 
         Args:
             vault_url: Vault server URL (defaults to VAULT_ADDR env var)
-            token_path: Path to Vault Agent token file
+            token_path: Path to Vault Agent token file (only used if use_token_file=True)
             mount_point: KV v2 mount point
             timeout: Request timeout in seconds
+            use_token_file: Whether to read token from file (False when using vault agent proxy)
         """
         self.vault_url = vault_url or os.getenv("VAULT_ADDR", "http://vault:8200")
         self.token_path = Path(token_path)
         self.mount_point = mount_point
         self.timeout = timeout
+        self.use_token_file = use_token_file
+
+        # Auto-detect proxy mode: if URL points to vault-agent, don't use token file
+        if "vault-agent" in self.vault_url.lower():
+            self.use_token_file = False
+            logger.info("Detected vault agent proxy in URL, token authentication will be handled by proxy")
 
         # Initialize hvac client
         self.client = hvac.Client(
@@ -83,8 +95,11 @@ class VaultAgentClient:
             timeout=timeout,
         )
 
-        # Load token from Vault Agent
-        self._load_token()
+        # Load token from file only if not using proxy
+        if self.use_token_file:
+            self._load_token()
+        else:
+            logger.info("Using vault agent proxy - no token file required")
 
         logger.info(f"Vault Agent client initialized: {self.vault_url}")
 
@@ -106,7 +121,7 @@ class VaultAgentClient:
             if not token:
                 raise VaultTokenError("Vault Agent token file is empty")
 
-            # Log token info for debugging (first and last 4 chars only for security)
+            # Log token info for debugging (first and last 4 chars only)
             token_preview = f"{token[:4]}...{token[-4:]}" if len(token) > 8 else "****"
             logger.debug(f"Loaded token: {token_preview} (length: {len(token)})")
 
@@ -114,7 +129,7 @@ class VaultAgentClient:
             logger.debug("Vault Agent token loaded successfully")
 
         except (OSError, IOError) as e:
-            raise VaultTokenError(f"Failed to read Vault Agent token: {e}")
+            raise VaultTokenError(f"Failed to read Vault Agent token: {e}") from e
 
     def is_authenticated(self) -> bool:
         """Check if client is authenticated with Vault.
@@ -123,7 +138,13 @@ class VaultAgentClient:
             True if authenticated, False otherwise
         """
         try:
-            # Check if we have a token
+            # If using proxy mode, skip token checks
+            if not self.use_token_file:
+                logger.debug("Using vault agent proxy - skipping token authentication check")
+                # Just verify vault is accessible
+                return self.is_vault_available()
+
+            # Check token is available
             if not hasattr(self.client, "token") or not self.client.token:
                 logger.debug("No token set on client")
                 return False
@@ -170,7 +191,7 @@ class VaultAgentClient:
                 # Try to get additional details from response body if available
                 try:
                     if hasattr(response, "json") and callable(
-                        getattr(response, "json")
+                        response.json
                     ):
                         health_data = response.json()
                         logger.debug(f"Vault health details: {health_data}")
@@ -233,14 +254,14 @@ class VaultAgentClient:
                 logger.debug(f"Secret not found at path: {path}")
                 return None
 
-        except hvac.exceptions.InvalidPath:
+        except InvalidPath:
             logger.debug(f"Secret not found at path: {path}")
             return None
-        except hvac.exceptions.Forbidden as e:
-            raise VaultSecretError(f"Access denied to secret path {path}: {e}")
+        except Forbidden as e:
+            raise VaultSecretError(f"Access denied to secret path {path}: {e}") from e
         except Exception as e:
             logger.error(f"Error retrieving secret from path {path}: {e}")
-            raise VaultSecretError(f"Failed to retrieve secret: {e}")
+            raise VaultSecretError(f"Failed to retrieve secret: {e}") from e
 
     def list_secrets(self, path: str) -> Optional[list[str]]:
         """List secrets at the given path.
@@ -278,12 +299,12 @@ class VaultAgentClient:
                 logger.debug(f"No secrets found at path: {path}")
                 return None
 
-        except hvac.exceptions.InvalidPath:
+        except InvalidPath:
             logger.debug(f"Path not found: {path}")
             return None
         except Exception as e:
             logger.error(f"Error listing secrets at path {path}: {e}")
-            raise VaultSecretError(f"Failed to list secrets: {e}")
+            raise VaultSecretError(f"Failed to list secrets: {e}") from e
 
     def refresh_token(self) -> bool:
         """Refresh token from Vault Agent.
