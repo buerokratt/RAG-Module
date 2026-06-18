@@ -92,8 +92,24 @@ class NeMoRailsAdapter:
 
             from llm_orchestrator_config.llm_manager import LLMManager
 
+            # Resolve vault_uuid from DB if not provided
+            connection_id = self.connection_id
+            if not connection_id:
+                from src.utils.connection_id_fetcher import get_connection_id_fetcher
+
+                fetcher = get_connection_id_fetcher()
+                connection_id = fetcher.fetch_vault_uuid_sync(self.environment)
+                if not connection_id:
+                    raise ValueError(
+                        f"No {self.environment} connection found in database. "
+                        f"Cannot initialize guardrails without a configured LLM connection."
+                    )
+                logger.debug(
+                    f"Resolved {self.environment} vault_uuid for guardrails: {connection_id}"
+                )
+
             llm_manager = LLMManager(
-                environment=self.environment, connection_id=self.connection_id
+                environment=self.environment, connection_id=connection_id
             )
             llm_manager.ensure_global_config()
 

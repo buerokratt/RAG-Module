@@ -134,3 +134,43 @@ class APICallResult:
     def is_server_error(self) -> bool:
         """True if the response was a 5xx server error."""
         return 500 <= self.status_code < 600
+
+
+@dataclass
+class MultiAPICallResult:
+    """
+    Result returned by MultiAPICaller.call_all() after executing a batch of concurrent
+    HTTP requests.
+
+    Preserves input order: ``results[i]`` corresponds to ``endpoints[i]``.
+
+    Attributes:
+        results: One :class:`APICallResult` per endpoint, in input order.
+        endpoints: Corresponding endpoint metadata dicts (url, method, call_params, …).
+    """
+
+    results: list[APICallResult]
+    endpoints: list[Dict[str, Any]]
+
+    @property
+    def all_succeeded(self) -> bool:
+        """True if every result in the batch has ``success=True``."""
+        return all(r.success for r in self.results)
+
+    @property
+    def successful_results(self) -> list[tuple[Dict[str, Any], APICallResult]]:
+        """Return ``(endpoint, result)`` pairs where ``result.success`` is True."""
+        return [
+            (ep, res)
+            for ep, res in zip(self.endpoints, self.results, strict=True)
+            if res.success
+        ]
+
+    @property
+    def failed_results(self) -> list[tuple[Dict[str, Any], APICallResult]]:
+        """Return ``(endpoint, result)`` pairs where ``result.success`` is False."""
+        return [
+            (ep, res)
+            for ep, res in zip(self.endpoints, self.results, strict=True)
+            if not res.success
+        ]

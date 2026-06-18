@@ -158,15 +158,17 @@ class ErrorLogger:
                 stats_dict["end_time"] = stats.end_time.isoformat()
             stats_dict["duration"] = stats.duration
             stats_dict["success_rate"] = stats.success_rate
+            stats_dict["chunk_success_rate"] = stats.chunk_success_rate
 
             with open(self.config.stats_log_file, "w", encoding="utf-8") as f:
                 json.dump(stats_dict, f, indent=2)
 
             logger.info(
                 f"Processing completed - Success rate: {stats.success_rate:.1%}, "
+                f"Chunk success rate: {stats.chunk_success_rate:.1%}, "
                 f"Duration: {stats.duration}, "
                 f"Processed: {stats.documents_processed}/{stats.total_documents} documents, "
-                f"Chunks: {stats.total_chunks_processed}"
+                f"Chunks: {stats.total_chunks_processed} ok / {stats.total_chunks_failed} failed"
             )
         except Exception as e:
             logger.error(f"Failed to write stats log: {e}")

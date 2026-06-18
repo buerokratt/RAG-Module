@@ -12,6 +12,7 @@ from typing import (
     TYPE_CHECKING,
 )
 import httpx
+import asyncio
 from loguru import logger
 
 from llm_orchestrator_config.llm_manager import LLMManager
@@ -26,6 +27,7 @@ from tool_classifier.enums import (
     WorkflowType,
     WORKFLOW_DISPLAY_NAMES,
     WORKFLOW_LAYER_ORDER,
+    ExecutionMode,
 )
 from tool_classifier.models import ClassificationResult
 from tool_classifier.constants import (
@@ -38,11 +40,17 @@ from tool_classifier.constants import (
     DENSE_MIN_THRESHOLD,
     DENSE_HIGH_CONFIDENCE_THRESHOLD,
     DENSE_SCORE_GAP_THRESHOLD,
+    API_TOOL_MIN_THRESHOLD,
+    API_TOOL_HIGH_CONFIDENCE_THRESHOLD,
     API_TOOL_INTENT_SWITCH_THRESHOLD,
 )
 
 from tool_classifier.sparse_encoder import SparseVector, compute_sparse_vector
-from tool_classifier.api_semantic_searcher import APISemanticSearcher
+from tool_classifier.api_semantic_searcher import (
+    APISemanticSearcher,
+    APIToolSearchResult,
+)
+from tool_classifier.intent_decomposer import IntentDecomposerModule
 
 from tool_classifier.workflows import (
     APIToolWorkflowExecutor,
@@ -52,6 +60,7 @@ from tool_classifier.workflows import (
     OODWorkflowExecutor,
 )
 from llm_orchestrator_config.feature_flags import FeatureFlags
+from utils.atc_cache_store import ATCCacheStore
 
 if TYPE_CHECKING:
     from llm_orchestration_service import LLMOrchestrationService
@@ -125,6 +134,9 @@ class ToolClassifier:
             embedding_service=orchestration_service,
             qdrant_client=self._qdrant_client,
         )
+
+        # Intent decomposer
+        self.intent_decomposer = IntentDecomposerModule()
 
         logger.info(
             "Tool classifier initialized with hybrid search classification "
@@ -210,6 +222,11 @@ class ToolClassifier:
                                 f"— abandoning old session"
                             )
                             await session_store.delete(request.chatId)
+                            if FeatureFlags.ATC_RESPONSE_CACHE_ENABLED:
+                                await ATCCacheStore().invalidate_l2(request.chatId)
+                                logger.info(
+                                    f"[{request.chatId}] ATC cache: L2 invalidated on intent switch"
+                                )
                             return new_api_match
 
                         logger.info(
@@ -802,24 +819,155 @@ class ToolClassifier:
                 precomputed_embedding=precomputed_embedding,
                 min_cosine_override=min_cosine_override,
             )
-            if results:
-                matched = results[0]
+            if not results:
+                return None
+
+            matched = results[0]
+            logger.info(
+                f"API tool match: {matched.name!r} "
+                f"(confidence={matched.confidence}, cosine={matched.cosine_score:.4f})"
+            )
+
+            # Suppress multi-intent hint results when the feature is disabled.
+            # The searcher returns a hint result (multi_intent_hint=True) when the
+            # disambiguator rejected all multi-candidates — it is only meaningful when
+            # MULTI_INTENT_ENABLED=True.
+            if matched.multi_intent_hint and not FeatureFlags.MULTI_INTENT_ENABLED:
                 logger.info(
-                    f"API tool match: {matched.name!r} "
-                    f"(confidence={matched.confidence}, cosine={matched.cosine_score:.4f})"
+                    f"ATC: {matched.name!r} is a multi-intent hint but "
+                    f"MULTI_INTENT_ENABLED=False — falling through to CONTEXT/RAG"
                 )
-                return ClassificationResult(
-                    workflow=WorkflowType.API_TOOL_CALLING,
-                    confidence=matched.cosine_score,
-                    metadata={"matched_endpoint": matched.to_dict()},
-                    reasoning=(
-                        f"API tool match: {matched.name} "
-                        f"(cosine={matched.cosine_score:.4f}, confidence={matched.confidence})"
-                    ),
+                return None
+
+            # ── Score-band gate: try multi-intent decomposition ───────────
+            # A score between the min and high-confidence thresholds may indicate
+            # a diluted embedding caused by multiple intents in one query.
+            # Scores at or above the high-confidence threshold are normally clear
+            # single matches — UNLESS the disambiguator already ran and rejected
+            # all candidates (multi_intent_hint=True). In that case the score
+            # landed just above the threshold only because two close intents
+            # pushed the embedding upward together; IntentDecomposer must still run.
+            in_ambiguous_band = (
+                API_TOOL_MIN_THRESHOLD
+                <= matched.cosine_score
+                < API_TOOL_HIGH_CONFIDENCE_THRESHOLD
+            )
+            if (
+                (in_ambiguous_band or matched.multi_intent_hint)
+                and FeatureFlags.MULTI_INTENT_ENABLED
+                and not matched.llm_validated
+            ):
+                reason = (
+                    "multi_intent_hint (disambiguator rejected all candidates)"
+                    if matched.multi_intent_hint
+                    else f"cosine={matched.cosine_score:.4f} in ambiguous band "
+                    f"[{API_TOOL_MIN_THRESHOLD}, {API_TOOL_HIGH_CONFIDENCE_THRESHOLD})"
                 )
+                logger.info(f"ATC: {reason} — running IntentDecomposer")
+                decomposition = await self.intent_decomposer.decompose(query)
+
+                if decomposition.mode == ExecutionMode.PARALLEL:
+                    parallel_result = await self._try_parallel_api_tool_classification(
+                        sub_queries=decomposition.sub_queries,
+                        environment=environment,
+                        connection_id=connection_id,
+                        original_matched=matched,
+                    )
+                    if parallel_result is not None:
+                        return parallel_result
+                    # Fewer than 2 endpoints matched — fall through to single path
+
+            # ── Single-endpoint path (unchanged) ─────────────────────────
+            return ClassificationResult(
+                workflow=WorkflowType.API_TOOL_CALLING,
+                confidence=matched.cosine_score,
+                metadata={
+                    "matched_endpoint": matched.to_dict(),
+                    "execution_mode": ExecutionMode.SINGLE,
+                },
+                reasoning=(
+                    f"API tool match: {matched.name} "
+                    f"(cosine={matched.cosine_score:.4f}, confidence={matched.confidence})"
+                ),
+            )
+
         except Exception as e:
             logger.error(f"API tool classification failed: {e}", exc_info=True)
         return None
+
+    async def _try_parallel_api_tool_classification(
+        self,
+        sub_queries: list[str],
+        environment: str,
+        connection_id: Optional[str],
+        original_matched: APIToolSearchResult,
+    ) -> Optional[ClassificationResult]:
+        """Run parallel endpoint searches for each sub-query from IntentDecomposer.
+
+        Searches all sub-queries concurrently. Returns a ClassificationResult with
+        execution_mode="parallel" if at least 2 distinct endpoints are matched, or
+        None to signal the caller to fall back to the single-endpoint path.
+
+        Args:
+            sub_queries: Focused sub-queries from IntentDecomposer (2–3 items).
+            environment: LLM environment from the original request.
+            connection_id: Connection ID from the original request.
+            original_matched: The gate search result (used as fallback reference).
+
+        Returns:
+            ClassificationResult with parallel metadata, or None if <2 matched.
+        """
+
+        async def search_one(sub_query: str) -> Optional[APIToolSearchResult]:
+            try:
+                sub_results = await self.api_tool_searcher.search(
+                    query=sub_query,
+                    environment=environment,
+                    connection_id=connection_id,
+                )
+                return sub_results[0] if sub_results else None
+            except Exception as exc:
+                logger.warning(
+                    f"ATC parallel sub-search failed for {sub_query!r}: {exc}"
+                )
+                return None
+
+        sub_results = await asyncio.gather(*[search_one(q) for q in sub_queries])
+
+        # Deduplicate by endpoint name — keep first occurrence
+        seen: set[str] = set()
+        matched_endpoints: list[dict[str, Any]] = []
+        for result in sub_results:
+            if result is None:
+                continue
+            name: str = result.name
+            if name not in seen:
+                seen.add(name)
+                matched_endpoints.append(result.to_dict())
+
+        if len(matched_endpoints) < 2:
+            logger.info(
+                f"ATC parallel: only {len(matched_endpoints)} distinct endpoint(s) matched "
+                f"— falling back to single path"
+            )
+            return None
+
+        logger.info(
+            f"ATC parallel: {len(matched_endpoints)} distinct endpoints matched: "
+            f"{[e.get('name') for e in matched_endpoints]}"
+        )
+        return ClassificationResult(
+            workflow=WorkflowType.API_TOOL_CALLING,
+            confidence=original_matched.cosine_score,
+            metadata={
+                "execution_mode": ExecutionMode.PARALLEL,
+                "matched_endpoints": matched_endpoints,
+            },
+            reasoning=(
+                f"Multi-intent parallel match: "
+                f"{[e.get('name') for e in matched_endpoints]}"
+            ),
+        )
 
     async def _execute_with_fallback_async(
         self,
@@ -981,7 +1129,9 @@ class ToolClassifier:
                     f"(Layer {layer_number})"
                 )
 
-                result = await next_workflow.execute_streaming(request, {}, time_metric)
+                result = await next_workflow.execute_streaming(
+                    request, context, time_metric
+                )
 
                 if result is not None:
                     logger.info(f"[{chat_id}] {next_name} streaming started")
@@ -999,7 +1149,7 @@ class ToolClassifier:
             # Fallback to RAG on error
             logger.info(f"[{chat_id}] Falling back to RAG streaming due to error")
             streaming_result = await self.rag_workflow.execute_streaming(
-                request, {}, time_metric
+                request, context, time_metric
             )
             if streaming_result is not None:
                 async for chunk in streaming_result:

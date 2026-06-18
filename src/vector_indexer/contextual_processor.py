@@ -41,7 +41,7 @@ class ContextualProcessor:
 
     async def process_document(
         self, document: ProcessingDocument
-    ) -> List[ContextualChunk]:
+    ) -> tuple[List[ContextualChunk], int]:
         """
         Process single document into contextual chunks.
 
@@ -49,7 +49,8 @@ class ContextualProcessor:
             document: Document to process
 
         Returns:
-            List of contextual chunks with embeddings
+            Tuple of (contextual chunks with embeddings, number of chunks
+            dropped due to context-generation failure)
         """
         logger.info(
             f"Processing document {document.document_hash} ({len(document.content)} characters)"
@@ -69,11 +70,13 @@ class ContextualProcessor:
             # Step 3: Create contextual chunks (filter out failed context generations)
             contextual_chunks: List[ContextualChunk] = []
             valid_contextual_contents: List[str] = []
+            failed_chunks = 0
 
             for i, (base_chunk, context) in enumerate(
                 zip(base_chunks, contexts, strict=True)
             ):
                 if isinstance(context, Exception):
+                    failed_chunks += 1
                     self.error_logger.log_context_generation_failure(
                         document.document_hash, i, str(context), self.config.max_retries
                     )
@@ -128,7 +131,7 @@ class ContextualProcessor:
                 logger.error(
                     f"No valid chunks created for document {document.document_hash}"
                 )
-                return []
+                return [], failed_chunks
 
             # Step 4: Create embeddings for all valid contextual chunks
             try:
@@ -154,9 +157,10 @@ class ContextualProcessor:
                 raise
 
             logger.info(
-                f"Successfully processed document {document.document_hash}: {len(contextual_chunks)} chunks"
+                f"Successfully processed document {document.document_hash}: "
+                f"{len(contextual_chunks)} chunks ({failed_chunks} dropped)"
             )
-            return contextual_chunks
+            return contextual_chunks, failed_chunks
 
         except Exception as e:
             logger.error(

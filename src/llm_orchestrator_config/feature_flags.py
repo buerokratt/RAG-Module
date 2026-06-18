@@ -22,6 +22,7 @@ class FeatureFlags:
     - SERVICE_WORKFLOW_ENABLED: Enable Layer 1 service workflow (default: true)
     - API_TOOL_CALLING_WORKFLOW_ENABLED: Enable Layer 2 API tool calling workflow (default: true)
     - CONTEXT_WORKFLOW_ENABLED: Enable Layer 3 context workflow (default: true)
+    - MULTI_INTENT_ENABLED: Enable parallel multi-intent path in ATC (default: true)
     """
 
     # Master switch for tool classifier
@@ -43,6 +44,20 @@ class FeatureFlags:
         os.getenv("CONTEXT_WORKFLOW_ENABLED", "true").lower() == "true"
     )
 
+    # Multi-intent (parallel multi-API) path
+    # When False: ambiguous-band ATC results go straight to the existing single-endpoint path
+    # When True: IntentDecomposer runs on ambiguous-band results; parallel endpoint searches
+    #            are attempted when the query is detected as multi-intent
+    MULTI_INTENT_ENABLED = os.getenv("MULTI_INTENT_ENABLED", "true").lower() == "true"
+
+    # ATC Response Cache — two-tier Redis cache for API Tool Calling responses
+    # When True: successful ATC API responses are cached and follow-up queries are
+    #            served from cache where possible (L1 exact hit, L2 follow-up routing)
+    # When False: all cache reads and writes are skipped; normal ATC flow unchanged
+    ATC_RESPONSE_CACHE_ENABLED: bool = (
+        os.getenv("ATC_RESPONSE_CACHE_ENABLED", "true").lower() == "true"
+    )
+
     # RAG and OOD workflows are always enabled (no flags)
     # RAG is the core fallback, OOD is the final safety net
 
@@ -61,6 +76,10 @@ class FeatureFlags:
                 f"  API_TOOL_CALLING_WORKFLOW_ENABLED: {cls.API_TOOL_CALLING_WORKFLOW_ENABLED}"
             )
             logger.info(f"  CONTEXT_WORKFLOW_ENABLED: {cls.CONTEXT_WORKFLOW_ENABLED}")
+            logger.info(f"  MULTI_INTENT_ENABLED: {cls.MULTI_INTENT_ENABLED}")
+            logger.info(
+                f"  ATC_RESPONSE_CACHE_ENABLED: {cls.ATC_RESPONSE_CACHE_ENABLED}"
+            )
             logger.info(f"  FALLBACK_TO_RAG_ON_ERROR: {cls.FALLBACK_TO_RAG_ON_ERROR}")
         else:
             logger.info("  (Classifier disabled - using RAG-only pipeline)")

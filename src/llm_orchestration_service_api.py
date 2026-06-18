@@ -1,5 +1,6 @@
 """LLM Orchestration Service API - FastAPI application."""
 
+import os
 import logging
 from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator, Dict
@@ -35,6 +36,7 @@ from src.llm_orchestrator_config.llm_ochestrator_constants import (
 from src.llm_orchestrator_config.stream_config import StreamConfig
 from src.llm_orchestrator_config.exceptions import StreamTimeoutError
 from src.utils.stream_timeout import stream_timeout
+from src.utils.observation_utils import safe_observation_context
 from src.utils.error_utils import generate_error_id, log_error_with_context
 from src.utils.rate_limiter import RateLimiter
 from src.utils.prompt_config_loader import RefreshStatus
@@ -48,7 +50,9 @@ from models.request_models import (
     ContextGenerationRequest,
     ContextGenerationResponse,
     EmbeddingErrorResponse,
+    DeepEvalTestOrchestrationResponse,
 )
+from src.utils.connection_id_fetcher import get_connection_id_fetcher
 
 
 @asynccontextmanager
@@ -247,6 +251,22 @@ async def pydantic_validation_exception_handler(
             "type": "validation_error",
         },
     )
+
+
+@app.post("/cache/clear")
+async def clear_connection_cache() -> dict[str, str]:
+    """Clear cached connection IDs and vault UUIDs."""
+    try:
+        fetcher = get_connection_id_fetcher()
+        fetcher.clear_cache()
+        logger.info("Connection cache cleared via /cache/clear endpoint")
+        return {"status": "ok", "message": "Connection cache cleared"}
+    except Exception as e:
+        logger.error(f"Failed to clear connection cache: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to clear connection cache",
+        ) from e
 
 
 @app.get("/health")
@@ -512,11 +532,12 @@ async def stream_orchestrated_response(
             f"chatId: {request.chatId}, "
             f"environment: {request.environment}, "
             f"message: {request.message[:100]}..."
+            f"connection_id: {request.connection_id}"
         )
 
         # Streaming is only for allowed environments
         if request.environment not in STREAMING_ALLOWED_ENVS:
-            error_msg = f"Streaming is only available for production environment. Current environment: {request.environment}. Please use /orchestrate endpoint for non-streaming environments."
+            error_msg = f"Streaming is only available for production and testing environments. Current environment: {request.environment}. Please use /orchestrate endpoint for non-streaming environments."
             logger.warning(error_msg)
 
             async def env_error_stream() -> AsyncGenerator[str, None]:
@@ -618,33 +639,46 @@ async def stream_orchestrated_response(
         # Wrap streaming response with timeout
         async def timeout_wrapped_stream() -> AsyncGenerator[str, None]:
             """Generator wrapper with timeout enforcement."""
-            try:
-                async with stream_timeout(StreamConfig.MAX_STREAM_DURATION_SECONDS):
-                    async for (
-                        chunk
-                    ) in orchestration_service.stream_orchestration_response(request):
-                        yield chunk
-            except StreamTimeoutError as timeout_exc:
-                # StreamTimeoutError already has error_id
-                log_error_with_context(
-                    logger,
-                    timeout_exc.error_id,
-                    "streaming_timeout",
-                    request.chatId,
-                    timeout_exc,
-                )
-                # Send timeout message to client
-                yield create_sse_error_stream(request.chatId, STREAM_TIMEOUT_MESSAGE)
-            except Exception as stream_error:
-                error_id = generate_error_id()
-                log_error_with_context(
-                    logger, error_id, "streaming_error", request.chatId, stream_error
-                )
-                # Send generic error message to client
-                yield create_sse_error_stream(
-                    request.chatId,
-                    "I apologize, but I encountered an issue while generating your response. Please try again.",
-                )
+            with safe_observation_context(
+                as_type="generation",
+                name="streaming_generation",
+                input={"message": request.message[:500], "chat_id": request.chatId},
+            ):
+                try:
+                    async with stream_timeout(StreamConfig.MAX_STREAM_DURATION_SECONDS):
+                        async for (
+                            chunk
+                        ) in orchestration_service.stream_orchestration_response(
+                            request
+                        ):
+                            yield chunk
+                except StreamTimeoutError as timeout_exc:
+                    # StreamTimeoutError already has error_id
+                    log_error_with_context(
+                        logger,
+                        timeout_exc.error_id,
+                        "streaming_timeout",
+                        request.chatId,
+                        timeout_exc,
+                    )
+                    # Send timeout message to client
+                    yield create_sse_error_stream(
+                        request.chatId, STREAM_TIMEOUT_MESSAGE
+                    )
+                except Exception as stream_error:
+                    error_id = generate_error_id()
+                    log_error_with_context(
+                        logger,
+                        error_id,
+                        "streaming_error",
+                        request.chatId,
+                        stream_error,
+                    )
+                    # Send generic error message to client
+                    yield create_sse_error_stream(
+                        request.chatId,
+                        "I apologize, but I encountered an issue while generating your response. Please try again.",
+                    )
 
         # Stream the response
         return StreamingResponse(
@@ -784,6 +818,84 @@ async def get_available_embedding_models(
         )
         raise HTTPException(
             status_code=500, detail="Failed to retrieve embedding models"
+        ) from e
+
+
+@app.post("/orchestrate-eval")
+async def orchestrate_llm_request_eval(
+    http_request: Request,
+    request: OrchestrationRequest,
+) -> DeepEvalTestOrchestrationResponse:
+    """
+    Process LLM orchestration request with additional testing data.
+
+    This endpoint is only available when EVAL_MODE=true and returns
+    retrieval context and refined questions for DeepEval metrics evaluation.
+
+    Args:
+        http_request: FastAPI Request object for accessing app state
+        request: OrchestrationRequest containing user message and context
+
+    Returns:
+        OrchestrationResponse: Response with LLM output, status flags, and test data
+
+    Raises:
+        HTTPException: For processing errors or if not in testing mode
+    """
+    # Check if eval mode is enabled
+    eval_mode = os.getenv("EVAL_MODE", "false").lower() == "true"
+    if not eval_mode:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Eval endpoint not available in production mode",
+        )
+
+    try:
+        logger.info(f"Received EVAL orchestration request for chatId: {request.chatId}")
+
+        if not hasattr(http_request.app.state, "orchestration_service"):
+            logger.error("Orchestration service not found in app state")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        orchestration_service = http_request.app.state.orchestration_service
+        if orchestration_service is None:
+            logger.error("Orchestration service is None")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Service not initialized",
+            )
+
+        # Process the request (will include test data due to EVAL_MODE env var)
+        response = await orchestration_service.process_orchestration_request(request)
+
+        # Convert to test response with additional fields
+        # Response may be OrchestrationResponse or TestOrchestrationResponse
+        chat_id = getattr(response, "chatId", request.chatId)
+        retrieval_ctx = getattr(response, "retrieval_context", None)
+
+        test_response = DeepEvalTestOrchestrationResponse(
+            chatId=chat_id,
+            llmServiceActive=response.llmServiceActive,
+            questionOutOfLLMScope=response.questionOutOfLLMScope,
+            inputGuardFailed=response.inputGuardFailed,
+            content=response.content,
+            retrieval_context=retrieval_ctx,
+            expected_output=None,  # Will be populated by test framework
+        )
+
+        logger.info(f"Successfully processed TEST request for chatId: {request.chatId}")
+        return test_response
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error processing TEST request: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error occurred",
         ) from e
 
 

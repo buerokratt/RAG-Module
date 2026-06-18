@@ -156,17 +156,5 @@
     "url": "https://ilmmicroservice.envir.ee/api/forecasts",
     "method": "GET",
     "params": []
-  },
-  {
-    "endpointId": "9b4d0e99-7a8b-4c9d-b033-9d1c5f990016",
-    "name": "check_legal_eligibility",
-    "description": "Kontrolli isiku õiguslikku sobivust teatud toimingute tegemiseks vanuse ja kodakondsuse alusel.",
-    "url": "https://bcd831cf-cd1b-40b9-af86-b760cd6143e8.mock.pstmn.io/api/legal-check",
-    "method": "POST",
-    "params": [
-      { "name": "action", "type": "string", "required": true, "description": "Toiming, mille jaoks sobivust kontrollitakse (nt start_business, vote, drive)" },
-      { "name": "citizenship", "type": "string", "required": true, "description": "Kahetäheline ISO kodakondsuskood (nt EE, LV, FI)" },
-      { "name": "age", "type": "integer", "required": true, "description": "Isiku vanus täisaastates" }
-    ]
   }
 ]

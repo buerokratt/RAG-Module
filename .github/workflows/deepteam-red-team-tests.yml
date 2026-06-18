@@ -3,12 +3,13 @@ name: DeepTeam Red Team Security Tests
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches: ["wip-eval"]
     paths:
       - 'src/**'
       - 'tests/**'
       - 'mocks/**'
       - 'data/**'
-      - '.github/workflows/deepeval-red-team-tests.yml'
+      - '.github/workflows/deepteam-red-team-tests.yml'
   workflow_dispatch:
     inputs:
       attack_intensity:
@@ -41,12 +42,24 @@ jobs:
       - name: Install dependencies (locked)
         run: uv sync --frozen
 
+      - name: Set up DeepTeam with Azure OpenAI
+        run: |
+          uv run deepeval set-azure-openai \
+          --openai-endpoint "${{ secrets.AZURE_OPENAI_ENDPOINT }}" \
+          --openai-api-key "${{ secrets.AZURE_OPENAI_API_KEY }}" \
+          --deployment-name "${{ secrets.AZURE_OPENAI_DEPLOYMENT }}" \
+          --openai-model-name "${{ secrets.AZURE_OPENAI_DEEPEVAL_DEPLOYMENT }}" \
+          --openai-api-version="2024-12-01-preview"
+
       - name: Run Complete Security Assessment
         id: run_tests
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+          AZURE_OPENAI_DEEPEVAL_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEEPEVAL_DEPLOYMENT }}
         run: |
           # Run all security tests in one comprehensive session
           uv run python -m pytest tests/deepeval_tests/red_team_tests.py::TestRAGSystemRedTeaming -v --tb=short

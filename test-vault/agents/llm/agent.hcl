@@ -3,7 +3,7 @@ vault {
   address = "http://vault:8200"
 }
 
-pid_file = "/agent/out/pidfile"
+pid_file = "/agent/llm-token/pidfile"
 
 auto_auth {
   method "approle" {
@@ -17,7 +17,7 @@ auto_auth {
 
   sink "file" {
     config = {
-      path = "/agent/out/token"
+      path = "/agent/llm-token/token"
     }
   }
 }
@@ -36,7 +36,7 @@ listener "tcp" {
 # dummy template so cache is “active” (some versions require this)
 template {
   source      = "/dev/null"
-  destination = "/agent/out/dummy"
+  destination = "/agent/llm-token/dummy"
 }
 
 # Disable API proxy; not needed here

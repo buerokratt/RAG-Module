@@ -155,22 +155,15 @@ def generate_failure_analysis(results: Dict[str, Any]) -> str:
     analysis += "| Test | Query | Metric | Score | Issue |\n"
     analysis += "|------|--------|--------|-------|-------|\n"
 
-    for failure in failed_results[:10]:  # Limit to first 10 failures
+    for failure in failed_results:  # Limit to first 10 failures
         query_preview = (
             failure["input"][:50] + "..."
             if len(failure["input"]) > 50
             else failure["input"]
         )
-        reason_preview = (
-            failure["reason"][:100] + "..."
-            if len(failure["reason"]) > 100
-            else failure["reason"]
-        )
+        reason_preview = failure["reason"]
 
         analysis += f"| {failure['test_case']} | {query_preview} | {failure['metric']} | {failure['score']:.2f} | {reason_preview} |\n"
-
-    if len(failed_results) > 10:
-        analysis += f"\n*({len(failed_results) - 10} additional failures not shown)*\n"
 
     analysis += "\n"
     return analysis

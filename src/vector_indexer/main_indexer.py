@@ -15,7 +15,7 @@ import hashlib
 sys.path.append(str(Path(__file__).parent.parent))
 
 from vector_indexer.config.config_loader import ConfigLoader
-from vector_indexer.document_loader import DocumentLoader
+from vector_indexer.document_loader import DocumentLoader, DocumentLoadError
 from vector_indexer.contextual_processor import ContextualProcessor
 from vector_indexer.qdrant_manager import QdrantManager
 from vector_indexer.error_logger import ErrorLogger
@@ -169,7 +169,7 @@ class VectorIndexer:
 
                 # Process documents with controlled concurrency
                 semaphore = asyncio.Semaphore(self.config.max_concurrent_documents)
-                tasks: List[asyncio.Task[tuple[int, str]]] = []
+                tasks: List[asyncio.Task[tuple[int, str, int]]] = []
 
                 for doc_info in documents:
                     task = asyncio.create_task(
@@ -189,6 +189,9 @@ class VectorIndexer:
                 chunks_info: Dict[
                     str, Dict[str, Any]
                 ] = {}  # Track chunk counts for metadata update
+                # Only documents that processed successfully are marked as
+                # processed in DVC tracking, so failures are retried next run.
+                processed_documents: List[DocumentInfo] = []
                 for i, result in enumerate(results):
                     if isinstance(result, Exception):
                         doc_info = documents[i]
@@ -200,16 +203,18 @@ class VectorIndexer:
                             doc_info.document_hash, str(result)
                         )
                     else:
-                        # Result should be tuple of (chunk_count, content_hash)
+                        # Result should be tuple of (chunk_count, content_hash, failed_chunks)
                         doc_info = documents[i]
                         self.stats.documents_processed += 1
-                        if isinstance(result, tuple) and len(result) == 2:
-                            chunk_count, content_hash = result
+                        processed_documents.append(doc_info)
+                        if isinstance(result, tuple) and len(result) == 3:
+                            chunk_count, content_hash, failed_chunks = result
                             self.stats.total_chunks_processed += chunk_count
+                            self.stats.total_chunks_failed += failed_chunks
                             # Track chunk count using content_hash (not directory hash)
                             chunks_info[content_hash] = {"chunk_count": chunk_count}
                             logger.info(
-                                f"CHUNK COUNT: Document {doc_info.document_hash[:12]}... (content: {content_hash[:12]}...) -> {chunk_count} chunks"
+                                f"CHUNK COUNT: Document {doc_info.document_hash[:12]}... (content: {content_hash[:12]}...) -> {chunk_count} chunks ({failed_chunks} failed)"
                             )
 
                 # Log the complete chunks_info dictionary
@@ -227,10 +232,10 @@ class VectorIndexer:
                 # Step 4: Update processed files tracking (even if no new documents processed)
                 if diff_detector:
                     try:
-                        # Update metadata for newly processed files
-                        if documents:
+                        # Update metadata for newly processed files (successful only)
+                        if processed_documents:
                             processed_paths = [
-                                doc.cleaned_txt_path for doc in documents
+                                doc.cleaned_txt_path for doc in processed_documents
                             ]
                             if processed_paths:
                                 logger.debug(
@@ -290,7 +295,7 @@ class VectorIndexer:
         doc_info: DocumentInfo,
         qdrant_manager: QdrantManager,
         semaphore: asyncio.Semaphore,
-    ) -> tuple[int, str]:
+    ) -> tuple[int, str, int]:
         """
         Process a single document with contextual retrieval.
 
@@ -300,7 +305,9 @@ class VectorIndexer:
             semaphore: Concurrency control semaphore
 
         Returns:
-            tuple: (chunk_count: int, content_hash: str) or Exception on error
+            tuple: (chunk_count: int, content_hash: str, failed_chunks: int).
+            Raises on any failure (including load failure or zero usable chunks),
+            so the document is counted as failed rather than as success.
         """
         async with semaphore:
             logger.info(f"Processing document: {doc_info.document_hash}")
@@ -310,29 +317,31 @@ class VectorIndexer:
                 document = self.document_loader.load_document(doc_info)
 
                 if not document:
-                    logger.warning(f"Could not load document: {doc_info.document_hash}")
-                    return (0, doc_info.document_hash)
+                    raise DocumentLoadError(
+                        f"Could not load document: {doc_info.document_hash}"
+                    )
 
                 # Process document with contextual retrieval
-                contextual_chunks = await self.contextual_processor.process_document(
-                    document
-                )
+                (
+                    contextual_chunks,
+                    failed_chunks,
+                ) = await self.contextual_processor.process_document(document)
 
                 if not contextual_chunks:
-                    logger.warning(
-                        f"No chunks created for document: {doc_info.document_hash}"
+                    raise RuntimeError(
+                        f"No chunks created for document: {doc_info.document_hash} "
+                        f"({failed_chunks} chunks failed context generation)"
                     )
-                    return (0, document.document_hash)
 
                 # Store chunks in Qdrant
                 await qdrant_manager.store_chunks(contextual_chunks)
 
                 logger.info(
                     f"Successfully processed document {doc_info.document_hash}: "
-                    f"{len(contextual_chunks)} chunks"
+                    f"{len(contextual_chunks)} chunks ({failed_chunks} dropped)"
                 )
 
-                return (len(contextual_chunks), document.document_hash)
+                return (len(contextual_chunks), document.document_hash, failed_chunks)
 
             except Exception as e:
                 logger.error(f"Error processing document {doc_info.document_hash}: {e}")
@@ -352,10 +361,12 @@ class VectorIndexer:
         logger.info(f"   • Failed Chunks: {self.stats.total_chunks_failed}")
 
         if self.stats.total_documents > 0:
-            success_rate = (
-                self.stats.documents_processed / self.stats.total_documents
-            ) * 100
-            logger.info(f"Success Rate: {success_rate:.1f}%")
+            logger.info(f"Success Rate: {self.stats.success_rate * 100:.1f}%")
+
+        if self.stats.total_chunks_processed + self.stats.total_chunks_failed > 0:
+            logger.info(
+                f"Chunk Success Rate: {self.stats.chunk_success_rate * 100:.1f}%"
+            )
 
         logger.info(f"Processing Duration: {self.stats.duration}")
 
@@ -364,6 +375,11 @@ class VectorIndexer:
                 f"  {self.stats.documents_failed} documents failed processing"
             )
             logger.info("Check failure logs for details")
+
+        if self.stats.total_chunks_failed > 0:
+            logger.warning(
+                f"  {self.stats.total_chunks_failed} chunks failed processing"
+            )
 
     async def run_health_check(self) -> bool:
         """
@@ -617,12 +633,20 @@ class VectorIndexer:
         return total_deleted
 
     def _cleanup_datasets(self) -> None:
-        """Remove datasets folder after processing."""
+        """Remove datasets folder contents after processing.
+
+        Only the folder's contents are removed, not the folder itself, since
+        the datasets path is a mounted volume in the container.
+        """
         try:
             datasets_path = Path(self.config.dataset_base_path)
             if datasets_path.exists():
-                shutil.rmtree(str(datasets_path))
-                logger.info(f"Datasets folder cleaned up: {datasets_path}")
+                for child in datasets_path.iterdir():
+                    if child.is_dir():
+                        shutil.rmtree(str(child))
+                    else:
+                        child.unlink()
+                logger.info(f"Datasets folder contents cleaned up: {datasets_path}")
             else:
                 logger.debug(f"Datasets folder does not exist: {datasets_path}")
         except Exception as e:

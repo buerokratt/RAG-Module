@@ -3,52 +3,243 @@ name: DeepEval RAG System Tests
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches: ["wip-eval"]
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'data/**'
+      - 'docker-compose-eval.yml'
+      - 'Dockerfile.llm_orchestration_service'
       - '.github/workflows/deepeval-tests.yml'
 
 jobs:
   deepeval-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 80
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+      
+      - name: Validate required secrets
+        id: validate_secrets
+        run: |
+          echo "validating required environment variables..."
+          MISSING_SECRETS=()
+          
+          # Check Azure OpenAI secrets
+          if [ -z "${{ secrets.AZURE_OPENAI_ENDPOINT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_ENDPOINT")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_API_KEY }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_API_KEY")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_DEPLOYMENT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_DEPLOYMENT")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+          fi
+
+          if [ -z "${{ secrets.AZURE_OPENAI_DEEPEVAL_DEPLOYMENT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_DEEPEVAL_DEPLOYMENT")
+          fi
+          
+
+          
+          if [ -z "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" ]; then
+            MISSING_SECRETS+=("AZURE_STORAGE_CONNECTION_STRING")
+          fi
+
+          if [ -z "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" ]; then
+            MISSING_SECRETS+=("AZURE_STORAGE_CONTAINER_NAME")
+          fi
+
+          if [ -z "${{ secrets.AZURE_STORAGE_BLOB_NAME }}" ]; then
+            MISSING_SECRETS+=("AZURE_STORAGE_BLOB_NAME")
+          fi
+
+          if [ -z "${{ secrets.NEXTAUTH_SECRET }}" ]; then
+            MISSING_SECRETS+=("NEXTAUTH_SECRET")
+          fi
+
+          if [ -z "${{ secrets.ENCRYPTION_KEY }}" ]; then
+            MISSING_SECRETS+=("ENCRYPTION_KEY")
+          fi
+
+          if [ -z "${{ secrets.SALT }}" ]; then
+            MISSING_SECRETS+=("SALT")
+          fi
+
+
+          # If any secrets are missing, fail
+          if [ ${#MISSING_SECRETS[@]} -gt 0 ]; then
+            echo "missing=true" >> $GITHUB_OUTPUT
+            echo "secrets_list=${MISSING_SECRETS[*]}" >> $GITHUB_OUTPUT
+            echo " Missing required secrets: ${MISSING_SECRETS[*]}"
+            exit 1
+          else
+            echo "missing=false" >> $GITHUB_OUTPUT
+            echo " All required secrets are configured"
+          fi
+      
+      - name: Comment PR with missing secrets error
+        if: failure() && steps.validate_secrets.outputs.missing == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const missingSecrets = '${{ steps.validate_secrets.outputs.secrets_list }}'.split(' ');
+            const secretsList = missingSecrets.map(s => `- \`${s}\``).join('\n');
+            
+            const comment = `##  DeepEval Tests: Missing Required Secrets
+            
+            The DeepEval RAG system tests cannot run because the following GitHub secrets are not configured:
+            
+            ${secretsList}
+            
+            ### How to Fix
+            
+            1. Go to **Settings** → **Secrets and variables** → **Actions**
+            2. Add the missing secrets with the appropriate values:
+            
+            **Azure OpenAI Configuration:**
+            - \`AZURE_OPENAI_ENDPOINT\` - Your Azure OpenAI  endpoint (e.g., \`https://your-resource.openai.azure.com/\`)
+            - \`AZURE_OPENAI_API_KEY\` - Your Azure OpenAI API key
+            - \`AZURE_OPENAI_DEPLOYMENT\` - Chat model deployment name (e.g., \`gpt-4o-mini\`)
+            - \`AZURE_OPENAI_EMBEDDING_DEPLOYMENT\` - Embedding model deployment name (e.g., \`text-embedding-3-large\`)
+            - \`AZURE_STORAGE_CONNECTION_STRING\` - Connection string for Azure Blob Storage
+            - \`AZURE_STORAGE_CONTAINER_NAME\` - Container name in Azure Blob Storage
+            - \`AZURE_STORAGE_BLOB_NAME\` - Blob name for dataset in Azure
+            - \`AZURE_OPENAI_DEEPEVAL_DEPLOYMENT\` - DeepEval model deployment name (e.g., \`gpt-4.1\`)
+            
+            3. Re-run the workflow after adding the secrets
+            
+            ### Note
+            Tests will not run until all required secrets are configured.
+            
+            ---
+            *Workflow: ${context.workflow} | Run: [#${context.runNumber}](${context.payload.repository.html_url}/actions/runs/${context.runId})*`;
+            
+            // Find existing comment
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const existingComment = comments.data.find(
+              comment => comment.user.login === 'github-actions[bot]' &&
+                comment.body.includes('DeepEval Tests: Missing Required Secrets')
+            );
+            
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+      
       - name: Set up Python
+        if: success()
         uses: actions/setup-python@v5
         with:
           python-version-file: '.python-version'
-          
+      
       - name: Set up uv
+        if: success()
         uses: astral-sh/setup-uv@v6
-        
+      
       - name: Install dependencies (locked)
+        if: success()
         run: uv sync --frozen
-        
-      - name: Run DeepEval tests
+   
+      - name: Create test directories with proper permissions
+        if: success()
+        run: |
+          mkdir -p test-vault/agents/llm
+          mkdir -p test-vault/agent-out
+          # Set ownership to current user and make writable
+          sudo chown -R $(id -u):$(id -g) test-vault
+          chmod -R 777 test-vault
+          # Ensure the agent-out directory is world-readable after writes
+          sudo chmod -R a+rwX test-vault/agent-out
+
+      - name: Set up Deepeval with azure 
+        if: success()
+        run: |
+          uv run deepeval set-azure-openai \
+          --openai-endpoint "${{ secrets.AZURE_OPENAI_ENDPOINT }}" \
+          --openai-api-key "${{ secrets.AZURE_OPENAI_API_KEY }}" \
+          --deployment-name "${{ secrets.AZURE_OPENAI_DEPLOYMENT }}" \
+          --openai-model-name "${{ secrets.AZURE_OPENAI_DEEPEVAL_DEPLOYMENT }}" \
+          --openai-api-version="2024-12-01-preview"
+
+      - name: Run DeepEval tests with testcontainers
+        if: success()
         id: run_tests
+        continue-on-error: true 
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: uv run python -m pytest tests/deepeval_tests/standard_tests.py -v --tb=short
-          
+          # LLM API Keys
+          AZURE_OPENAI_DEEPEVAL_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEEPEVAL_DEPLOYMENT }}
+          # Azure OpenAI - Chat Model
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+          # Azure OpenAI - Embedding Model
+          AZURE_OPENAI_EMBEDDING_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT }}
+          # Evaluation mode
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+          AZURE_STORAGE_BLOB_NAME: ${{ secrets.AZURE_STORAGE_BLOB_NAME }}
+          EVAL_MODE: "true"
+          # Langfuse auth secrets (required by docker-compose-eval.yml)
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+          SALT: ${{ secrets.SALT }}
+        run: |
+          # Run tests sequentially (one at a time) to avoid rate limiting
+          uv run python -m pytest tests/deepeval_tests/standard_tests.py -v --tb=short --log-cli-level=INFO -n 0
+      
+      - name: Fix permissions on test artifacts
+        if: always()
+        run: |
+          sudo chown -R $(id -u):$(id -g) test-vault || true
+          sudo chmod -R a+rX test-vault || true
+      
       - name: Generate evaluation report
         if: always()
-        run: python tests/deepeval_tests/report_generator.py
-          
+        run: uv run python tests/deepeval_tests/report_generator.py
+      
+      - name: Save test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            pytest_captured_results.json
+            test_report.md
+          retention-days: 30
+      
       - name: Comment PR with test results
         if: always() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            
             try {
               const reportContent = fs.readFileSync('test_report.md', 'utf8');
-              
               const comments = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -57,7 +248,7 @@ jobs:
               
               const existingComment = comments.data.find(
                 comment => comment.user.login === 'github-actions[bot]' &&
-                comment.body.includes('RAG System Evaluation Report')
+                  comment.body.includes('RAG System Evaluation Report')
               );
               
               if (existingComment) {
@@ -75,10 +266,8 @@ jobs:
                   body: reportContent
                 });
               }
-              
             } catch (error) {
               console.error('Failed to post test results:', error);
-              
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
@@ -86,25 +275,26 @@ jobs:
                 body: `## RAG System Evaluation Report\n\n**Error generating test report**\n\nFailed to read or post test results. Check workflow logs for details.\n\nError: ${error.message}`
               });
             }
-            
+      
       - name: Check test results and fail if needed
         if: always()
         run: |
-           # Check if pytest ran (look at step output)
-           if [ "${{ steps.run_tests.outcome }}" == "failure" ]; then
+          # Check if pytest ran (look at step output)
+          if [ "${{ steps.run_tests.outcome }}" == "failure" ]; then
             echo "Tests ran but failed - this is expected if RAG performance is below threshold"
-           fi  
-           if [ -f "pytest_captured_results.json" ]; then
+          fi
+          
+          if [ -f "pytest_captured_results.json" ]; then
             total_tests=$(jq '.total_tests // 0' pytest_captured_results.json)
             passed_tests=$(jq '.passed_tests // 0' pytest_captured_results.json)
-
+            
             if [ "$total_tests" -eq 0 ]; then
               echo "ERROR: No tests were executed"
               exit 1
             fi
-
+            
             pass_rate=$(awk "BEGIN {print ($passed_tests / $total_tests) * 100}")
-
+            
             echo "DeepEval Test Results:"
             echo "Total Tests: $total_tests"
             echo "Passed Tests: $passed_tests"
@@ -117,7 +307,13 @@ jobs:
             else
               echo "TEST SUCCESS: Pass rate $pass_rate% meets threshold 70%"
             fi
-           else
+          else
             echo "ERROR: No test results file found"
             exit 1
-           fi
+          fi
+      
+      - name: Cleanup Docker resources
+        if: always()
+        run: |
+          docker compose -f docker-compose-eval.yml down -v --remove-orphans || true
+          docker system prune -f || true

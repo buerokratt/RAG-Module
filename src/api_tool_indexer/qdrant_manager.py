@@ -218,7 +218,8 @@ class ApiToolQdrantManager:
 
         Payload fields stored on every point:
             endpoint_id, name, description, url, method, params,
-            enriched_context, service_id, point_type, example_text (example only)
+            enriched_context, service_id, point_type, cacheable,
+            cache_ttl_seconds, example_text (example only)
 
         Args:
             enriched_points: List of EnrichedEndpoint instances (examples + summary).
@@ -256,6 +257,8 @@ class ApiToolQdrantManager:
                     "enriched_context": enriched.enriched_context,
                     "service_id": enriched.service_id,
                     "point_type": enriched.point_type,
+                    "cacheable": enriched.cacheable,
+                    "cache_ttl_seconds": enriched.cache_ttl_seconds,
                 }
                 if enriched.example_text is not None:
                     payload["example_text"] = enriched.example_text

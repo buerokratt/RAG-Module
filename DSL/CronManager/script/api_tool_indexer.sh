@@ -64,6 +64,10 @@ if [ -n "$params" ]; then
     url_decode "$params" > "$PARAMS_FILE"
 fi
 
+# Decode URL to restore path parameter templates that were
+# URL-encoded by Ruuter to prevent Spring URI template expansion errors.
+DECODED_URL=$(url_decode "$url")
+
 # Build Python command arguments array
 PYTHON_ARGS=(
     "$PYTHON_SCRIPT"
@@ -71,7 +75,7 @@ PYTHON_ARGS=(
     --service-id "${service_id:-""}"
     --name "$name"
     --description "$description"
-    --url "$url"
+    --url "$DECODED_URL"
     --method "${method:-"GET"}"
     --visibility "${visibility:-"public"}"
     --type "${type:-"custom_endpoint"}"

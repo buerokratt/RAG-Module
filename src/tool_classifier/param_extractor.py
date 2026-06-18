@@ -9,7 +9,11 @@ from typing import Any, Dict, List, Optional, TypedDict
 import dspy
 import dspy.streaming
 from dspy.streaming import StreamListener
+from langfuse import observe
+from src.utils.observation_utils import update_observation_safe
 from loguru import logger
+
+from src.utils.cost_utils import get_lm_usage_since
 
 _TRUTHY_STRINGS = {"true", "yes", "jah", "1", "on", "õige", "да"}
 _FALSY_STRINGS = {"false", "no", "ei", "0", "off", "vale", "нет"}
@@ -30,7 +34,7 @@ _FORMAT_HINT_PATTERNS: List[re.Pattern[str]] = [
 ]
 
 
-def _strip_format_hints(description: str) -> str:
+def strip_format_hints(description: str) -> str:
     """Remove format hints from a parameter description.
 
     Strips patterns such as ``(YYYY-MM-DD)``, ``(ISO 8601)``,
@@ -92,10 +96,36 @@ class ParamExtractionSignature(dspy.Signature):
     - After extraction, check whether ALL required params are now satisfied
       (i.e., present in already_collected OR just extracted).
     - If ALL required params are satisfied, return the literal string "none".
-    - If ONE OR MORE required params are still missing, generate ONE friendly question
-      that asks for ALL of those remaining missing params at once.
-      On the first turn this may cover many params; on follow-up turns it narrows
-      to only the params the user has not yet provided.
+      Do NOT add any acknowledgment or thank-you — just return "none".
+    - If ONE OR MORE required params are still missing, generate ONE friendly message
+      that first acknowledges what was just collected (if anything) then asks for
+      all remaining missing params in the same message.
+
+    Acknowledgment rules (when params are still missing):
+    - CASE A — turn_count is not '0' AND extracted_params is non-empty
+      (the user was responding to a follow-up question and gave something):
+        Prepend a brief natural acknowledgment of the values just provided, then
+        ask for the remaining missing params.
+        Use the parameter's description field to describe what was received, NOT
+        the raw camelCase name (e.g. "Thank you for providing the group" not
+        "Thank you for providing group").
+        Keep it concise: two sentences — one acknowledgment sentence, one question sentence.
+        Join the two clauses with a period and a space, never with a dash, em dash,
+        or any other punctuation connector.
+        VARY the acknowledgment opener each turn — do NOT repeat the same phrase.
+        Use different natural openers across turns, for example:
+          English:  "Got it.", "Perfect.", "Got the address.", "Noted.",
+                    "Thanks for that.", "Great.", "Received."
+          Estonian: "Selge.", "Hästi.", "Aitäh.", "Märgitud.", "Tubli."
+          Russian:  "Принято.", "Понял.", "Отлично.", "Хорошо.", "Записал."
+        Match the tone and language to session_language.
+    - CASE B — turn_count is '0' (this is the user's original query):
+        Do NOT add any acknowledgment or thank-you, even if params were extracted
+        from the original message. Simply ask for the remaining missing params.
+        The user was not responding to a question — they just asked naturally.
+    - CASE C — turn_count is not '0' AND extracted_params is empty (the user did NOT answer what was asked):
+        Do NOT add any acknowledgment or thank-you. Ask for the missing params
+        again directly, rephrasing if helpful.
     - Use each missing parameter's description field to phrase the question naturally
       (e.g., "Which country and date would you like to use?" not "Provide countryIsoCode and startDate")
     - Never expose raw parameter names (camelCase identifiers) to the user
@@ -104,6 +134,11 @@ class ParamExtractionSignature(dspy.Signature):
       "in the format...") in the question — only ask WHAT information is needed,
       not HOW it should be formatted. The system handles format conversion
       internally from any natural-language input the user provides.
+    - When intent_groups is a non-empty JSON array with 2 or more groups, structure
+      the question with a clear natural-language separation per group — e.g.,
+      "Which address or place would you like to search for, and what is the unique
+      identifier of the initiative you want to check?" Use conjunctions like "and"
+      to link the groups naturally into one fluent sentence.
     """
 
     user_message: str = dspy.InputField(
@@ -130,12 +165,31 @@ class ParamExtractionSignature(dspy.Signature):
             "still extract the new value — corrections are allowed."
         )
     )
+    turn_count: str = dspy.InputField(
+        desc=(
+            "Zero-based turn index as a string. '0' means this is the user's original query "
+            "(not a response to a follow-up question). '1' or higher means the user is "
+            "responding to a clarifying question asked by the system."
+        )
+    )
     custom_instructions: str = dspy.InputField(
         desc=(
             "Optional system-level instructions configured by the organisation "
             "(e.g. 'Always respond in Estonian', 'Use formal tone'). "
             "Empty string when no custom config is active. "
             "When non-empty, follow these rules with highest priority for the clarifying_question."
+        )
+    )
+    intent_groups: str = dspy.InputField(
+        desc=(
+            "Optional JSON array grouping missing required params by their owning intent/endpoint: "
+            '[{"intent": "<endpoint name>", "missing_param_descriptions": ["desc1", ...]}, ...]. '
+            "Empty JSON array [] when not in multi-intent mode or when no intents have "
+            "missing params. "
+            "When 1 group is present, use the intent name to add context to the question "
+            "(e.g., 'For the electricity market prices, what is the start and end date?'). "
+            "When 2+ groups are present, use this to phrase a single question "
+            "that clearly separates the needs of each intent with natural conjunctions."
         )
     )
 
@@ -147,10 +201,22 @@ class ParamExtractionSignature(dspy.Signature):
     )
     clarifying_question: str = dspy.OutputField(
         desc=(
-            "A single natural-language question that asks for ALL missing parameters "
-            'at once, or the literal string "none" if all required params are collected. '
+            "One natural-language message in session_language. "
+            'Return the literal string "none" if all required params are collected (no acknowledgment). '
+            "If params are still missing and turn_count is '0' (original query): "
+            "skip any acknowledgment and ask for the missing params directly. "
+            "If params are still missing and turn_count > 0 and extracted_params is non-empty: "
+            "briefly acknowledge the values just provided (using natural descriptions, not raw param names), "
+            "then ask for all remaining missing params in the same message. "
+            "If params are still missing and turn_count > 0 and extracted_params is empty: "
+            "skip any acknowledgment and ask for the missing params directly. "
             'Never include format instructions or examples (e.g. "YYYY-MM-DD", '
-            '"ISO 8601", "2-letter code") — only ask what information is needed.'
+            '"ISO 8601", "2-letter code") — only ask what information is needed. '
+            "When intent_groups contains 1 group, prefix the question with the intent "
+            "name for context (e.g. 'For the electricity market prices, what is the "
+            "start and end date?'). "
+            "When intent_groups contains 2+ groups, the question must use natural conjunctions "
+            "(e.g. 'and') to separate the missing params of each group into one fluent sentence."
         )
     )
 
@@ -170,6 +236,7 @@ class ParamExtractionModule(dspy.Module):
         self.extractor = dspy.Predict(ParamExtractionSignature)
         self._custom_instructions = custom_instructions
 
+    @observe(name="api_param_extraction_llm", as_type="generation")
     def forward(
         self,
         user_message: str,
@@ -177,6 +244,8 @@ class ParamExtractionModule(dspy.Module):
         conversation_history: Optional[List[Dict[str, Any]]] = None,
         already_collected: Optional[Dict[str, Any]] = None,
         session_language: str = "en",
+        turn_count: int = 0,
+        intent_groups: Optional[List[Dict[str, Any]]] = None,
     ) -> ParamExtractionResult:
         """
         Extract parameter values from user message and conversation history.
@@ -188,6 +257,15 @@ class ParamExtractionModule(dspy.Module):
             already_collected: Parameter values collected in prior turns (optional)
             session_language: Language code detected on turn 0 ('en', 'et', 'ru').
                 All clarifying questions will be generated in this language.
+            intent_groups: Optional list of intent-group dicts, each with an
+                ``"intent"`` key (endpoint name) and a
+                ``"missing_param_descriptions"`` key (list of human-readable
+                descriptions for the missing params of that intent).  Pass this
+                when a single user query maps to multiple intents that each have
+                outstanding required parameters; the extractor will then phrase
+                one clarifying question that addresses every group's missing
+                params using natural conjunctions.  Pass ``None`` (default) or
+                an empty list when operating in single-intent mode.
 
         Returns:
             ParamExtractionResult with extracted_params, missing_required, clarifying_question
@@ -196,13 +274,24 @@ class ParamExtractionModule(dspy.Module):
 
         history_text = self._format_conversation_history(conversation_history)
         sanitized_schema = [
-            {**p, "description": _strip_format_hints(p.get("description", ""))}
+            {**p, "description": strip_format_hints(p.get("description", ""))}
             if isinstance(p, dict)
             else p
             for p in params_schema
         ]
         params_schema_json = json.dumps(sanitized_schema, ensure_ascii=False)
         already_collected_json = json.dumps(already_collected, ensure_ascii=False)
+        intent_groups_json = json.dumps(intent_groups or [], ensure_ascii=False)
+
+        history_length_before = 0
+        try:
+            lm = dspy.settings.lm
+            if lm and hasattr(lm, "history"):
+                history_length_before = len(lm.history)
+        except Exception as e:
+            logger.warning(
+                f"Failed to get LM history length for parameter extraction: {e}"
+            )
 
         result = None
         try:
@@ -212,9 +301,29 @@ class ParamExtractionModule(dspy.Module):
                 session_language=session_language,
                 params_schema=params_schema_json,
                 already_collected=already_collected_json,
+                turn_count=str(turn_count),
                 custom_instructions=self._custom_instructions,
+                intent_groups=intent_groups_json,
             )
-            return self._parse_prediction(result, params_schema, already_collected)
+            parsed = self._parse_prediction(result, params_schema, already_collected)
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(parsed["missing_required"]),
+                    "clarifying_question": parsed["clarifying_question"],
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "extracted_params_count": len(parsed["extracted_params"]),
+                    "streaming": False,
+                },
+            )
+            return parsed
 
         except json.JSONDecodeError as e:
             logger.error(f"Failed to parse param extraction JSON: {e}")
@@ -225,11 +334,47 @@ class ParamExtractionModule(dspy.Module):
                 logger.error(
                     f"Raw missing_required: {getattr(result, 'missing_required', None)}"
                 )
-            return self._safe_defaults(params_schema, already_collected)
+            fallback = self._safe_defaults(params_schema, already_collected)
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(fallback["missing_required"]),
+                    "clarifying_question": fallback["clarifying_question"],
+                    "error": f"JSON parse error: {e}",
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "streaming": False,
+                },
+            )
+            return fallback
 
         except Exception as e:
             logger.exception(f"Param extraction forward failed: {e}")
-            return self._safe_defaults(params_schema, already_collected)
+            fallback = self._safe_defaults(params_schema, already_collected)
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(fallback["missing_required"]),
+                    "clarifying_question": fallback["clarifying_question"],
+                    "error": str(e),
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "streaming": False,
+                },
+            )
+            return fallback
 
     def _get_stream_predictor(self) -> Any:
         """Return a fresh streamified predictor for each call.
@@ -245,6 +390,7 @@ class ParamExtractionModule(dspy.Module):
         listener = StreamListener(signature_field_name="clarifying_question")
         return dspy.streamify(self.extractor, stream_listeners=[listener])
 
+    @observe(name="api_param_extraction_streaming", as_type="generation")
     async def stream_forward(
         self,
         user_message: str,
@@ -252,6 +398,8 @@ class ParamExtractionModule(dspy.Module):
         conversation_history: Optional[List[Dict[str, Any]]] = None,
         already_collected: Optional[Dict[str, Any]] = None,
         session_language: str = "en",
+        turn_count: int = 0,
+        intent_groups: Optional[List[Dict[str, Any]]] = None,
     ) -> tuple[List[str], ParamExtractionResult]:
         """Stream clarifying_question tokens while returning the full extraction result.
 
@@ -270,6 +418,15 @@ class ParamExtractionModule(dspy.Module):
             conversation_history: Recent conversation messages (optional).
             already_collected: Parameter values from prior turns (optional).
             session_language: Language code (``'en'``, ``'et'``, ``'ru'``).
+            intent_groups: Optional list of intent-group dicts, each with an
+                ``"intent"`` key (endpoint name) and a
+                ``"missing_param_descriptions"`` key (list of human-readable
+                descriptions for the missing params of that intent).  Pass this
+                when a single user query maps to multiple intents that each have
+                outstanding required parameters; the extractor will then phrase
+                one clarifying question that addresses every group's missing
+                params using natural conjunctions, streamed token by token.
+                Pass ``None`` (default) or an empty list for single-intent mode.
 
         Returns:
             Tuple of ``(question_tokens, extraction_result)``.
@@ -279,15 +436,28 @@ class ParamExtractionModule(dspy.Module):
 
         history_text = self._format_conversation_history(conversation_history)
         sanitized_schema = [
-            {**p, "description": _strip_format_hints(p.get("description", ""))}
+            {**p, "description": strip_format_hints(p.get("description", ""))}
             if isinstance(p, dict)
             else p
             for p in params_schema
         ]
         params_schema_json = json.dumps(sanitized_schema, ensure_ascii=False)
         already_collected_json = json.dumps(already_collected, ensure_ascii=False)
+        intent_groups_json = json.dumps(intent_groups or [], ensure_ascii=False)
 
         output_stream = None
+
+        history_length_before = 0
+        try:
+            lm = dspy.settings.lm
+            if lm and hasattr(lm, "history"):
+                history_length_before = len(lm.history)
+        except Exception as e:
+            logger.warning(
+                "Failed to get LM history length for parameter extraction "
+                f"streaming: {e}"
+            )
+
         try:
             stream_predictor = self._get_stream_predictor()
             output_stream = stream_predictor(
@@ -296,7 +466,9 @@ class ParamExtractionModule(dspy.Module):
                 session_language=session_language,
                 params_schema=params_schema_json,
                 already_collected=already_collected_json,
+                turn_count=str(turn_count),
                 custom_instructions=self._custom_instructions,
+                intent_groups=intent_groups_json,
             )
 
             tokens: List[str] = []
@@ -321,6 +493,8 @@ class ParamExtractionModule(dspy.Module):
                     conversation_history,
                     already_collected,
                     session_language,
+                    turn_count,
+                    intent_groups,
                 )
                 fallback_token = result["clarifying_question"]
                 return (
@@ -341,17 +515,77 @@ class ParamExtractionModule(dspy.Module):
                     f"ParamExtractionModule.stream_forward: streamed {len(tokens)} tokens"
                 )
 
+            # Join all streamed token chunks into the complete assembled question for langfuse logging.
+            assembled_question = (
+                "".join(tokens) if tokens else result["clarifying_question"]
+            )
+
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(result["missing_required"]),
+                    "clarifying_question": assembled_question,
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "extracted_params_count": len(result["extracted_params"]),
+                    "streaming": True,
+                    "question_token_count": len(tokens),
+                },
+            )
+
             return tokens, result
 
         except json.JSONDecodeError as e:
             logger.error(
                 f"ParamExtractionModule.stream_forward failed to parse JSON: {e}"
             )
-            return [], self._safe_defaults(params_schema, already_collected)
+            fallback = self._safe_defaults(params_schema, already_collected)
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(fallback["missing_required"]),
+                    "clarifying_question": fallback["clarifying_question"],
+                    "error": f"JSON parse error: {e}",
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "streaming": True,
+                },
+            )
+            return [], fallback
 
         except Exception as e:
             logger.exception(f"ParamExtractionModule.stream_forward failed: {e}")
-            return [], self._safe_defaults(params_schema, already_collected)
+            fallback = self._safe_defaults(params_schema, already_collected)
+            usage = get_lm_usage_since(history_length_before)
+            update_observation_safe(
+                input_data={
+                    "user_message": user_message,
+                    "params_schema_count": len(params_schema),
+                },
+                output_data={
+                    "missing_required_count": len(fallback["missing_required"]),
+                    "clarifying_question": fallback["clarifying_question"],
+                    "error": str(e),
+                },
+                metadata={
+                    "usage": usage,
+                    "num_calls": usage.get("num_calls", 0),
+                    "streaming": True,
+                },
+            )
+            return [], fallback
 
         finally:
             if output_stream is not None:
@@ -536,31 +770,6 @@ class ParamExtractionModule(dspy.Module):
                     f"(expected {param_type}, got {raw_value!r})"
                 )
                 type_invalid_params.append(param_name)
-
-        # SINGLE-VALUE REASSIGNMENT: if the LLM assigned a value to a later same-type
-        # param while an earlier same-type param is still missing, move the value forward.
-        # This fixes the common case where a lone date like "2026-04-01" is extracted as
-        # endDate when startDate is still missing.
-        combined_after_extraction = {**already_collected, **validated_params}
-        required_schema_order = [
-            p for p in params_schema if isinstance(p, dict) and p.get("required", False)
-        ]
-        for idx, missing_entry in enumerate(required_schema_order):
-            m_name = missing_entry["name"]
-            m_type = missing_entry.get("type", "string")
-            if m_name in combined_after_extraction:
-                continue  # already satisfied
-            # Find the first later param with the same type that was just extracted
-            for later_entry in required_schema_order[idx + 1 :]:
-                l_name = later_entry["name"]
-                l_type = later_entry.get("type", "string")
-                if l_type == m_type and l_name in validated_params:
-                    logger.debug(
-                        f"ParamExtractor: reassigning '{l_name}' → '{m_name}' "
-                        f"(single {m_type} value assigned to wrong param by LLM)"
-                    )
-                    validated_params[m_name] = validated_params.pop(l_name)
-                    break
 
         # Re-derive missing required params after type validation.
         # validated_params (current turn) takes precedence over already_collected

@@ -140,6 +140,15 @@ Only a clear, unambiguous new query (cosine >= 0.50) should override a session."
 # Agentic Loop — Continuation Threshold
 # ============================================================================
 
+MULTI_API_MAX_TURNS = 9
+"""Hard cap on total turns for the multi-endpoint agentic loop (MultiEndpointAgenticLoop).
+
+The per-session limit is ``min(3 * num_endpoints, MULTI_API_MAX_TURNS)``.
+``MULTI_API_MAX_ENDPOINTS`` independently caps ``num_endpoints`` at 3, so the
+combined ceiling is ``min(3 * 3, 9) = 9`` turns — up to 3 turns per endpoint
+at maximum endpoint count.
+"""
+
 CONTINUATION_TURN = 3
 """1-based turn count (after increment) at which the loop asks the user whether
 to continue collecting parameters or fall back to the RAG workflow.
@@ -152,6 +161,21 @@ speaks). With CONTINUATION_TURN=3 the conversation looks like:
   run_turn #1 (turn 0→1): initial question — "Which country and date?"
   run_turn #2 (turn 1→2): user gives partial answer — bot asks follow-up
   run_turn #3 (turn 2→3): user doesn't answer properly → CONTINUATION CHECK
+"""
+
+MULTI_INTENT_CONTINUATION_TURN = 4
+"""1-based turn count at which the multi-endpoint loop asks the user whether to
+continue collecting parameters when **multiple** intents (endpoints) are active.
+Fixed at 4 regardless of how many endpoints are active — if required params are
+still missing at exactly this turn, the user is asked whether to keep going.
+"""
+
+MULTI_INTENT_MAX_TURNS = 6
+"""Hard cap on total turns for the multi-endpoint agentic loop when multiple
+intents are active. When the internal turn counter reaches or exceeds this value
+(i.e., when `turn_count >= MULTI_INTENT_MAX_TURNS`, such as when attempting
+`turn_count == 6`), the loop falls back to the RAG workflow regardless of how
+many required params are still missing.
 """
 
 CONTINUATION_QUESTION = (
@@ -231,3 +255,46 @@ CLIENT_ERROR_MESSAGES = {
     "en": "Your request could not be processed. Please check the provided information and try again.",
 }
 """Friendly message returned on 4xx client errors from external API calls."""
+
+
+# ============================================================================
+# Multi-Intent (Parallel Multi-API) Configuration
+# ============================================================================
+
+MULTI_API_MAX_ENDPOINTS = 3
+"""Maximum number of parallel endpoints allowed per multi-intent query.
+Caps the number of sub-queries the IntentDecomposer may produce and the
+number of concurrent API calls MultiAPICaller may execute."""
+
+MULTI_API_BATCH_TIMEOUT = 30
+"""Total wall-clock timeout in seconds for all concurrent API calls in a batch.
+Exceeds the per-call API_CALL_TIMEOUT (10 s) to allow parallel requests time to
+complete without the batch being cancelled prematurely."""
+
+MULTI_API_PARTIAL_FAILURE_MESSAGES = {
+    "et": "Mõned teenusekutsed ebaõnnestusid. Osad tulemused võivad puududa.",
+    "ru": "Некоторые запросы к сервисам завершились неудачно. Часть результатов может отсутствовать.",
+    "en": "Some service calls failed. Partial results may be missing.",
+}
+"""Friendly message returned when a batch of API calls has partial failures."""
+
+
+# ============================================================================
+# ATC Response Cache Configuration
+# ============================================================================
+
+ATC_CACHE_KEY_PREFIX = "atc:cache"
+"""Redis key prefix for L1 exact-match response cache entries.
+Full key format: atc:cache:{chat_id}:{api_name}:{param_hash}"""
+
+ATC_LAST_CALL_KEY_PREFIX = "atc:last"
+"""Redis key prefix for L2 last-call context entries.
+Full key format: atc:last:{chat_id}"""
+
+ATC_CACHE_DEFAULT_TTL_SECONDS = 1800
+"""Default L1 cache TTL in seconds (30 minutes).
+Applied when an endpoint does not define a per-endpoint cache_ttl_seconds override."""
+
+ATC_LAST_CALL_TTL_SECONDS = 1800
+"""L2 last-call context TTL in seconds (30 minutes).
+Matches the session TTL so cached context never outlives the session."""

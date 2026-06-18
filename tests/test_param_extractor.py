@@ -10,7 +10,7 @@ import pytest
 
 from src.tool_classifier.param_extractor import (
     ParamExtractionModule,
-    _strip_format_hints,
+    strip_format_hints,
 )
 
 
@@ -745,12 +745,12 @@ class TestCustomInstructions:
 
 
 # ---------------------------------------------------------------------------
-# _strip_format_hints helper
+# strip_format_hints helper
 # ---------------------------------------------------------------------------
 
 
 class TestStripFormatHints:
-    """_strip_format_hints() should remove format hints from descriptions."""
+    """strip_format_hints() should remove format hints from descriptions."""
 
     @pytest.mark.parametrize(
         "description, expected",
@@ -776,21 +776,19 @@ class TestStripFormatHints:
         ],
     )
     def test_strips_known_patterns(self, description: str, expected: str) -> None:
-        assert _strip_format_hints(description) == expected
+        assert strip_format_hints(description) == expected
 
     def test_preserves_unrelated_parentheses(self) -> None:
         """Parentheses that don't contain format-like keywords are kept."""
         desc = "City name (required)"
         # "required" does not match the keyword list, so it should be preserved
-        result = _strip_format_hints(desc)
+        result = strip_format_hints(desc)
         assert "required" in result
 
     def test_idempotent(self) -> None:
         """Calling twice produces the same result."""
         desc = "Start date (YYYY-MM-DD)"
-        assert _strip_format_hints(_strip_format_hints(desc)) == _strip_format_hints(
-            desc
-        )
+        assert strip_format_hints(strip_format_hints(desc)) == strip_format_hints(desc)
 
 
 # ---------------------------------------------------------------------------

@@ -196,12 +196,11 @@ class ConfigurationLoader:
         if "providers" not in config:
             return
 
-        # Validate environment-specific requirements
-        if self.environment in ["development", "test"]:
-            if not self.connection_id:
-                raise ConfigurationError(
-                    f"connection_id is required for {self.environment} environment"
-                )
+        # connection_id (vault_uuid) is required for all environments
+        if not self.connection_id:
+            raise ConfigurationError(
+                f"connection_id (vault_uuid) is required for {self.environment} environment"
+            )
 
         try:
             providers_to_update: Dict[str, Dict[str, Any]] = {}
@@ -223,60 +222,27 @@ class ConfigurationLoader:
                         )
                         continue
 
-                    # For production: try to find any available model
-                    # For dev/test: use connection_id to find specific model
-                    if self.environment == "production":
-                        # Find first available model for this provider
-                        available_models = resolver.list_available_models(
-                            provider_name, self.environment
+                    # Use connection_id (vault_uuid) directly for all environments
+                    secret = resolver.get_secret_for_model(
+                        provider_name,
+                        self.environment,
+                        "",
+                        self.connection_id,
+                    )
+                    if secret:
+                        model_name = secret.model
+                        updated_config = self._merge_config_with_secrets(
+                            provider_config, secret, model_name
                         )
-                        if available_models:
-                            # Use the first available model in production
-                            model_name = available_models[0]
-                            secret = resolver.get_secret_for_model(
-                                provider_name, self.environment, model_name
-                            )
-                            if secret:
-                                # Update provider config with secrets
-                                updated_config = self._merge_config_with_secrets(
-                                    provider_config, secret, model_name
-                                )
-                                providers_to_update[provider_name] = updated_config
-                                logger.info(
-                                    f"Configured {provider_name} with model {model_name}"
-                                )
-                            else:
-                                logger.warning(
-                                    f"No secret found for {provider_name} model {model_name}"
-                                )
-                        else:
-                            logger.warning(
-                                f"No available models found for provider {provider_name}"
-                            )
+                        providers_to_update[provider_name] = updated_config
+                        logger.info(
+                            f"Configured {provider_name} with model {model_name} "
+                            f"(vault_uuid: {self.connection_id})"
+                        )
                     else:
-                        # For dev/test, try to find the specific connection_id
-                        # Try each model to see if we can find the connection
-                        for model_name in provider_config.get("models", {}):
-                            secret = resolver.get_secret_for_model(
-                                provider_name,
-                                self.environment,
-                                model_name,
-                                self.connection_id,
-                            )
-                            if secret:
-                                # Update provider config with secrets
-                                updated_config = self._merge_config_with_secrets(
-                                    provider_config, secret, model_name
-                                )
-                                providers_to_update[provider_name] = updated_config
-                                logger.info(
-                                    f"Configured {provider_name} with connection {self.connection_id}"
-                                )
-                                break
-                        else:
-                            logger.warning(
-                                f"No connection found for {provider_name} with connection_id {self.connection_id}"
-                            )
+                        logger.warning(
+                            f"No secret found for {provider_name} with vault_uuid {self.connection_id}"
+                        )
 
                 except Exception as e:
                     logger.error(f"Failed to process provider {provider_name}: {e}")
@@ -289,20 +255,10 @@ class ConfigurationLoader:
 
             # Check if we have any providers configured
             if not providers_to_update:
-                if self.environment == "production":
-                    raise ConfigurationError(
-                        "No providers available for production environment. "
-                        "At least one provider must have production models configured."
-                    )
-                else:
-                    raise ConfigurationError(
-                        f"No providers available for {self.environment} environment"
-                        + (
-                            f" with connection_id {self.connection_id}"
-                            if self.connection_id
-                            else ""
-                        )
-                    )
+                raise ConfigurationError(
+                    f"No providers available for {self.environment} environment "
+                    f"with vault_uuid {self.connection_id}"
+                )
 
             # Update the configuration with only available providers
             config["providers"] = providers_to_update
@@ -645,9 +601,12 @@ class ConfigurationLoader:
     ) -> tuple[str, str]:
         """Resolve embedding model from vault based on environment and connection_id.
 
+        Uses the same vault_uuid as the LLM model resolver. The embedding secret
+        is stored at `secret/embeddings/connections/{platform}/{vault_uuid}`.
+
         Args:
-            environment: Environment (production, development, test)
-            connection_id: Optional connection ID for dev/test environments
+            environment: Environment (production, testing)
+            connection_id: Vault UUID for the connection (same as LLM connection)
 
         Returns:
             Tuple of (provider_name, model_name) resolved from vault
@@ -655,6 +614,17 @@ class ConfigurationLoader:
         Raises:
             ConfigurationError: If no embedding models are available
         """
+        # Resolve vault_uuid for production if not provided
+        if not connection_id:
+            from src.utils.connection_id_fetcher import get_connection_id_fetcher
+
+            fetcher = get_connection_id_fetcher()
+            connection_id = fetcher.fetch_vault_uuid_sync(environment)
+            if not connection_id:
+                raise ConfigurationError(
+                    f"No {environment} connection found in database for embedding resolution"
+                )
+
         # Load raw config to get vault settings
         try:
             with open(self.config_path, "r", encoding="utf-8") as file:
@@ -669,58 +639,33 @@ class ConfigurationLoader:
             resolver: SecretResolver = self._initialize_vault_resolver(config)
 
             # Get available providers from config
-            providers: List[str] = ["azure_openai", "aws_bedrock"]  # Hardcoded for now
+            providers: List[str] = ["azure_openai", "aws_bedrock"]
 
-            if environment == "production":
-                # Find first available embedding model across all providers
-                for provider in providers:
-                    try:
-                        models: List[str] = resolver.list_available_embedding_models(
-                            provider, environment
+            # Use vault_uuid directly to find embedding secret (same UUID as LLM)
+            for provider in providers:
+                try:
+                    secret: Optional[Union[AzureOpenAISecret, AWSBedrockSecret]] = (
+                        resolver.get_embedding_secret_for_model(
+                            provider, environment, "", connection_id
                         )
-                        embedding_models: List[str] = [
-                            m for m in models if self._is_embedding_model(m)
-                        ]
-                        if embedding_models:
-                            logger.info(
-                                f"Resolved production embedding model: {provider}/{embedding_models[0]}"
-                            )
-                            return provider, embedding_models[0]
-                    except Exception as e:
-                        logger.debug(
-                            f"Provider {provider} not available for embeddings: {e}"
-                        )
-                        continue
-
-                raise ConfigurationError("No embedding models available in production")
-            else:
-                # Use connection_id to find specific embedding model
-                if not connection_id:
-                    raise ConfigurationError(
-                        f"connection_id is required for {environment} environment"
                     )
-
-                for provider in providers:
-                    try:
-                        secret: Optional[Union[AzureOpenAISecret, AWSBedrockSecret]] = (
-                            resolver.get_embedding_secret_for_model(
-                                provider, environment, "", connection_id
-                            )
+                    if secret and self._is_embedding_model(secret.model):
+                        logger.info(
+                            f"Resolved embedding model: {provider}/{secret.model} "
+                            f"(vault_uuid: {connection_id})"
                         )
-                        if secret and self._is_embedding_model(secret.model):
-                            logger.info(
-                                f"Resolved {environment} embedding model: {provider}/{secret.model}"
-                            )
-                            return provider, secret.model
-                    except Exception as e:
-                        logger.debug(
-                            f"Provider {provider} not available with connection {connection_id}: {e}"
-                        )
-                        continue
+                        return provider, secret.model
+                except Exception as e:
+                    logger.debug(
+                        f"Provider {provider} not available for embeddings "
+                        f"with vault_uuid {connection_id}: {e}"
+                    )
+                    continue
 
-                raise ConfigurationError(
-                    f"No embedding models available for {environment} with connection_id {connection_id}"
-                )
+            raise ConfigurationError(
+                f"No embedding models available for {environment} "
+                f"with vault_uuid {connection_id}"
+            )
 
         except yaml.YAMLError as e:
             raise ConfigurationError(f"Failed to parse YAML configuration: {e}") from e
@@ -751,6 +696,17 @@ class ConfigurationLoader:
             ConfigurationError: If configuration cannot be loaded or secrets not found
         """
         try:
+            # Auto-resolve vault_uuid from DB if not provided
+            if not connection_id:
+                from src.utils.connection_id_fetcher import get_connection_id_fetcher
+
+                fetcher = get_connection_id_fetcher()
+                connection_id = fetcher.fetch_vault_uuid_sync(environment)
+                if not connection_id:
+                    raise ConfigurationError(
+                        f"No {environment} connection found in database for embedding config"
+                    )
+
             # Load raw config
             with open(self.config_path, "r", encoding="utf-8") as file:
                 raw_config: Dict[str, Any] = yaml.safe_load(file)

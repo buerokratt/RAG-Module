@@ -2,10 +2,12 @@
 
 import asyncio
 import json
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Protocol, cast
 
 import dspy
 import httpx
+from src.utils.observation_utils import safe_observation_context
 from loguru import logger
 
 from tool_classifier.constants import (
@@ -20,6 +22,20 @@ from tool_classifier.constants import (
 )
 from tool_classifier.sparse_encoder import compute_sparse_vector
 from tool_classifier.sparse_encoder import SparseVector
+from src.utils.cost_utils import get_lm_usage_since
+
+
+def _get_current_model_name() -> str:
+    """Best-effort model name lookup from current DSPy LM."""
+    try:
+        lm = dspy.settings.lm
+        if lm and hasattr(lm, "model"):
+            model_name = lm.model
+            if isinstance(model_name, str) and model_name:
+                return model_name
+    except Exception:
+        pass
+    return "unknown"
 
 
 class EmbeddingServiceProtocol(Protocol):
@@ -48,6 +64,8 @@ class APIToolSearchResult:
         cosine_score: float,
         rrf_score: float,
         confidence: str,
+        llm_validated: bool = False,
+        multi_intent_hint: bool = False,
     ) -> None:
         self.endpoint_id = endpoint_id
         self.name = name
@@ -60,6 +78,13 @@ class APIToolSearchResult:
         )
         self.rrf_score = rrf_score  # Hybrid RRF fusion score (used for ranking)
         self.confidence = confidence  # "high", "medium", "none"
+        self.llm_validated = (
+            llm_validated  # True when disambiguator confirmed this match
+        )
+        self.multi_intent_hint = (
+            multi_intent_hint  # True when disambiguator rejected all multi-candidates;
+            # this result is only valid when MULTI_INTENT_ENABLED=True
+        )
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -72,6 +97,7 @@ class APIToolSearchResult:
             "cosine_score": round(self.cosine_score, 4),
             "rrf_score": round(self.rrf_score, 6),
             "confidence": self.confidence,
+            "llm_validated": self.llm_validated,
         }
 
 
@@ -98,6 +124,16 @@ class EndpointDisambiguationSignature(dspy.Signature):
     )
 
 
+@dataclass
+class DisambiguationResult:
+    """Wrapper for disambiguation result to satisfy DSPy's Langfuse callback."""
+
+    winner_id: Optional[str]
+
+    def set_lm_usage(self, *args: object, **kwargs: object) -> None:
+        """No-op stub for DSPy's internal Langfuse callback compatibility."""
+
+
 class EndpointDisambiguatorModule(dspy.Module):
     """DSPy Module for resolving ambiguous API endpoint candidates via LLM.
 
@@ -114,7 +150,7 @@ class EndpointDisambiguatorModule(dspy.Module):
         self,
         user_query: str,
         candidates: List[Dict[str, Any]],
-    ) -> Optional[str]:
+    ) -> DisambiguationResult:
         """Pick the best matching endpoint_id from candidates, or return None.
 
         Args:
@@ -123,7 +159,7 @@ class EndpointDisambiguatorModule(dspy.Module):
                 description, and cosine_score.
 
         Returns:
-            The winning endpoint_id string, or None if no endpoint clearly fits.
+            DisambiguationResult with winner_id (endpoint_id string or None).
         """
         candidates_payload = [
             {
@@ -143,14 +179,14 @@ class EndpointDisambiguatorModule(dspy.Module):
             )
             winner = result.best_endpoint_id.strip()
             if winner.lower() == "none":
-                return None
-            return winner
+                return DisambiguationResult(winner_id=None)
+            return DisambiguationResult(winner_id=winner)
         except Exception as e:
             logger.error(
                 f"EndpointDisambiguatorModule: Disambiguation failed: {e}",
                 exc_info=True,
             )
-            return None
+            return DisambiguationResult(winner_id=None)
 
 
 class APISemanticSearcher:
@@ -253,8 +289,9 @@ class APISemanticSearcher:
             )
             query_embedding = precomputed_embedding
         else:
-            query_embedding = self._get_query_embedding(
-                query, environment, connection_id
+            # loop is not blocked — this allows parallel sub-query searches
+            query_embedding = await asyncio.to_thread(
+                self._get_query_embedding, query, environment, connection_id
             )
         if query_embedding is None:
             logger.error("APISemanticSearcher: Failed to generate query embedding")
@@ -391,8 +428,24 @@ class APISemanticSearcher:
             )
         winner_id = await self._disambiguate(query, medium_results)
         if winner_id is None:
+            if len(medium_results) > 1:
+                # Disambiguator rejected all candidates on a multi-candidate query.
+                # This happens when the query spans multiple independent intents and
+                # no single endpoint fully answers it. Return the top cosine-scored
+                # candidate WITHOUT llm_validated so the classifier's IntentDecomposer
+                # gate can run and detect the parallel path.
+                top = max(medium_results, key=lambda r: r.cosine_score)
+                logger.info(
+                    f"APISemanticSearcher: disambiguator rejected all "
+                    f"{len(medium_results)} candidates (possible multi-intent) — "
+                    f"returning top candidate {top.name!r} "
+                    f"(cosine={top.cosine_score:.4f}) for IntentDecomposer"
+                )
+                top.multi_intent_hint = True
+                return [top]
             logger.info(
-                "APISemanticSearcher: disambiguator rejected all candidates — no API tool match"
+                "APISemanticSearcher: disambiguator rejected sole candidate — "
+                "no API tool match"
             )
             return []
 
@@ -404,9 +457,10 @@ class APISemanticSearcher:
             )
             return []
 
+        winner.llm_validated = True
         logger.info(
             f"APISemanticSearcher: disambiguated winner → {winner.name!r} "
-            f"(cosine={winner.cosine_score:.4f})"
+            f"(cosine={winner.cosine_score:.4f}, llm_validated=True)"
         )
         return [winner]
 
@@ -437,17 +491,49 @@ class APISemanticSearcher:
             f"APISemanticSearcher: disambiguating {len(candidates)} candidates "
             f"for query: {query!r}"
         )
-        # Run the synchronous DSPy LLM call in a thread pool so it does not
-        # block the asyncio event loop while waiting for the LLM response.
-        # cast: asyncio.to_thread infers Prediction from DSPy; forward() returns Optional[str]
-        winner_id = cast(
-            Optional[str],
-            await asyncio.to_thread(
-                self._disambiguator,
-                user_query=query,
-                candidates=candidate_dicts,
-            ),
-        )
+
+        history_length_before = 0
+        try:
+            lm = dspy.settings.lm
+            if lm and hasattr(lm, "history"):
+                history_length_before = len(lm.history)
+        except Exception as e:
+            logger.warning(f"Failed to get LM history length for disambiguation: {e}")
+
+        with safe_observation_context(
+            name="api_endpoint_disambiguation_llm",
+            as_type="generation",
+            input={"user_query": query, "candidates_count": len(candidates)},
+        ) as generation:
+            # Run the synchronous DSPy LLM call in a thread pool so it does not
+            # block the asyncio event loop while waiting for the LLM response.
+            disambiguation_result = cast(
+                DisambiguationResult,
+                await asyncio.to_thread(
+                    self._disambiguator,
+                    user_query=query,
+                    candidates=candidate_dicts,
+                ),
+            )
+            winner_id = disambiguation_result.winner_id
+
+            # Update Langfuse observation with output and usage
+            try:
+                if generation is not None:
+                    usage = get_lm_usage_since(history_length_before)
+                    generation.update(
+                        model=_get_current_model_name(),
+                        output={"winner": winner_id},
+                        usage_details={
+                            "input": usage.get("total_prompt_tokens", 0),
+                            "output": usage.get("total_completion_tokens", 0),
+                            "total": usage.get("total_tokens", 0),
+                        },
+                        cost_details={"total": usage.get("total_cost", 0.0)},
+                    )
+            except Exception as e:
+                logger.debug(f"Langfuse generation update skipped: {e}")
+
         if winner_id:
             logger.info(
                 f"APISemanticSearcher: disambiguator picked endpoint_id={winner_id!r}"

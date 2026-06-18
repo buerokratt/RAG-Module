@@ -43,7 +43,7 @@ extract_request_data:
     name: ${incoming.body.name}
     description: ${incoming.body.description}
     method: ${incoming.body.method || 'GET'}
-    url: ${incoming.body.url}
+    url: ${encodeURIComponent(incoming.body.url)}
     visibility: ${incoming.body.visibility || 'public'}
     type: ${incoming.body.type || 'custom_endpoint'}
     params: ${encodeURIComponent(JSON.stringify(incoming.body.params || []))}

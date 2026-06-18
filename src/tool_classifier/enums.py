@@ -61,3 +61,15 @@ class AgenticLoopStatus(str, Enum):
     NEEDS_INPUT = "needs_input"
     MAX_TURNS_REACHED = "max_turns_reached"
     AWAITING_CONTINUATION_DECISION = "awaiting_continuation_decision"
+
+
+class ExecutionMode(str, Enum):
+    """Execution mode for the API Tool Calling workflow.
+
+    - SINGLE:   One endpoint matched — existing single-API path, no changes.
+    - PARALLEL: Multiple independent endpoints matched via intent decomposition —
+                params collected together, APIs called concurrently.
+    """
+
+    SINGLE = "single"
+    PARALLEL = "parallel"

@@ -1,10 +1,59 @@
 """Cost calculation utilities for LLM usage tracking."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Tuple
 import logging
 import dspy
 
 logger = logging.getLogger(__name__)
+
+
+def _to_float(value: str | int | float | bytes | bytearray | None) -> float:
+    """Best-effort float conversion for cost values."""
+    try:
+        if value is None:
+            return 0.0
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _extract_cost_with_fallback(
+    item: Dict[str, Any], usage: Dict[str, Any]
+) -> Tuple[float, str]:
+    """Extract cost from history entry with streaming-safe fallbacks."""
+    # Primary source used by DSPy for non-streaming calls.
+    item_cost = _to_float(item.get("cost"))
+    if item_cost > 0.0:
+        return item_cost, "item.cost"
+
+    # Some providers put cost directly into usage for streaming responses.
+    usage_cost = _to_float(usage.get("cost")) if isinstance(usage, dict) else 0.0
+    if usage_cost > 0.0:
+        return usage_cost, "usage.cost"
+
+    # Final fallback: estimate from model + tokens when available.
+    prompt_tokens = int(usage.get("prompt_tokens", 0)) if isinstance(usage, dict) else 0
+    completion_tokens = (
+        int(usage.get("completion_tokens", 0)) if isinstance(usage, dict) else 0
+    )
+    model_name = item.get("model")
+
+    if not model_name or (prompt_tokens == 0 and completion_tokens == 0):
+        return 0.0, "missing_model_or_tokens"
+
+    try:
+        from litellm.cost_calculator import cost_per_token
+
+        input_cost, output_cost = cost_per_token(
+            model=model_name,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+        )
+        estimated_cost = input_cost + output_cost
+        return _to_float(estimated_cost), "litellm.cost_per_token"
+    except Exception as e:
+        logger.debug(f"Cost fallback failed for model '{model_name}': {e}")
+        return 0.0, "fallback_error"
 
 
 def extract_cost_from_lm_history(lm_history: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -32,13 +81,13 @@ def extract_cost_from_lm_history(lm_history: List[Dict[str, Any]]) -> Dict[str, 
         for item in lm_history:
             num_calls += 1
 
-            # Extract cost (may be None or 0 for some providers)
-            cost = item.get("cost", 0.0)
-            if cost is not None:
-                total_cost += float(cost)
-
             # Extract usage information
             usage = item.get("usage", {})
+
+            # Extract cost with fallback path for streaming entries.
+            entry_cost, _ = _extract_cost_with_fallback(item, usage)
+            total_cost += entry_cost
+
             if usage:
                 total_prompt_tokens += usage.get("prompt_tokens", 0)
                 total_completion_tokens += usage.get("completion_tokens", 0)

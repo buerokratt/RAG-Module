@@ -7,11 +7,29 @@ import json
 import dspy
 import dspy.streaming
 from dspy.streaming import StreamListener
+from langfuse import observe
+from src.utils.observation_utils import (
+    safe_observation_context,
+    update_observation_safe,
+)
 from loguru import logger
 from pydantic import BaseModel, Field
 
 from src.utils.cost_utils import get_lm_usage_since
 from tool_classifier.greeting_constants import get_greeting_response
+
+
+def _get_current_model_name() -> str:
+    """Best-effort model name lookup from current DSPy LM."""
+    try:
+        lm = dspy.settings.lm
+        if lm and hasattr(lm, "model"):
+            model_name = lm.model
+            if isinstance(model_name, str) and model_name:
+                return model_name
+    except Exception:
+        pass
+    return "unknown"
 
 
 class ContextAnalysisResult(BaseModel):
@@ -281,6 +299,7 @@ class ContextAnalyzer:
             "num_calls": cost1.get("num_calls", 0) + cost2.get("num_calls", 0),
         }
 
+    @observe(name="context_detection_phase1", as_type="generation")
     async def detect_context(
         self,
         query: str,
@@ -365,12 +384,29 @@ class ContextAnalyzer:
             )
 
         cost_dict = get_lm_usage_since(history_length_before)
+        update_observation_safe(
+            input_data={
+                "query": query,
+                "history_turns": total_turns,
+            },
+            output_data={
+                "is_greeting": result.is_greeting,
+                "greeting_type": result.greeting_type,
+                "can_answer_from_context": result.can_answer_from_context,
+                "has_context_snippet": bool(result.context_snippet),
+            },
+            metadata={
+                "model": _get_current_model_name(),
+                "usage": cost_dict,
+            },
+        )
         logger.info(
             f"Detection cost | Total: ${cost_dict.get('total_cost', 0):.6f} | "
             f"Tokens: {cost_dict.get('total_tokens', 0)}"
         )
         return result, cost_dict
 
+    @observe(name="context_detection_with_summary_fallback", as_type="chain")
     async def detect_context_with_summary_fallback(
         self,
         query: str,
@@ -501,79 +537,136 @@ class ContextAnalyzer:
         Yields:
             Token strings as they arrive from the LLM (or simulated chunks)
         """
-        logger.info(f"CONTEXT GENERATOR: Phase 2 streaming | Query: '{query[:100]}'")
+        with safe_observation_context(
+            as_type="generation",
+            name="context_response_streaming",
+            input={"query": query[:500]},
+        ) as _generation:
+            logger.info(
+                f"CONTEXT GENERATOR: Phase 2 streaming | Query: '{query[:100]}'"
+            )
 
-        self.llm_manager.ensure_global_config()
-        output_stream = None
-        stream_started = False
-        prediction_answer: Optional[str] = None
-        try:
-            with self.llm_manager.use_task_local():
-                # Always create a fresh StreamListener + streamified predictor so that
-                # the listener's internal state is clean for this call.
-                answer_listener = StreamListener(signature_field_name="answer")
-                stream_predictor: Any = dspy.streamify(
-                    dspy.Predict(ContextResponseGenerationSignature),
-                    stream_listeners=[answer_listener],
+            self.llm_manager.ensure_global_config()
+            history_length_before = 0
+            try:
+                lm = dspy.settings.lm
+                if lm and hasattr(lm, "history"):
+                    history_length_before = len(lm.history)
+            except Exception as e:
+                logger.warning(
+                    f"Failed to get LM history length for streaming generation: {e}"
                 )
-                output_stream = stream_predictor(
-                    context_snippet=context_snippet,
-                    user_query=query,
-                )
-
-                async for chunk in output_stream:
-                    if isinstance(chunk, dspy.streaming.StreamResponse):
-                        if chunk.signature_field_name == "answer":
-                            stream_started = True
-                            yield chunk.chunk
-                    elif isinstance(chunk, dspy.Prediction):
-                        logger.info(
-                            "Context response streaming complete (final Prediction received)"
-                        )
-                        if not stream_started:
-                            # Tokens didn't stream — extract answer from the Prediction
-                            # directly as first fallback before leaving the LM context.
-                            prediction_answer = getattr(chunk, "answer", "") or ""
-
-        except GeneratorExit:
-            raise
-        except Exception as e:
-            logger.error(f"Error during context response streaming: {e}")
-            raise
-        finally:
-            if output_stream is not None:
-                try:
-                    await output_stream.aclose()
-                except Exception as cleanup_error:
-                    logger.debug(
-                        f"Error during context stream cleanup: {cleanup_error}"
+            output_stream = None
+            stream_started = False
+            prediction_answer: Optional[str] = None
+            assembled_answer = ""  # Collect all yielded tokens here
+            try:
+                with self.llm_manager.use_task_local():
+                    # Always create a fresh StreamListener + streamified predictor so that
+                    # the listener's internal state is clean for this call.
+                    answer_listener = StreamListener(signature_field_name="answer")
+                    stream_predictor: Any = dspy.streamify(
+                        dspy.Predict(ContextResponseGenerationSignature),
+                        stream_listeners=[answer_listener],
+                    )
+                    output_stream = stream_predictor(
+                        context_snippet=context_snippet,
+                        user_query=query,
                     )
 
-        if stream_started:
-            return
+                    async for chunk in output_stream:
+                        if isinstance(chunk, dspy.streaming.StreamResponse):
+                            if chunk.signature_field_name == "answer":
+                                stream_started = True
+                                assembled_answer += chunk.chunk
+                                yield chunk.chunk
+                        elif isinstance(chunk, dspy.Prediction):
+                            logger.info(
+                                "Context response streaming complete (final Prediction received)"
+                            )
+                            if not stream_started:
+                                # Tokens didn't stream — extract answer from the Prediction
+                                # directly as first fallback before leaving the LM context.
+                                prediction_answer = getattr(chunk, "answer", "") or ""
 
-        # Fallback 1: answer was in the final Prediction but didn't stream as tokens
-        if prediction_answer:
+            except GeneratorExit:
+                raise
+            except Exception as e:
+                logger.error(f"Error during context response streaming: {e}")
+                raise
+            finally:
+                if output_stream is not None:
+                    try:
+                        await output_stream.aclose()
+                    except Exception as cleanup_error:
+                        logger.debug(
+                            f"Error during context stream cleanup: {cleanup_error}"
+                        )
+
+            stream_usage = get_lm_usage_since(history_length_before)
+
+            # Determine final answer for Langfuse output
+            final_answer = assembled_answer
+            if not stream_started and prediction_answer:
+                final_answer = prediction_answer
+
+            try:
+                _generation.update(
+                    model=_get_current_model_name(),
+                    usage_details={
+                        "input": stream_usage.get("total_prompt_tokens", 0),
+                        "output": stream_usage.get("total_completion_tokens", 0),
+                        "total": stream_usage.get("total_tokens", 0),
+                    },
+                    cost_details={
+                        "total": stream_usage.get("total_cost", 0.0),
+                    },
+                    input={
+                        "query": query,
+                        "context_snippet_preview": context_snippet[:500],
+                    },
+                    output={
+                        "answer": final_answer,
+                        "stream_started": stream_started,
+                        "has_prediction_answer": bool(prediction_answer),
+                    },
+                    metadata={
+                        "num_calls": stream_usage.get("num_calls", 0),
+                    },
+                )
+            except Exception as e:
+                logger.warning(
+                    f"Failed to update context streaming observation in Langfuse: {e}"
+                )
+
+            if stream_started:
+                return
+
+            # Fallback 1: answer was in the final Prediction but didn't stream as tokens
+            if prediction_answer:
+                logger.warning(
+                    "Stream tokens not received — yielding answer from final Prediction in chunks."
+                )
+                for text_chunk in self._yield_in_chunks(prediction_answer):
+                    yield text_chunk
+                return
+
+            # Fallback 2: Prediction had no answer either — call generate_context_response
             logger.warning(
-                "Stream tokens not received — yielding answer from final Prediction in chunks."
+                "No answer from streamify — falling back to generate_context_response."
             )
-            for text_chunk in self._yield_in_chunks(prediction_answer):
-                yield text_chunk
-            return
+            fallback_answer, _ = await self.generate_context_response(
+                query=query, context_snippet=context_snippet
+            )
+            if fallback_answer:
+                for text_chunk in self._yield_in_chunks(fallback_answer):
+                    yield text_chunk
+            else:
+                logger.error(
+                    "All Phase 2 streaming fallbacks exhausted — empty response."
+                )
 
-        # Fallback 2: Prediction had no answer either — call generate_context_response
-        logger.warning(
-            "No answer from streamify — falling back to generate_context_response."
-        )
-        fallback_answer, _ = await self.generate_context_response(
-            query=query, context_snippet=context_snippet
-        )
-        if fallback_answer:
-            for text_chunk in self._yield_in_chunks(fallback_answer):
-                yield text_chunk
-        else:
-            logger.error("All Phase 2 streaming fallbacks exhausted — empty response.")
-
+    @observe(name="context_response_non_streaming", as_type="generation")
     async def generate_context_response(
         self,
         query: str,
@@ -624,12 +717,27 @@ class ContextAnalyzer:
             logger.error(f"Context response generation failed: {e}", exc_info=True)
 
         cost_dict = get_lm_usage_since(history_length_before)
+        update_observation_safe(
+            input_data={
+                "query": query,
+                "context_snippet_preview": context_snippet[:500],
+            },
+            output_data={
+                "answer_preview": answer[:500],
+                "has_answer": bool(answer),
+            },
+            metadata={
+                "model": _get_current_model_name(),
+                "usage": cost_dict,
+            },
+        )
         logger.info(
             f"Generation cost | Total: ${cost_dict.get('total_cost', 0):.6f} | "
             f"Tokens: {cost_dict.get('total_tokens', 0)}"
         )
         return answer, cost_dict
 
+    @observe(name="conversation_summary_generation", as_type="generation")
     async def _generate_conversation_summary(
         self,
         older_history: List[Dict[str, Any]],
@@ -680,6 +788,19 @@ class ContextAnalyzer:
             summary = ""
 
         cost_dict = get_lm_usage_since(history_length_before)
+        update_observation_safe(
+            input_data={
+                "older_history_turns": len(older_history),
+            },
+            output_data={
+                "summary_preview": summary[:500],
+                "summary_length": len(summary),
+            },
+            metadata={
+                "model": _get_current_model_name(),
+                "usage": cost_dict,
+            },
+        )
         logger.info(
             f"Summary cost | Total: ${cost_dict.get('total_cost', 0):.6f} | "
             f"Tokens: {cost_dict.get('total_tokens', 0)}"
@@ -687,6 +808,7 @@ class ContextAnalyzer:
 
         return summary, cost_dict
 
+    @observe(name="summary_answerability_analysis", as_type="generation")
     async def _analyze_from_summary(
         self,
         query: str,
@@ -775,6 +897,21 @@ class ContextAnalyzer:
                 )
 
         cost_dict = get_lm_usage_since(history_length_before)
+        update_observation_safe(
+            input_data={
+                "query": query,
+                "summary_preview": summary[:500],
+            },
+            output_data={
+                "can_answer_from_context": result.can_answer_from_context,
+                "answered_from_summary": result.answered_from_summary,
+                "has_answer": bool(result.answer),
+            },
+            metadata={
+                "model": _get_current_model_name(),
+                "usage": cost_dict,
+            },
+        )
         logger.info(
             f"Summary analysis cost | Total: ${cost_dict.get('total_cost', 0):.6f} | "
             f"Tokens: {cost_dict.get('total_tokens', 0)}"
@@ -782,6 +919,7 @@ class ContextAnalyzer:
 
         return result, cost_dict
 
+    @observe(name="context_analysis_orchestration", as_type="chain")
     async def analyze_context(
         self,
         query: str,
@@ -886,6 +1024,7 @@ class ContextAnalyzer:
         )
         return result, cost_dict
 
+    @observe(name="context_analysis_recent_history", as_type="generation")
     async def _analyze_recent_history(
         self,
         query: str,
@@ -1000,6 +1139,22 @@ class ContextAnalyzer:
 
         # Calculate costs
         cost_dict = get_lm_usage_since(history_length_before)
+        update_observation_safe(
+            input_data={
+                "query": query,
+                "history_turns": len(conversation_history),
+                "language": language,
+            },
+            output_data={
+                "is_greeting": result.is_greeting,
+                "can_answer_from_context": result.can_answer_from_context,
+                "has_answer": bool(result.answer),
+            },
+            metadata={
+                "model": _get_current_model_name(),
+                "usage": cost_dict,
+            },
+        )
         logger.info(
             f"Cost tracking | Total cost: ${cost_dict.get('total_cost', 0):.6f} | "
             f"Tokens: {cost_dict.get('total_tokens', 0)} | "

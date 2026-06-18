@@ -18,7 +18,10 @@ from tool_classifier.models import (
     AgenticLoopResult,
     APICallResult,
     ClassificationResult,
+    MultiAPICallResult,
 )
+from tool_classifier.multi_api_caller import MultiAPICaller
+from tool_classifier.multi_response_formatter import MultiResponseFormatterModule
 
 __all__ = [
     "AgenticLoop",
@@ -28,6 +31,9 @@ __all__ = [
     "APICallResult",
     "APIResponseFormatterModule",
     "ClassificationResult",
+    "MultiAPICaller",
+    "MultiAPICallResult",
+    "MultiResponseFormatterModule",
     "ToolClassifier",
     "WorkflowType",
 ]

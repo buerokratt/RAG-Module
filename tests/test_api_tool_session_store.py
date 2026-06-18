@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from pydantic import ValidationError
 
-from src.models.session_models import APIToolSession
+from src.models.session_models import APIToolSession, EndpointSessionState
 from src.utils.api_tool_session_store import (
     APIToolSessionStore,
     _key,
@@ -46,6 +46,36 @@ def _make_redis_mock() -> AsyncMock:
 # ---------------------------------------------------------------------------
 
 
+class TestEndpointSessionState:
+    def test_defaults(self):
+        ep = EndpointSessionState(
+            endpoint={"name": "get_holidays", "url": "https://example.com"}
+        )
+        assert ep.collected_params == {}
+        assert ep.completed is False
+
+    def test_mark_completed(self):
+        ep = EndpointSessionState(
+            endpoint={"name": "get_holidays"},
+            collected_params={"year": "2026"},
+            completed=True,
+        )
+        assert ep.completed is True
+        assert ep.collected_params == {"year": "2026"}
+
+    def test_serialization_roundtrip(self):
+        ep = EndpointSessionState(
+            endpoint={"name": "get_electricity_prices", "url": "https://example.com"},
+            collected_params={"region": "EE"},
+        )
+        restored = EndpointSessionState.model_validate_json(ep.model_dump_json())
+        assert restored == ep
+
+    def test_endpoint_is_required(self):
+        with pytest.raises(ValidationError):
+            EndpointSessionState()  # type: ignore[call-arg]
+
+
 class TestAPIToolSession:
     def test_defaults(self):
         session = APIToolSession(chat_id="abc", state="collecting_params")
@@ -53,6 +83,10 @@ class TestAPIToolSession:
         assert session.turn_count == 0
         assert session.max_turns == 5
         assert session.selected_endpoint is None
+        # Phase 2 parallel-mode defaults
+        assert session.execution_mode == "single"
+        assert session.parallel_endpoints == []
+        assert session.active_endpoint_index == 0
 
     def test_serialization_roundtrip(self):
         session = _make_session()
@@ -67,6 +101,75 @@ class TestAPIToolSession:
     def test_max_turns_must_be_at_least_one(self):
         with pytest.raises(ValidationError):
             APIToolSession(chat_id="x", state="s", max_turns=0)
+
+    # ── Phase 2: parallel-mode fields ────────────────────────────────────
+
+    def test_parallel_session_stores_endpoint_states(self):
+        ep1 = EndpointSessionState(endpoint={"name": "get_holidays"})
+        ep2 = EndpointSessionState(endpoint={"name": "get_electricity_prices"})
+        session = APIToolSession(
+            chat_id="chat-p1",
+            state="collecting_params",
+            execution_mode="parallel",
+            parallel_endpoints=[ep1, ep2],
+        )
+        assert session.execution_mode == "parallel"
+        assert len(session.parallel_endpoints) == 2
+        assert session.parallel_endpoints[0].endpoint["name"] == "get_holidays"
+        assert (
+            session.parallel_endpoints[1].endpoint["name"] == "get_electricity_prices"
+        )
+
+    def test_active_endpoint_index_defaults_to_zero(self):
+        session = APIToolSession(
+            chat_id="chat-p2",
+            state="collecting_params",
+            execution_mode="parallel",
+            parallel_endpoints=[EndpointSessionState(endpoint={"name": "ep1"})],
+        )
+        assert session.active_endpoint_index == 0
+
+    def test_active_endpoint_index_must_be_non_negative(self):
+        with pytest.raises(ValidationError):
+            APIToolSession(
+                chat_id="x",
+                state="s",
+                active_endpoint_index=-1,
+            )
+
+    def test_parallel_session_serialization_roundtrip(self):
+        ep1 = EndpointSessionState(
+            endpoint={"name": "get_holidays", "url": "https://example.com"},
+            collected_params={"year": "2026"},
+        )
+        ep2 = EndpointSessionState(
+            endpoint={"name": "get_electricity_prices", "url": "https://example.com"},
+            completed=True,
+        )
+        session = APIToolSession(
+            chat_id="chat-parallel",
+            state="collecting_params",
+            execution_mode="parallel",
+            parallel_endpoints=[ep1, ep2],
+            active_endpoint_index=1,
+        )
+        restored = APIToolSession.model_validate_json(session.model_dump_json())
+        assert restored == session
+        assert restored.parallel_endpoints[1].completed is True
+        assert restored.active_endpoint_index == 1
+
+    def test_backward_compat_session_without_parallel_fields(self):
+        """Sessions serialised before Phase 2 (no parallel fields) load cleanly."""
+        legacy_json = (
+            '{"chat_id":"legacy","state":"collecting_params",'
+            '"selected_endpoint":null,"collected_params":{},'
+            '"turn_count":0,"max_turns":5,"awaiting_continuation":false,'
+            '"detected_language":"en","original_query":""}'
+        )
+        session = APIToolSession.model_validate_json(legacy_json)
+        assert session.execution_mode == "single"
+        assert session.parallel_endpoints == []
+        assert session.active_endpoint_index == 0
 
 
 # ---------------------------------------------------------------------------

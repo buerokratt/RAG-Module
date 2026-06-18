@@ -6,9 +6,9 @@
 set -e  # Exit on any error
 
 # Configuration
-# Use VAULT_AGENT_URL which points to vault-agent-cron proxy
+# Use vaultAgentUrl which points to vault-agent-cron proxy
 # The agent automatically injects the authentication token
-VAULT_ADDR="${VAULT_AGENT_URL:-http://vault-agent-cron:8203}"
+VAULT_ADDR="${vaultAgentUrl:-http://vault-agent-cron:8203}"
 
 # Decryption Configuration
 PRIVATE_KEY_CACHE=""
@@ -164,11 +164,17 @@ setup_python_environment() {
 
 log "=== Starting Vault Secrets Storage ==="
 log "Received parameters:"
-log "  connectionId: $connectionId"
+log "  vaultUuid: $vaultUuid"
 log "  llmPlatform: $llmPlatform"
 log "  llmModel: $llmModel"
 log "  deploymentEnvironment: $deploymentEnvironment"
 log "  Vault Address: $VAULT_ADDR"
+
+# Validate required vaultUuid parameter
+if [ -z "$vaultUuid" ]; then
+    log "ERROR: vaultUuid is required but not provided"
+    exit 1
+fi
 
 # Redirect stderr to stdout so cron-manager can capture all logs
 exec 2>&1
@@ -197,24 +203,13 @@ get_model_name() {
     echo "$llmModel" | sed 's/\[//g' | sed 's/\]//g' | sed 's/"//g' | cut -d',' -f1 | xargs
 }
 
-# Function to build vault path
+# Function to build vault path (uses vaultUuid as stable path terminal)
 build_vault_path() {
     local secret_type=$1  # "llm" or "embeddings"
     local platform=$(get_platform_name)
     
-    # Use appropriate model based on secret type
-    local model
-    if [ "$secret_type" = "embeddings" ]; then
-        model="$embeddingModel"
-    else
-        model=$(get_model_name)
-    fi
-    
-    if [ "$deploymentEnvironment" = "testing" ]; then
-        echo "secret/$secret_type/connections/$platform/$deploymentEnvironment/$connectionId"
-    else
-        echo "secret/$secret_type/connections/$platform/$deploymentEnvironment/$model"
-    fi
+    # UUID-based path: no environment in path, swap is DB-only
+    echo "secret/$secret_type/connections/$platform/$vaultUuid"
 }
 
 # Function to store LLM secrets
@@ -272,18 +267,16 @@ store_aws_llm_secrets() {
     
     # Build JSON payload using jq for proper escaping
     local json_payload=$(jq -n \
-        --arg conn_id "$connectionId" \
+        --arg conn_id "$vaultUuid" \
         --arg access_key "$decrypted_access_key" \
         --arg secret_key "$decrypted_secret_key" \
-        --arg env "$deploymentEnvironment" \
         --arg model "$model" \
         '{data: {
             connection_id: $conn_id,
             access_key: $access_key,
             secret_key: $secret_key,
-            environment: $env,
             model: $model,
-            tags: "aws,bedrock,\($env),\($model)"
+            tags: "aws,bedrock,\($model)"
         }}')
     
     log "Storing secrets at path: $vault_path"
@@ -333,21 +326,19 @@ store_azure_llm_secrets() {
     
     # Build JSON payload using jq for proper escaping
     local json_payload=$(jq -n \
-        --arg conn_id "$connectionId" \
+        --arg conn_id "$vaultUuid" \
         --arg endpoint "$targetUrl" \
         --arg api_key "$decrypted_api_key" \
         --arg deploy_name "$deploymentName" \
-        --arg env "$deploymentEnvironment" \
         --arg model "$model" \
         '{data: {
             connection_id: $conn_id,
             endpoint: $endpoint,
             api_key: $api_key,
             deployment_name: $deploy_name,
-            environment: $env,
             model: $model,
             api_version: "2024-05-01-preview",
-            tags: "azure,\($env),\($model)"
+            tags: "azure,\($model)"
         }}')
     
     log "Storing secrets at path: $vault_path"
@@ -402,18 +393,16 @@ store_aws_embedding_secrets() {
     
     # Build JSON payload using jq for proper escaping
     local json_payload=$(jq -n \
-        --arg conn_id "$connectionId" \
+        --arg conn_id "$vaultUuid" \
         --arg access_key "$decrypted_embedding_access_key" \
         --arg secret_key "$decrypted_embedding_secret_key" \
-        --arg env "$deploymentEnvironment" \
         --arg model "$embeddingModel" \
         '{data: {
             connection_id: $conn_id,
             access_key: $access_key,
             secret_key: $secret_key,
-            environment: $env,
             model: $model,
-            tags: "aws,bedrock,embedding,\($env),\($model)"
+            tags: "aws,bedrock,embedding,\($model)"
         }}')
     
     log "Storing secrets at path: $vault_path"
@@ -462,21 +451,19 @@ store_azure_embedding_secrets() {
     
     # Build JSON payload using jq for proper escaping
     local json_payload=$(jq -n \
-        --arg conn_id "$connectionId" \
+        --arg conn_id "$vaultUuid" \
         --arg endpoint "$embeddingTargetUri" \
         --arg api_key "$decrypted_embedding_api_key" \
         --arg deploy_name "$embeddingDeploymentName" \
-        --arg env "$deploymentEnvironment" \
         --arg model "$embeddingModel" \
         '{data: {
             connection_id: $conn_id,
             endpoint: $endpoint,
             api_key: $api_key,
             deployment_name: $deploy_name,
-            environment: $env,
             model: $model,
             api_version: "2024-12-01-preview",
-            tags: "azure,embedding,\($env),\($model)"
+            tags: "azure,embedding,\($model)"
         }}')
     
     log "Storing secrets at path: $vault_path"
