@@ -1,0 +1,83 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Update or insert prompt configuration"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: prompt
+        type: string
+        description: "Prompt text to save"
+
+extract_request_data:
+  assign:
+    prompt: ${incoming.body.prompt ?? ""}
+  next: initialize_results
+
+initialize_results:
+  assign:
+    update_result: null
+    insert_result: null
+  next: get_existing_prompt
+
+get_existing_prompt:
+  call: http.get
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-prompt-configuration"
+  result: existing_prompt
+  next: check_if_exists
+
+check_if_exists:
+  switch:
+    - condition: "${existing_prompt.response.body.length > 0}"
+      next: update_prompt
+  next: insert_prompt
+
+update_prompt:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-prompt-configuration"
+    body:
+      id: ${existing_prompt.response.body[0].id}
+      prompt: ${prompt}
+  result: update_result
+  next: refresh_llm_cache
+
+insert_prompt:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/insert-prompt-configuration"
+    body:
+      prompt: ${prompt}
+  result: insert_result
+  next: refresh_llm_cache
+
+refresh_llm_cache:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_PROMPT_REFRESH]"
+    body: {}
+  result: refresh_result
+  next: check_operation_type
+  on_error: handle_refresh_error
+
+handle_refresh_error:
+  log: "Prompt refresh failed, will use TTL cache fallback"
+  next: check_operation_type
+
+check_operation_type:
+  switch:
+    - condition: "${update_result != null}"
+      next: return_update_success
+  next: return_insert_success
+
+return_update_success:
+  return: ${update_result.response.body[0]}
+  next: end
+
+return_insert_success:
+  return: ${insert_result.response.body[0]}
+  next: end

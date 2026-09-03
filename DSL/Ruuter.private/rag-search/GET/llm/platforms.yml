@@ -1,0 +1,19 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get all active LLM platforms"
+  method: get
+  returns: json
+  namespace: rag-search
+
+get_llm_platforms:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-platforms"
+  result: platforms_result
+  next: return_success
+
+return_success:
+  return: ${platforms_result.response.body}
+  status: 200
+  next: end

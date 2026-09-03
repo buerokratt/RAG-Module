@@ -1,0 +1,87 @@
+.prompt-configurations {
+  padding: 2rem;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .title-container {
+    margin-bottom: 2rem;
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin: 0;
+    }
+  }
+
+  .prompt-form {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    .toggle-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      .switch {
+        margin: 0;
+        gap: 0;
+
+        &__label {
+          display: none;
+        }
+
+        &__button {
+          width: 65px;
+          height:auto;
+          min-width: 44px;
+          padding: 2px;
+          gap: 0;
+        }
+
+        &__on,
+        &__off {
+          display: none;
+        }
+
+        &__thumb {
+          display: block;
+          width: 30px;
+          height: 30px;
+          background-color: white;
+          border-radius: 50%;
+          transition: transform 0.25s ease-out;
+          transform: translateX(2px);
+        }
+
+        &__button[aria-checked="true"] .switch__thumb {
+          transform: translateX(30px);
+        }
+      }
+    }
+
+    .separator {
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+  }
+}

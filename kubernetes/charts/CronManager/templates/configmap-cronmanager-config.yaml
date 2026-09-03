@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.release_name }}-config"
+  labels:
+    app: "{{ .Values.release_name }}"
+data:
+  constants.ini: |
+  
+    RAG_MODULE_RUUTER_PRIVATE={{ .Values.constants.RAG_MODULE_RUUTER_PRIVATE }}
+    RAG_MODULE_RUUTER_PUBLIC={{ .Values.constants.RAG_MODULE_RUUTER_PUBLIC }}
+    RAG_MODULE_RESQL={{ .Values.constants.RAG_MODULE_RESQL }}
+    RAG_MODULE_TIM={{ .Values.constants.RAG_MODULE_TIM }}
+    RAG_MODULE_DATAMAPPER={{ .Values.constants.RAG_MODULE_DATAMAPPER }}
+   

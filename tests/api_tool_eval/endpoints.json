@@ -1,0 +1,223 @@
+[
+  {
+    "endpointId": "a3f7c2d1-84e6-4b19-92f3-d51c7e890ab2",
+    "name": "get_national_holidays",
+    "description": "Fetch national holidays for a specific country to see when they have public days off.",
+    "url": "https://openholidaysapi.org/PublicHolidays",
+    "method": "GET",
+    "params": [
+      { "name": "countryIsoCode", "type": "string", "required": true, "description": "The 2-letter ISO country code (e.g., EE for Estonia, DE for Germany)" },
+      { "name": "languageIsoCode", "type": "string", "required": false, "description": "The 2-letter ISO language code for the response (e.g., ET, EN)" },
+      { "name": "validFrom", "type": "date", "required": false, "description": "Start date for the holiday search (YYYY-MM-DD)" },
+      { "name": "validTo", "type": "date", "required": false, "description": "End date for the holiday search (YYYY-MM-DD)" }
+    ]
+  },
+  {
+    "endpointId": "c6d092b4-f518-4a37-b9e7-120e83a7d64f",
+    "name": "get_unemployment_rate",
+    "description": "Fetch the official unemployment rate statistics for Estonia from the national statistics office.",
+    "url": "https://andmed.stat.ee/api/v1/en/stat/TT330",
+    "method": "POST",
+    "params": [
+      { "name": "Näitaja", "type": "string", "required": true, "description": "The specific statistical indicator to query (e.g., unemployment rate)" },
+      { "name": "Sugu", "type": "string", "required": false, "description": "Gender filter (e.g., Male, Female, Total)" },
+      { "name": "Vanuserühm", "type": "string", "required": false, "description": "Age group category filter (e.g., 15-24, 25-49)" },
+      { "name": "Vaatlusperiood", "type": "string", "required": true, "description": "The observation period (e.g., year or quarter) to get data for" }
+    ]
+  },
+  {
+    "endpointId": "b8e41f09-3c72-4d85-ae16-7f924d10c53e",
+    "name": "get_current_electricity_price",
+    "description": "Fetch the current real-time electricity and energy market price for Estonia.",
+    "url": "https://dashboard.elering.ee/api/nps/price/EE/current",
+    "method": "GET",
+    "params": []
+  },
+  {
+    "endpointId": "d1e2f3a4-b5c6-7890-abcd-ef1234567890",
+    "name": "get_weather_forecast",
+    "description": "Fetch hourly or daily weather forecast for any location including temperature, precipitation, and wind speed.",
+    "url": "https://api.open-meteo.com/v1/forecast",
+    "method": "GET",
+    "params": [
+      { "name": "latitude", "type": "float", "required": true, "description": "Geographic latitude of the location (e.g., 59.4370 for Tallinn)" },
+      { "name": "longitude", "type": "float", "required": true, "description": "Geographic longitude of the location (e.g., 24.7536 for Tallinn)" },
+      { "name": "hourly", "type": "string", "required": false, "description": "Hourly weather variables to include (e.g., temperature_2m, precipitation, windspeed_10m)" },
+      { "name": "daily", "type": "string", "required": false, "description": "Daily weather variables to include (e.g., temperature_2m_max, precipitation_sum)" },
+      { "name": "forecast_days", "type": "integer", "required": false, "description": "Number of forecast days (1-16)" }
+    ]
+  },
+  {
+    "endpointId": "e2f3a4b5-c6d7-8901-bcde-f12345678901",
+    "name": "get_exchange_rates",
+    "description": "Fetch the latest foreign currency exchange rates relative to a base currency.",
+    "url": "https://api.frankfurter.app/latest",
+    "method": "GET",
+    "params": [
+      { "name": "base", "type": "string", "required": false, "description": "Base currency code to convert from (e.g., EUR, USD). Defaults to EUR." },
+      { "name": "symbols", "type": "string", "required": false, "description": "Comma-separated list of target currency codes to include (e.g., USD,GBP,SEK)" }
+    ]
+  },
+  {
+    "endpointId": "f3a4b5c6-d7e8-9012-cdef-123456789012",
+    "name": "get_country_information",
+    "description": "Fetch detailed country information including population, capital city, languages, currency, and geographic data.",
+    "url": "https://restcountries.com/v3.1/name",
+    "method": "GET",
+    "params": [
+      { "name": "country", "type": "string", "required": true, "description": "Full or partial name of the country (e.g., Estonia, Germany, Finland)" },
+      { "name": "fields", "type": "string", "required": false, "description": "Comma-separated fields to return (e.g., name,capital,population,currencies)" }
+    ]
+  },
+  {
+    "endpointId": "a4b5c6d7-e8f9-0123-defa-234567890123",
+    "name": "get_ip_geolocation",
+    "description": "Fetch geographic location information for an IP address including country, city, region, and coordinates.",
+    "url": "http://ip-api.com/json",
+    "method": "GET",
+    "params": [
+      { "name": "ip", "type": "string", "required": true, "description": "The IP address to geolocate (e.g., 88.196.123.45)" },
+      { "name": "fields", "type": "string", "required": false, "description": "Comma-separated fields to return (e.g., country,city,lat,lon,isp)" }
+    ]
+  },
+  {
+    "endpointId": "b5c6d7e8-f9a0-1234-efab-345678901234",
+    "name": "get_school_holidays",
+    "description": "Fetch official school holidays and term breaks for a specific country and school year.",
+    "url": "https://openholidaysapi.org/SchoolHolidays",
+    "method": "GET",
+    "params": [
+      { "name": "countryIsoCode", "type": "string", "required": true, "description": "The 2-letter ISO country code (e.g., EE for Estonia)" },
+      { "name": "languageIsoCode", "type": "string", "required": false, "description": "The 2-letter ISO language code for the response (e.g., ET, EN)" },
+      { "name": "validFrom", "type": "date", "required": false, "description": "Start date for the school holiday search (YYYY-MM-DD)" },
+      { "name": "validTo", "type": "date", "required": false, "description": "End date for the school holiday search (YYYY-MM-DD)" }
+    ]
+  },
+  {
+    "endpointId": "c6d7e8f9-a0b1-2345-fabc-456789012345",
+    "name": "get_current_time_by_timezone",
+    "description": "Fetch the current time, date, UTC offset, and daylight saving time status for any timezone.",
+    "url": "https://worldtimeapi.org/api/timezone",
+    "method": "GET",
+    "params": [
+      { "name": "timezone", "type": "string", "required": true, "description": "IANA timezone name (e.g., Europe/Tallinn, Europe/Helsinki, UTC)" }
+    ]
+  },
+  {
+    "endpointId": "d7e8f9a0-b1c2-3456-abcd-567890123456",
+    "name": "get_air_quality",
+    "description": "Fetch real-time air quality measurements including PM2.5, PM10, NO2, ozone, and AQI index for a location.",
+    "url": "https://api.openaq.org/v2/latest",
+    "method": "GET",
+    "params": [
+      { "name": "city", "type": "string", "required": false, "description": "City name to filter air quality sensors (e.g., Tallinn, Tartu)" },
+      { "name": "country", "type": "string", "required": false, "description": "2-letter ISO country code to filter sensors (e.g., EE)" },
+      { "name": "parameter", "type": "string", "required": false, "description": "Pollutant to filter by (e.g., pm25, pm10, no2, o3)" },
+      { "name": "limit", "type": "integer", "required": false, "description": "Maximum number of results to return" }
+    ]
+  },
+  {
+    "endpointId": "e8f9a0b1-c2d3-4567-bcde-678901234567",
+    "name": "get_address_geocoding",
+    "description": "Search for a geographic address and return its latitude, longitude, and structured address components.",
+    "url": "https://nominatim.openstreetmap.org/search",
+    "method": "GET",
+    "params": [
+      { "name": "q", "type": "string", "required": true, "description": "Free-form address or place name to search for (e.g., Viru 4, Tallinn)" },
+      { "name": "format", "type": "string", "required": false, "description": "Response format: json, xml, geojson. Default: json" },
+      { "name": "countrycodes", "type": "string", "required": false, "description": "Comma-separated ISO country codes to restrict search (e.g., ee for Estonia)" },
+      { "name": "limit", "type": "integer", "required": false, "description": "Maximum number of results to return (default: 10)" }
+    ]
+  },
+  {
+    "endpointId": "f9a0b1c2-d3e4-5678-cdef-789012345678",
+    "name": "get_word_definition",
+    "description": "Fetch the definition, phonetics, synonyms, antonyms, and usage examples for an English word.",
+    "url": "https://api.dictionaryapi.dev/api/v2/entries/en",
+    "method": "GET",
+    "params": [
+      { "name": "word", "type": "string", "required": true, "description": "The English word to look up the definition for (e.g., ephemeral, resilient)" }
+    ]
+  },
+  {
+    "endpointId": "a0b1c2d3-e4f5-6789-defa-890123456789",
+    "name": "get_gdp_statistics",
+    "description": "Fetch annual GDP and economic growth rate statistics for any country from the World Bank open data API.",
+    "url": "https://api.worldbank.org/v2/country/indicator/NY.GDP.MKTP.CD",
+    "method": "GET",
+    "params": [
+      { "name": "country", "type": "string", "required": true, "description": "ISO 2-letter country code (e.g., EE for Estonia, FI for Finland)" },
+      { "name": "format", "type": "string", "required": false, "description": "Response format: json or xml. Default: json" },
+      { "name": "date", "type": "string", "required": false, "description": "Year or year range to filter (e.g., 2020 or 2015:2023)" },
+      { "name": "per_page", "type": "integer", "required": false, "description": "Number of records per page (default: 50)" }
+    ]
+  },
+  {
+    "endpointId": "b1c2d3e4-f5a6-7890-efab-901234567890",
+    "name": "get_population_data",
+    "description": "Fetch annual population count and growth statistics for any country from the World Bank.",
+    "url": "https://api.worldbank.org/v2/country/indicator/SP.POP.TOTL",
+    "method": "GET",
+    "params": [
+      { "name": "country", "type": "string", "required": true, "description": "ISO 2-letter country code (e.g., EE for Estonia)" },
+      { "name": "format", "type": "string", "required": false, "description": "Response format: json or xml. Default: json" },
+      { "name": "date", "type": "string", "required": false, "description": "Year or year range (e.g., 2020 or 2010:2023)" }
+    ]
+  },
+  {
+    "endpointId": "c2d3e4f5-a6b7-8901-fabc-012345678901",
+    "name": "get_electricity_price_history",
+    "description": "Fetch historical electricity market prices for Estonia over a specified date range.",
+    "url": "https://dashboard.elering.ee/api/nps/price",
+    "method": "GET",
+    "params": [
+      { "name": "start", "type": "datetime", "required": true, "description": "Start datetime for the price history query (ISO 8601 format, e.g., 2024-01-01T00:00:00Z)" },
+      { "name": "end", "type": "datetime", "required": true, "description": "End datetime for the price history query (ISO 8601 format, e.g., 2024-01-31T23:59:59Z)" }
+    ]
+  },
+  {
+    "endpointId": "e4f5a6b7-c8d9-0123-bcde-234567890123",
+    "name": "get_public_transport_stops",
+    "description": "Fetch list of public transport stops in Estonia including buses, trams, and trains with their GPS coordinates.",
+    "url": "https://peatus.ee/gtfs/stops.txt",
+    "method": "GET",
+    "params": []
+  },
+  {
+    "endpointId": "f5a6b7c8-d9e0-1234-cdef-345678901234",
+    "name": "get_average_salary_statistics",
+    "description": "Fetch official average gross and net salary statistics for Estonia by sector, region, or time period from Statistics Estonia.",
+    "url": "https://andmed.stat.ee/api/v1/en/stat/PA5321",
+    "method": "POST",
+    "params": [
+      { "name": "Aasta", "type": "string", "required": true, "description": "Year of the salary data to retrieve (e.g., 2023, 2022)" },
+      { "name": "Tegevusala", "type": "string", "required": false, "description": "Industry or economic sector to filter by (e.g., total economy, manufacturing, IT)" },
+      { "name": "Maakond", "type": "string", "required": false, "description": "Estonian county or region to filter by (e.g., Harju, Tartu)" }
+    ]
+  },
+  {
+    "endpointId": "a6b7c8d9-e0f1-2345-defa-456789012345",
+    "name": "get_estonian_company_info",
+    "description": "Fetch official company registration details from the Estonian Business Registry including name, registration number, address, legal status, and board members.",
+    "url": "https://ariregister.rik.ee/api/v1/company",
+    "method": "GET",
+    "params": [
+      { "name": "reg_code", "type": "string", "required": false, "description": "Company registration number to look up (e.g., 10000000)" },
+      { "name": "name", "type": "string", "required": false, "description": "Company name or partial name to search for" },
+      { "name": "status", "type": "string", "required": false, "description": "Filter by company status: active, liquidated, bankrupt" }
+    ]
+  },
+  {
+    "endpointId": "b7c8d9e0-f1a2-3456-efab-567890123456",
+    "name": "get_reverse_geocoding",
+    "description": "Convert GPS coordinates (latitude and longitude) into a human-readable street address or place name.",
+    "url": "https://nominatim.openstreetmap.org/reverse",
+    "method": "GET",
+    "params": [
+      { "name": "lat", "type": "float", "required": true, "description": "Latitude of the location to reverse geocode (e.g., 59.4370 for Tallinn)" },
+      { "name": "lon", "type": "float", "required": true, "description": "Longitude of the location to reverse geocode (e.g., 24.7536 for Tallinn)" },
+      { "name": "format", "type": "string", "required": false, "description": "Response format: json or xml. Default: json" },
+      { "name": "zoom", "type": "integer", "required": false, "description": "Level of detail for the address (3=country, 10=city, 18=building)" }
+    ]
+  }
+]

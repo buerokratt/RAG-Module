@@ -1,0 +1,5 @@
+index_endpoint:
+  trigger: off
+  type: exec
+  command: "/app/scripts/api_tool_indexer.sh"
+  allowedEnvs: ['endpoint_id', 'service_id', 'name', 'description', 'method', 'url', 'visibility', 'type', 'params']

@@ -1,0 +1,266 @@
+[
+  {
+    "query": "Mitu töötajat on ettevõttes Bolt?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_employees",
+    "language": "et"
+  },
+  {
+    "query": "Kui palju inimesi töötab firmas Tallink?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_employees",
+    "language": "et"
+  },
+  {
+    "query": "Mis on Swedbanki töötajate arv?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_employees",
+    "language": "et"
+  },
+  {
+    "query": "Kui palju töötajaid on ettevõttel Eesti Energia?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_employees",
+    "language": "et"
+  },
+  {
+    "query": "Mis on ettevõtte aasta käive?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_revenue",
+    "language": "et"
+  },
+  {
+    "query": "Kui suur on firma käive?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_revenue",
+    "language": "et"
+  },
+  {
+    "query": "Kui palju maksis ettevõte tööjõumakse?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_workforce_taxes",
+    "language": "et"
+  },
+  {
+    "query": "Kui palju maksis ettevõte riiklikke makse?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_national_taxes",
+    "language": "et"
+  },
+  {
+    "query": "Kes on firma tegelikud kasusaajad?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_beneficiaries",
+    "language": "et"
+  },
+  {
+    "query": "Mis on ettevõtte kontaktandmed?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_companies_contactdetails",
+    "language": "et"
+  },
+  {
+    "query": "Millal on selle aasta koolivaheajad?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_school_holiday",
+    "language": "et"
+  },
+  {
+    "query": "Mis olid viimaste NBA mängude tulemused?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_nba_results",
+    "language": "et"
+  },
+  {
+    "query": "Mis on euro ja dollari vahetuskurss?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_exchange_rate",
+    "language": "et"
+  },
+  {
+    "query": "Mis on viis viimast avalikku algatust?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_teenus_citizien_initiative",
+    "language": "et"
+  },
+  {
+    "query": "Mis on hetkel populaarsemad rahvaalgatused?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_teenus_citizien_initiative_popular",
+    "language": "et"
+  },
+  {
+    "query": "Kui palju kasvasid tarbija hinnad eelmisel aastal?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_CPI",
+    "language": "et"
+  },
+  {
+    "query": "Mis ilm on Tallinnas?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_teenus_ilm",
+    "language": "et"
+  },
+  {
+    "query": "Kas Narvas on ilus ilm?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_teenus_ilm",
+    "language": "et"
+  },
+  {
+    "query": "Mis on ööpäeva odavaim elektri hind?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_teenus_nordpool2",
+    "language": "et"
+  },
+  {
+    "query": "Kus leida diiselkütuse hinnaindeks?",
+    "expected_category": "SERVICE",
+    "expected_service_id": "common_service_CPI",
+    "language": "et"
+  },
+  {
+    "query": "Miks ID-kaart ei tööta e-teenustes, kuigi DigiDoc4 loeb kaardi andmed sisse?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas Safari brauseris vahemälu tühjendada, kui ID-kaardiga sisselogimine ei tööta?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas kontrollida ja lubada ID-kaardi jaoks vajalikke laiendusi Firefoxi brauseris?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida teha, kui Firefoxis puudub või ei tööta Web eID või PKCS11 loader laiendus?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas anda dokumendile digiallkiri DigiDoc4 abil Windows 10 või Windows 11 arvutis?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas allkirjastada mitu faili korraga DigiDoc4-s mobiil-ID abil?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida teha, kui mu telefon koos Mobiil-IDga on kadunud või varastatud?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas peatada ja hiljem taastada Mobiil-ID sertifikaadid?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas allkirjastada dokument DigiDoc rakenduses mobiil-ID abil samm-sammult?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida pean kontrollima enne, kui annan DigiDocis dokumendile mobiil-IDga digiallkirja ja kuidas see pärast salvestada?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas siseneda e-teenustesse mobiil-ID abil samm-sammult?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida teha, kui mobiil-IDga sisselogimisel kontrollkoodid ei kattu või küsitakse ootamatult PIN-koodi?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida pean tegema, kui mu ID-kaart või mobiiltelefon (Mobiil-ID) on kadunud või varastatud?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas peatada ja hiljem taastada ID-kaardi ja Mobiil-ID sertifikaadid?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas siseneda e-teenustesse mobiil-ID abil samm-sammult?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida teha, kui mobiil-IDga sisselogimisel kontrollkood ei kattu või küsitakse ootamatult PIN-koodi?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kust saab alla laadida ja paigaldada ametliku ID-kaardi tarkvara (DigiDoc4 ja Web eID) Windowsi, macOS-i ja mobiili jaoks?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Milliseid rakendusi on vaja ID-kaardi ja digiallkirja kasutamiseks Androidi ja iPhone’i telefonis?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Milleks on ID-kaardi sertifikaadid ja mis vahe on PIN1- ja PIN2-sertifikaadil?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Mida teha, kui mu ID-kaart või mobiil-ID on kadunud ja kuidas sertifikaate peatada?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas allkirjastada dokumente mobiil-ID abil RIA DigiDoc rakenduses samm-sammult?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas salvestada ja jagada DigiDocis allkirjastatud dokumendiümbrik ning lisada korraga mitu faili?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas anda digiallkiri dokumentidele DigiDoc4 rakenduses mobiil-ID abil Windows 10 või 11 arvutis?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  },
+  {
+    "query": "Kuidas allkirjastada mitu faili korraga DigiDoc4-s ja kontrollida mobiil-ID kontrollkoodi?",
+    "expected_category": "RAG",
+    "expected_service_id": "",
+    "language": "et"
+  }
+]

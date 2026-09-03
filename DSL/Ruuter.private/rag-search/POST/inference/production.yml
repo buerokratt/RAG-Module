@@ -1,0 +1,121 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Call LLM orchestration service with budget validation"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: chatId
+        type: string
+        description: "Chat ID"
+      - field: message
+        type: string
+        description: "User message"
+      - field: authorId
+        type: string
+        description: "Author ID"
+      - field: conversationHistory
+        type: array
+        description: "Conversation history"
+      - field: url
+        type: string
+        description: "URL reference"
+
+extract_request_data:
+  assign:
+    chatId: ${incoming.body.chatId}
+    message: ${incoming.body.message}
+    authorId: ${incoming.body.authorId}
+    conversationHistory: ${incoming.body.conversationHistory}
+    url: ${incoming.body.url}
+  next: get_production_connection
+
+get_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection"
+    body: {}
+  result: production_connection_result
+  next: validate_production_connection
+
+validate_production_connection:
+  switch:
+    - condition: "${production_connection_result.response.body.length > 0}"
+      next: extract_connection_id
+  next: return_no_production_connection
+
+extract_connection_id:
+  assign:
+    connection_id: ${Number(production_connection_result.response.body[0].id)}
+  next: check_budget_status
+
+check_budget_status:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RUUTER_PRIVATE]/llm-connections/usage/check"
+    body:
+      connection_id: ${connection_id}
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: budget_check_result
+  next: validate_budget_status
+
+validate_budget_status:
+  switch:
+    - condition: ${budget_check_result.response.body.response.isLLMConnectionDisconnected}
+      next: assign_disconnected_response
+    - condition: "${budget_check_result.response.statusCodeValue >= 400}"
+      next: return_budget_check_error
+  next: call_orchestrate_endpoint
+
+call_orchestrate_endpoint:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_LLM_ORCHESTRATOR]"
+    body:
+      chatId: ${chatId}
+      message: ${message}
+      authorId: ${authorId}
+      conversationHistory: ${conversationHistory}
+      url: ${url}
+      environment: "production"
+    headers:
+      Content-Type: "application/json"
+  result: orchestrate_result
+  next: assign_response
+
+assign_response:
+  assign:
+    response: "${orchestrate_result.response.body}"
+  next: return_orchestrate_response
+
+return_orchestrate_response:
+  return: ${response}
+  next: end
+
+assign_disconnected_response:
+  assign:
+    disconnected_response:
+      {
+        chatId: "${chatId}",
+        content: "The LLM connection is currently unavailable. Your request couldn't be processed. Please retry shortly.",
+        status: 400
+      }
+  next: return_connection_disconnected
+
+return_connection_disconnected:
+  status: 400
+  return: ${disconnected_response}
+  next: end
+
+return_budget_check_error:
+  return: ${budget_check_result.response.body}
+  next: end
+
+return_no_production_connection:
+  status: 404
+  return: "No production connection found"
+  next: end

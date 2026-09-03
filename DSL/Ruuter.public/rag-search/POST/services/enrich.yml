@@ -1,0 +1,114 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Enrich service data and index in Qdrant (async via CronManager)"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: service_id
+        type: string
+        description: "Unique service identifier"
+      - field: name
+        type: string
+        description: "Service name"
+      - field: description
+        type: string
+        description: "Service description"
+      - field: examples
+        type: array
+        description: "Example queries"
+      - field: entities
+        type: array
+        description: "Expected entity names"
+      - field: ruuter_type
+        type: string
+        description: "HTTP method (GET/POST)"
+      - field: current_state
+        type: string
+        description: "Service state (active/inactive/draft)"
+      - field: is_common
+        type: boolean
+        description: "Is common service"
+
+extract_request_data:
+  assign:
+    service_id: ${incoming.body.service_id}
+    service_name: ${incoming.body.name}
+    service_description: ${incoming.body.description}
+    service_examples: ${encodeURIComponent(JSON.stringify(incoming.body.examples) || '[]')}
+    service_entities: ${encodeURIComponent(JSON.stringify(incoming.body.entities) || '[]')}
+    service_ruuter_type: ${incoming.body.ruuter_type || 'GET'}
+    service_current_state: ${incoming.body.current_state || 'draft'}
+    service_is_common: ${incoming.body.is_common || false}
+  next: validate_required_fields
+
+validate_required_fields:
+  switch:
+    - condition: "${!service_id || !service_name || !service_description}"
+      next: return_missing_fields
+  next: execute_enrichment
+
+return_missing_fields:
+  assign:
+    error_data: {
+      success: false,
+      error: "MISSING_REQUIRED_FIELDS",
+      message: "service_id, name, and description are required"
+    }
+  next: return_bad_request
+
+execute_enrichment:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_CRON_MANAGER]/execute/service_enrichment/enrich_and_index"
+    query:
+      service_id: ${service_id}
+      name: ${service_name}
+      description: ${service_description}
+      examples: ${service_examples}
+      entities: ${service_entities}
+      ruuter_type: ${service_ruuter_type}
+      current_state: ${service_current_state}
+      is_common: ${service_is_common}
+  result: enrichment_result
+  on_error: handle_cron_error
+  next: assign_success
+
+handle_cron_error:
+  log: "ERROR: Failed to queue enrichment job - ${enrichment_result.error || 'CronManager unreachable'}"
+  next: assign_cron_failure
+
+assign_cron_failure:
+  assign:
+    response_data:
+      success: false
+      error: "ENRICHMENT_QUEUE_FAILED"
+      message: "Failed to queue enrichment job. CronManager may be unavailable."
+      details: ${enrichment_result.error || 'CronManager unreachable'}
+  next: return_server_error
+
+assign_success:
+  assign:
+    response_data:
+      success: true
+      service_id: ${service_id}
+      message: "Service enrichment job queued successfully. Processing asynchronously."
+  next: return_ok
+
+return_ok:
+  status: 200
+  return: ${response_data}
+  next: end
+
+return_bad_request:
+  status: 400
+  return: ${error_data}
+  next: end
+
+return_server_error:
+  status: 500
+  return: ${response_data}
+  next: end

@@ -1,0 +1,187 @@
+@import 'src/styles/tools/spacing';
+@import 'src/styles/tools/color';
+@import 'src/styles/settings/variables/other';
+@import 'src/styles/settings/variables/typography';
+
+.input {
+  $self: &;
+  display: flex;
+  align-items: center;
+  gap: get-spacing(paldiski);
+  width: 100%;
+
+  &__label {
+    flex: 0 0 185px;
+    font-size: $veera-font-size-100;
+    line-height: 24px;
+  }
+
+  &__wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    position: relative;
+
+    .icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  &__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__replace-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: get-color(sapphire-blue-10);
+    color: get-color(white);
+    border: none;
+    border-radius: $veera-radius-s;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 2;
+    
+    &:hover {
+      background-color: get-color(sapphire-blue-8);
+    }
+    
+    &:focus {
+      outline: 2px solid get-color(sapphire-blue-10);
+      outline-offset: 2px;
+    }
+  }
+
+  &__prefix {
+    position: absolute;
+    left: get-spacing(paldiski);
+    top: 9px; // Fixed position from top of input field
+    color: get-color(black-coral-10);
+    font-size: $veera-font-size-100;
+    line-height: 24px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__inline_error {
+    color: get-color(jasper-10);
+    font-size: 12px;
+   
+  }
+
+  &__error {
+    width: 100%;
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+    gap: get-spacing(paldiski);
+    color: get-color(black-coral-20);
+    border-radius: $veera-radius-s;
+    background-color: get-color(jasper-3);
+    font-size: 13px;
+    line-height: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    &::before {
+      content: '';
+      display: block;
+      background-color: get-color(jasper-3);
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 25px;
+    }
+  }
+
+  // Input field styles
+  &__field {
+    width: 100%;
+    display: block;
+    appearance: none;
+    background-color: get-color(white);
+    border: 1px solid get-color(black-coral-6);
+    border-radius: $veera-radius-s;
+    color: var(--color-black);
+    font-size: $veera-font-size-100;
+    height: 40px;
+    line-height: 24px;
+    padding: get-spacing(paldiski);
+
+    &::placeholder {
+      color: get-color(black-coral-6);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: get-color(sapphire-blue-10);
+    }
+
+    // Add left padding when prefix is present
+    &--with-prefix {
+      padding-left: 30px;
+    }
+    
+    // Add right padding when replace button is present
+    &--with-replace-button {
+      padding-right: 70px;
+    }
+  }
+
+  // Legacy input styles for backward compatibility
+  input {
+    width: 100%;
+    display: block;
+    appearance: none;
+    background-color: get-color(white);
+    border: 1px solid get-color(black-coral-6);
+    border-radius: $veera-radius-s;
+    color: var(--color-black);
+    font-size: $veera-font-size-100;
+    height: 40px;
+    line-height: 24px;
+    padding: get-spacing(paldiski);
+
+    &::placeholder {
+      color: get-color(black-coral-6);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: get-color(sapphire-blue-10);
+    }
+  }
+
+  // Add left padding when prefix is present (legacy support)
+  &__input-container:has(&__prefix) input {
+    padding-left: 30px;
+  }
+
+  &--error {
+    .input__field {
+      border-color: get-color(jasper-10);
+    }
+    
+    input {
+      border-color: get-color(jasper-10);
+    }
+  }
+
+  &--disabled & {
+    .input__field {
+      background-color: get-color(black-coral-0);
+      border: solid 1px get-color(jasper-10);
+    }
+    
+    input {
+      background-color: get-color(black-coral-0);
+      border: solid 1px get-color(jasper-10);
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{{- if .Values.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.release_name }}"
+  labels:
+    app: "{{ .Values.release_name }}"
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.release_name }}"
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        app: "{{ .Values.release_name }}"
+    spec:
+      initContainers:
+       - name: git-clone
+         image: alpine/git:latest
+         volumeMounts:
+           - name: dsl-lib
+             mountPath: /workspace/app/lib
+         command:
+            - sh
+            - -c
+            - |
+                git clone --single-branch --depth 1 --branch wip  https://github.com/rootcodelabs/RAG-Module /tmp/rag &&
+
+                # mkdir -p /workspace/app/views/rag-search &&
+                mkdir -p /workspace/app/lib &&
+
+                # cp -r /tmp/rag/DSL/DMapper/rag-search/hbs/* /workspace/app/views/rag-search &&
+                cp -r /tmp/rag/DSL/DMapper/rag-search/lib/* /workspace/app/lib 
+
+
+      containers:
+        - name: "{{ .Values.release_name }}"
+          image: "{{ .Values.images.scope.registry }}/{{ .Values.images.scope.repository }}:{{ .Values.images.scope.tag }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              name: http
+          env:
+            - name: PORT
+              value: "{{ .Values.env.PORT }}"
+            - name: CONTENT_FOLDER
+              value: "{{ .Values.env.CONTENT_FOLDER }}"
+          volumeMounts:
+            - name: dsl-lib
+              mountPath: /workspace/app/lib
+          
+          resources:
+            requests:
+              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.limits.cpu }}"
+      volumes:
+        - name: dsl-lib
+          emptyDir: {}
+{{- end }}

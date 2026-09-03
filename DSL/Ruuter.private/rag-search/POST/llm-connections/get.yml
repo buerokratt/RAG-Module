@@ -1,0 +1,47 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get a single LLM connection by ID"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+  next: get_llm_connection
+
+get_llm_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: connection_result
+  next: check_connection_exists
+
+check_connection_exists:
+  switch:
+    - condition: "${connection_result.response.body.length > 0}"
+      next: return_success
+  next: return_not_found
+
+return_success:
+  return: ${connection_result.response.body[0]}
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end

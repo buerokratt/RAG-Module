@@ -1,0 +1,57 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Check if production LLM connection's used budget has exceeded warn or stop budget thresholds"
+  method: get
+  accepts: json
+  returns: json
+  namespace: rag-search
+
+get_production_connection_budget_status:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection"
+    body: {}
+  result: budget_result
+  next: check_budget_status
+
+check_budget_status:
+  switch:
+    - condition: "${budget_result.response.body.length > 0}"
+      next: process_budget_status
+  next: return_no_production_connection
+
+process_budget_status:
+  assign:
+      used_budget: '${budget_result.response.body[0].usedBudget || 0}'
+      monthly_budget: '${budget_result.response.body[0].monthlyBudget}'
+      warn_threshold: '${budget_result.response.body[0].warnBudgetThreshold}'
+      stop_threshold: '${budget_result.response.body[0].stopBudgetThreshold}'
+      warn_budget_amount: '${(monthly_budget * warn_threshold) / 100}'
+      stop_budget_amount: '${(monthly_budget * stop_threshold) / 100}'
+      exceeded_stop_budget: '${stop_budget_amount != 0 && used_budget >= stop_budget_amount}'
+      exceeded_warn_budget: '${used_budget >= warn_budget_amount}'
+      within_budget: '${used_budget < warn_budget_amount}'
+      used_budget_percentage: '${(used_budget * 100) / monthly_budget}'
+
+  next: process_warnings
+
+process_warnings:
+  assign:
+      response: {
+        data: '${budget_result.response.body[0]}',
+        used_budget_percentage: '${used_budget_percentage}',
+        exceeded_stop_budget: '${exceeded_stop_budget}',
+        exceeded_warn_budget: '${exceeded_warn_budget}',
+      }
+  next: return_budget_status
+
+return_budget_status:
+  return: ${response}
+  status: 200
+  next: end
+
+return_no_production_connection:
+  return: "No production LLM connection found"
+  status: 404
+  next: end

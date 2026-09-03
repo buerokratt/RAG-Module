@@ -1,0 +1,336 @@
+[
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Tell me about family benefits"},
+      {"role": "assistant", "content": "Estonia offers various family benefits including child allowance, parental benefits, and support for families with many children."}
+    ],
+    "original_question": "What about single parents?",
+    "expected_refinements": [
+      "What family benefits are available for single parents in Estonia?",
+      "How does Estonia support single-parent families financially?",
+      "What is the single parent allowance in Estonia?"
+    ],
+    "quality_score": 0.95
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Räägi mulle peretoetustest"},
+      {"role": "assistant", "content": "Eesti pakub mitmesuguseid peretoetusi, sealhulgas lapsetoetust, vanemahüvitist ja toetust paljulapselistele peredele."}
+    ],
+    "original_question": "Aga üksikvanemad?",
+    "expected_refinements": [
+      "Milliseid peretoetusi on saadaval üksikvanematele Eestis?",
+      "Kuidas Eesti toetab üksikvanemaid rahaliselt?",
+      "Mis on üksikvanema toetus Eestis?"
+    ],
+    "quality_score": 0.95
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "How does the pension system work?"},
+      {"role": "assistant", "content": "Estonia has a three-pillar pension system with state pension, mandatory funded pension, and voluntary pension."}
+    ],
+    "original_question": "When can I retire?",
+    "expected_refinements": [
+      "What is the retirement age in Estonia?",
+      "At what age can I start receiving pension in Estonia?",
+      "What is the current retirement age based on the Estonian pension system?"
+    ],
+    "quality_score": 0.92
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Kuidas pensionisüsteem toimib?"},
+      {"role": "assistant", "content": "Eestis on kolmesambaline pensionisüsteem: riiklik pension, kohustuslik kogumispension ja vabatahtlik pension."}
+    ],
+    "original_question": "Millal ma saan pensionile jääda?",
+    "expected_refinements": [
+      "Mis on pensionieaks Eestis?",
+      "Mis vanuses ma saan hakata pensioni saama Eestis?",
+      "Mis on praegune pensionieaks Eesti pensionisüsteemi järgi?"
+    ],
+    "quality_score": 0.92
+  },
+  {
+    "conversation_history": [],
+    "original_question": "How many kids get support?",
+    "expected_refinements": [
+      "How many children receive family benefits in Estonia?",
+      "What is the number of children receiving support from the Social Insurance Board?",
+      "How many Estonian families receive child support?"
+    ],
+    "quality_score": 0.88
+  },
+  {
+    "conversation_history": [],
+    "original_question": "Mitu last saavad toetust?",
+    "expected_refinements": [
+      "Mitu last saavad peretoetusi Eestis?",
+      "Kui palju lapsi saavad toetust Sotsiaalkindlustusametist?",
+      "Mitu Eesti peret saavad lapsetoetust?"
+    ],
+    "quality_score": 0.88
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "What benefits exist for families?"},
+      {"role": "assistant", "content": "There are child allowance, parental benefit, maternity benefit, and support for large families."}
+    ],
+    "original_question": "How much is it?",
+    "expected_refinements": [
+      "How much is the child allowance in Estonia?",
+      "What is the amount of family benefits in Estonia?",
+      "What are the payment amounts for family benefits?"
+    ],
+    "quality_score": 0.90
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Milliseid toetusi on olemas peredele?"},
+      {"role": "assistant", "content": "On lapsetoetus, vanemahüvitis, sünnitoetus ja toetus suurperedele."}
+    ],
+    "original_question": "Kui palju see on?",
+    "expected_refinements": [
+      "Kui palju on lapsetoetus Eestis?",
+      "Mis on peretoetuste summa Eestis?",
+      "Millised on peretoetuste maksesummad?"
+    ],
+    "quality_score": 0.90
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "I'm interested in the pension changes"},
+      {"role": "assistant", "content": "The I pillar pension was reformed in 2018 with changes starting in 2021."}
+    ],
+    "original_question": "What changed?",
+    "expected_refinements": [
+      "What changes were made to the Estonian pension system in 2021?",
+      "What are the specific reforms to the I pillar pension?",
+      "How did the pension formula change after the 2018 amendments?"
+    ],
+    "quality_score": 0.93
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Mind huvitavad pensionireformid"},
+      {"role": "assistant", "content": "I samba pensioni reformiti 2018. aastal ja muudatused jõustusid 2021. aastal."}
+    ],
+    "original_question": "Mis muutus?",
+    "expected_refinements": [
+      "Milliseid muudatusi tehti Eesti pensionisüsteemis 2021. aastal?",
+      "Millised on I samba pensioni konkreetsed reformid?",
+      "Kuidas muutus pensioni arvutamise valem pärast 2018. aasta muudatusi?"
+    ],
+    "quality_score": 0.93
+  },
+  {
+    "conversation_history": [],
+    "original_question": "poverty stats",
+    "expected_refinements": [
+      "What are the child poverty statistics in Estonia?",
+      "How many children live in poverty in Estonia?",
+      "What percentage of Estonian children are in relative poverty?"
+    ],
+    "quality_score": 0.85
+  },
+  {
+    "conversation_history": [],
+    "original_question": "vaesuse statistika",
+    "expected_refinements": [
+      "Mis on laste vaesuse statistika Eestis?",
+      "Kui palju lapsi elavad vaesuses Eestis?",
+      "Kui suur protsent Eesti lastest on suhtelises vaesuses?"
+    ],
+    "quality_score": 0.85
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Tell me about disabled children support"},
+      {"role": "assistant", "content": "Estonia provides various services and support measures for children with disabilities and their families."}
+    ],
+    "original_question": "How many?",
+    "expected_refinements": [
+      "How many children with disabilities are there in Estonia?",
+      "What is the number of children diagnosed with disabilities in Estonia?",
+      "How many Estonian children receive disability support?"
+    ],
+    "quality_score": 0.87
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Räägi mulle puuetega laste toetusest"},
+      {"role": "assistant", "content": "Eesti pakub erinevaid teenuseid ja toetusi puuetega lastele ja nende peredele."}
+    ],
+    "original_question": "Kui palju?",
+    "expected_refinements": [
+      "Kui palju on puuetega lapsi Eestis?",
+      "Mis on puuetega diagnoositud laste arv Eestis?",
+      "Kui palju Eesti lapsi saavad puudetoetust?"
+    ],
+    "quality_score": 0.87
+  },
+  {
+    "conversation_history": [],
+    "original_question": "ministry hours",
+    "expected_refinements": [
+      "What are the opening hours of the Ministry of Social Affairs?",
+      "When is the Ministry of Social Affairs open?",
+      "What are the contact hours for the Estonian Ministry of Social Affairs?"
+    ],
+    "quality_score": 0.91
+  },
+  {
+    "conversation_history": [],
+    "original_question": "ministeeriumi lahtiolekuajad",
+    "expected_refinements": [
+      "Millised on Sotsiaalministeeriumi lahtiolekuajad?",
+      "Millal on Sotsiaalministeerium avatud?",
+      "Millised on Eesti Sotsiaalministeeriumi kontaktajad?"
+    ],
+    "quality_score": 0.91
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "What's the parental benefit like?"},
+      {"role": "assistant", "content": "Estonia's parental benefit is one of the most generous globally, covering a long period with substantial amounts."}
+    ],
+    "original_question": "Compared to what?",
+    "expected_refinements": [
+      "How does Estonia's parental benefit compare to other EU countries?",
+      "What is Estonia's ranking for parental benefits in the EU?",
+      "How does Estonian parental benefit compare to the European average?"
+    ],
+    "quality_score": 0.94
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Milline on vanemahüvitis?"},
+      {"role": "assistant", "content": "Eesti vanemahüvitis on üks maailma heldekõige, katab pikka perioodi märkimisväärsete summadega."}
+    ],
+    "original_question": "Võrreldes millega?",
+    "expected_refinements": [
+      "Kuidas Eesti vanemahüvitis võrreldes teiste EL riikidega?",
+      "Mis on Eesti koht vanemahüvitiste edetabelis EL-is?",
+      "Kuidas Eesti vanemahüvitis võrreldes Euroopa keskmisega?"
+    ],
+    "quality_score": 0.94
+  },
+  {
+    "conversation_history": [],
+    "original_question": "large families",
+    "expected_refinements": [
+      "What benefits are available for large families in Estonia?",
+      "How does Estonia support families with many children?",
+      "What is the definition of a large family for benefit purposes in Estonia?"
+    ],
+    "quality_score": 0.89
+  },
+  {
+    "conversation_history": [],
+    "original_question": "suurpered",
+    "expected_refinements": [
+      "Milliseid toetusi on saadaval suurperedele Eestis?",
+      "Kuidas Eesti toetab paljulapselisi peresid?",
+      "Mis on suurpere definitsioon toetuste saamiseks Eestis?"
+    ],
+    "quality_score": 0.89
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "I need info about unemployment"},
+      {"role": "assistant", "content": "Estonia provides unemployment benefits and employment services through the Unemployment Insurance Fund."}
+    ],
+    "original_question": "How long?",
+    "expected_refinements": [
+      "How long can I receive unemployment benefits in Estonia?",
+      "What is the duration of unemployment insurance in Estonia?",
+      "For how many months does unemployment benefit last in Estonia?"
+    ],
+    "quality_score": 0.90
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Vajan infot töötuse kohta"},
+      {"role": "assistant", "content": "Eesti pakub töötutoetust ja tööhõiveteenuseid Töötukassa kaudu."}
+    ],
+    "original_question": "Kui kaua?",
+    "expected_refinements": [
+      "Kui kaua ma saan töötutoetust Eestis?",
+      "Mis on töötuskindlustuse kestus Eestis?",
+      "Mitu kuud kestab töötutoetus Eestis?"
+    ],
+    "quality_score": 0.90
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Tell me about childcare support"},
+      {"role": "assistant", "content": "Estonia offers childcare allowance for parents who stay at home to care for children under 3 years old."}
+    ],
+    "original_question": "What's the amount?",
+    "expected_refinements": [
+      "What is the amount of childcare allowance in Estonia?",
+      "How much is the childcare support payment in Estonia?",
+      "What are the childcare allowance rates in Estonia?"
+    ],
+    "quality_score": 0.88
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Räägi mulle lapsehoidja toetusest"},
+      {"role": "assistant", "content": "Eesti pakub lapsehoiutoetust vanematele, kes jäävad koju alla 3-aastaste laste eest hoolitsema."}
+    ],
+    "original_question": "Mis on summa?",
+    "expected_refinements": [
+      "Mis on lapsehoiutoetuse summa Eestis?",
+      "Kui palju on lapsehoidja toetuse makse Eestis?",
+      "Millised on lapsehoiutoetuse määrad Eestis?"
+    ],
+    "quality_score": 0.88
+  },
+  {
+    "conversation_history": [],
+    "original_question": "health insurance",
+    "expected_refinements": [
+      "How does health insurance work in Estonia?",
+      "What is covered by Estonian health insurance?",
+      "How do I get health insurance in Estonia?"
+    ],
+    "quality_score": 0.86
+  },
+  {
+    "conversation_history": [],
+    "original_question": "ravikindlustus",
+    "expected_refinements": [
+      "Kuidas ravikindlustus Eestis toimib?",
+      "Mida katab Eesti ravikindlustus?",
+      "Kuidas ma saan ravikindlustuse Eestis?"
+    ],
+    "quality_score": 0.86
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Explain maternity benefits"},
+      {"role": "assistant", "content": "Estonia provides maternity benefit starting 30-70 days before the due date."}
+    ],
+    "original_question": "And after birth?",
+    "expected_refinements": [
+      "What benefits are available after childbirth in Estonia?",
+      "How long does maternity benefit continue after birth in Estonia?",
+      "What is the parental benefit after giving birth in Estonia?"
+    ],
+    "quality_score": 0.92
+  },
+  {
+    "conversation_history": [
+      {"role": "user", "content": "Seleta sünnitoetust"},
+      {"role": "assistant", "content": "Eesti maksab sünnitoetust alates 30-70 päeva enne sünnitust."}
+    ],
+    "original_question": "Ja pärast sünnitust?",
+    "expected_refinements": [
+      "Milliseid toetusi on saadaval pärast sünnitust Eestis?",
+      "Kui kaua sünnitoetus jätkub pärast sünnitust Eestis?",
+      "Mis on vanemahüvitis pärast lapse sündi Eestis?"
+    ],
+    "quality_score": 0.92
+  }
+]

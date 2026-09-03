@@ -1,0 +1,98 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "history": "user: Seleta sünnitoetust\nassistant: Eesti maksab sünnitoetust alates 30-70 päeva enne sünnitust.",
+        "question": "Ja pärast sünnitust?",
+        "n": 3,
+        "reasoning": "The user's question asks about the parental benefit after childbirth, building on the previous context about childbirth support. The rewrites will clarify the inquiry regarding the support system in place following the birth of a child.",
+        "rewrites": [
+          "Milline on sünnitoetuse süsteem pärast sünnitust?",
+          "Kuidas Eesti toetab peresid pärast lapse sündi?",
+          "Mis toetust on saadaval pärast sünnitust Eestis?"
+        ]
+      },
+      {
+        "history": "user: What's the parental benefit like?\nassistant: Estonia's parental benefit is one of the most generous globally, covering a long period with substantial amounts.",
+        "question": "Compared to what?",
+        "n": 3,
+        "expected_refinements": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ],
+        "rewrites": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ]
+      },
+      {
+        "history": "",
+        "question": "large families",
+        "n": 3,
+        "expected_refinements": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ],
+        "rewrites": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ]
+      },
+      {
+        "history": "user: Vajan infot töötuse kohta\nassistant: Eesti pakub töötutoetust ja tööhõiveteenuseid Töötukassa kaudu.",
+        "question": "Kui kaua?",
+        "n": 3,
+        "expected_refinements": [
+          "Kui kaua ma saan töötutoetust Eestis?",
+          "Mis on töötuskindlustuse kestus Eestis?",
+          "Mitu kuud kestab töötutoetus Eestis?"
+        ],
+        "rewrites": [
+          "Kui kaua ma saan töötutoetust Eestis?",
+          "Mis on töötuskindlustuse kestus Eestis?",
+          "Mitu kuud kestab töötutoetus Eestis?"
+        ]
+      }
+    ],
+    "signature": {
+      "instructions": "In a high-stakes scenario where accurate information retrieval is crucial, produce N distinct, concise rewrites of the user's question based on the conversation history. Ensure that each rewrite maintains the original intent while resolving any ambiguities, especially pronouns. Prioritize explicit and searchable phrasing, incorporating relevant entities, dates, and units. Each rewrite should be meaningfully distinct to improve the clarity of the user's inquiry, ultimately enhancing the likelihood of obtaining precise responses. Return the rewrites as a list of exactly N items.",
+      "fields": [
+        {
+          "prefix": "History:",
+          "description": "Recent conversation history"
+        },
+        {
+          "prefix": "Question:",
+          "description": "The user's latest question to refine"
+        },
+        {
+          "prefix": "N:",
+          "description": "Number of rewrites to produce"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Rewrites:",
+          "description": "Exactly N refined variations of the question"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

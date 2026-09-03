@@ -1,0 +1,27 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get LLM models by platform"
+  method: get
+  accepts: query
+  returns: json
+  namespace: rag-search
+  allowlist:
+    params:
+      - field: embedding_platform_key
+        type: string
+        description: "Embedding Platform key to filter models"
+
+get_llm_models:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-embedding-models-by-platform"
+    body:
+      embedding_platform_key: ${incoming.params.embedding_platform_key}
+  result: models_result
+  next: return_success
+
+return_success:
+  return: ${models_result.response.body}
+  status: 200
+  next: end

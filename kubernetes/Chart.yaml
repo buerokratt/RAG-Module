@@ -1,0 +1,119 @@
+apiVersion: v2
+name: rag-module
+description: Umbrella chart for RAG Module
+version: 0.1.0
+type: application
+
+dependencies:
+  - name: database
+    version: 0.1.0
+    repository: "file://./charts/database"
+    condition: database.enabled
+  - name: TIM-database
+    version: 0.1.0
+    repository: "file://./charts/TIM-database"
+    condition: TIM-database.enabled
+  - name: resql
+    version: 0.1.0
+    repository: "file://./charts/Resql"
+    condition: resql.enabled
+  - name: ruuter-public
+    version: 0.1.0
+    repository: "file://./charts/Ruuter-Public"
+    condition: ruuter-public.enabled
+  - name: ruuter-private
+    version: 0.1.0
+    repository: "file://./charts/Ruuter-Private"
+    condition: ruuter-private.enabled
+  - name: data-mapper
+    version: 0.1.0
+    repository: "file://./charts/DataMapper"
+    condition: data-mapper.enabled
+  - name: TIM
+    version: 0.1.0
+    repository: "file://./charts/TIM"
+    condition: TIM.enabled
+  - name: Authentication-Layer
+    version: 0.1.0
+    repository: "file://./charts/Authentication-Layer"
+    condition: Authentication-Layer.enabled
+  - name: CronManager
+    version: 0.1.0
+    repository: "file://./charts/CronManager"
+    condition: CronManager.enabled
+  - name: GUI
+    version: 0.1.0
+    repository: "file://./charts/GUI"
+    condition: GUI.enabled
+  - name: Loki
+    version: 0.1.0
+    repository: "file://./charts/Loki"
+    condition: Loki.enabled
+  - name: Grafana
+    version: 0.1.0
+    repository: "file://./charts/Grafana"
+    condition: Grafana.enabled
+  - name: S3-Ferry
+    version: 0.1.0
+    repository: "file://./charts/S3-Ferry"
+    condition: S3-Ferry.enabled
+  - name: minio
+    version: 0.1.0
+    repository: "file://./charts/minio"
+    condition: minio.enabled
+  - name: Redis
+    version: 0.1.0
+    repository: "file://./charts/Redis"
+    condition: Redis.enabled
+  - name: Qdrant
+    version: 0.1.0
+    repository: "file://./charts/Qdrant"
+    condition: Qdrant.enabled
+  - name: ClickHouse
+    version: 0.1.0
+    repository: "file://./charts/ClickHouse"
+    condition: ClickHouse.enabled
+  - name: Langfuse-Web
+    version: 0.1.0
+    repository: "file://./charts/Langfuse-Web"
+    condition: Langfuse-Web.enabled
+  - name: Langfuse-Worker
+    version: 0.1.0
+    repository: "file://./charts/Langfuse-Worker"
+    condition: Langfuse-Worker.enabled
+  - name: Vault
+    version: 0.1.0
+    repository: "file://./charts/Vault"
+    condition: Vault.enabled
+  - name: Vault-Init
+    version: 0.1.0
+    repository: "file://./charts/Vault-Init"
+    condition: Vault-Init.enabled
+  - name: Vault-Agent-GUI
+    version: 0.1.0
+    repository: "file://./charts/Vault-Agent-GUI"
+    condition: Vault-Agent-GUI.enabled
+  - name: Vault-Agent-Cron
+    version: 0.1.0
+    repository: "file://./charts/Vault-Agent-Cron"
+    condition: Vault-Agent-Cron.enabled
+  - name: Vault-Agent-LLM
+    version: 0.1.0
+    repository: "file://./charts/Vault-Agent-LLM"
+    condition: Vault-Agent-LLM.enabled
+  - name: LLM-Orchestration-Service
+    version: 0.1.0
+    repository: "file://./charts/LLM-Orchestration-Service"
+    condition: LLM-Orchestration-Service.enabled
+  - name: Liquibase
+    version: 0.1.0
+    repository: "file://./charts/Liquibase"
+    condition: Liquibase.enabled
+  - name: Notifications-Node
+    version: 0.1.0
+    repository: "file://./charts/Notifications-Node"
+    condition: Notifications-Node.enabled
+  - name: OpenSearch
+    version: 0.1.0
+    repository: "file://./charts/OpenSearch"
+    condition: OpenSearch.enabled

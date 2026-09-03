@@ -1,0 +1,34 @@
+{{- range .Values.databases }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .name }}
+  ports:
+    - name: postgres
+      port: {{ $.Values.service.port }}
+      targetPort: {{ $.Values.service.port }}
+---
+# Headless service for StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-headless
+  labels:
+    app: {{ .name }}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: {{ .name }}
+  ports:
+    - name: postgres
+      port: {{ $.Values.service.port }}
+      targetPort: {{ $.Values.service.port }}
+---
+{{- end }}

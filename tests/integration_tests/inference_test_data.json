@@ -1,0 +1,44 @@
+[
+  {
+    "question": "What is the retirement age in Estonia?",
+    "category": "pension_information",
+    "expected_scope": true,
+    "expected_keywords": ["retirement", "age", "pension", "estonia"],
+    "description": "Simple question about pension eligibility"
+  },
+  {
+    "question": "How do I apply for family benefits?",
+    "category": "family_benefits",
+    "expected_scope": true,
+    "expected_keywords": ["family", "benefits", "apply"],
+    "description": "Question about family benefits application process"
+  },
+  {
+    "question": "What documents are needed for unemployment benefits?",
+    "category": "unemployment_benefits",
+    "expected_scope": true,
+    "expected_keywords": ["documents", "unemployment", "benefits"],
+    "description": "Question about required documentation"
+  },
+  {
+    "question": "What is the capital of Mars?",
+    "category": "out_of_scope",
+    "expected_scope": false,
+    "expected_keywords": [],
+    "description": "Question completely outside the knowledge base"
+  },
+  {
+    "question": "How do I make a chocolate cake?",
+    "category": "out_of_scope",
+    "expected_scope": false,
+    "expected_keywords": [],
+    "description": "Unrelated question to test scope detection"
+  },
+  {
+    "question": "Tell me about parental leave policies",
+    "category": "family_benefits",
+    "expected_scope": true,
+    "expected_keywords": ["parental", "leave", "policy"],
+    "description": "Question about parental leave for conversation history test"
+  }
+]

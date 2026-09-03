@@ -1,0 +1,95 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "history": "user: Vajan infot töötuse kohta\nassistant: Eesti pakub töötutoetust ja tööhõiveteenuseid Töötukassa kaudu.",
+        "question": "Kui kaua?",
+        "n": 3,
+        "reasoning": "The user is inquiring about the duration of unemployment benefits in Estonia. It's important to specify the time frame related to the unemployment benefits or services mentioned in the history to provide clear and concise rewrites that maintain the original intent.",
+        "rewrites": [
+          "Kui kaua kestab töötutoetus Eestis?",
+          "Mis on töötutoetuse maksimaalne kestus Eestis?",
+          "Kui pikalt on võimalik saada töötutoetust pärast töötuks jäämist?"
+        ]
+      },
+      {
+        "augmented": true,
+        "history": "user: Seleta sünnitoetust\nassistant: Eesti maksab sünnitoetust alates 30-70 päeva enne sünnitust.",
+        "question": "Ja pärast sünnitust?",
+        "n": 3,
+        "reasoning": "The user is seeking to understand the details regarding the maternity benefit or birth grant in Estonia after childbirth. The rewrites aim to clarify the support available post-birth, ensuring the intent remains focused on the temporal context of the support.",
+        "rewrites": [
+          "Milline on sünnitoetuse summa pärast sünnitust Eestis?",
+          "Mis toetust makstakse pärast lapse sündi Eestis?",
+          "Kui kaua kestab sünnitoetus pärast sünnitust?"
+        ]
+      },
+      {
+        "history": "",
+        "question": "large families",
+        "n": 3,
+        "expected_refinements": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ],
+        "rewrites": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ]
+      },
+      {
+        "history": "user: What's the parental benefit like?\nassistant: Estonia's parental benefit is one of the most generous globally, covering a long period with substantial amounts.",
+        "question": "Compared to what?",
+        "n": 3,
+        "expected_refinements": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ],
+        "rewrites": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ]
+      }
+    ],
+    "signature": {
+      "instructions": "In a scenario where a user urgently needs precise information about Estonia's social support systems to prepare for an important presentation, produce N distinct, concise rewrites of the user's question using chat history. Ensure that the rewrites maintain the original intent and are explicit, searchable, and tailored to the context, enabling the user to receive the most relevant and targeted responses quickly.",
+      "fields": [
+        {
+          "prefix": "History:",
+          "description": "Recent conversation history"
+        },
+        {
+          "prefix": "Question:",
+          "description": "The user's latest question to refine"
+        },
+        {
+          "prefix": "N:",
+          "description": "Number of rewrites to produce"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Rewrites:",
+          "description": "Exactly N refined variations of the question"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

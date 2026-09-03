@@ -1,0 +1,56 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Delete an LLM connection (soft delete)"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+
+extract_request_data:
+  assign:
+    connection_id: ${incoming.body.connection_id}
+  next: check_connection_exists
+
+check_connection_exists:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: existing_connection
+  next: validate_connection_exists
+
+validate_connection_exists:
+  switch:
+    - condition: "${existing_connection.response.body.length > 0}"
+      next: delete_llm_connection
+  next: return_not_found
+
+delete_llm_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/delete-llm-connection"
+    body:
+      connection_id: ${Number(connection_id)}
+  result: delete_result
+  next: return_success
+
+return_success:
+  return: "LLM connection deleted successfully"
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end

@@ -1,0 +1,30 @@
+# Centralized database configuration using pure PostgreSQL
+databases:
+  - name: rag-search-db
+    username: postgres
+    password: "{{ ragSearchDB.password }}" 
+    db: llm_production
+    storage: 8Gi
+    initdbScripts:
+      init-langfuse.sql: |
+        SELECT 'CREATE DATABASE "langfuse-db"'
+        WHERE NOT EXISTS (
+            SELECT FROM pg_catalog.pg_database WHERE datname = 'langfuse-db'
+        )\gexec
+  - name: tim-postgresql
+    username: tim
+    password: "{{ TIMDB.password }}"  
+    db: tim
+    storage: 1Gi
+
+image:
+  repository: postgres
+  tag: "14.1"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 5432
+
+persistence:
+  storageClass: ""  # specify your own
+  accessModes: ["ReadWriteOnce"]

@@ -1,0 +1,119 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Trigger API Tool endpoint indexing in Qdrant"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: endpointId
+        type: string
+        description: "Unique endpoint identifier"
+      - field: serviceId
+        type: string
+        description: "Parent service ID"
+      - field: name
+        type: string
+        description: "Endpoint name"
+      - field: description
+        type: string
+        description: "Endpoint description"
+      - field: method
+        type: string
+        description: "HTTP Method"
+      - field: url
+        type: string
+        description: "API URL"
+      - field: visibility
+        type: string
+        description: "public or private"
+      - field: type
+        type: string
+        description: "custom_endpoint"
+      - field: params
+        type: array
+        description: "List of parameters"
+
+extract_request_data:
+  assign:
+    endpoint_id: ${incoming.body.endpointId}
+    service_id: ${incoming.body.serviceId || ''}
+    name: ${incoming.body.name}
+    description: ${incoming.body.description}
+    method: ${incoming.body.method || 'GET'}
+    url: ${encodeURIComponent(incoming.body.url)}
+    visibility: ${incoming.body.visibility || 'public'}
+    type: ${incoming.body.type || 'custom_endpoint'}
+    params: ${encodeURIComponent(JSON.stringify(incoming.body.params || []))}
+  next: validate_required_fields
+
+validate_required_fields:
+  switch:
+    - condition: "${!endpoint_id || !name || !description || !url}"
+      next: return_missing_fields
+  next: execute_indexing
+
+return_missing_fields:
+  assign:
+    error_data: {
+      success: false,
+      error: "MISSING_REQUIRED_FIELDS",
+      message: "endpointId, name, description, and url are required"
+    }
+  next: return_bad_request
+
+execute_indexing:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_CRON_MANAGER]/execute/api_tool_indexer/index_endpoint"
+    query:
+      endpoint_id: ${endpoint_id}
+      service_id: ${service_id}
+      name: ${name}
+      description: ${description}
+      method: ${method}
+      url: ${url}
+      visibility: ${visibility}
+      type: ${type}
+      params: ${params}
+  result: indexing_result
+  on_error: handle_cron_error
+  next: assign_success
+
+handle_cron_error:
+  log: "ERROR: Failed to queue api_tool indexing job - ${indexing_result.error || 'CronManager unreachable'}"
+  next: assign_cron_failure
+
+assign_cron_failure:
+  assign:
+    response_data:
+      success: false
+      error: "INDEXING_QUEUE_FAILED"
+      message: "Failed to queue indexing job. CronManager may be unavailable."
+      details: ${indexing_result.error || 'CronManager unreachable'}
+  next: return_server_error
+
+assign_success:
+  assign:
+    response_data:
+      success: true
+      endpoint_id: ${endpoint_id}
+      message: "API Tool indexing job queued successfully. Processing asynchronously."
+  next: return_ok
+
+return_ok:
+  status: 200
+  return: ${response_data}
+  next: end
+
+return_bad_request:
+  status: 400
+  return: ${error_data}
+  next: end
+
+return_server_error:
+  status: 500
+  return: ${response_data}
+  next: end

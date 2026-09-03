@@ -1,0 +1,160 @@
+[
+  {
+    "endpointId": "1f9c2a11-3c6e-4a91-8b77-0b2e7c1a1001",
+    "name": "get_public_holidays",
+    "description": "Too riiklikud pühad konkreetse riigi kohta etteantud ajavahemikus.",
+    "url": "https://openholidaysapi.org/PublicHolidays",
+    "method": "GET",
+    "params": [
+      { "name": "countryIsoCode", "type": "string", "required": true, "description": "Kahetäheline ISO riigikood (nt EE, LV)" },
+      { "name": "validFrom", "type": "date", "required": true, "description": "Alguskuupäev (YYYY-MM-DD)" },
+      { "name": "validTo", "type": "date", "required": true, "description": "Lõppkuupäev (YYYY-MM-DD)" },
+      { "name": "languageIsoCode", "type": "string", "required": false, "description": "Valikuline keelekood (nt ET, EN)" }
+    ]
+  },
+  {
+    "endpointId": "1f9c2a11-3c6e-4a91-8b77-0b2e7c1a1002",
+    "name": "get_school_holidays",
+    "description": "Too koolivaheaegade andmed konkreetse riigi kohta etteantud ajavahemikus.",
+    "url": "https://openholidaysapi.org/SchoolHolidays",
+    "method": "GET",
+    "params": [
+      { "name": "countryIsoCode", "type": "string", "required": true, "description": "Kahetäheline ISO riigikood" },
+      { "name": "validFrom", "type": "date", "required": true, "description": "Alguskuupäev (YYYY-MM-DD)" },
+      { "name": "validTo", "type": "date", "required": true, "description": "Lõppkuupäev (YYYY-MM-DD)" }
+    ]
+  },
+  {
+    "endpointId": "2a7b3c22-9d5f-4b1e-9c44-1d3a9e220003",
+    "name": "get_electricity_prices",
+    "description": "Too elektrituruhinnad etteantud ajavahemiku kohta.",
+    "url": "https://dashboard.elering.ee/api/nps/price",
+    "method": "GET",
+    "params": [
+      { "name": "start", "type": "datetime", "required": true, "description": "Alguskuupäev ja -aeg UTC formaadis (YYYY-MM-DDTHH:MM:SSZ). Näide: 2025-01-01T00:00:00Z. Kui kasutaja annab ainult kuupäeva, kasuta alguseks T00:00:00Z. Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." },
+      { "name": "end", "type": "datetime", "required": true, "description": "Lõppkuupäev ja -aeg UTC formaadis (YYYY-MM-DDTHH:MM:SSZ). Näide: 2025-01-31T23:59:59Z. Kui kasutaja annab ainult kuupäeva, kasuta lõpuks T23:59:59Z. Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." }
+    ]
+  },
+  {
+    "endpointId": "3b8d4e33-7f6a-4c2d-a911-2c4b8f330004",
+    "name": "get_vehicle_tax_info",
+    "description": "Arvuta sõidukimaks ja registreerimistasu Eesti sõiduki registreerimisnumbri alusel. Tagastab aastase sõidukimaksu ja ühekordse registreerimistasu koos CO2 ja massikomponentidega.",
+    "url": "https://avalik.emta.ee/msm-public/v1/vehicle-tax/calculate-by-reg-nr",
+    "method": "GET",
+    "params": [
+      { "name": "regNr", "type": "string", "required": true, "description": "Sõiduki registreerimisnumber (nt 123ABC, 456DEF)" },
+      { "name": "calculationYear", "type": "integer", "required": true, "description": "Aasta, mille kohta maksu arvutatakse (nt 2026, 2027). Kohustuslik parameeter — kasutaja peab aasta täpsustama." },
+      { "name": "showRegFee", "type": "boolean", "required": false, "description": "Kui true, lisatakse vastusesse ka ühekordne registreerimistasu (regFee). Vaikimisi false. Kasuta true, kui kasutaja küsib registreerimistasu kohta." }
+    ]
+  },
+  {
+    "endpointId": "4c9e5f44-1a2b-4d3e-b822-3d5c9f440005",
+    "name": "get_parliament_votings",
+    "description": "Too Riigikogu hääletusprotokolid ja otsused.",
+    "url": "https://api.riigikogu.ee/api/votings",
+    "method": "GET",
+    "params": [
+      { "name": "startDate", "type": "date", "required": true, "description": "Alguskuupäev (YYYY-MM-DD). Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." },
+      { "name": "endDate", "type": "date", "required": true, "description": "Lõppkuupäev (YYYY-MM-DD). Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." },
+      { "name": "lang", "type": "string", "required": false, "description": "Vastuse keel (ET, EN, RU). Täidetakse automaatselt kasutaja keele põhjal." }
+    ]
+  },
+  {
+    "endpointId": "4c9e5f44-1a2b-4d3e-b822-3d5c9f440006",
+    "name": "get_parliament_participation_stats",
+    "description": "Too Riigikogu liikmete kohaloleku ja osalemise statistika.",
+    "url": "https://api.riigikogu.ee/api/statistics/participations/plenary",
+    "method": "GET",
+    "params": [
+      { "name": "startDate", "type": "date", "required": true, "description": "Alguskuupäev (YYYY-MM-DD). Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." },
+      { "name": "endDate", "type": "date", "required": true, "description": "Lõppkuupäev (YYYY-MM-DD). Ei tohi olla tulevane kuupäev — kui kasutaja sisestab tulevase kuupäeva, keeldu ja palu kehtiv mineviku- või tänane kuupäev." },
+      { "name": "lang", "type": "string", "required": false, "description": "Vastuse keel (ET, EN, RU). Täidetakse automaatselt kasutaja keele põhjal." }
+    ]
+  },
+  {
+    "endpointId": "5d0f6a55-2b3c-4e4f-c933-4e6d0a550007",
+    "name": "get_initiatives",
+    "description": "Too kodanike rahvaalgatuste nimekiri.",
+    "url": "https://rahvaalgatus.ee/initiatives",
+    "method": "GET",
+    "params": [
+      { "name": "page", "type": "number", "required": false, "description": "Lehekülje number lehekülgede kaupa" }
+    ]
+  },
+  {
+    "endpointId": "5d0f6a55-2b3c-4e4f-c933-4e6d0a550008",
+    "name": "get_initiative_details",
+    "description": "Too üksikasjalikku teavet konkreetse kodanike rahvaalgatuse kohta. Algatuse ID lisatakse tee osana alusURL-ile (nt /initiatives/123).",
+    "url": "https://rahvaalgatus.ee/initiatives",
+    "method": "GET",
+    "params": [
+      { "name": "id", "type": "string", "required": true, "description": "Algatuse kordumatu identifikaator — lisatakse tee osana URL-ile" }
+    ]
+  },
+  {
+    "endpointId": "5d0f6a55-2b3c-4e4f-c933-4e6d0a550009",
+    "name": "get_initiative_events",
+    "description": "Too kodanike rahvaalgatustega seotud sündmused ja uuendused.",
+    "url": "https://rahvaalgatus.ee/initiative-events",
+    "method": "GET",
+    "params": []
+  },
+  {
+    "endpointId": "6e1a7b66-3c4d-5f5a-d044-5f7e1b660010",
+    "name": "search_address",
+    "description": "Otsi aadresse või asukohti märksõnapäringu abil.",
+    "url": "https://inaadress.maaamet.ee/inaadress/gazetteer",
+    "method": "GET",
+    "params": [
+      { "name": "address", "type": "string", "required": true, "description": "Aadressi või kohanime otsingupäring" }
+    ]
+  },
+  {
+    "endpointId": "7f2b8c77-4d5e-6a6b-e155-6a8f2c770011",
+    "name": "get_population_statistics",
+    "description": "Too rahvastikustatistika andmed struktureeritud päringu abil.",
+    "url": "https://andmed.stat.ee/api/v1/en/stat/IA021",
+    "method": "POST",
+    "params": [
+      { "name": "query", "type": "object", "required": true, "description": "JSON-päringu keha andmestiku filtrite ja mõõtmetega" }
+    ]
+  },
+  {
+    "endpointId": "7f2b8c77-4d5e-6a6b-e155-6a8f2c770012",
+    "name": "get_economic_statistics",
+    "description": "Too majandusstatistika andmed struktureeritud päringu abil.",
+    "url": "https://andmed.stat.ee/api/v1/en/stat/LE27",
+    "method": "POST",
+    "params": [
+      { "name": "query", "type": "object", "required": true, "description": "JSON-päringu keha andmestiku filtrite ja mõõtmetega" }
+    ]
+  },
+  {
+    "endpointId": "7f2b8c77-4d5e-6a6b-e155-6a8f2c770013",
+    "name": "get_labor_statistics",
+    "description": "Too tööjõu ja tööhõive statistika andmed struktureeritud päringu abil.",
+    "url": "https://andmed.stat.ee/api/v1/en/stat/TT330",
+    "method": "POST",
+    "params": [
+      { "name": "query", "type": "object", "required": true, "description": "JSON-päringu keha andmestiku filtrite ja mõõtmetega" }
+    ]
+  },
+  {
+    "endpointId": "8a3c9d88-5e6f-7b7c-f266-7b9a3d880014",
+    "name": "get_current_weather",
+    "description": "Too praegused ja kombineeritud ilmaandmed.",
+    "url": "https://publicapi.envir.ee/v1/combinedWeatherData",
+    "method": "GET",
+    "params": [
+      { "name": "station", "type": "string", "required": false, "description": "Ilmajaama identifikaator" }
+    ]
+  },
+  {
+    "endpointId": "8a3c9d88-5e6f-7b7c-f266-7b9a3d880015",
+    "name": "get_weather_forecast",
+    "description": "Too ilmaprognoos tulevaste perioodide kohta.",
+    "url": "https://ilmmicroservice.envir.ee/api/forecasts",
+    "method": "GET",
+    "params": []
+  }
+]

@@ -1,0 +1,200 @@
+name: RAG Module Integration Tests
+
+on:
+  pull_request:
+    branches: [wip]
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'data/**'
+      - 'docker-compose-test.yml'
+      - 'Dockerfile.llm_orchestration_service'
+      - '.github/workflows/pytest-integration-check.yml'
+
+jobs:
+  pytest-integration-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate required secrets
+        id: validate_secrets
+        run: |
+          echo "Validating required environment variables..."
+          MISSING_SECRETS=()
+          
+          # Check Azure OpenAI secrets
+          if [ -z "${{ secrets.AZURE_OPENAI_ENDPOINT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_ENDPOINT")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_API_KEY }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_API_KEY")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_DEPLOYMENT_NAME")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+          fi
+          
+          if [ -z "${{ secrets.AZURE_OPENAI_EMBEDDING_ENDPOINT }}" ]; then
+            MISSING_SECRETS+=("AZURE_OPENAI_EMBEDDING_ENDPOINT")
+          fi
+
+          if [ -z "${{ secrets.SALT }}" ]; then
+            MISSING_SECRETS+=("SALT")
+          fi
+
+          if [ -z "${{ secrets.ENCRYPTION_KEY }}" ]; then
+            MISSING_SECRETS+=("ENCRYPTION_KEY")
+          fi
+
+          if [ -z "${{ secrets.NEXTAUTH_SECRET }}" ]; then
+            MISSING_SECRETS+=("NEXTAUTH_SECRET")
+          fi
+
+          
+          # If any secrets are missing, fail
+          if [ ${#MISSING_SECRETS[@]} -gt 0 ]; then
+            echo "missing=true" >> $GITHUB_OUTPUT
+            echo "secrets_list=${MISSING_SECRETS[*]}" >> $GITHUB_OUTPUT
+            echo " Missing required secrets: ${MISSING_SECRETS[*]}"
+            exit 1
+          else
+            echo "missing=false" >> $GITHUB_OUTPUT
+            echo " All required secrets are configured"
+          fi
+      
+      - name: Comment PR with missing secrets error
+        if: failure() && steps.validate_secrets.outputs.missing == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const missingSecrets = '${{ steps.validate_secrets.outputs.secrets_list }}'.split(' ');
+            const secretsList = missingSecrets.map(s => `- \`${s}\``).join('\n');
+            
+            const comment = `##  RAG Module Integration Tests: Missing Required Secrets
+            
+            RAG Module Integration tests cannot run because the following GitHub secrets are not configured:
+            
+            ${secretsList}
+            
+            ### How to Fix
+            
+            1. Go to **Settings** → **Secrets and variables** → **Actions**
+            2. Add the missing secrets with the appropriate values:
+            
+            **Azure OpenAI Configuration:**
+            - \`AZURE_OPENAI_ENDPOINT\` - Your Azure OpenAI resource endpoint (e.g., \`https://your-resource.openai.azure.com/\`)
+            - \`AZURE_OPENAI_API_KEY\` - Your Azure OpenAI API key
+            - \`AZURE_OPENAI_DEPLOYMENT_NAME\` - Chat model deployment name (e.g., \`gpt-4o-mini\`)
+            - \`AZURE_OPENAI_EMBEDDING_DEPLOYMENT\` - Embedding model deployment name (e.g., \`text-embedding-3-large\`)
+            
+            
+            3. Re-run the workflow after adding the secrets
+            
+            ### Note
+            Tests will not run until all required secrets are configured.
+            
+            ---
+            *Workflow: ${context.workflow} | Run: [#${context.runNumber}](${context.payload.repository.html_url}/actions/runs/${context.runId})*`;
+            
+            // Find existing comment
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const existingComment = comments.data.find(
+              comment => comment.user.login === 'github-actions[bot]' &&
+                comment.body.includes('RAG Module Integration Tests: Missing Required Secrets')
+            );
+            
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+      
+      - name: Set up Python
+        if: success()
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      
+      - name: Set up uv
+        if: success()
+        uses: astral-sh/setup-uv@v6
+      
+      - name: Install dependencies (locked)
+        if: success()
+        run: uv sync --frozen
+   
+      - name: Create test directories with proper permissions
+        if: success()
+        run: |
+          mkdir -p test-vault/agents/llm
+          mkdir -p test-vault/agent-out
+          # Set ownership to current user and make writable
+          sudo chown -R $(id -u):$(id -g) test-vault
+          chmod -R 777 test-vault
+          # Ensure the agent-out directory is world-readable after writes
+          sudo chmod -R a+rwX test-vault/agent-out
+
+      - name: Make Cron-Manager scripts executable
+        if: success()
+        run: |
+          chmod +x DSL/CronManager/script/*.sh
+          ls -la DSL/CronManager/script/
+          
+      - name: Build Docker images
+        if: success()
+        run: docker compose -f docker-compose-test.yml build
+
+      - name: Run Pytest Integration tests with testcontainers
+        if: success()
+        id: run_tests
+        env:
+          # Azure OpenAI - Chat Model
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_DEPLOYMENT_NAME: ${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}
+          # Azure OpenAI - Embedding Model
+          AZURE_OPENAI_EMBEDDING_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT }}
+          AZURE_OPENAI_EMBEDDING_ENDPOINT: ${{ secrets.AZURE_OPENAI_EMBEDDING_ENDPOINT }}
+          SALT: ${{ secrets.SALT }}
+          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+        run: |
+          # Run tests with testcontainers managing Docker Compose
+          uv run python -m pytest tests/integration_tests/ -v --tb=short --log-cli-level=INFO
+
+      - name: Fix permissions on test artifacts
+        if: always()
+        run: |
+          sudo chown -R $(id -u):$(id -g) test-vault || true
+          sudo chmod -R a+rX test-vault || true
+      
+      - name: Cleanup Docker resources
+        if: always()
+        run: |
+          docker compose -f docker-compose-test.yml down -v --remove-orphans || true
+          docker system prune -f || true

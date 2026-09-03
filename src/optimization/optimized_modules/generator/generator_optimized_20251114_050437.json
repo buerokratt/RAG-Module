@@ -1,0 +1,91 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "Milliseid filme näidatakse kinodes?",
+        "context_blocks": [
+          "[Context 1]\n(No relevant context available.)"
+        ],
+        "reasoning": "The provided context does not contain any information regarding the films currently showing in cinemas.",
+        "answer": "Ei ole võimalik vastata, kuna kontekstis puudub teave näidatavate filmide kohta.",
+        "questionOutOfLLMScope": true
+      },
+      {
+        "augmented": true,
+        "question": "What was the total amount spent on family benefits in 2021?",
+        "context_blocks": [
+          "[Context 1]\nIn 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; approximately 280 million euros for parental benefit; Maternity benefit of approx. 58 million euros; Maintenance benefit of about 5 million euros."
+        ],
+        "reasoning": "The context provides specific figures related to the total amount spent on family benefits in 2021, including the total and the breakdown of various types of benefits. Therefore, the question can be answered directly based on the provided information.",
+        "answer": "In 2021, a total of approximately 653 million euros was spent on family benefits.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "augmented": true,
+        "question": "Kes on töötutoetusele õigustatud?",
+        "context_blocks": [
+          "[Context 1]\nTöötutoetus on saadaval inimestele, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna."
+        ],
+        "reasoning": "Töötutoetusele on õigustatud need inimesed, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna.",
+        "answer": "Töötutoetusele on õigustatud inimesed, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "augmented": true,
+        "question": "Kui palju raha kulutati peretoetustele 2021. aastal kokku?",
+        "context_blocks": [
+          "[Context 1]\n2021. aastal maksti peredele toetusi kokku umbes 653 miljonit eurot. Umbes 310 miljonit eurot peretoetusteks; umbes 280 miljonit eurot vanemahüvitiseks; sünnitoetust umbes 58 miljonit eurot; ülalpidamistoetust umbes 5 miljonit eurot."
+        ],
+        "reasoning": "Küsimus puudutab 2021. aastal peretoetustele kulutatud raha summat, millele on antud kontekstis selge vastus. Kontekst ütleb, et kokku maksti peredele toetusi umbes 653 miljonit eurot, sealhulgas erinevad toetuste kategooriad.",
+        "answer": "2021. aastal kulutati peretoetustele kokku umbes 653 miljonit eurot.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "augmented": true,
+        "question": "How does Estonia support single-parent families?",
+        "context_blocks": [
+          "[Context 1]\nSince January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families. The support needs of single parents are much wider than just financial support. There is a chronic lack of time, lack of flexible childcare, and high expectation of better access to hobby education."
+        ],
+        "reasoning": "The context provides information that the Ministry of Social Affairs in Estonia is actively seeking solutions to support single-parent families. It highlights that their support needs extend beyond financial assistance, addressing issues such as time constraints, the need for flexible childcare, and improved access to hobby education. However, it does not provide specific details about the types of support being implemented.",
+        "answer": "Estonia is exploring solutions to support single-parent families, recognizing that their needs are broader than just financial support. This includes addressing issues like the chronic lack of time, the need for flexible childcare, and better access to hobby education.",
+        "questionOutOfLLMScope": false
+      }
+    ],
+    "signature": {
+      "instructions": "Generate a well-reasoned answer based solely on the provided context blocks. Ensure that your response adheres to the following guidelines:\n- Utilize only the information contained within the context blocks.\n- If the context does not provide enough information to answer the question, set the flag for questionOutOfLLMScope to true.\n- Avoid fabricating any details; your answer should be concise and directly related to the context.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "User's question"
+        },
+        {
+          "prefix": "Context Blocks:",
+          "description": "Relevant context chunks"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "Grounded answer from context"
+        },
+        {
+          "prefix": "Question Out Of LLM Scope:",
+          "description": "True if context is insufficient to answer"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+name: RAG GUI eslint check
+
+on:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["*"]
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'GUI/package-lock.json'
+          
+      - name: Install dependencies
+        working-directory: ./GUI
+        run: npm install --legacy-peer-deps
+        
+      - name: Lint code
+        working-directory: ./GUI
+        run: npx eslint "src/**/*.{ts,tsx}" --quiet

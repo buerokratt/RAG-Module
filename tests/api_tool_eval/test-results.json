@@ -1,0 +1,1010 @@
+[
+  {
+    "query": "What are the public holidays in Estonia this year?",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.6777,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "List official public holidays in Estonia for 2025",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.6234,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "When are the national public holidays in Estonia?",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.5978,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me all public days off in Estonia between January and June",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.5606,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What are the official non-working days in Estonia?",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.6518,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millised on Eesti riigip\u00fchad sel aastal?",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.6896,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millal on Eestis ametlikud riigip\u00fchad 2025. aastal?",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.6969,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle Eesti riigip\u00fchi jaanuarist juunini",
+    "expected": "get_public_holidays",
+    "got": "get_public_holidays",
+    "cosine_score": 0.5552,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "When are the school holidays in Estonia?",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.6782,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What are the school term breaks in Estonia this year?",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.646,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "When does school summer break start in Estonia in 2025?",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.6939,
+    "rrf_score": 0.833333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me school holiday periods in Estonia for spring 2025",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.5997,
+    "rrf_score": 0.666667,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Millal on Eesti koolide koolivaheajad?",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.7407,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millal algab koolide suvepuhkus Eestis 2025. aastal?",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.6872,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle kevadise koolivaheaja aegu Eestis",
+    "expected": "get_school_holidays",
+    "got": "get_school_holidays",
+    "cosine_score": 0.6195,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What are the electricity market prices in Estonia?",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.6332,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me electricity prices for the past week in Estonia",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.6837,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Fetch energy market prices between January and March 2025",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.432,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What was the electricity spot price in Estonia last month?",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.6716,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millised on elektrituruhinnad Eestis?",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.6218,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita elektrihindu eelmise n\u00e4dala kohta Eestis",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.7159,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Mis oli elektrihind Eestis eelmisel kuul?",
+    "expected": "get_electricity_prices",
+    "got": "get_electricity_prices",
+    "cosine_score": 0.6676,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Calculate vehicle tax for registration number 123ABC",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.653,
+    "rrf_score": 0.833333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "How much is the vehicle tax for my car with plate 456XYZ?",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.6316,
+    "rrf_score": 1.0,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What is the car tax based on my registration number?",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.5134,
+    "rrf_score": 0.833333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Arvuta s\u00f5idukimaks registreerimisnumbri 123ABC alusel",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.8383,
+    "rrf_score": 0.833333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Kui suur on minu auto maks numbrim\u00e4rgi 456XYZ j\u00e4rgi?",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.824,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Mis on mootors\u00f5idukimaks minu auto registreerimisnumbri alusel?",
+    "expected": "get_vehicle_tax_info",
+    "got": "get_vehicle_tax_info",
+    "cosine_score": 0.6378,
+    "rrf_score": 0.666667,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me the latest parliament voting records in Estonia",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.6093,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What did the Riigikogu vote on recently?",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.7187,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Retrieve parliamentary voting decisions from the Estonian parliament",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.6544,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What laws were voted on in the Estonian parliament?",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.5905,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita Riigikogu viimaseid h\u00e4\u00e4letusprotokolle",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.6515,
+    "rrf_score": 0.642857,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Mille \u00fcle h\u00e4\u00e4letas Riigikogu hiljuti?",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.7685,
+    "rrf_score": 0.666667,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Milliseid seadusi h\u00e4\u00e4letati Eesti parlamendis?",
+    "expected": "get_parliament_votings",
+    "got": "get_parliament_votings",
+    "cosine_score": 0.6675,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "How often do Estonian parliament members attend sessions?",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.5247,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me parliament member attendance statistics",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.5584,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Which MPs have the best attendance record in the Riigikogu?",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.7052,
+    "rrf_score": 0.75,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Kui tihti osalevad Riigikogu liikmed istungitel?",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.6471,
+    "rrf_score": 0.7,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita Riigikogu liikmete kohaloleku statistikat",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.7678,
+    "rrf_score": 0.833333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millistel saadikutel on Riigikogu parim kohalolekurekord?",
+    "expected": "get_parliament_participation_stats",
+    "got": "get_parliament_participation_stats",
+    "cosine_score": 0.631,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me a list of active citizen initiatives in Estonia",
+    "expected": "get_initiatives",
+    "got": "get_initiatives",
+    "cosine_score": 0.6595,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What public initiatives are currently available?",
+    "expected": "get_initiatives",
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": false
+  },
+  {
+    "query": "List all citizen initiatives on rahvaalgatus.ee",
+    "expected": "get_initiatives",
+    "got": "get_initiatives",
+    "cosine_score": 0.6632,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle aktiivsete kodanike algatuste nimekirja Eestis",
+    "expected": "get_initiatives",
+    "got": "get_initiatives",
+    "cosine_score": 0.6846,
+    "rrf_score": 0.666667,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Millised rahvaalgatused on praegu saadaval?",
+    "expected": "get_initiatives",
+    "got": "get_initiatives",
+    "cosine_score": 0.7545,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Loetle k\u00f5ik algatused rahvaalgatus.ee lehel",
+    "expected": "get_initiatives",
+    "got": "get_initiatives",
+    "cosine_score": 0.5893,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Get details about citizen initiative with ID abc123",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.5825,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me more information about a specific public initiative",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.4889,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Fetch the details of initiative ID xyz789",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.5759,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Too andmed kodanike algatuse ID abc123 kohta",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.5205,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle \u00fcksikasju konkreetse rahvaalgatuse kohta",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.6357,
+    "rrf_score": 0.666667,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Too algatuse ID xyz789 \u00fcksikasjad",
+    "expected": "get_initiative_details",
+    "got": "get_initiative_details",
+    "cosine_score": 0.4259,
+    "rrf_score": 0.833333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What are the latest events related to citizen initiatives?",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.5164,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me updates and events for public initiatives",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.5302,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Are there any new events for citizen initiatives in Estonia?",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.5956,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Millised on viimased kodanike algatustega seotud s\u00fcndmused?",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.7619,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita rahvaalgatuste uuendusi ja s\u00fcndmusi",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.7217,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Kas Eestis on uusi s\u00fcndmusi kodanike algatuste kohta?",
+    "expected": "get_initiative_events",
+    "got": "get_initiative_events",
+    "cosine_score": 0.6662,
+    "rrf_score": 0.642857,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Search for the address Viru 4 in Tallinn",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.6338,
+    "rrf_score": 0.833333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Find the location of Kadriorg Park in Tallinn",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.4442,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Look up an address or place name in Estonia",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.5577,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Search for a street address in Tartu",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.6088,
+    "rrf_score": 1.0,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Otsi aadressi Viru 4 Tallinnas",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.7736,
+    "rrf_score": 0.75,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Leia Kadrioru pargi asukoht Tallinnas",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.4523,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Otsi t\u00e4navaaadress Tartus",
+    "expected": "search_address",
+    "got": "search_address",
+    "cosine_score": 0.6469,
+    "rrf_score": 0.75,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What is the population of Estonia?",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.4761,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me population statistics data for Estonia",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.4796,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Fetch demographic statistics for Estonia",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.5258,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What is the population breakdown by age group in Estonia?",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.5764,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Milline on Eesti rahvaarv?",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.5107,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle Eesti rahvastikustatistika andmeid",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.5269,
+    "rrf_score": 0.833333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Milline on Eesti rahvastiku jaotus vanuser\u00fchmade kaupa?",
+    "expected": "get_population_statistics",
+    "got": "get_population_statistics",
+    "cosine_score": 0.5995,
+    "rrf_score": 0.666667,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me economic statistics for Estonia",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.5219,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What is the GDP and economic output of Estonia?",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.4211,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Fetch economic data for Estonia from the statistics office",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.5652,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle Eesti majandusstatistikat",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.5082,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Mis on Eesti SKP ja majanduslik toodang?",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.5431,
+    "rrf_score": 0.833333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Too majandusandmed Eesti statistikaametist",
+    "expected": "get_economic_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.4921,
+    "rrf_score": 0.7,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What is the unemployment rate in Estonia?",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.5905,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Show me labor and employment statistics for Estonia",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.5207,
+    "rrf_score": 0.333333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "How many people are employed in Estonia?",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.4705,
+    "rrf_score": 0.333333,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Fetch workforce and jobless statistics for Estonia",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.5505,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Milline on t\u00f6\u00f6tuse m\u00e4\u00e4r Eestis?",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.6245,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle Eesti t\u00f6\u00f6j\u00f5u ja t\u00f6\u00f6h\u00f5ive statistikat",
+    "expected": "get_labor_statistics",
+    "got": "get_labor_statistics",
+    "cosine_score": 0.556,
+    "rrf_score": 0.666667,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Kui palju inimesi t\u00f6\u00f6tab Eestis?",
+    "expected": "get_labor_statistics",
+    "got": "get_economic_statistics",
+    "cosine_score": 0.465,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": false
+  },
+  {
+    "query": "What is the current weather in Tallinn?",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.7102,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me the current weather conditions in Estonia",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.5532,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "What is the temperature right now at the Tallinn weather station?",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.7024,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Milline on praegune ilm Tallinnas?",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.8075,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle praeguseid ilmastikuolusid Eestis",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.5993,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Mis on praegune temperatuur Tallinna ilmajaamas?",
+    "expected": "get_current_weather",
+    "got": "get_current_weather",
+    "cosine_score": 0.8916,
+    "rrf_score": 0.533333,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What is the weather forecast for Tallinn tomorrow?",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.7875,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Show me the upcoming weather forecast for Tartu",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.6849,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "What will the weather be like in Estonia next week?",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.6047,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Give me a weather forecast for the next few days in Estonia",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.5652,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Milline on ilmaprognoos Tallinnas homme?",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.8612,
+    "rrf_score": 0.666667,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "N\u00e4ita mulle Tartu eelseisvat ilmaprognoosi",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.77,
+    "rrf_score": 0.5,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Milline on ilm Eestis j\u00e4rgmisel n\u00e4dalal?",
+    "expected": "get_weather_forecast",
+    "got": "get_weather_forecast",
+    "cosine_score": 0.6499,
+    "rrf_score": 0.5,
+    "confidence": "high",
+    "pass": true
+  },
+  {
+    "query": "Who is the Prime Minister of Estonia?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "What is the best restaurant in Tallinn?",
+    "expected": null,
+    "got": "search_address",
+    "cosine_score": 0.4746,
+    "rrf_score": 1.0,
+    "confidence": "medium",
+    "pass": true
+  },
+  {
+    "query": "Tell me a random fact about Estonia",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "What is the meaning of life?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Book me a flight to London",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Can you translate this text to Estonian?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "What are the visa requirements to visit Estonia?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "How do I apply for an Estonian e-Residency?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "What is the history of Tallinn Old Town?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Give me a poem about Estonia",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Kes on Eesti peaminister?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Mis on parim restoran Tallinnas?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  },
+  {
+    "query": "Mis on elu m\u00f5te?",
+    "expected": null,
+    "got": null,
+    "cosine_score": null,
+    "rrf_score": null,
+    "confidence": null,
+    "pass": true
+  }
+]

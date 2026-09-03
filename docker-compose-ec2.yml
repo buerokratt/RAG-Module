@@ -1,0 +1,704 @@
+services:
+  ruuter-public:
+    container_name: ruuter-public
+    image: ruuter
+    environment:
+      - application.cors.allowedOrigins=http://localhost:8086,http://localhost:3001,http://localhost:3003,http://localhost:3004,http://localhost:8080,http://localhost:8000,http://localhost:8090,https://est-rag-rtc.rootcode.software
+      - application.httpCodesAllowList=200,201,202,204,400,401,403,500
+      - application.internalRequests.allowedIPs=127.0.0.1
+      - application.logging.displayRequestContent=true
+      - application.logging.displayResponseContent=true
+      - application.logging.printStackTrace=true
+      - application.internalRequests.disabled=true
+      - server.port=8086
+    volumes:
+      - ./DSL/Ruuter.public:/DSL
+      - ./constants.ini:/app/constants.ini
+    ports:
+      - 8086:8086
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "512M"
+  
+  ruuter-private:
+    container_name: ruuter-private
+    image: ruuter
+    environment:
+      - application.cors.allowedOrigins=http://localhost:3001,http://localhost:3003,http://localhost:8088,http://localhost:3002,http://localhost:3004,http://localhost:8000,https://est-rag-rtc.rootcode.software
+      - application.httpCodesAllowList=200,201,202,400,401,403,500
+      - application.internalRequests.allowedIPs=127.0.0.1
+      - application.logging.displayRequestContent=true
+      - application.logging.displayResponseContent=true
+      - application.logging.printStackTrace=true
+      - application.internalRequests.disabled=true
+      - server.port=8088
+    volumes:
+      - ./DSL/Ruuter.private:/DSL
+      - ./constants.ini:/app/constants.ini
+    ports:
+      - 8088:8088
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "512M"
+
+  data-mapper:
+    container_name: data-mapper
+    image: data-mapper
+    environment:
+      - PORT=3000
+      - CONTENT_FOLDER=/data
+    volumes:
+      - ./DSL:/data
+      - ./DSL/DMapper/rag-search/hbs:/workspace/app/views/rag-search
+      - ./DSL/DMapper/rag-search/lib:/workspace/app/lib
+    ports:
+      - 3001:3000
+    networks:
+      - bykstack
+
+  tim:
+    container_name: tim
+    image: tim
+    depends_on:
+      tim-postgresql:
+        condition: service_started
+    environment:
+      - SECURITY_ALLOWLIST_JWT=ruuter-private,ruuter-public,data-mapper,resql,tim,tim-postgresql,chat-widget,authentication-layer,127.0.0.1,::1,est-rag-rtc.rootcode.software
+      - KEY_PASS=ppjjpp
+    ports:
+      - 8085:8085
+    networks:
+      - bykstack
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cpus: "0.5"
+    mem_limit: "512M"
+
+  tim-postgresql:
+    container_name: tim-postgresql
+    image: postgres:14.1
+    environment:
+      - POSTGRES_USER=tim
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=tim
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./tim-db:/var/lib/postgresql/data
+    ports:
+      - 9876:5432
+    networks:
+      - bykstack
+
+  authentication-layer:
+    container_name: authentication-layer
+    image: authentication-layer
+    ports:
+      - 3004:3004
+    networks:
+      - bykstack
+
+  resql:
+    container_name: resql
+    image: resql
+    depends_on:
+      rag-search-db:
+        condition: service_started
+    environment:
+      - sqlms.datasources.[0].name=byk
+      - sqlms.datasources.[0].jdbcUrl=jdbc:postgresql://rag-search-db:5432/rag-search #For LocalDb Use
+      # sqlms.datasources.[0].jdbcUrl=jdbc:postgresql://171.22.247.13:5435/byk?sslmode=require
+      - sqlms.datasources.[0].username=postgres
+      - sqlms.datasources.[0].password=dbadmin
+      - logging.level.org.springframework.boot=INFO
+    ports:
+      - 8082:8082
+    volumes:
+      - ./DSL/Resql:/DSL
+      - ./shared:/shared
+      - ./DSL/DatasetGenerator/output_datasets:/app/output_datasets
+    networks:
+      - bykstack
+   
+  gui:
+    container_name: gui
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_RUUTER_API_URL=https://est-rag-rtc.rootcode.software/ruuter-public
+      - REACT_APP_RUUTER_PRIVATE_API_URL=https://est-rag-rtc.rootcode.software/ruuter-private  
+      - REACT_APP_CUSTOMER_SERVICE_LOGIN=https://est-rag-rtc.rootcode.software/authentication-layer/et/dev-auth
+      - REACT_APP_NOTIFICATION_NODE_URL=https://est-rag-rtc.rootcode.software/notifications-node
+      - REACT_APP_CSP=upgrade-insecure-requests; default-src 'self'; font-src 'self' data:; img-src 'self' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; connect-src 'self' http://localhost:8086 http://localhost:8088 http://localhost:3004 http://localhost:3005 http://localhost:4040 https://vault-agent-gui:8202 ws://localhost https://est-rag-rtc.rootcode.software;
+      - DEBUG_ENABLED=true
+      - CHOKIDAR_USEPOLLING=true
+      - PORT=3001
+      - REACT_APP_SERVICE_ID=settings,services,training,rag-search,knowledge-center
+      - REACT_APP_ENABLE_HIDDEN_FEATURES=TRUE
+      - REACT_APP_MENU_JSON= [{"id":"conversations","label":{"et":"Vestlused","en":"Conversations"},"path":"/chat","children":[{"label":{"et":"Vastamata","en":"Unanswered"},"path":"/unanswered"},{"label":{"et":"Aktiivsed","en":"Active"},"path":"/active"},{"label":{"et":"Ootel","en":"Pending"},"path":"/pending"},{"label":{"et":"Ajalugu","en":"History"},"path":"/history"},{"label":{"et":"Valideerimised","en":"Validations"},"path":"/validations"}]},{"id":"training","label":{"et":"Treening","en":"Training"},"path":"/training","children":[{"label":{"et":"Treening","en":"Training"},"path":"/training","children":[{"label":{"et":"Teemad","en":"Themes"},"path":"/training/intents"},{"hidden":true,"label":{"et":"Avalikud teemad","en":"Public themes"},"path":"/training/common-intents"},{"label":{"et":"Teemade järeltreenimine","en":"Post training themes"},"path":"/training/intents-followup-training"},{"label":{"et":"Vastused","en":"Answers"},"path":"/training/responses"},{"label":{"et":"Reeglid","en":"Rules"},"path":"/training/rules"},{"hidden":true,"label":{"et":"Konfiguratsioon","en":"Configuration"},"path":"/training/configuration"},{"label":{"et":"Vormid","en":"Forms"},"path":"/training/forms"},{"label":{"et":"Mälukohad","en":"Slots"},"path":"/training/slots"}]},{"label":{"et":"Ajaloolised vestlused","en":"Historical conversations"},"path":"/history","children":[{"label":{"et":"Ajalugu","en":"History"},"path":"/history/history"},{"hidden":true,"label":{"et":"Pöördumised","en":"Appeals"},"path":"/history/appeal"}]},{"label":{"et":"Mudelipank ja analüütika","en":"Modelbank and analytics"},"path":"/analytics","children":[{"label":{"et":"Teemade ülevaade","en":"Overview of topics"},"path":"/analytics/overview"},{"label":{"et":"Mudelite võrdlus","en":"Comparison of models"},"path":"/analytics/models"},{"hidden":true,"label":{"et":"Testlood","en":"testTracks"},"path":"/analytics/testcases"}]},{"label":{"et":"Treeni uus mudel","en":"Train new model"},"path":"/train-new-model"}]},{"id":"analytics","label":{"et":"Analüütika","en":"Analytics"},"path":"/analytics","children":[{"label":{"et":"Ülevaade","en":"Overview"},"path":"/overview"},{"label":{"et":"Vestlused","en":"Chats"},"path":"/chats"},{"label":{"et":"Tagasiside","en":"Feedback"},"path":"/feedback"},{"label":{"et":"Avaandmed","en":"Reports"},"path":"/reports"}]},{"id":"services","hidden":true,"label":{"et":"Teenused","en":"Services"},"path":"/services","children":[{"label":{"et":"Ülevaade","en":"Overview"},"path":"/overview"},{"label":{"et":"Uus teenus","en":"New Service"},"path":"/newService"},{"label":{"et":"Probleemsed teenused","en":"Faulty Services"},"path":"/faultyServices"}]},{"id":"knowledge-center","label":{"et":"Teadmuskeskus","en":"Knowledge Center"},"path":"/knowledge-center","children":[{"id":"rag-search","label":{"et":"Mudelid ja seadistused","en":"Models management"},"path":"/rag-search","children":[{"label":{"et":"Mudelite ühendused","en":"LLM connections"},"path":"/llm-connections"},{"label":{"et":"Viiba Seaded","en":"Prompt Configurations"},"path":"/prompt-configurations"},{"label":{"et":"Testi mudelit","en":"Test LLM"},"path":"/test-llm"}]},{"id":"ckb","label":{"et":"Teadmusbaas","en":"Knowledge Base"},"path":"/ckb","children":[{"label":{"et":"Agentuur","en":"Agency"},"path":"/agency"},{"label":{"et":"Aruanded","en":"Reports"},"path":"/reports"},{"label":{"et":"API Integratsioonid","en":"API Integrations"},"path":"/api"}]}]},{"id":"settings","label":{"et":"Haldus","en":"Administration"},"path":"/settings","children":[{"label":{"et":"Kasutajad","en":"Users"},"path":"/users"},{"label":{"et":"Vestlusbot","en":"Chatbot"},"path":"/chatbot","children":[{"label":{"et":"Seaded","en":"Settings"},"path":"/chatbot/settings"},{"label":{"et":"Tervitussõnum","en":"Welcome message"},"path":"/chatbot/welcome-message"},{"label":{"et":"Välimus ja käitumine","en":"Appearance and behavior"},"path":"/chatbot/appearance"},{"label":{"et":"Erakorralised teated","en":"Emergency notices"},"path":"/chatbot/emergency-notices"},{"label":{"et":"Tagasiside","en":"Feedback"},"path":"/chatbot/feedback"}]},{"label":{"et":"Vestluste analüüs","en":"Chat analysis"},"path":"/chat-analysis"},{"label":{"et":"Asutuse tööaeg","en":"Office opening hours"},"path":"/working-time"},{"label":{"et":"Vestluse Kustutamine","en":"Delete Conversations"},"path":"/delete-conversations"},{"label":{"et":"Sessiooni pikkus","en":"Session length"},"path":"/session-length"},{"label":{"et":"SKMi konfiguratsioon","en":"SKM Configuration"},"path":"/skm-configuration"},{"label":{"et":"Anonümiseerija","en":"Anonymizer"},"path":"/anonymizer"}]},{"id":"monitoring","hidden":true,"label":{"et":"Seire","en":"Monitoring"},"path":"/monitoring","children":[{"label":{"et":"Aktiivaeg","en":"Working hours"},"path":"/uptime"}]}]
+      - VITE_HOST=0.0.0.0
+      - VITE_PORT=3001
+      - HOST=0.0.0.0
+      - VITE_ALLOWED_HOSTS=localhost,127.0.0.1,est-rag-rtc.rootcode.software
+      - HMR=false
+      - FAST_REFRESH=false
+    build:
+      context: ./GUI
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3003:3001"
+    volumes:
+      - /app/node_modules
+      - ./GUI:/app
+    networks:
+      - bykstack
+    cpus: "0.5"
+    mem_limit: "1G"
+    restart: unless-stopped
+
+  rag-s3-ferry:
+    image: s3-ferry:latest
+    container_name: rag-s3-ferry
+    volumes:
+      - shared-volume:/app/shared
+      - cron_data:/app/data
+      - ./datasets:/app/datasets  # Access to datasets folder for diff identifier operations
+    env_file:
+      - .env
+    ports:
+      - "3006:3000"
+    networks:
+      - bykstack
+    depends_on:
+      minio:
+        condition: service_started
+
+  cron-manager:
+    container_name: cron-manager
+    image: cron-manager-python:latest
+    user: root
+    volumes:
+      - ./DSL/CronManager/DSL:/DSL
+      - ./DSL/CronManager/script:/app/scripts
+      - ./src/vector_indexer:/app/src/vector_indexer
+      - ./src/tool_classifier:/app/src/tool_classifier
+      - ./src/intent_data_enrichment:/app/src/intent_data_enrichment
+      - ./src/api_tool_indexer:/app/src/api_tool_indexer
+      - ./src/__init__.py:/app/src/__init__.py:ro
+      - ./src/loki_logger.py:/app/src/loki_logger.py:ro
+      - ./src/utils/decrypt_vault_secrets.py:/app/src/utils/decrypt_vault_secrets.py:ro  # Decryption utility (read-only)
+      - cron_data:/app/data
+      - shared-volume:/app/shared  # Access to shared resources for cross-container coordination
+      - ./datasets:/app/datasets   # Direct access to datasets folder for diff identifier operations
+      - ./grafana-configs/loki_logger.py:/app/src/vector_indexer/loki_logger.py
+      - ./.env:/app/.env:ro
+    environment:
+      - server.port=9010
+      - PYTHONPATH=/app:/app/src:/app/src/vector_indexer:/app/src/intent_data_enrichment:/app/src/api_tool_indexer
+      - VAULT_AGENT_URL=http://vault-agent-cron:8203
+    ports:
+      - 9010:8080
+    depends_on:
+      - vault-agent-cron
+    networks:
+      - bykstack
+
+  opensearch-node:
+    image: opensearchproject/opensearch:2.11.1
+    container_name: opensearch-node
+    environment:
+      - node.name=opensearch-node
+      - discovery.seed_hosts=opensearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - plugins.security.disabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600
+    networks:
+      - bykstack
+
+  notifications-node:
+    container_name: notifications-node
+    build:
+      context: ./notification-server
+      dockerfile: Dockerfile
+    ports:
+      - 4040:4040
+    depends_on:
+      - opensearch-node
+    environment:
+      OPENSEARCH_PROTOCOL: http
+      OPENSEARCH_HOST: opensearch-node
+      OPENSEARCH_PORT: 9200
+      OPENSEARCH_USERNAME: admin
+      OPENSEARCH_PASSWORD: admin
+      PORT: 4040
+      REFRESH_INTERVAL: 1000
+      QUEUE_REFRESH_INTERVAL: 4000
+      CORS_WHITELIST_ORIGINS: http://localhost:3001,http://localhost:3003,http://localhost:3004,http://localhost:8080,https://est-rag-rtc.rootcode.software
+      RUUTER_URL: http://ruuter-public:8086
+      CHAT_TERMINATION_DELAY: 5000
+    volumes:
+      - /app/node_modules
+      - ./notification-server:/app
+    networks:
+      - bykstack
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    restart: always
+    container_name: qdrant
+    ports:
+      - 6333:6333 # http client 
+      - 6334:6334 # grpc client
+    expose:
+      - 6333
+      - 6334
+      - 6335
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - bykstack
+
+  # Logging Stack - Loki and Grafana
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./grafana-configs/loki-config.yaml:/etc/loki/local-config.yaml
+      - loki-data:/loki
+    networks:
+      - bykstack
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: grafana
+    ports:
+      - "4005:3000"
+    env_file:
+      - .env
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana-configs/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana-configs/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./grafana-configs/grafana-dashboard-deployment.json:/etc/grafana/dashboards/deployment.json
+    networks:
+      - bykstack
+    depends_on:
+      - loki
+    restart: unless-stopped
+  
+  langfuse-worker:
+    image: docker.io/langfuse/langfuse-worker:3
+    restart: always
+    depends_on: &langfuse-depends-on
+      rag-search-db:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    ports:
+      - 3030:3030
+    env_file:
+      - .env
+    environment: &langfuse-worker-env
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      SALT: ${SALT}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      TELEMETRY_ENABLED: ${TELEMETRY_ENABLED}
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: ${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES}
+      CLICKHOUSE_MIGRATION_URL: ${CLICKHOUSE_MIGRATION_URL}
+      CLICKHOUSE_URL: ${CLICKHOUSE_URL}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_CLUSTER_ENABLED: ${CLICKHOUSE_CLUSTER_ENABLED}
+      LANGFUSE_USE_AZURE_BLOB: ${LANGFUSE_USE_AZURE_BLOB}
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET}
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: ${LANGFUSE_S3_EVENT_UPLOAD_REGION}
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID}
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT}
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE}
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: ${LANGFUSE_S3_EVENT_UPLOAD_PREFIX}
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET}
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: ${LANGFUSE_S3_MEDIA_UPLOAD_REGION}
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID}
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT}
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE}
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: ${LANGFUSE_S3_MEDIA_UPLOAD_PREFIX}
+      LANGFUSE_S3_BATCH_EXPORT_ENABLED: ${LANGFUSE_S3_BATCH_EXPORT_ENABLED}
+      LANGFUSE_S3_BATCH_EXPORT_BUCKET: ${LANGFUSE_S3_BATCH_EXPORT_BUCKET}
+      LANGFUSE_S3_BATCH_EXPORT_PREFIX: ${LANGFUSE_S3_BATCH_EXPORT_PREFIX}
+      LANGFUSE_S3_BATCH_EXPORT_REGION: ${LANGFUSE_S3_BATCH_EXPORT_REGION}
+      LANGFUSE_S3_BATCH_EXPORT_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_ENDPOINT}
+      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT}
+      LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID: ${LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID}
+      LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY: ${LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE: ${LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE}
+      LANGFUSE_INGESTION_QUEUE_DELAY_MS: ${LANGFUSE_INGESTION_QUEUE_DELAY_MS}
+      LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: ${LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_AUTH: ${REDIS_AUTH}
+      REDIS_TLS_ENABLED: ${REDIS_TLS_ENABLED}
+      REDIS_TLS_CA: ${REDIS_TLS_CA}
+      REDIS_TLS_CERT: ${REDIS_TLS_CERT}
+      REDIS_TLS_KEY: ${REDIS_TLS_KEY}
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
+      SMTP_CONNECTION_URL: ${SMTP_CONNECTION_URL}
+    networks:
+      - bykstack
+
+  langfuse-web:
+    image: docker.io/langfuse/langfuse:3
+    restart: always
+    depends_on:
+      - langfuse-worker
+      - rag-search-db
+    ports:
+      - 3005:3000
+    env_file:
+      - .env
+    environment:
+      <<: *langfuse-worker-env
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      LANGFUSE_INIT_ORG_ID: ${LANGFUSE_INIT_ORG_ID:-}
+      LANGFUSE_INIT_ORG_NAME: ${LANGFUSE_INIT_ORG_NAME:-}
+      LANGFUSE_INIT_PROJECT_ID: ${LANGFUSE_INIT_PROJECT_ID:-}
+      LANGFUSE_INIT_PROJECT_NAME: ${LANGFUSE_INIT_PROJECT_NAME:-}
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:-}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_INIT_PROJECT_SECRET_KEY:-}
+      LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_INIT_USER_EMAIL:-}
+      LANGFUSE_INIT_USER_NAME: ${LANGFUSE_INIT_USER_NAME:-}
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_INIT_USER_PASSWORD:-}
+    networks:
+      - bykstack
+
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server
+    restart: always
+    user: "101:101"
+    env_file:
+      - .env
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    volumes:
+      - langfuse_clickhouse_data:/var/lib/clickhouse
+      - langfuse_clickhouse_logs:/var/log/clickhouse-server
+    ports:
+      - 8123:8123
+      - 9000:9000
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider https://est-rag-rtc.rootcode.software:8123/ping || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 1s
+    networks:
+      - bykstack
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    restart: always
+    env_file:
+      - .env
+    entrypoint: sh
+    command: -c "
+      export MINIO_ROOT_USER=$${S3_ACCESS_KEY_ID:-minio} && \
+      export MINIO_ROOT_PASSWORD=$${S3_SECRET_ACCESS_KEY:-miniosecret} && \
+      export MINIO_BROWSER_REDIRECT_URL=$${MINIO_BROWSER_REDIRECT_URL:-https://est-rag-rtc.rootcode.software/minio} && \
+      mkdir -p /data/rag-search/resources/langfuse && \
+      mkdir -p /data/rag-search/resources/models && \
+      mkdir -p /data/rag-search/resources/datasets && \
+      mkdir -p /data/rag-search/resources/qdrant && \
+      mkdir -p /data/rag-search/resources/system && \
+      minio server /data --address \":9000\" --console-address \":9001\"
+      "
+    ports:
+      - 9090:9000
+      - 9091:9001
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+    networks:
+      - bykstack
+
+  redis:
+    image: docker.io/redis:7
+    restart: always
+    env_file:
+      - .env
+    command: >
+      --requirepass ${REDIS_AUTH:-myredissecret}
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 10s
+      retries: 10
+    networks:
+      - bykstack
+
+  rag-search-db:
+    container_name: rag-search-db
+    image: postgres:14.1
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbadmin}
+      POSTGRES_DB: ${POSTGRES_DB:-rag-search}
+    ports:
+      - 5436:5432
+    volumes:
+      - rag-search-db:/var/lib/postgresql/data
+      - ./DSL/Liquibase/langfuse-init/init-langfuse.sql:/docker-entrypoint-initdb.d/init-langfuse.sql:ro
+    networks:
+      - bykstack
+
+  vault:
+    image: hashicorp/vault:1.20.3
+    container_name: vault
+    cap_add:
+      - IPC_LOCK
+    command: ["vault", "server", "-config=/vault/config/vault.hcl"]
+    environment:
+      VAULT_ADDR: http://0.0.0.0:8200
+      VAULT_SKIP_VERIFY_CONFIG_PERMISSIONS: "true"
+    volumes:
+      - vault-data:/vault/file
+      - ./vault/config:/vault/config:ro
+      - ./vault/logs:/vault/logs
+    networks:
+      vault-network:  # Only on vault-network for security
+        # Local testing: bare "vault" collides with the ckb stack on the shared
+        # bykstack network, so expose this Vault under a unique alias instead.
+        aliases:
+          - rag-vault
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "wget -q -O- http://127.0.0.1:8200/v1/sys/health || exit 0"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  vault-init:
+    build:
+      context: .
+      dockerfile: Dockerfile.vault-init
+    image: rag-vault-init:1.20.3
+    container_name: vault-init
+    user: "0"
+    depends_on:
+      vault:
+        condition: service_healthy
+    environment:
+      VAULT_ADDR: http://rag-vault:8200
+    volumes:
+      - vault-data:/vault/data
+      - vault-agent-creds:/agent/credentials
+      - vault-agent-gui-token:/agent/gui-token
+      - vault-agent-cron-token:/agent/cron-token
+      - vault-agent-llm-token:/agent/llm-token
+      - ./vault-init.sh:/vault-init.sh:ro
+    networks:
+      # vault-network only: tokens/creds go via shared volumes, not the network.
+      - vault-network
+    entrypoint: ["/bin/sh"]
+    command:
+      - -c
+      - |
+        # Create and set permissions for all agent directories
+        mkdir -p /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        chown -R vault:vault /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        chmod 755 /agent/credentials /agent/gui-token /agent/cron-token /agent/llm-token /agent/out
+        # Run vault initialization as vault user
+        su vault -s /bin/sh /vault-init.sh
+    restart: "no"
+
+  vault-agent-gui:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-gui
+    command: ["vault", "agent", "-config=/agent/config/gui-agent.hcl", "-log-level=info"]
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/gui/gui-agent.hcl:/agent/config/gui-agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-gui-token:/agent/gui-token
+    networks:
+      - vault-network  # Access vault
+      - bykstack       # Accessible by GUI service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/gui-token/token && test -s /agent/gui-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  vault-agent-cron:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-cron
+    command: ["vault", "agent", "-config=/agent/config/cron-agent.hcl", "-log-level=info"]
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/cron/cron-agent.hcl:/agent/config/cron-agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-cron-token:/agent/cron-token
+    networks:
+      - vault-network  # Access vault
+      - bykstack       # Accessible by CronManager service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/cron-token/token && test -s /agent/cron-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  vault-agent-llm:
+    image: hashicorp/vault:1.20.3
+    container_name: vault-agent-llm
+    command: ["vault", "agent", "-config=/agent/config/agent.hcl", "-log-level=info"]
+    depends_on:
+      vault-init:
+        condition: service_completed_successfully
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/agents/llm/agent.hcl:/agent/config/agent.hcl:ro
+      - vault-agent-creds:/agent/credentials:ro
+      - vault-agent-llm-token:/agent/llm-token
+    networks:
+      - vault-network  # Access vault
+      - bykstack       # Accessible by LLM service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-c", "test -f /agent/llm-token/token && test -s /agent/llm-token/token"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # LLM Orchestration Service
+  llm-orchestration-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.llm_orchestration_service
+    container_name: llm-orchestration-service
+    restart: always
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=production
+      - VAULT_ADDR=http://vault-agent-llm:8201
+      # VAULT_TOKEN not set - vault-agent-llm proxy handles authentication
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_AUTH=${REDIS_AUTH}
+      - REDIS_SESSION_DB=${REDIS_SESSION_DB}
+    volumes:
+      - ./src/llm_config_module/config:/app/src/llm_config_module/config:ro
+      - ./src/optimization/optimized_modules:/app/src/optimization/optimized_modules
+      - llm_orchestration_logs:/app/logs
+      - ./grafana-configs/loki_logger.py:/app/src/loki_logger.py:ro
+    networks:
+      - bykstack
+    depends_on:
+      - vault-agent-llm
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://llm-orchestration-service:8100/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
+
+volumes:
+  loki-data:
+    name: loki-data
+  grafana-data:
+    name: grafana-data
+  llm_orchestration_logs:
+    name: llm_orchestration_logs
+  qdrant_data:
+    name: qdrant_data
+  rag-search-db:
+    name: rag-search-db
+  langfuse_clickhouse_data:
+    name: langfuse_clickhouse_data
+  langfuse_clickhouse_logs:
+    name: langfuse_clickhouse_logs
+  minio_data:
+    name: minio_data
+  vault-data:
+    name: vault-data
+  shared-volume:
+    name: shared-volume
+  cron_data:
+    name: cron_data
+  vault-agent-creds:
+    name: vault-agent-creds
+  vault-agent-gui-token:
+    name: vault-agent-gui-token
+  vault-agent-cron-token:
+    name: vault-agent-cron-token
+  vault-agent-llm-token:
+    name: vault-agent-llm-token
+  opensearch-data:
+    name: opensearch-data
+
+networks:
+  bykstack:
+    name: bykstack
+    driver: bridge
+  vault-network:
+    name: vault-network
+    driver: bridge
+    internal: true  # No external access - isolated network

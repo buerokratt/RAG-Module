@@ -1,0 +1,61 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get production LLM connection with optional filters"
+  method: get
+  returns: json
+  namespace: rag-search
+  allowlist:
+    params:
+      - field: llmPlatform
+        type: string
+        description: "Filter by LLM platform"
+      - field: llmModel
+        type: string
+        description: "Filter by LLM model"
+      - field: embeddingPlatform
+        type: string
+        description: "Filter by embedding platform"
+      - field: embeddingModel
+        type: string
+        description: "Filter by embedding model"
+      - field: connectionStatus
+        type: string
+        description: "Filter by connection status"
+      - field: sortBy
+        type: string
+        description: "Field to sort by"
+      - field: sortOrder
+        type: string
+        description: "Sort order: 'asc' or 'desc'"
+
+extract_request_data:
+  assign:
+    llmPlatform: ${incoming.params.llmPlatform ?? ""}
+    llmModel: ${incoming.params.llmModel ?? ""}
+    embeddingPlatform: ${incoming.params.embeddingPlatform ?? ""}
+    embeddingModel: ${incoming.params.embeddingModel ?? ""}
+    connectionStatus: ${incoming.params.connectionStatus ?? ""}
+    sortBy: ${incoming.params.sortBy ?? "created_at"}
+    sortOrder: ${incoming.params.sortOrder ?? "desc"}
+    sorting: ${sortBy + " " + sortOrder}
+  next: get_production_connection
+
+get_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection-filtered"
+    body:
+      llm_platform: ${llmPlatform}
+      llm_model: ${llmModel}
+      embedding_platform: ${embeddingPlatform}
+      embedding_model: ${embeddingModel}
+      connection_status: ${connectionStatus}
+      sorting: ${sorting}
+  result: connection_result
+  next: return_success
+
+return_success:
+  return: ${connection_result.response.body}
+  status: 200
+  next: end

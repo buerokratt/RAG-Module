@@ -1,0 +1,208 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Update an existing LLM connection"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+      - field: connection_name
+        type: string
+        description: "Connection name for identification"
+      - field: llm_platform
+        type: string
+        description: "LLM platform (e.g., Azure AI, OpenAI)"
+      - field: llm_model
+        type: string
+        description: "LLM model (e.g., GPT-4o)"
+      - field: embedding_platform
+        type: string
+        description: "Embedding platform (e.g., Azure AI, OpenAI)"
+      - field: embedding_model
+        type: string
+        description: "Embedding model (e.g., Ada-200-1)"
+      - field: monthly_budget
+        type: number
+        description: "Monthly budget amount"
+      - field: warn_budget_threshold
+        type: number
+        description: "Warn budget threshold percentage"
+      - field: stop_budget_threshold
+        type: number
+        description: "Stop budget threshold percentage"
+      - field: disconnect_on_budget_exceed
+        type: boolean
+        description: "Automatically disconnect when budget threshold is exceeded"
+      - field: deployment_environment
+        type: string
+        description: "Deployment environment (Testing or Production)"
+      - field: deployment_name
+        type: string
+        description: "Azure deployment name"
+      - field: target_uri
+        type: string
+        description: "Custom endpoint URI"
+      - field: api_key
+        type: string
+        description: "API key"
+      - field: secret_key
+        type: string
+        description: "AWS secret key"
+      - field: access_key
+        type: string
+        description: "AWS access key"
+      # Embedding AWS Bedrock credentials
+      - field: embedding_access_key
+        type: string
+        description: "AWS access key for embedding model"
+      - field: embedding_secret_key
+        type: string
+        description: "AWS secret key for embedding model"
+      # Embedding Azure credentials
+      - field: embedding_deployment_name
+        type: string
+        description: "Azure embedding deployment name"
+      - field: embedding_target_uri
+        type: string
+        description: "Azure embedding endpoint URI"
+      - field: embedding_azure_api_key
+        type: string
+        description: "Azure embedding API key"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+    connection_name: ${incoming.body.connection_name}
+    llm_platform: ${incoming.body.llm_platform}
+    llm_model: ${incoming.body.llm_model}
+    embedding_platform: ${incoming.body.embedding_platform}
+    embedding_model: ${incoming.body.embedding_model}
+    monthly_budget: ${Number(incoming.body.monthly_budget)}
+    warn_budget_threshold: ${Number(incoming.body.warn_budget_threshold)}
+    stop_budget_threshold: ${Number(incoming.body.stop_budget_threshold)}
+    disconnect_on_budget_exceed: ${incoming.body.disconnect_on_budget_exceed}
+    environment: ${incoming.body.deployment_environment}
+    deployment_name: ${incoming.body.deployment_name || ""}
+    target_uri: ${incoming.body.target_uri || ""}
+    api_key: ${incoming.body.api_key || ""}
+    secret_key: ${incoming.body.secret_key || ""}
+    access_key: ${incoming.body.access_key || ""}
+    # Embedding platform specific credentials
+    embedding_access_key: ${incoming.body.embedding_access_key || ""}
+    embedding_secret_key: ${incoming.body.embedding_secret_key || ""}
+    embedding_deployment_name: ${incoming.body.embedding_deployment_name || ""}
+    embedding_target_uri: ${incoming.body.embedding_target_uri || ""}
+    embedding_azure_api_key: ${incoming.body.embedding_azure_api_key || ""}
+    updated_at: ${new Date().toISOString()}
+  next: validate_environment
+
+validate_environment:
+  switch:
+    - condition: ${environment == "testing" || environment == "production"}
+      next: check_connection_exists
+  next: return_invalid_environment
+
+check_connection_exists:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: existing_connection
+  next: validate_connection_exists
+
+validate_connection_exists:
+  switch:
+    - condition: "${existing_connection.response.body.length > 0}"
+      next: check_deployment_environment
+  next: return_not_found
+
+check_deployment_environment:
+  switch:
+    - condition: ${environment == "production" && existing_connection.response.body[0].environment == "testing"}
+      next: get_existing_production_connection
+  next: update_llm_connection
+
+get_existing_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-production-connection"
+  result: existing_production_result
+  next: update_existing_production_to_testing
+
+update_existing_production_to_testing:
+  switch:
+    - condition: ${existing_production_result.response.body && existing_production_result.response.body.length > 0}
+      next: update_production_connection
+  next: update_llm_connection
+
+update_production_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection-environment"
+    body:
+      connection_id: ${existing_production_result.response.body[0].id}
+      environment: "testing"
+  result: update_result
+  next: clear_llm_cache
+
+clear_llm_cache:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_LLM_CACHE_CLEAR]"
+  result: cache_clear_result
+  next: update_llm_connection
+
+update_llm_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-llm-connection"
+    body:
+      connection_id: ${connection_id}
+      connection_name: ${connection_name}
+      llm_platform: ${llm_platform}
+      llm_model: ${llm_model}
+      embedding_platform: ${embedding_platform}
+      embedding_model: ${embedding_model}
+      monthly_budget: ${monthly_budget}
+      warn_budget_threshold: ${warn_budget_threshold}
+      stop_budget_threshold: ${stop_budget_threshold}
+      disconnect_on_budget_exceed: ${disconnect_on_budget_exceed}
+      environment: ${environment}
+      deployment_name: ${deployment_name}
+      target_uri: ${target_uri}
+      api_key: ${api_key}
+      secret_key: ${secret_key}
+      access_key: ${access_key}
+      # Embedding platform specific credentials
+      embedding_access_key: ${embedding_access_key}
+      embedding_secret_key: ${embedding_secret_key}
+      embedding_deployment_name: ${embedding_deployment_name}
+      embedding_target_uri: ${embedding_target_uri}
+      embedding_azure_api_key: ${embedding_azure_api_key}
+  result: connection_result
+  next: return_success
+
+return_success:
+  return: ${connection_result.response.body[0]}
+  next: end
+
+return_not_found:
+  status: 404
+  return: "error: connection not found"
+  next: end
+
+return_invalid_environment:
+  status: 400
+  return: "error: environment must be 'Testing' or 'Production'"
+  next: end
+
+return_unauthorized:
+  status: 401
+  return: "error: unauthorized"
+  next: end

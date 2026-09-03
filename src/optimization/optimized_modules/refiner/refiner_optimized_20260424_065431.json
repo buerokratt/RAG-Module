@@ -1,0 +1,98 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "history": "",
+        "question": "poverty stats",
+        "n": 3,
+        "reasoning": "The user asked a very broad question: \"poverty stats\". There is no prior context, so the rewrites should clarify and specify the request, making it more explicit and searchable. Since no location, time period, or demographic is given, the rewrites should cover common interpretations, such as national poverty statistics, recent data, and possibly global comparisons. Each rewrite should be distinct, focusing on different ways someone might seek poverty-related statistical information.",
+        "rewrites": [
+          "What are the latest poverty statistics for Estonia?",
+          "Can you provide recent global poverty rates?",
+          "What percentage of the population in Estonia lives below the poverty line?"
+        ]
+      },
+      {
+        "history": "",
+        "question": "large families",
+        "n": 3,
+        "expected_refinements": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ],
+        "rewrites": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ]
+      },
+      {
+        "history": "user: Vajan infot töötuse kohta\nassistant: Eesti pakub töötutoetust ja tööhõiveteenuseid Töötukassa kaudu.",
+        "question": "Kui kaua?",
+        "n": 3,
+        "expected_refinements": [
+          "Kui kaua ma saan töötutoetust Eestis?",
+          "Mis on töötuskindlustuse kestus Eestis?",
+          "Mitu kuud kestab töötutoetus Eestis?"
+        ],
+        "rewrites": [
+          "Kui kaua ma saan töötutoetust Eestis?",
+          "Mis on töötuskindlustuse kestus Eestis?",
+          "Mitu kuud kestab töötutoetus Eestis?"
+        ]
+      },
+      {
+        "history": "user: What's the parental benefit like?\nassistant: Estonia's parental benefit is one of the most generous globally, covering a long period with substantial amounts.",
+        "question": "Compared to what?",
+        "n": 3,
+        "expected_refinements": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ],
+        "rewrites": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ]
+      }
+    ],
+    "signature": {
+      "instructions": "Produce N distinct, concise rewrites of the user's question using chat history.\n\nConstraints:\n- Preserve the original intent\n- Resolve pronouns with context when safe\n- Prefer explicit, searchable phrasing (entities, dates, units)\n- Make each rewrite meaningfully distinct\n- Return exactly N items as a list",
+      "fields": [
+        {
+          "prefix": "History:",
+          "description": "Recent conversation history"
+        },
+        {
+          "prefix": "Question:",
+          "description": "The user's latest question to refine"
+        },
+        {
+          "prefix": "N:",
+          "description": "Number of rewrites to produce"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Rewrites:",
+          "description": "Exactly N refined variations of the question"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

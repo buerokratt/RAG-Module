@@ -1,0 +1,60 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get services for intent detection - returns all services if count <= 10, otherwise signals to use semantic search"
+  method: get
+  returns: json
+  namespace: rag-search
+
+# Step 1: Count active services
+count_services:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/mock-count-active-services"
+    body: {}
+  result: count_result
+  next: check_service_count
+
+# Step 2: Check if count > threshold (10)
+check_service_count:
+  assign:
+    service_count: ${Number(count_result.response.body[0].active_service_count)}
+  switch:
+    - condition: "${service_count > 10}"
+      next: return_semantic_search_flag
+  next: fetch_all_services
+
+# Step 3a: If > 10, return flag for semantic search
+return_semantic_search_flag:
+  assign:
+    semantic_search_response:
+      use_semantic_search: true
+      service_count: ${service_count}
+      message: "Service count exceeds threshold - use semantic search"
+  next: return_semantic_search_response
+
+return_semantic_search_response:
+  return: ${semantic_search_response}
+  next: end
+
+# Step 3b: If <= 10, fetch all services
+fetch_all_services:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/mock-get-all-active-services"
+    body: {}
+  result: services_result
+  next: return_all_services
+
+# Step 4: Return all services for LLM
+return_all_services:
+  assign:
+    all_services_response:
+      use_semantic_search: false
+      service_count: ${services_result.response.body.length}
+      services: ${services_result.response.body}
+  next: return_all_services_response
+
+return_all_services_response:
+  return: ${all_services_response}
+  next: end

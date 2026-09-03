@@ -1,0 +1,466 @@
+{
+  "global": {
+    "save": "Salvesta",
+    "add": "Lisa",
+    "edit": "Redigeeri",
+    "delete": "Kustuta",
+    "cancel": "Tühista",
+    "confirm": "Kinnita",
+    "continue": "Jätka",
+    "modifiedAt": "Viimati muudetud",
+    "addNew": "Lisa uus",
+    "search": "Otsi",
+    "notification": "Teade",
+    "notificationError": "Viga",
+    "active": "Aktiivne",
+    "activate": "Aktiveeri",
+    "deactivate": "Deaktiveeri",
+    "disconnect": "Eemalda ühendus",
+    "connect": "Ühenda",
+    "on": "Sees",
+    "off": "Väljas",
+    "back": "Tagasi",
+    "from": "Alates",
+    "to": "Kuni",
+    "view": "Vaata",
+    "resultCount": "Tulemuste arv",
+    "paginationNavigation": "Lehekülgede navigeerimine",
+    "gotoPage": "Mine lehele",
+    "name": "Nimi",
+    "idCode": "ID kood",
+    "status": "Olek",
+    "yes": "Jah",
+    "no": "Ei",
+    "removeValidation": "Kas oled kindel?",
+    "startDate": "Alguskuupäev",
+    "endDate": "Lõppkuupäev",
+    "preview": "Eelvaade",
+    "logout": "Logi välja",
+    "present": "Kohal",
+    "away": "Eemal",
+    "csaStatus": "Nõustaja",
+    "statusClarification": "Staatuse täpsustus",
+    "notificationErrorMsg": "Midagi läks valesti",
+    "change": "Muuda",
+    "loading": "Laadimine",
+    "asc": "kasvav",
+    "desc": "kahanev",
+    "reset": "Lähtesta",
+    "choose": "Vali",
+    "extendSession": "Pikenda sessiooni",
+    "unAuthorized": "Juurdepääs keelatud",
+    "unAuthorizedDesc": "Teil ei ole lubatud seda lehte vaadata.",
+    "latest": "Viimane",
+    "failed": "Ebaõnnestus",
+    "sessionTimeOutTitle": "Teie sessioon on lõppenud!",
+    "sessionTimeOutDesc": "Pikendage oma sessiooni või logige rakendusest välja {{seconds}}",
+    "close": "Sulge",
+    "proceed": "Jätka",
+    "maxFileSize": "Faili suurus ei tohiks ületada 20 MB.",
+    "select": "-Vali-",
+    "replace": "Asenda",
+    "clearFilters": "Puhasta filtrid",
+    "showEntries": "Näita",
+    "entries": "kirjeid",
+    "deleteSelected": "Kustuta valik"
+  },
+  "chat": {
+    "unanswered": "Vastamata",
+    "forwarded": "Suunatud",
+    "pending": "Ootel"
+  },
+  "mainMenu": {
+    "menuLabel": "Põhinavigatsioon",
+    "closeMenu": "Kitsenda menüü",
+    "openMenu": "Ava menüü",
+    "openIcon": "Ava menüü ikoon",
+    "closeIcon": "Sulge menüü ikoon"
+  },
+  "menu": {
+    "userManagement": "Kasutajate haldus",
+    "testLLM": "Testi mudelit",
+    "testProductionLLM": "Testi toodangu mudelit",
+    "llmConnections": {
+      "_self": "Mudelite ühendused",
+      "overview": "Ülevaade",
+      "promptConfigurations": "Viiba Seaded"
+    }
+  },
+  "userManagement": {
+    "title": "Kasutajate haldus",
+    "addUserButton": " Lisa kasutaja",
+    "addUser": {
+      "addUserModalTitle": "Lisa uus kasutaja",
+      "editUserModalTitle": "Redigeeri kasutajat",
+      "deleteUserModalTitle": "Oled kindel?",
+      "deleteUserModalDesc": "Kinnita, et soovid kirje kustutada",
+      "name": "Ees- ja perekonnanimi",
+      "namePlaceholder": "Sisesta nimi",
+      "role": "Roll",
+      "rolePlaceholder": "-Vali-",
+      "personalId": "Isikukood",
+      "personalIdPlaceholder": "Sisesta isikukood",
+      "title": "Ametinimetus",
+      "titlePlaceholder": "Sisesta ametinimetus",
+      "email": "E-post",
+      "emailPlaceholder": "Sisesta e-post",
+      "nameRequired": "Nimi on kohustuslik",
+      "roleRequired": "Roll on kohustuslik",
+      "idCodeRequired": "Isikukood on kohustuslik",
+      "titleRequired": "Ametinimetus on kohustuslik",
+      "emailRequired": "E-posti aadress on kohustuslik",
+      "invalidIdCode": "Vigane isikukood",
+      "invalidEmail": "Vigane e-posti aadress",
+      "userExists": "Kasutaja on juba olemas"
+    },
+    "table": {
+      "fullName": "Täisnimi",
+      "personalId": "Isikukood",
+      "role": "Roll",
+      "email": "E-post",
+      "actions": "Tegevused",
+      "title": "Ametinimetus"
+    }
+  },
+
+  "roles": {
+    "ROLE_ADMINISTRATOR": "Administraator",
+    "ROLE_MODEL_TRAINER": "Treener"
+  },
+  "toast": {
+    "success": {
+      "title": "Edu",
+      "updateSuccess": "Uuendamine õnnestus",
+      "copied": "Kopeeritud",
+      "userDeleted": "Kasutaja kustutatud",
+      "newUserAdded": "Uus kasutaja lisatud",
+      "userUpdated": "Kasutaja uuendatud"
+    },
+    "error": {
+      "title": "Viga"
+    }
+  },
+  "dataModels": {
+    "settings": "Seaded",
+    "dataModels": "Mudelite ühendused",
+    "noModels": "Mudelite ühendusi ei leitud",
+    "errorLoadingConnections": "Viga mudeli ühenduste laadimisel",
+    "createModel": "Loo mudeli ühendus",
+    "productionConnections": "Mudel toodangukeskkonnas",
+    "otherConnections": "Muud mudeli ühendused",
+    "sortOptions": {
+      "createdDateNewest": "Loomise kuupäev (uusim)",
+      "createdDateOldest": "Loomise kuupäev (vanim)",
+      "platformAZ": "Platvorm A-Z",
+      "platformZA": "Platvorm Z-A",
+      "modelAZ": "Mudel A-Z",
+      "modelZA": "Mudel Z-A",
+      "budgetHighToLow": "Eelarve (kõrgest madalamani)",
+      "budgetLowToHigh": "Eelarve (madalast kõrgemani)"
+    },
+    "filters": {
+      "platform": "Platvorm",
+      "model": "Mudel",
+      "environment": "Keskkond",
+      "sortBy": "Sorteeri",
+      "allPlatforms": "Kõik platvormid",
+      "allModels": "Kõik mudelid",
+      "allEnvironments": "Kõik keskkonnad"
+    },
+    "platforms": {
+      "azure": "Azure OpenAI",
+      "aws": "AWS Bedrock"
+    },
+    "models": {
+      "gpt4.1": "GPT-4.1",
+      "gpt4Mini": "GPT-4 Mini",
+      "gpt4o": "GPT-4o",
+      "claude35Sonnet": "Anthropic Claude 3.5 Sonnet",
+      "claude37Sonnet": "Anthropic Claude 3.7 Sonnet"
+    },
+    "environments": {
+      "testing": "Testimine",
+      "production": "Toodang"
+    },
+    "budgetUsage": "Eelarve kasutamine",
+    "budgetStatus": {
+      "withinBudget": "Eelarve piires",
+      "overBudget": "Eelarve ületatud",
+      "closeToExceed": "Lähedal eelarve ületamisele"
+    }
+  },
+  "llmConnectionForm": {
+    "createTitle": "Loo mudeli ühendus",
+    "editTitle": "Muuda mudeli ühendust",
+    "sections": {
+      "llmConfiguration": "Mudeli seadistus",
+      "embeddingConfiguration": "Vektor-teisenduse seadistus",
+      "budgetDeployment": "Eelarve ja kasutuselevõtt"
+    },
+    "fields": {
+      "connectionName": {
+        "label": "Ühenduse nimi",
+        "description": "Unikaalne nimi selle mudeli ühenduse tuvastamiseks",
+        "placeholder": "Sisesta ühenduse nimi (nt Azure GPT-4 toodang)"
+      },
+      "llmPlatform": {
+        "label": "Mudeli platvorm",
+        "description": "Pilve/kohalik platvorm, kus teie mudel on majutatud",
+        "placeholder": "Vali mudeli platvorm"
+      },
+      "llmModel": {
+        "label": "LLM Mudel",
+        "description": "LLM mudel, mida soovite kasutada",
+        "placeholder": "Vali LLM mudel"
+      },
+      "embeddingPlatform": {
+        "label": "Vektor-teisendusmudeli platvorm",
+        "description": "See on pilve/kohalik platvorm, kus teie vektor-teisendusmudel on majutatud",
+        "placeholder": "Vali vektor-teisendusmudeli platvorm"
+      },
+      "embeddingModel": {
+        "label": "Vektor-teisendusmudel",
+        "description": "vektor-teisendusmudel, mida kasutatakse teie teadmusbaasist otsimiseks",
+        "placeholder": "Vali vektor-teisendusmudel"
+      },
+      "monthlyBudget": {
+        "label": "Kuueelarve",
+        "description": "Kogu kuueelarve vektor-teisendusmudeli ja suure keelemudeli jaoks. Kui mudeli kasutamise kulu ületab eelarve, muutub mudel 'mitteaktiivseks'",
+        "placeholder": "Sisesta kuueelarve"
+      },
+      "disconnectOnBudgetExceed": {
+        "label": "Katkesta mudeli ühendus automaatselt, kui peatamise eelarve lävi on ületatud"
+      },
+      "warnBudget": {
+        "label": "Hoiatuse eelarve lävi",
+        "description": "Saate teatise, kui teie kasutus jõuab teie poolt määratud protsendini kuueelarvest.",
+        "placeholder": "Sisesta hoiatuse eelarve lävi"
+      },
+      "stopBudget": {
+        "label": "Katkestamise eelarve lävi",
+        "description": "Teie mudeli ühendus katkestatakse automaatselt ja kõik edaspidised päringud peatatakse, kui kasutamise kulu jõuab määratud protsendini kuueelarvest.",
+        "placeholder": "Sisesta peatamise eelarve lävi"
+      },
+      "deploymentEnvironment": {
+        "label": "Paigalduskeskkond"
+      }
+    },
+    "aws": {
+      "accessKey": {
+        "label": "Juurdepääsuvõti",
+        "description": "AWS juurdepääsuvõti Bedrock teenuse jaoks",
+        "placeholder": "Sisesta AWS juurdepääsuvõti"
+      },
+      "secretKey": {
+        "label": "Salavõti",
+        "description": "AWS salavõti Bedrock teenuse jaoks",
+        "placeholder": "Sisesta AWS salavõti"
+      },
+      "embeddingAccessKey": {
+        "label": "Vektor-teisenduse juurdepääsuvõti",
+        "description": "AWS juurdepääsuvõti Bedrock vektor-teisenduse teenuse jaoks",
+        "placeholder": "Sisesta AWS juurdepääsuvõti vektor-teisenduse jaoks"
+      },
+      "embeddingSecretKey": {
+        "label": "Vektor-teisenduse salavõti",
+        "description": "AWS salavõti Bedrock vektor-teisenduse teenuse jaoks",
+        "placeholder": "Sisesta AWS salavõti vektor-teisenduse jaoks"
+      }
+    },
+    "azure": {
+      "deploymentName": {
+        "label": "Paigalduse nimi",
+        "description": "Azure OpenAI paigalduse nimi",
+        "placeholder": "Sisesta paigalduse nimi"
+      },
+      "targetUri": {
+        "label": "Lõpp-punkt / siht URI",
+        "description": "Azure OpenAI teenuse lõpp-punkti URL",
+        "placeholder": "https://your-resource.openai.azure.com/"
+      },
+      "apiKey": {
+        "label": "API Võti",
+        "description": "Azure OpenAI API võti",
+        "placeholder": "Sisesta Azure OpenAI API võti"
+      },
+      "embeddingDeploymentName": {
+        "label": "Vektor-teisenduse paigalduse nimi",
+        "description": "Azure OpenAI vektor-teisenduse paigalduse nimi",
+        "placeholder": "Sisesta vektor-teisenduse paigalduse nimi"
+      },
+      "embeddingTargetUri": {
+        "label": "Vektor-teisenduse lõpp-punkt / siht URI",
+        "description": "Azure OpenAI vektor-teisenduse teenuse lõpp-punkti URL"
+      },
+      "embeddingApiKey": {
+        "label": "Vektor-teisenduse API võti",
+        "description": "Azure OpenAI vektor-teisenduse API võti",
+        "placeholder": "Sisesta Azure OpenAI vektor-teisenduse API võti"
+      }
+    },
+    "generic": {
+      "llmApiKey": {
+        "label": "LLM API võti",
+        "description": "LLM mudeli API võti",
+        "placeholder": "Sisesta oma LLM API võti"
+      },
+      "embeddingApiKey": {
+        "label": "Vektor-teisendusmudeli API võti",
+        "description": "Teie vektor-teisendusmudeli API võti",
+        "placeholder": "Sisesta oma vektor-teisendusmudeli API võti"
+      }
+    },
+    "placeholders": {
+      "loadingPlatforms": "Platvormide laadimine...",
+      "errorLoadingPlatforms": "Viga platvormide laadimisel",
+      "loadingModels": "Mudelite laadimine...",
+      "errorLoadingModels": "Viga mudelite laadimisel",
+      "selectPlatformFirst": "Vali esmalt platvorm"
+    },
+    "validationMessages": {
+      "connectionNameRequired": "Ühenduse nimi on kohustuslik",
+      "connectionNameMaxLength": "Ühenduse nimi ei tohi ületada 100 märki",
+      "llmPlatformRequired": "LLM platvorm on kohustuslik",
+      "llmModelRequired": "LLM mudel on kohustuslik",
+      "embeddingPlatformRequired": "Vektor-teisendusmudeli platvorm on kohustuslik",
+      "embeddingModelRequired": "Vektor-teisendusmudel on kohustuslik",
+      "monthlyBudgetRequired": "Kuueelarve on kohustuslik",
+      "monthlyBudgetInvalid": "Palun sisesta kehtiv eelarve summa",
+      "monthlyBudgetPositive": "Kuueelarve peab olema positiivne arv",
+      "warnBudgetRequired": "Hoiatuse eelarve lävi on kohustuslik",
+      "warnBudgetRange": "Hoiatuse eelarve lävi peab olema võrdne või vahemikus 1-100%",
+      "stopBudgetRequired": "Peatamise eelarve lävi on kohustuslik",
+      "stopBudgetRange": "Peatamise eelarve lävi peab olema võrdne või vahemikus 1-200%",
+      "stopBudgetGreater": "Peatamise eelarve lävi peab olema suurem kui hoiatuse eelarve lävi",
+      "deploymentEnvironmentRequired": "Paigalduse keskkond on kohustuslik",
+      "numbersOnly": "Palun sisesta ainult numbrid",
+      "accessKeyRequiredAws": "Juurdepääsuvõti on AWS Bedrock jaoks kohustuslik",
+      "secretKeyRequiredAws": "Salavõti on AWS Bedrock jaoks kohustuslik",
+      "deploymentNameRequiredAzure": "Paigalduse nimi on Azure OpenAI jaoks kohustuslik",
+      "endpointRequiredAzure": "Lõpp-punkt on Azure OpenAI jaoks kohustuslik",
+      "apiKeyRequiredAzure": "API võti on Azure OpenAI jaoks kohustuslik",
+      "llmApiKeyRequired": "LLM API võti on kohustuslik",
+      "embeddingAccessKeyRequiredAws": "Vektor-teisenduse juurdepääsuvõti on AWS Bedrock jaoks kohustuslik",
+      "embeddingSecretKeyRequiredAws": "Vektor-teisenduse salavõti on AWS Bedrock jaoks kohustuslik",
+      "embeddingDeploymentNameRequiredAzure": "Vektor-teisenduse paigalduse nimi on Azure OpenAI jaoks kohustuslik",
+      "embeddingEndpointRequiredAzure": "Vektor-teisenduse lõpp-punkt on Azure OpenAI jaoks kohustuslik",
+      "embeddingApiKeyRequiredAzure": "Vektor-teisenduse API võti on Azure OpenAI jaoks kohustuslik",
+      "embeddingApiKeyRequired": "Vektor-teisenduse API võti on kohustuslik",
+      "invalidUrl": "Palun sisesta kehtiv URL, mis algab http:// või https://",
+      "failedToLoadPlatforms": "Platvormide laadimine ebaõnnestus",
+      "failedToLoadModels": "Mudelite laadimine ebaõnnestus",
+      "invalidAccessKey": "Juurdepääsuvõti ei tohi sisaldada tühikuid",
+      "invalidSecretKey": "Salavõti ei tohi sisaldada tühikuid",
+      "invalidApiKey": "API võti ei tohi sisaldada tühikuid",
+      "invalidEmbeddingAccessKey": "Vektor-teisenduse juurdepääsuvõti ei tohi sisaldada tühikuid",
+      "invalidEmbeddingSecretKey": "Vektor-teisenduse salavõti ei tohi sisaldada tühikuid",
+      "invalidEmbeddingApiKey": "Vektor-teisenduse API võti ei tohi sisaldada tühikuid"
+    },
+    "buttons": {
+      "deleteConnection": "Kustuta ühendus",
+      "updateConnection": "Uuenda ühendus",
+      "createConnection": "Loo ühendus"
+    },
+    "environments": {
+      "testing": "Testimine",
+      "production": "Toodang"
+    },
+    "createConnection": {
+      "title": "Loo mudeli ühendus",
+      "successDialogTitle": "Ühendus õnnestus",
+      "successDialogMessage": "Mudeli seadistus on edukalt lõpetatud",
+      "viewConnectionsButton": "Vaata mudeli ühendusi",
+      "errorDialogTitle": "Ühendus ebaõnnestus",
+      "errorDialogMessage": "Ühendust ei saanud luua kas vigaste API autentimisandmete või paigaldusplatvormi vale seadistuse tõttu",
+      "goBackButton": "Mine tagasi",
+      "replaceProductionDialogTitle": "Asenda toodanguühendus",
+      "replaceProductionDialogMessage": "Toodanguühendus \"{connectionName}\" on juba olemas.",
+      "replaceProductionDialogWarning": "Uue toodanguühenduse loomine asendab praeguse. Kas oled kindel, et soovid jätkata?",
+      "cancelButton": "Tühista",
+      "confirmReplaceButton": "Jah, asenda toodanguühendus"
+    },
+    "viewConnection": {
+      "updateSuccessTitle": "Ühenduse uuendamine õnnestus",
+      "updateSuccessMessage": "Mudeli seadistus uuendati edukalt!",
+      "updateErrorTitle": "Ühenduse uuendamine ebaõnnestus",
+      "updateErrorMessage": "Mudeli ühenduse uuendamine ebaõnnestus. Palun proovi uuesti.",
+      "deleteSuccessTitle": "Ühenduse kustutamine õnnestus",
+      "deleteSuccessMessage": "Mudeli ühendus kustutati edukalt!",
+      "deleteErrorTitle": "Viga",
+      "deleteErrorMessage": "Mudeli ühenduse kustutamine ebaõnnestus. Palun proovi uuesti.",
+      "viewConnectionsButton": "Vaata mudeli ühendusi",
+      "goBackButton": "Mine tagasi",
+      "confirmEnvironmentChangeTitle": "Kinnita toodangukeskkonna muutus",
+      "confirmEnvironmentChangeMessage": "Oled toodanguühendust muutmas testimiskeskkonnaks.",
+      "confirmTestingToProductionEnvironmentChangeMessage": "Oled testimiskeskkonna ühendust muutmas toodangukeskkonnaks.",
+      "confirmEnvironmentChangeWarning": "See mõjutab praegust toodanguseadistust. Kas oled kindel, et soovid jätkata?",
+      "cancelButton": "Tühista",
+      "confirmChangeButton": "Jah, muuda keskkonda",
+      "cannotDeleteProductionTitle": "Ei saa kustutada toodanguühendust",
+      "cannotDeleteProductionMessage": "See mudeli ühendus on praegu määratud toodanguühendusena ja seda ei saa kustutada.",
+      "cannotDeleteProductionInstructions": "Selle ühenduse kustutamiseks veendu, et mõni teine ühendus on määratud toodanguühendusena.",
+      "confirmDeleteTitle": "Kinnita kustutamine",
+      "confirmDeleteMessage": "Kas oled kindel, et soovid selle mudeli ühenduse kustutada? Seda tegevust ei saa tagasi võtta.",
+      "deleteButton": "Kustuta",
+      "okButton": "OK",
+      "connectionNotFoundTitle": "Ühendust ei leitud",
+      "connectionNotFoundMessage": "Soovitud mudeli ühendust ei leitud."
+    }
+  },
+  "testModels": {
+    "title": "Testi mudelit",
+    "llmConnectionLabel": "Mudeli ühendus",
+    "selectConnectionPlaceholder": "Vali mudeli ühendus",
+    "connectionNotExist": "Ühendust ei eksisteeri",
+    "classifyTextLabel": "Sisesta tekst testimiseks",
+    "sendButton": "Saada",
+    "sendingButton": "Saatmine...",
+    "responseLabel": "Vastus:",
+    "inferenceErrorTitle": "Järeldamise (inference) viga",
+    "inferenceErrorMessage": "Tulemuse saamine ebaõnnestus. Palun proovi uuesti.",
+    "classificationFailed": "Järeldamine (inference) ebaõnnestus. Palun proovi uuesti.",
+    "closeButton": "Sulge"
+  },
+  "budgetBanner": {
+    "productionDisabled": "Tootmise LLM ühendus keelatud",
+    "budgetExceededDescription": "{{platform}} integratsioon on oma eelarve ületanud. Uuenda eelarvet LLM ühenduse taasaktiveerimiseks.",
+    "budgetUsageMessage": "{{percentage}}% ühenduse eelarvest on kasutatud.",
+    "budgetUsageDescription": "{{platform}} integratsioon on kasutanud {{percentage}}% oma eelarvest. Vaata üle ühenduse eelarve, et vältida katkestusi",
+    "reviewBudgetButton": "Vaata Eelarvet",
+    "updateBudgetButton": "Uuenda Eelarvet",
+    "platforms": {
+      "aws": "AWS Bedrock",
+      "azure": "Azure OpenAI"
+    }
+  },
+  "testProductionLLM": {
+    "title": "Testi Tootmise LLM",
+    "clearChat": "Tühjenda Vestlus",
+    "welcomeTitle": "Tere tulemast Tootmise LLM Testimisse",
+    "welcomeSubtitle": "Alusta vestlust, kirjutades allpool sõnumi.",
+    "messageLabel": "Sõnum",
+    "messagePlaceholder": "Kirjuta oma sõnum siia... (Vajuta Enter saatmiseks, Shift+Enter uue rea jaoks)",
+    "sendButton": "Saada",
+    "sendingButton": "Saatmine...",
+    "warningTitle": "Hoiatus",
+    "emptyMessageWarning": "Palun sisesta sõnum",
+    "streamingErrorTitle": "Voogedastuse Viga",
+    "chatClearedTitle": "Vestlus Tühjendatud",
+    "chatClearedMessage": "Kõik sõnumid on tühjendatud."
+  },
+  "promptConfigurations": {
+    "title": "Viiba Seaded",
+    "subtitle": "Seadista ja halda oma viiba malle",
+    "enableToggleLabel": "Luba kohandatud viiba seadistus",
+    "promptLabel": "Viiba Mall",
+    "promptPlaceholder": "Sisesta siia oma viiba mall...",
+    "submitButton": "Salvesta",
+    "updateButton": "Uuenda",
+    "saving": "Salvestan...",
+    "updating": "Uuendan...",
+    "submitSuccess": "Viiba seadistus salvestati edukalt",
+    "submitError": "Viiba seadistuse salvestamine ebaõnnestus. Palun proovi uuesti.",
+    "deleteSuccess": "Viiba seadistus kustutati edukalt",
+    "deleteError": "Viiba seadistuse kustutamine ebaõnnestus. Palun proovi uuesti."
+  }
+}

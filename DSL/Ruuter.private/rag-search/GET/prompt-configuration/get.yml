@@ -1,0 +1,39 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Get prompt configuration"
+  method: get
+  accepts: json
+  returns: json
+  namespace: rag-search
+
+get_prompt_configuration:
+  call: http.get
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-prompt-configuration"
+  result: prompt_result
+  next: check_prompt_exists
+
+check_prompt_exists:
+  switch:
+    - condition: "${prompt_result.response.body.length > 0}"
+      next: transform_response
+  next: transform_empty_response
+
+transform_response:
+  assign:
+    data: ${prompt_result.response.body}
+  next: return_success
+
+transform_empty_response:
+  assign:
+    emptyData: []
+  next: return_empty
+
+return_success:
+  return: ${data}
+  next: end
+
+return_empty:
+  return: ${emptyData}
+  next: end

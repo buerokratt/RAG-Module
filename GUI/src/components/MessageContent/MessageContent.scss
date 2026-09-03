@@ -1,0 +1,112 @@
+.message-content-wrapper {
+  width: 100%;
+  line-height: 1.6;
+
+  // Markdown text styling
+  p {
+    margin: 0 0 12px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Bold text
+  .markdown-bold,
+  strong {
+    font-weight: 600;
+  }
+
+  // Ordered lists (for references)
+  .markdown-list,
+  ol {
+    margin: 16px 0 0 0;
+    padding-left: 20px;
+    list-style-type: decimal;
+  }
+
+  // List items
+  .markdown-list-item,
+  li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Links
+  a {
+    color: #0066cc;
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0052a3;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: #551a8b;
+    }
+  }
+
+  // Inline code
+  code {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+
+  // Code blocks
+  pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 12px 0;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    margin: 16px 0 8px 0;
+    font-weight: 600;
+  }
+
+  // Blockquotes
+  blockquote {
+    border-left: 4px solid rgba(0, 0, 0, 0.2);
+    padding-left: 12px;
+    margin: 12px 0;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+// Dark mode support
+.test-production-llm__message--bot {
+  .message-content-wrapper {
+    code {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    pre {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    blockquote {
+      border-left-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}

@@ -1,0 +1,320 @@
+[
+  {
+    "question": "How many families receive family benefits in Estonia?",
+    "context_chunks": [
+      {
+        "text": "According to the Social Insurance Board, there are 155,000 families receiving family benefits and a total of approximately 260,000 children live in these families.",
+        "meta": {"source": "cleaned.txt", "section": "family_statistics"}
+      }
+    ],
+    "expected_answer": "According to the Social Insurance Board, there are 155,000 families receiving family benefits in Estonia, and these families include a total of approximately 260,000 children.",
+    "should_be_in_scope": true,
+    "key_facts": ["155,000 families", "260,000 children", "Social Insurance Board"],
+    "completeness_score": 0.95
+  },
+  {
+    "question": "Kui palju perekondi saavad peretoetusi Eestis?",
+    "context_chunks": [
+      {
+        "text": "Sotsiaalkindlustusameti andmetel saab peretoetusi 155 000 peret ja neis peredes elab kokku umbes 260 000 last.",
+        "meta": {"source": "cleaned.txt", "section": "family_statistics"}
+      }
+    ],
+    "expected_answer": "Sotsiaalkindlustusameti andmetel saab Eestis peretoetusi 155 000 peret ja neis peredes elab kokku umbes 260 000 last.",
+    "should_be_in_scope": true,
+    "key_facts": ["155 000 peret", "260 000 last", "Sotsiaalkindlustusamet"],
+    "completeness_score": 0.95
+  },
+  {
+    "question": "What percentage of families have one child?",
+    "context_chunks": [
+      {
+        "text": "About half of families have one child (51%), families with two children 35% and families with three or more children 14% of all families.",
+        "meta": {"source": "cleaned.txt", "section": "family_composition"}
+      }
+    ],
+    "expected_answer": "About half of Estonian families (51%) have one child, while 35% have two children and 14% have three or more children.",
+    "should_be_in_scope": true,
+    "key_facts": ["51% one child", "35% two children", "14% three or more"],
+    "completeness_score": 0.92
+  },
+  {
+    "question": "Kui suur protsent peredest on ühe lapsega?",
+    "context_chunks": [
+      {
+        "text": "Umbes pooled pered on ühe lapsega (51%), kahe lapsega peresid on 35% ja kolme või enama lapsega peresid 14% kõigist peredest.",
+        "meta": {"source": "cleaned.txt", "section": "family_composition"}
+      }
+    ],
+    "expected_answer": "Umbes pooled Eesti peredest (51%) on ühe lapsega, 35% peredest on kahe lapsega ja 14% kolme või enama lapsega.",
+    "should_be_in_scope": true,
+    "key_facts": ["51% üks laps", "35% kaks last", "14% kolm või enam"],
+    "completeness_score": 0.92
+  },
+  {
+    "question": "What was the total amount spent on family benefits in 2021?",
+    "context_chunks": [
+      {
+        "text": "In 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; approximately 280 million euros for parental benefit; Maternity benefit of approx. 58 million euros; Maintenance benefit of about 5 million euros.",
+        "meta": {"source": "cleaned.txt", "section": "benefits_spending"}
+      }
+    ],
+    "expected_answer": "In 2021, approximately 653 million euros in total benefits were paid to families in Estonia. This includes about 310 million euros for family benefits, 280 million euros for parental benefit, 58 million euros for maternity benefit, and 5 million euros for maintenance benefit.",
+    "should_be_in_scope": true,
+    "key_facts": ["653 million total", "310 million family benefits", "280 million parental", "58 million maternity"],
+    "completeness_score": 0.98
+  },
+  {
+    "question": "Kui palju raha kulutati peretoetustele 2021. aastal kokku?",
+    "context_chunks": [
+      {
+        "text": "2021. aastal maksti peredele toetusi kokku umbes 653 miljonit eurot. Umbes 310 miljonit eurot peretoetusteks; umbes 280 miljonit eurot vanemahüvitiseks; sünnitoetust umbes 58 miljonit eurot; ülalpidamistoetust umbes 5 miljonit eurot.",
+        "meta": {"source": "cleaned.txt", "section": "benefits_spending"}
+      }
+    ],
+    "expected_answer": "2021. aastal maksti Eestis peredele toetusi kokku umbes 653 miljonit eurot. See hõlmab umbes 310 miljonit eurot peretoetusi, 280 miljonit eurot vanemahüvitist, 58 miljonit eurot sünnitoetust ja 5 miljonit eurot ülalpidamistoetust.",
+    "should_be_in_scope": true,
+    "key_facts": ["653 miljonit kokku", "310 miljonit peretoetused", "280 miljonit vanemahüvitis", "58 miljonit sünnitoetus"],
+    "completeness_score": 0.98
+  },
+  {
+    "question": "What is the retirement age in Estonia?",
+    "context_chunks": [
+      {
+        "text": "Starting in 2027, retirement age calculations will be based on the life expectancy of 65-year-olds. The pension system will thus be in line with demographic developments.",
+        "meta": {"source": "cleaned.txt", "section": "pension_reforms"}
+      }
+    ],
+    "expected_answer": "Starting in 2027, Estonia's retirement age will be calculated based on the life expectancy of 65-year-olds. You can check your estimated retirement age using the calculator at www.pensioniplaan.ee.",
+    "should_be_in_scope": true,
+    "key_facts": ["2027 start", "based on life expectancy", "65-year-olds"],
+    "completeness_score": 0.90
+  },
+  {
+    "question": "Mis on pensionieaks Eestis?",
+    "context_chunks": [
+      {
+        "text": "Alates 2027. aastast arvutatakse pensionieaks 65-aastaste eluea ootuse põhjal. Seega on pensionisüsteem kooskõlas demograafiliste arengutega.",
+        "meta": {"source": "cleaned.txt", "section": "pension_reforms"}
+      }
+    ],
+    "expected_answer": "Alates 2027. aastast arvutatakse Eesti pensionieaks 65-aastaste eluea ootuse põhjal. Oma hinnangulist pensioniiga saate kontrollida kalkulaatoriga aadressil www.pensioniplaan.ee.",
+    "should_be_in_scope": true,
+    "key_facts": ["2027 algus", "eluea ootuse põhjal", "65-aastased"],
+    "completeness_score": 0.90
+  },
+  {
+    "question": "How many children live in poverty in Estonia?",
+    "context_chunks": [
+      {
+        "text": "2.5% of Estonian children live in absolute poverty (nearly 6,500 children) and 15.2% of children in relative poverty (nearly 38,900 children).",
+        "meta": {"source": "cleaned.txt", "section": "poverty_statistics"}
+      }
+    ],
+    "expected_answer": "According to available data, 2.5% of Estonian children (nearly 6,500 children) live in absolute poverty, and 15.2% (nearly 38,900 children) live in relative poverty.",
+    "should_be_in_scope": true,
+    "key_facts": ["2.5% absolute poverty", "6,500 children absolute", "15.2% relative", "38,900 children relative"],
+    "completeness_score": 0.96
+  },
+  {
+    "question": "Kui palju lapsi elab Eestis vaesuses?",
+    "context_chunks": [
+      {
+        "text": "2,5% Eesti lastest elab absoluutses vaesuses (ligi 6500 last) ja 15,2% lastest suhtelises vaesuses (ligi 38 900 last).",
+        "meta": {"source": "cleaned.txt", "section": "poverty_statistics"}
+      }
+    ],
+    "expected_answer": "Olemasolevate andmete kohaselt elab 2,5% Eesti lastest (ligi 6500 last) absoluutses vaesuses ja 15,2% (ligi 38 900 last) suhtelises vaesuses.",
+    "should_be_in_scope": true,
+    "key_facts": ["2,5% absoluutne vaesus", "6500 last absoluutne", "15,2% suhteline", "38 900 last suhteline"],
+    "completeness_score": 0.96
+  },
+  {
+    "question": "What are the opening hours of the Ministry?",
+    "context_chunks": [
+      {
+        "text": "Open Mon -Thu 8.30-17.15 and Fri 8.30-16.00",
+        "meta": {"source": "cleaned.txt", "section": "contact_info"}
+      }
+    ],
+    "expected_answer": "The Ministry of Social Affairs is open Monday to Thursday from 8:30 to 17:15, and Friday from 8:30 to 16:00.",
+    "should_be_in_scope": true,
+    "key_facts": ["Mon-Thu 8:30-17:15", "Fri 8:30-16:00"],
+    "completeness_score": 0.94
+  },
+  {
+    "question": "Millised on ministeeriumi lahtiolekuajad?",
+    "context_chunks": [
+      {
+        "text": "Avatud E-N 8.30-17.15 ja R 8.30-16.00",
+        "meta": {"source": "cleaned.txt", "section": "contact_info"}
+      }
+    ],
+    "expected_answer": "Sotsiaalministeerium on avatud esmaspäevast neljapäevani kell 8.30-17.15 ja reedel kell 8.30-16.00.",
+    "should_be_in_scope": true,
+    "key_facts": ["E-N 8:30-17:15", "R 8:30-16:00"],
+    "completeness_score": 0.94
+  },
+  {
+    "question": "How satisfied are Estonian children with their lives?",
+    "context_chunks": [
+      {
+        "text": "According to the School Pupil Health Behaviour Survey, in 2018, 87% of 11-, 13- and 15-year-old children in Estonia were satisfied with their lives.",
+        "meta": {"source": "cleaned.txt", "section": "child_wellbeing"}
+      }
+    ],
+    "expected_answer": "According to the 2018 School Pupil Health Behaviour Survey, 87% of Estonian children aged 11, 13, and 15 years old were satisfied with their lives. This represents an improvement of about 10% since 2002.",
+    "should_be_in_scope": true,
+    "key_facts": ["87% satisfied", "2018 survey", "ages 11, 13, 15"],
+    "completeness_score": 0.93
+  },
+  {
+    "question": "Kui rahul on Eesti lapsed oma eluga?",
+    "context_chunks": [
+      {
+        "text": "Koolilaste tervisekäitumise uuringu andmetel oli 2018. aastal 87% 11-, 13- ja 15-aastastest Eesti lastest oma eluga rahul.",
+        "meta": {"source": "cleaned.txt", "section": "child_wellbeing"}
+      }
+    ],
+    "expected_answer": "2018. aasta koolilaste tervisekäitumise uuringu andmetel oli 87% 11-, 13- ja 15-aastastest Eesti lastest oma eluga rahul. See on umbes 10% parem kui 2002. aastal.",
+    "should_be_in_scope": true,
+    "key_facts": ["87% rahul", "2018 uuring", "vanused 11, 13, 15"],
+    "completeness_score": 0.93
+  },
+  {
+    "question": "What is the weather like today in Tallinn?",
+    "context_chunks": [
+      {
+        "text": "No relevant context available.",
+        "meta": {"source": "none", "section": "none"}
+      }
+    ],
+    "expected_answer": "I don't have information about current weather conditions in my knowledge base.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  },
+  {
+    "question": "Milline on täna ilm Tallinnas?",
+    "context_chunks": [
+      {
+        "text": "Asjakohast konteksti pole saadaval.",
+        "meta": {"source": "none", "section": "none"}
+      }
+    ],
+    "expected_answer": "Mul pole hetkel ilmaolude kohta infot oma teadmistebaasis.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  },
+  {
+    "question": "What movies are playing in theaters?",
+    "context_chunks": [],
+    "expected_answer": "This question is outside the scope of my knowledge about Estonian social affairs and family benefits.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  },
+  {
+    "question": "Milliseid filme näidatakse kinodes?",
+    "context_chunks": [],
+    "expected_answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  },
+  {
+    "question": "How does Estonia support single-parent families?",
+    "context_chunks": [
+      {
+        "text": "Since January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families. The support needs of single parents are much wider than just financial support. There is a chronic lack of time, lack of flexible childcare, and high expectation of better access to hobby education.",
+        "meta": {"source": "cleaned.txt", "section": "single_parent_support"}
+      }
+    ],
+    "expected_answer": "Estonia is working to improve support for single-parent families. Since January 2022, the Ministry of Social Affairs has been developing comprehensive solutions. They've identified that single parents need more than just financial support - they also need flexible childcare options, better access to hobby education for children, and relationship counseling. The ministry is planning pilot projects to address these needs.",
+    "should_be_in_scope": true,
+    "key_facts": ["broader than financial", "flexible childcare", "hobby education access", "counseling"],
+    "completeness_score": 0.91
+  },
+  {
+    "question": "Kuidas Eesti toetab üksikvanemaid?",
+    "context_chunks": [
+      {
+        "text": "Alates 2022. aasta jaanuarist on Sotsiaalministeerium otsinud lahendusi üksikvanematele peredele toetuse andmiseks. Üksikvanema toetusvajadused on palju laiemad kui ainult rahaline toetus. On krooniline aja puudus, puuduvad paindlikud lapsehoiuvõimalused ja suur ootus parema juurdepääsu kohta huviharidusse.",
+        "meta": {"source": "cleaned.txt", "section": "single_parent_support"}
+      }
+    ],
+    "expected_answer": "Eesti töötab üksikvanematele peredele toe parandamise nimel. Alates 2022. aasta jaanuarist on Sotsiaalministeerium välja töötamas põhjalikke lahendusi. On tuvastatud, et üksikvanemad vajavad rohkem kui ainult rahalist toetust - nad vajavad ka paindlikke lapsehoiuvõimalusi, paremat juurdepääsu lastele huviharidusele ja suhtlemisnõustamist. Ministeerium planeerib nende vajaduste rahuldamiseks pilootprojekte.",
+    "should_be_in_scope": true,
+    "key_facts": ["laiem kui rahaline", "paindlik lapsehoid", "huviharidusse juurdepääs", "nõustamine"],
+    "completeness_score": 0.91
+  },
+  {
+    "question": "What is the parental benefit amount?",
+    "context_chunks": [
+      {
+        "text": "Parental benefit is 100% of the parent's average income from the previous calendar year. The minimum amount is 584 euros per month and maximum is 3 times the average salary in Estonia.",
+        "meta": {"source": "cleaned.txt", "section": "parental_benefits"}
+      }
+    ],
+    "expected_answer": "Parental benefit in Estonia is 100% of the parent's average income from the previous calendar year. The minimum monthly amount is 584 euros and the maximum is 3 times the average Estonian salary.",
+    "should_be_in_scope": true,
+    "key_facts": ["100% of average income", "584 euros minimum", "3x average salary maximum"],
+    "completeness_score": 0.95
+  },
+  {
+    "question": "Kui suur on vanemahüvitis?",
+    "context_chunks": [
+      {
+        "text": "Vanemahüvitis on 100% vanema eelmise kalendriaasta keskmisest tulust. Miinimumsumma on 584 eurot kuus ja maksimum on 3 korda Eesti keskmine palk.",
+        "meta": {"source": "cleaned.txt", "section": "parental_benefits"}
+      }
+    ],
+    "expected_answer": "Vanemahüvitis Eestis on 100% vanema eelmise kalendriaasta keskmisest tulust. Minimaalne kuusumma on 584 eurot ja maksimum on 3 korda Eesti keskmine palk.",
+    "should_be_in_scope": true,
+    "key_facts": ["100% keskmisest tulust", "584 eurot miinimum", "3x keskmine palk maksimum"],
+    "completeness_score": 0.95
+  },
+  {
+    "question": "Who is eligible for unemployment benefits?",
+    "context_chunks": [
+      {
+        "text": "Unemployment benefits are available to people who have worked and paid social tax for at least 12 months in the last 36 months and are registered as unemployed.",
+        "meta": {"source": "cleaned.txt", "section": "unemployment"}
+      }
+    ],
+    "expected_answer": "To be eligible for unemployment benefits in Estonia, you must have worked and paid social tax for at least 12 months within the last 36 months and be registered as unemployed with the Unemployment Insurance Fund.",
+    "should_be_in_scope": true,
+    "key_facts": ["12 months work", "36 months period", "registered as unemployed"],
+    "completeness_score": 0.93
+  },
+  {
+    "question": "Kes on töötutoetusele õigustatud?",
+    "context_chunks": [
+      {
+        "text": "Töötutoetus on saadaval inimestele, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna.",
+        "meta": {"source": "cleaned.txt", "section": "unemployment"}
+      }
+    ],
+    "expected_answer": "Eestis töötutoetuse saamiseks peate olema töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning olema registreeritud töötuna Töötukassas.",
+    "should_be_in_scope": true,
+    "key_facts": ["12 kuud töötatud", "36 kuu periood", "registreeritud töötuna"],
+    "completeness_score": 0.93
+  },
+  {
+    "question": "What is Bitcoin?",
+    "context_chunks": [],
+    "expected_answer": "This question is outside the scope of my knowledge about Estonian social affairs and family benefits.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  },
+  {
+    "question": "Mis on Bitcoin?",
+    "context_chunks": [],
+    "expected_answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+    "should_be_in_scope": false,
+    "key_facts": [],
+    "completeness_score": 0.0
+  }
+]

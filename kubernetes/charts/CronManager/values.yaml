@@ -1,0 +1,50 @@
+replicas: 1
+enabled: true
+release_name: "cron-manager"
+
+cronmanager:
+  image:
+    registry: ghcr.io
+    repository: buerokratt/cronmanager 
+    tag: "python-1.2.0"
+    pullPolicy: IfNotPresent
+
+  environment:
+    containerPort: "8080"
+    pythonPath: "/app:/app/src:/app/src/vector_indexer:/app/src/intent_data_enrichment:/app/src/api_tool_indexer"
+    VAULT_ADDR: "http://vault:8200"
+
+service:
+  type: ClusterIP
+  port: 9010
+  targetPort: 8080
+
+# PVC Configuration
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+# Service URLs 
+constants:
+  RAG_MODULE_RUUTER_PRIVATE: "http://ruuter-private:8088"
+  RAG_MODULE_RUUTER_PUBLIC: "http://ruuter-public:8086"
+  RAG_MODULE_RESQL: "http://resql:8082"
+  RAG_MODULE_TIM: "http://tim:8085"
+  RAG_MODULE_DATAMAPPER: "http://data-mapper:3000"
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "100m"
+  limits:
+    memory: "2Gi"
+    cpu: "500m"
+
+podAnnotations: 
+  dsl-checksum: "initial"
+
+# Vault Agent sidecar configuration
+vaultAgent:
+  enabled: true

@@ -1,0 +1,91 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "question": "Milliseid filme näidatakse kinodes?",
+        "context_blocks": [
+          "[Context 1]\n(No relevant context available.)"
+        ],
+        "should_be_in_scope": false,
+        "expected_answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+        "answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+        "questionOutOfLLMScope": true
+      },
+      {
+        "question": "Kes on töötutoetusele õigustatud?",
+        "context_blocks": [
+          "[Context 1]\nTöötutoetus on saadaval inimestele, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "Eestis töötutoetuse saamiseks peate olema töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning olema registreeritud töötuna Töötukassas.",
+        "answer": "Eestis töötutoetuse saamiseks peate olema töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning olema registreeritud töötuna Töötukassas.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "What was the total amount spent on family benefits in 2021?",
+        "context_blocks": [
+          "[Context 1]\nIn 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; approximately 280 million euros for parental benefit; Maternity benefit of approx. 58 million euros; Maintenance benefit of about 5 million euros."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "In 2021, approximately 653 million euros in total benefits were paid to families in Estonia. This includes about 310 million euros for family benefits, 280 million euros for parental benefit, 58 million euros for maternity benefit, and 5 million euros for maintenance benefit.",
+        "answer": "In 2021, approximately 653 million euros in total benefits were paid to families in Estonia. This includes about 310 million euros for family benefits, 280 million euros for parental benefit, 58 million euros for maternity benefit, and 5 million euros for maintenance benefit.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "Kui palju raha kulutati peretoetustele 2021. aastal kokku?",
+        "context_blocks": [
+          "[Context 1]\n2021. aastal maksti peredele toetusi kokku umbes 653 miljonit eurot. Umbes 310 miljonit eurot peretoetusteks; umbes 280 miljonit eurot vanemahüvitiseks; sünnitoetust umbes 58 miljonit eurot; ülalpidamistoetust umbes 5 miljonit eurot."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "2021. aastal maksti Eestis peredele toetusi kokku umbes 653 miljonit eurot. See hõlmab umbes 310 miljonit eurot peretoetusi, 280 miljonit eurot vanemahüvitist, 58 miljonit eurot sünnitoetust ja 5 miljonit eurot ülalpidamistoetust.",
+        "answer": "2021. aastal maksti Eestis peredele toetusi kokku umbes 653 miljonit eurot. See hõlmab umbes 310 miljonit eurot peretoetusi, 280 miljonit eurot vanemahüvitist, 58 miljonit eurot sünnitoetust ja 5 miljonit eurot ülalpidamistoetust.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "How does Estonia support single-parent families?",
+        "context_blocks": [
+          "[Context 1]\nSince January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families. The support needs of single parents are much wider than just financial support. There is a chronic lack of time, lack of flexible childcare, and high expectation of better access to hobby education."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "Estonia is working to improve support for single-parent families. Since January 2022, the Ministry of Social Affairs has been developing comprehensive solutions. They've identified that single parents need more than just financial support - they also need flexible childcare options, better access to hobby education for children, and relationship counseling. The ministry is planning pilot projects to address these needs.",
+        "answer": "Estonia is working to improve support for single-parent families. Since January 2022, the Ministry of Social Affairs has been developing comprehensive solutions. They've identified that single parents need more than just financial support - they also need flexible childcare options, better access to hobby education for children, and relationship counseling. The ministry is planning pilot projects to address these needs.",
+        "questionOutOfLLMScope": false
+      }
+    ],
+    "signature": {
+      "instructions": "Utilize the provided context blocks to formulate a precise and accurate answer to the user's question. Ensure that your response is strictly based on the information given, without introducing any new facts or assumptions. If the context does not contain enough information to adequately answer the question, indicate that the question is beyond the model's scope. Maintain clarity and brevity in your response.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "User's question"
+        },
+        {
+          "prefix": "Context Blocks:",
+          "description": "Relevant context chunks"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "Grounded answer from context"
+        },
+        {
+          "prefix": "Question Out Of LLM Scope:",
+          "description": "True if context is insufficient to answer"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

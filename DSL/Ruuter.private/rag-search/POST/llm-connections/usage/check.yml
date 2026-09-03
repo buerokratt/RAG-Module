@@ -1,0 +1,99 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Check budget usage and either proceed with orchestration or return budget exceeded response"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+  allowlist:
+    body:
+      - field: connection_id
+        type: number
+        description: "LLM connection ID"
+
+extract_request_data:
+  assign:
+    connection_id: ${Number(incoming.body.connection_id)}
+  next: get_connection
+
+get_connection:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-llm-connection"
+    body:
+      connection_id: ${connection_id}
+  result: connection_result
+  next: check_connection_exists
+
+check_connection_exists:
+  switch:
+    - condition: "${connection_result.response.body.length > 0}"
+      next: calculate_budget_threshold
+  next: return_connection_not_found
+
+calculate_budget_threshold:
+  assign:
+    connection_data: ${connection_result.response.body[0]}
+    monthly_budget: ${Number(connection_data.monthlyBudget)}
+    used_budget: ${Number(connection_data.usedBudget)}
+    stop_budget_threshold: ${Number(connection_data.stopBudgetThreshold)}
+    disconnect_on_budget_exceed: ${connection_data.disconnectOnBudgetExceed}
+    budget_threshold_amount: ${monthly_budget / 100 * stop_budget_threshold}
+  next: check_budget_threshold
+
+check_budget_threshold:
+  switch:
+    - condition: ${used_budget >= budget_threshold_amount}
+      next: handle_budget_exceeded
+  next: format_budget_within_threshold
+
+handle_budget_exceeded:
+  switch:
+    - condition: ${disconnect_on_budget_exceed}
+      next: format_budget_exceeded_disconnected
+  next: format_budget_exceeded_not_disconnected
+
+format_budget_within_threshold:
+  assign:
+    response_budget_within_threshold: 
+      {
+        isBudgetExceed: false,
+        isLLMConnectionDisconnected: false,
+      }
+  next: return_budget_within_threshold
+
+format_budget_exceeded_not_disconnected:
+  assign:
+    response_budget_exceeded_not_disconnected: 
+      {
+        isBudgetExceed: true,
+        isLLMConnectionDisconnected: false,
+      }
+  next: return_budget_exceeded_not_disconnected
+
+format_budget_exceeded_disconnected:
+  assign:
+    response_budget_exceeded_disconnected: 
+      {
+        isBudgetExceed: true,
+        isLLMConnectionDisconnected: true,
+      }
+  next: return_budget_exceeded_disconnected
+
+return_budget_within_threshold:
+  return: ${response_budget_within_threshold}
+  next: end
+
+return_budget_exceeded_not_disconnected:
+  return: ${response_budget_exceeded_not_disconnected}
+  next: end
+
+return_budget_exceeded_disconnected:
+  return: ${response_budget_exceeded_disconnected}
+  next: end
+
+return_connection_not_found:
+  status: 404
+  return: "Connection not found"
+  next: end

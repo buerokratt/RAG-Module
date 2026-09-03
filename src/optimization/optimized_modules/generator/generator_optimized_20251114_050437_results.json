@@ -1,0 +1,23 @@
+{
+  "component": "generator",
+  "optimizer": "Bootstrap+MIPROv2",
+  "metric_type": "GeneratorMetric with DSPy SemanticF1",
+  "total_time_seconds": 458.205061,
+  "phase_times": {
+    "bootstrap": 23.930698,
+    "mipro": 434.274043
+  },
+  "trainset_size": 5,
+  "valset_size": 21,
+  "num_candidates": 20,
+  "validation_stats": {
+    "combined_score": 0.9574404761904762,
+    "scope_accuracy": 0.9523809523809523,
+    "in_scope_performance": 0.9375,
+    "out_scope_performance": 1.0,
+    "total_examples": 21,
+    "in_scope_examples": 16,
+    "out_scope_examples": 5
+  },
+  "timestamp": "2025-11-14T05:42:02.854833"
+}

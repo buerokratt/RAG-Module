@@ -1,0 +1,16 @@
+{{- range .Values.databases }}
+{{- if .initdbScripts }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .name }}-initdb
+  labels:
+    app: {{ .name }}
+data:
+  {{- range $filename, $content := .initdbScripts }}
+  {{ $filename }}: |
+    {{- $content | nindent 4 }}
+  {{- end }}
+---
+{{- end }}
+{{- end }}

@@ -1,0 +1,62 @@
+[
+    {
+        "input": "Mida teha kui mobiil-ID kasutamisel kinnituskood ei ilmu mobiilile?",
+        "expected_output": "Veendu, et sinu telefon on mobiilvõrgu levialas ja mobiilne andmeside on sisse lülitatud. Lisaks tuleb kontrollida, kas mobiilsidevõrgus pole hetkel katkestusi. Mõnikord võib abiks olla telefoni taaskäivitamine ja/või selle võrguseadete lähtestamine.",
+        "category": "mobile_id_usage",
+        "language": "et"
+    },
+    {
+        "input": "Mida teha, kui minu telefon Mobiil-ID-ga varastatakse?",
+        "expected_output": "Kui sinu telefon Mobiil-ID-ga on varastatud, tuleks kohe teavitada oma mobiilsideoperaatorit, et peatada mobiil-ID sertifikaadid. See aitab kaitsta sind identiteedivarguse eest. Kui leiad oma telefoni uuesti, saad jätkata vana SIM-kaardi kasutamist, kuid mobiil-ID funktsionaalsuse taastamiseks on vajalik tellida uus Mobiil-ID SIM-kaart operaatorilt.",
+        "category": "digital_identity_security",
+        "language": "et"
+    },
+    {
+        "input": "Mis on eIDAS määrus?",
+        "expected_output": "eIDAS määrus (electronic IDentification, Authentication and trust Services) on Euroopa Liidus kehtiv e-identimise ja e-tehingute määrus, mille eesmärk on lihtsustada piiriülest elektrooniliste teenuste tarbimist ühtsustatud standardite ja tegutsemispõhimõtete kaudu. Määrus võeti vastu 23. juulil 2014 ja alates 1. juulist 2016 peavad Euroopa Liidu riigid tunnustama teineteise e-allkirju ning Eesti kodanike digiallkirju peab aktsepteerima ka teiste EL liikmesriikide avaliku sektori asutused.",
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Why am I getting an error when trying to sign documents in DigiDoc4?",
+        "expected_output": "This error occurs when your computer's clock time differs from the validation confirmation time. The system needs synchronized time to verify digital signatures properly.To fix this: Windows: Click the Start menu (Windows logo) in the bottom left corner, type \"Control Panel\" and open it. Then go to \"Date and Time\" settings and ensure your date, time, and time zone are correct. macOS: Open Spotlight Search and type \"System Settings\". Select \"General\", then adjust settings in \"Language & Region\" and \"Date & Time\". Ubuntu: Click \"Show applications\" icon in the bottom left corner, search for \"Date & time\" and open it. Before making changes, disable automatic configuration first. If the error persists: Disconnect any active VPN connection, restart your device, and disable antivirus/security software temporarily. If problems continue, contact ID support through their web form.",
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Kuidas aktiveerida Mobiil-ID?",
+        "expected_output": "Mobiil-ID aktiveerimine toimub operaatorite iseteeninduses (Telia, Elisa, Tele2).",
+        "category": "digital_identity",
+        "language": "et"
+    },
+    {
+        "input": "Mis on Eesti sotsiaaluuring ja miks ma peaksin osalema?",
+        "expected_output": "Eesti sotsiaaluuring aitab hinnata leibkondade ja isikute sissetulekute jaotust, elamistingimusi ning sotsiaalset tõrjutust. Samasugust uuringut korraldatakse kõikides Euroopa Liidu riikides. Teie osalemine aitab kujundada Eesti sotsiaalpoliitikat ja arendada teenuseid. Miks see on oluline: Need andmed aitavad riigijuhtidel, teadlastel ja arvamusliidridel mõista inimeste toimetulekut, vaesust, ilmajäetust, sissetulekut, elamistingimusi ja arstiabi kättesaadavust. Iga uuringusse sattunud inimene esindab umbes sadat Eesti elanikku, seega on teie vastused olulised. Kuidas osaleda: Kui teid valitakse, saate teavituskirja e-postile (rahvastikuregistris märgitud aadressile) või postiga. Saate küsimustikule vastata veebis aadressil https://estat.stat.ee, logides sisse ID-kaardi, mobiil-ID või Smart-ID-ga, või osaleda telefoniintervjuus. Uuring koosneb kahest osast: leibkonnaküsimustik (vastab põhiisik) ja isikuküsimustik (võib vastata iga vähemalt 15-aastane leibkonnaliige). Osalemine on vabatahtlik, kuid Statistikaamet kaitseb kõigi vastajate andmeid riikliku statistika seaduse ja isikuandmete kaitse seaduse alusel. Iga leibkonda küsitletakse neli aastat järjest 12 kuu tagant.",
+        "category": "statistics",
+        "language": "et"
+    },
+    {
+        "input": "Kas ma saan kodus elektritöid ise teha või vajan spetsialisti?",
+        "expected_output": "Enamik elektritöid nõuab ohutuse huvides kvalifitseeritud spetsialisti. Valesti tehtud elektritöö võib põhjustada elektrilöögi ning tulekahjuohtu. Siiski saate lihtsamaid töid ise teha, kui teil on vastavad teadmised. Mida VÕITE ise teha:  Vahetada lüliteid, pistikupesi, lambipesi ja kaitsmeid (kuid MITTE paigaldada uusi) Parandada ja asendada juhtmelüliteid, lambipesi, pikendusjuhtmeid ja juhtmepistikuid  Milleks PEATE palkama spetsialisti:  Uute elektripaigaldiste ehitamine Uute pistikupesade ja lülitite paigaldamine Kohtkindlate kodumasinate ühendamine ja lahti ühendamine Kaitsekontaktita (maandamata) pistikupesade vahetamine kaitsekontaktiga (maandatud) pistikupesade vastu  Elektritöö ettevõtjad peavad olema esitanud majandustegevuse registrisse majandustegevuseteatise ning neil peab olema tööde eest vastutav kompetentne elektritöö juht.",
+        "category": "ttja",
+        "language": "et"
+    },
+    {
+        "input": "What is an electrical installation audit and when do I need one?",
+        "expected_output": "An electrical installation audit checks whether your electrical system meets safety requirements and is safe to use. During the audit, the auditor visually assesses the installation's condition, reviews documentation and test/measurement results, and performs additional control measurements if necessary. When you need an audit:  Before commissioning: Required before putting a new or renovated building's electrical installation into use Periodic audits: Regular checks at intervals depending on the installation type and age. While not mandatory for residential spaces (private houses, apartments, summer cottages), you should still periodically check them to ensure safety and functionality  How to get an audit:  Only contractors with appropriate accreditation can perform audits Results and documents are digitally formatted in TTJA's information system at https://jvis.ttja.ee, where they're always accessible to the electrical installation owner For residential electrical system checks, contact a competent electrical professional or auditor who will perform necessary operations and provide feedback on the system's condition and safety.",
+        "category": "ttja",
+        "language": "en"
+    },
+    {
+        "input": "How long is the e-residency digi-ID valid for?",
+        "expected_output": "The e-residency digi-ID is valid for 5 years",
+        "category": "digital_identity",
+        "language": "en"
+    },
+    {
+        "input": "Предоставляет ли электронное резидентство эстонское гражданство или налоговое резидентство?",
+        "expected_output": "Нет, электронное резидентство не предоставляет эстонское гражданство или налоговое резидентство.",
+        "category": "digital_identity",
+        "language": "ru"
+    }
+]

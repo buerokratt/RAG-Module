@@ -1,0 +1,91 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "How does Estonia support single-parent families?",
+        "context_blocks": [
+          "[Context 1]\nSince January 2022, the Ministry of Social Affairs has been looking for solutions to support single-parent families. The support needs of single parents are much wider than just financial support. There is a chronic lack of time, lack of flexible childcare, and high expectation of better access to hobby education."
+        ],
+        "reasoning": "The context indicates that the Ministry of Social Affairs in Estonia is actively seeking solutions to support single-parent families, highlighting that their needs are broader than just financial assistance. It mentions issues such as a lack of time, flexible childcare, and access to hobby education.",
+        "answer": "Estonia supports single-parent families by seeking solutions that address their broader needs beyond financial support, including tackling the chronic lack of time, the need for flexible childcare, and improving access to hobby education.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "What was the total amount spent on family benefits in 2021?",
+        "context_blocks": [
+          "[Context 1]\nIn 2021, a total of approximately 653 million euros in benefits were paid to families. Approximately 310 million euros for family benefits; approximately 280 million euros for parental benefit; Maternity benefit of approx. 58 million euros; Maintenance benefit of about 5 million euros."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "In 2021, approximately 653 million euros in total benefits were paid to families in Estonia. This includes about 310 million euros for family benefits, 280 million euros for parental benefit, 58 million euros for maternity benefit, and 5 million euros for maintenance benefit.",
+        "answer": "In 2021, approximately 653 million euros in total benefits were paid to families in Estonia. This includes about 310 million euros for family benefits, 280 million euros for parental benefit, 58 million euros for maternity benefit, and 5 million euros for maintenance benefit.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "Kes on töötutoetusele õigustatud?",
+        "context_blocks": [
+          "[Context 1]\nTöötutoetus on saadaval inimestele, kes on töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning on registreeritud töötuna."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "Eestis töötutoetuse saamiseks peate olema töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning olema registreeritud töötuna Töötukassas.",
+        "answer": "Eestis töötutoetuse saamiseks peate olema töötanud ja maksnud sotsiaalmaksu vähemalt 12 kuud viimase 36 kuu jooksul ning olema registreeritud töötuna Töötukassas.",
+        "questionOutOfLLMScope": false
+      },
+      {
+        "question": "Milliseid filme näidatakse kinodes?",
+        "context_blocks": [
+          "[Context 1]\n(No relevant context available.)"
+        ],
+        "should_be_in_scope": false,
+        "expected_answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+        "answer": "See küsimus jääb välja minu teadmiste ulatusest Eesti sotsiaalteemade ja peretoetuste kohta.",
+        "questionOutOfLLMScope": true
+      },
+      {
+        "question": "Kui palju raha kulutati peretoetustele 2021. aastal kokku?",
+        "context_blocks": [
+          "[Context 1]\n2021. aastal maksti peredele toetusi kokku umbes 653 miljonit eurot. Umbes 310 miljonit eurot peretoetusteks; umbes 280 miljonit eurot vanemahüvitiseks; sünnitoetust umbes 58 miljonit eurot; ülalpidamistoetust umbes 5 miljonit eurot."
+        ],
+        "should_be_in_scope": true,
+        "expected_answer": "2021. aastal maksti Eestis peredele toetusi kokku umbes 653 miljonit eurot. See hõlmab umbes 310 miljonit eurot peretoetusi, 280 miljonit eurot vanemahüvitist, 58 miljonit eurot sünnitoetust ja 5 miljonit eurot ülalpidamistoetust.",
+        "answer": "2021. aastal maksti Eestis peredele toetusi kokku umbes 653 miljonit eurot. See hõlmab umbes 310 miljonit eurot peretoetusi, 280 miljonit eurot vanemahüvitist, 58 miljonit eurot sünnitoetust ja 5 miljonit eurot ülalpidamistoetust.",
+        "questionOutOfLLMScope": false
+      }
+    ],
+    "signature": {
+      "instructions": "Given the user's question and the relevant context blocks, generate a clear and concise answer that is strictly based on the provided information. If the context does not contain sufficient information to answer the question, indicate that the question is out of the language model's scope. Ensure that your response adheres to the rules of not inventing facts and maintaining clarity in eligibility definitions and support structures related to social benefits.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "User's question"
+        },
+        {
+          "prefix": "Context Blocks:",
+          "description": "Relevant context chunks"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "Grounded answer from context"
+        },
+        {
+          "prefix": "Question Out Of LLM Scope:",
+          "description": "True if context is insufficient to answer"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

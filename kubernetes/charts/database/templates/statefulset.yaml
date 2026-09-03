@@ -1,0 +1,76 @@
+{{- range .Values.databases }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .name }}
+spec:
+  serviceName: {{ .name }}-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      securityContext:
+        fsGroup: 999
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: postgresql
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          env:
+            - name: POSTGRES_USER
+              value: "{{ .username }}"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .name }}-secret
+                  key: password
+            - name: POSTGRES_DB
+              value: "{{ .db }}"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - name: postgres
+              containerPort: {{ $.Values.service.port }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ $.Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: {{ $.Values.service.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            {{- if .initdbScripts }}
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+            {{- end }}
+      {{- if .initdbScripts }}
+      volumes:
+        - name: initdb
+          configMap:
+            name: {{ .name }}-initdb
+      {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: {{ toYaml $.Values.persistence.accessModes | nindent 8 }}
+        resources:
+          requests:
+            storage: {{ .storage }}
+        {{- if $.Values.persistence.storageClass }}
+        storageClassName: {{ $.Values.persistence.storageClass }}
+        {{- end }}
+---
+{{- end }}

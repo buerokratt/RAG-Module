@@ -1,0 +1,42 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Reset used budget for all LLM connections to 0"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+
+reset_used_budget:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/reset-llm-connection-used-budget"
+    body: {}
+  result: reset_result
+  next: check_reset_status
+
+check_reset_status:
+  switch:
+    - condition: ${200 <= reset_result.response.statusCodeValue && reset_result.response.statusCodeValue < 300}
+      next: format_success_response
+  next: return_reset_failed
+
+format_success_response:
+  assign:
+    response_success: {
+      message: 'Used budget reset to 0 successfully for all connections',
+      totalConnections: '${reset_result.response.body.length}',
+      operationSuccess: true,
+      statusCode: 200
+    }
+  next: return_success
+
+return_success:
+  return: ${response_success}
+  status: 200
+  next: end
+
+return_reset_failed:
+  return: "error: failed to reset used budget"
+  status: 500
+  next: end

@@ -1,0 +1,84 @@
+# Global configuration for RAG Module
+global:
+  domain: "<your-domain>"  # Update with actual domain
+  namespace: "rag-module"
+  storageClass: "local-path"
+  
+# Individual service configurations
+database:
+  enabled: true
+  
+resql:
+  enabled: true
+  
+ruuter-public:
+  enabled: true
+
+ruuter-private:
+  enabled: true
+
+data-mapper:
+  enabled: true
+
+TIM:
+  enabled: true
+
+Authentication-Layer:
+  enabled: true
+
+CronManager:
+  enabled: true
+
+GUI:
+  enabled: true
+
+Loki:
+  enabled: true
+
+Grafana:
+  enabled: true
+
+S3-Ferry:
+  enabled: true
+
+minio:
+  enabled: true
+
+Redis:
+  enabled: true
+
+Qdrant:
+  enabled: true
+
+ClickHouse:
+  enabled: false
+
+Langfuse-Web:
+  enabled: false
+
+Langfuse-Worker:
+  enabled: false
+
+Vault:
+  enabled: true
+
+Vault-Init:
+  enabled: true
+
+Vault-Agent-LLM:
+  enabled: true
+
+Vault-Agent-GUI:
+  enabled: true
+
+Vault-Agent-Cron:
+  enabled: true
+
+LLM-Orchestration-Service:
+  enabled: true
+
+Liquibase:
+  enabled: true
+
+Notifications-Node:
+  enabled: true

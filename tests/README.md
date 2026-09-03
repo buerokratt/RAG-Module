@@ -1,1 +1,0 @@
-This folder contains all the testcases for the Python code

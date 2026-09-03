@@ -1,0 +1,56 @@
+{
+  "component": "refiner",
+  "optimizer": "Bootstrap+MIPROv2",
+  "metric_type": "LLM-as-Judge (ChainOfThought)",
+  "total_time_seconds": 2407.061353,
+  "phase_times": {
+    "bootstrap": 39.981034,
+    "mipro": 2367.079623
+  },
+  "trainset_size": 5,
+  "valset_size": 23,
+  "num_candidates": 15,
+  "validation_stats": {
+    "average_quality": 0.8721159420289856,
+    "median_quality": 0.84,
+    "min_quality": 0.6733333333333333,
+    "max_quality": 0.9933333333333333,
+    "avg_refinements_per_question": 3.0,
+    "total_examples": 23,
+    "metric_type": "LLM Judge (ChainOfThought)",
+    "scores": [
+      0.9733333333333333,
+      0.8266666666666667,
+      0.7666666666666666,
+      0.7999999999999999,
+      0.9733333333333333,
+      0.7066666666666667,
+      0.8133333333333334,
+      0.7933333333333333,
+      0.6733333333333333,
+      0.68,
+      0.9706666666666667,
+      0.96,
+      0.82,
+      0.94,
+      0.84,
+      0.8266666666666667,
+      0.9933333333333333,
+      0.82,
+      0.984,
+      0.98,
+      0.96,
+      0.9733333333333333,
+      0.984
+    ]
+  },
+  "timestamp": "2026-04-24T08:05:35.979568",
+  "judge_config": {
+    "evaluates": [
+      "intent_preservation",
+      "clarity_improvement",
+      "quality_score"
+    ],
+    "uses_reasoning": true
+  }
+}

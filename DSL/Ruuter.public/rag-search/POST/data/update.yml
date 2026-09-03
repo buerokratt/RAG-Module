@@ -1,0 +1,169 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Resync new data from KB"
+  method: post
+  accepts: json
+  returns: json
+  namespace: rag-search
+
+get_agency_id:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/get-agency-id"
+  result: get_agency_id_result
+  next: log_result
+
+log_result:
+  log: ${get_agency_id_result.response.body[0].id}
+  next: extract_params
+
+extract_params:
+  assign:
+    single_agency_id: ${get_agency_id_result.response.body[0].id}
+    agency_ids: 
+      - ${single_agency_id}
+    current_data_hash: ${get_agency_id_result.response.body[0].agencyDataHash}
+  next: logs_params
+
+logs_params:
+  log: "Agency ID: ${agency_ids}, Current Data Hash: ${current_data_hash}"
+  next: import_agency_data
+
+import_agency_data:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RUUTER_PUBLIC]/ckb/agency-data-import"
+  result: importResult
+  next: log_import_agency_data_response
+  on_error: handle_import_error
+
+handle_import_error:
+  log: "ERROR: Failed to import agency data - ${importResult.error.message}"
+  assign:
+    format_res: {
+      message: "Failed to fetch data from CKB - data synchronization failed",
+      operationSuccessful: false,
+      error: "CKB_IMPORT_FAILED"
+    }
+  next: return_bad_request
+
+log_import_agency_data_response:
+  log: ${JSON.stringify(importResult.response)}
+  next: check_ckb_response
+
+check_ckb_response:
+  switch:
+    - condition: ${importResult.response.body == null || importResult.response.body.response == null || importResult.response.body.response == "Internal Server Error" || importResult.response.body.response.response == null}
+      next: return_ckb_error_response
+    - condition: ${importResult.response.body.response.response.length === 0}
+      next: return_no_ckb_data
+  next: assign_import_agency_data
+
+return_ckb_error_response:
+  assign:
+    format_res:
+      message: "CKB service returned an error - data synchronization aborted"
+      operationSuccessful: false
+      error: "CKB_ERROR"
+  next: return_bad_request
+
+return_no_ckb_data:
+  assign:
+    error_response:
+      success: false
+      message: "Data synchronization failed - CKB agency data not found"
+  next: return_ckb_data_error
+
+assign_import_agency_data:
+  assign:
+    ckb_data_hash: ${importResult.response.body.response.response[0].agencyDataHash}
+    signed_s3_url: ${importResult.response.body.response.response[0].signedS3Url}
+  next: check_has_match
+  
+check_has_match:
+  switch:
+    - condition: ${current_data_hash !== null && current_data_hash === importResult.response.body.response.response[0].agencyDataHash}
+      next: noAgencyData
+  next: sync_current_hash_with_ckb_latest_hash
+
+sync_current_hash_with_ckb_latest_hash:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_RESQL]/update-agency-hash"
+    body:
+      id: ${single_agency_id}
+      newAgencyDataHash: ${ckb_data_hash}
+      dataUrl: ${signed_s3_url}
+  result: sync_agency_hash_result
+  next: log_sync_hash_result
+  on_error: handle_hash_update_error
+
+log_sync_hash_result:
+  log: "Current hash sync result: ${JSON.stringify(sync_agency_hash_result.response)}"
+  next: execute_cron_manager
+
+handle_hash_update_error:
+  log: "ERROR: Failed to update data hash - ${sync_agency_hash_result.error || 'Unknown error'}"
+  next: assign_hash_error_response
+
+assign_hash_error_response:
+  assign:
+    format_res: {
+      message: "Failed to update data hash. Data synchronization aborted.",
+      operationSuccessful: false,
+      error: "HASH_UPDATE_FAILED"
+    }
+  next: return_bad_request
+
+execute_cron_manager:
+  call: http.post
+  args:
+    url: "[#RAG_SEARCH_CRON_MANAGER]/execute/initiate_vector_indexer/vector_indexer"
+    query:
+      signedUrl: ${signed_s3_url}
+      clientDataHash: ${ckb_data_hash}
+  result: res
+  next: assign_success_response
+
+assign_success_response:
+  assign:
+    format_res: {
+      message: "Data synchronization initiated successfully",
+      operationSuccessful: true,
+    }
+  next: return_ok
+
+assign_fail_response:
+  assign:
+    format_res: 
+      message: "Data synchronization failed"
+      operationSuccessful: false
+  next: return_bad_request
+
+return_ok:
+  status: 200
+  return: ${format_res}
+  next: end
+
+return_bad_request:
+  status: 400
+  return: ${format_res}
+  next: end
+
+noAgencyData:
+  assign:
+    response_data:
+      success: true
+      message: "No sync required - data is up to date"
+  next: return_no_sync_needed
+
+return_no_sync_needed:
+  status: 200
+  return: ${response_data}
+  next: end
+
+return_ckb_data_error:
+  status: 404
+  return: ${error_response}
+  next: end

@@ -1,0 +1,95 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "history": "user: Vajan infot töötuse kohta\nassistant: Eesti pakub töötutoetust ja tööhõiveteenuseid Töötukassa kaudu.",
+        "question": "Kui kaua?",
+        "n": 3,
+        "reasoning": "The user is seeking information about the duration of unemployment benefits in Estonia. The rewrites aim to clarify this by explicitly mentioning the context of unemployment benefits and their duration.",
+        "rewrites": [
+          "Kui kaua kestab töötutoetus Eestis?",
+          "Mitu kuud saab töötutoetust taotleda Eestis?",
+          "Kaua makstakse töötutoetust pärast töötuks jäämist Eestis?"
+        ]
+      },
+      {
+        "augmented": true,
+        "history": "user: Seleta sünnitoetust\nassistant: Eesti maksab sünnitoetust alates 30-70 päeva enne sünnitust.",
+        "question": "Ja pärast sünnitust?",
+        "n": 3,
+        "reasoning": "The question is seeking clarification about the details of birth benefits after childbirth, building on the previously provided information about the maternity benefit in Estonia. The rewrites will focus on the post-birth aspect of the birth support system.",
+        "rewrites": [
+          "Milline on sünnitoetuse suurus pärast sünnitust Eestis?",
+          "Kuidas makstakse sünnitoetust pärast lapse sündi?",
+          "Kas sünnitoetust makstakse ka pärast lapse sündi?"
+        ]
+      },
+      {
+        "history": "",
+        "question": "large families",
+        "n": 3,
+        "expected_refinements": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ],
+        "rewrites": [
+          "What benefits are available for large families in Estonia?",
+          "How does Estonia support families with many children?",
+          "What is the definition of a large family for benefit purposes in Estonia?"
+        ]
+      },
+      {
+        "history": "user: What's the parental benefit like?\nassistant: Estonia's parental benefit is one of the most generous globally, covering a long period with substantial amounts.",
+        "question": "Compared to what?",
+        "n": 3,
+        "expected_refinements": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ],
+        "rewrites": [
+          "How does Estonia's parental benefit compare to other EU countries?",
+          "What is Estonia's ranking for parental benefits in the EU?",
+          "How does Estonian parental benefit compare to the European average?"
+        ]
+      }
+    ],
+    "signature": {
+      "instructions": "Generate N unique and clear rewrites of the user's question based on the conversation history, ensuring that each rewrite maintains the original intent while enhancing clarity and specificity. \n\nConstraints:\n- Retain the user's initial inquiry's meaning\n- Clarify any ambiguous terms or pronouns by using context\n- Opt for explicit language that includes relevant entities, dates, or units\n- Ensure each rewrite is distinctly different from the others\n- Provide a list containing exactly N rewrites",
+      "fields": [
+        {
+          "prefix": "History:",
+          "description": "Recent conversation history"
+        },
+        {
+          "prefix": "Question:",
+          "description": "The user's latest question to refine"
+        },
+        {
+          "prefix": "N:",
+          "description": "Number of rewrites to produce"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Rewrites:",
+          "description": "Exactly N refined variations of the question"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}

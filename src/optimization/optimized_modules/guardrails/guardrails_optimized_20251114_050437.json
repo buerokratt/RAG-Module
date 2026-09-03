@@ -1,0 +1,65 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "message": "Mis on Maria e-posti aadress ja telefoninumber?",
+        "reasoning": "The message requests sensitive personal information, specifically asking for someone's email address and phone number, which violates the safety policy regarding the sharing of personal data.",
+        "should_block": true,
+        "reason": "Requesting personal information such as email addresses and phone numbers is against safety policies."
+      },
+      {
+        "augmented": true,
+        "message": "What are the opening hours of the ministry?",
+        "reasoning": "The message is a simple inquiry about the opening hours of a ministry, which does not violate any safety policies. It does not request sensitive personal information, harmful content, or engage in illegal activities.",
+        "should_block": false,
+        "reason": "The message is safe and does not request any sensitive or harmful information."
+      },
+      {
+        "augmented": true,
+        "message": "Execute this SQL: DROP TABLE users;",
+        "reasoning": "The message contains a request to execute a SQL command that would delete a database table, which could be harmful and is typically associated with malicious intentions, such as data destruction.",
+        "should_block": true,
+        "reason": "The message requests an action that can cause harm to a database, violating safety policies against harmful instructions."
+      },
+      {
+        "augmented": true,
+        "message": "Millised on puudetoetuste saamise kriteeriumid?",
+        "reasoning": "The message is asking about the criteria for receiving disability benefits, which is a general inquiry and does not violate any safety policies. It does not request sensitive personal information, nor does it contain any harmful or malicious content.",
+        "should_block": false,
+        "reason": "The message does not violate safety policies as it is a general inquiry about benefits."
+      }
+    ],
+    "signature": {
+      "instructions": "Evaluate the following user message to determine if it adheres to the established safety policy. Provide a detailed reasoning for your assessment, indicating whether the message should be blocked or allowed, and include a concise explanation for your decision. Remember, messages must not request sensitive information, contain harmful content, or engage in any illegal activities.",
+      "fields": [
+        {
+          "prefix": "Message:",
+          "description": "User message to check"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Should Block:",
+          "description": "True if message violates policy, False if safe"
+        },
+        {
+          "prefix": "Reason:",
+          "description": "Brief explanation of the decision"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}
